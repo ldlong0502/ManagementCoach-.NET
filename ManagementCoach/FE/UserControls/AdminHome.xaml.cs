@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ManagementCoach.FE
+namespace ManagementCoach.FE.UserControls
 {
     /// <summary>
-    /// Interaction logic for SignUpWindow.xaml
+    /// Interaction logic for AdminHome.xaml
     /// </summary>
-    public partial class SignUpWindow : Window
+    public partial class AdminHome : UserControl
     {
-        public SignUpWindow()
+        public AdminHome()
         {
             InitializeComponent();
         }

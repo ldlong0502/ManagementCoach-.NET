@@ -10,18 +10,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ManagementCoach.FE
+namespace ManagementCoach.FE.UserControls
 {
     /// <summary>
-    /// Interaction logic for DashBoard.xaml
+    /// Interaction logic for ManagerUserControl.xaml
     /// </summary>
-    public partial class DashBoard : Window
+    public partial class ManagerUserControl : UserControl
     {
-        public DashBoard()
+        public ManagerUserControl()
         {
             InitializeComponent();
+            datagridFrame.Content = new TripsUserControl();
         }
     }
 }
