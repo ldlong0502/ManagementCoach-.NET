@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ManagementCoach.BE.Entities
 {
-	internal class RouteRestArea : Models.RouteRestArea
+	public class RouteRestArea : Models.RouteRestArea
 	{
 		public Route Route { get; set; }
 		public RestArea	RestArea { get; set; }

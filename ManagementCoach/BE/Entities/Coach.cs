@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ManagementCoach.BE.Entities
 {
-	internal class Coach : Models.BaseCoach
+	public class Coach : Models.BaseCoach
 	{
 		public List<CoachSeat> CoachSeats { get; set; }
 		public List<Trip> Trips { get; set; }
