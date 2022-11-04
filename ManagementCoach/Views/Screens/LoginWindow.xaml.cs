@@ -13,7 +13,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ManagementCoach.FE.Screens
+namespace ManagementCoach.Views.Screens
 {
     /// <summary>
     /// Interaction logic for LoginWindow.xaml

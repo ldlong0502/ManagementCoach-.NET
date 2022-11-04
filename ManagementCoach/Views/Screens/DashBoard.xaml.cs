@@ -13,9 +13,9 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using FontAwesome.WPF;
-using ManagementCoach.FE.UserControls;
+using ManagementCoach.Views.UserControls;
 
-namespace ManagementCoach.FE.Screens
+namespace ManagementCoach.Views.Screens
 {
     /// <summary>
     /// Interaction logic for DashBoard.xaml
@@ -28,43 +28,10 @@ namespace ManagementCoach.FE.Screens
             InitializeComponent();
             
         }
-        void MoveSlide(object sender)
-        {
-            Grid grid = sender as Grid;
-            slide.Margin = new Thickness(0.5, grid.Margin.Top, 0, 0);
-        }
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
         }
-
-        private void Home_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            MoveSlide(sender);
-            frDashBoard.Content = new AdminHome();
-        }
-
-        private void Bus_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            MoveSlide(sender);
-            frDashBoard.Content = new ManagerUserControl();
-        }
-
-        private void Account_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            MoveSlide(sender);
-        }
-
-        private void Info_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            MoveSlide(sender);
-        }
-
-        private void Chart_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            MoveSlide(sender);
-        }
-
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
             
@@ -81,11 +48,5 @@ namespace ManagementCoach.FE.Screens
             isSlideClose = !isSlideClose;
 
         }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            frDashBoard.Content = new AdminHome();
-        }
-
     }
 }

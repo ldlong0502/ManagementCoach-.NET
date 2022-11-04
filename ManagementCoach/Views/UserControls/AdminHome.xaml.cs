@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ManagementCoach.FE.UserControls
+namespace ManagementCoach.Views.UserControls
 {
     /// <summary>
     /// Interaction logic for AdminHome.xaml

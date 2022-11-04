@@ -10,20 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ManagementCoach.FE.UserControls
+namespace ManagementCoach.Views.Screens
 {
     /// <summary>
-    /// Interaction logic for ManagerUserControl.xaml
+    /// Interaction logic for AddNewTripScreen.xaml
     /// </summary>
-    public partial class ManagerUserControl : UserControl
+    public partial class AddNewTripScreen : Window
     {
-        public ManagerUserControl()
+        public AddNewTripScreen()
         {
             InitializeComponent();
-            datagridFrame.Content = new TripsUserControl();
         }
     }
 }

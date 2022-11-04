@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="ManagementCoach.FE.UserControls.AdminHome"
+﻿<UserControl x:Class="ManagementCoach.Views.UserControls.AdminHome"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ManagementCoach.FE.UserControls"
+             xmlns:local="clr-namespace:ManagementCoach.Views.UserControls"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" 
              Background="White"
@@ -51,10 +51,10 @@
                 <DropShadowEffect ShadowDepth="1" BlurRadius="10" Color="SkyBlue"/>
             </Border.Effect>
             <Grid>
-                <fa:FontAwesome Icon="Calendar" Foreground="{StaticResource violetIcon}" FontSize="30" Margin="10,28,97,90"/>
+                <fa:FontAwesome Icon="Bus" Foreground="{StaticResource violetIcon}" FontSize="30" Margin="10,28,97,90"/>
                 <Image Height="15" Width="20" Source="/Images/more.png" Margin="130,21,8,114"/>
-                <TextBlock HorizontalAlignment="Center" Foreground="{StaticResource violetIcon}" Height="24" Margin="0,75,0,0" TextWrapping="Wrap" Text="25-10-2022" VerticalAlignment="Top" Width="115" FontSize="22" FontWeight="Bold" FontFamily="Arial"/>
-                <TextBlock HorizontalAlignment="Center" Foreground="{StaticResource violetIcon}" Height="24"  TextWrapping="Wrap" Text="Date" VerticalAlignment="Top" Width="115" FontWeight="Normal" FontFamily="Arial" Margin="0,116,0,0"/>
+                <TextBlock HorizontalAlignment="Center" Foreground="{StaticResource violetIcon}" Height="24" Margin="0,75,0,0" TextWrapping="Wrap" Text="3000" VerticalAlignment="Top" Width="115" FontSize="22" FontWeight="Bold" FontFamily="Arial"/>
+                <TextBlock HorizontalAlignment="Center" Foreground="{StaticResource violetIcon}" Height="24"  TextWrapping="Wrap" Text="Total trips" VerticalAlignment="Top" Width="115" FontWeight="Normal" FontFamily="Arial" Margin="0,116,0,0"/>
             </Grid>
 
 
@@ -104,7 +104,7 @@
 
 
         </Border>
-        <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Height="23" Margin="22,10,0,0" TextWrapping="Wrap" Text="Top 3 Customers" VerticalAlignment="Top" Width="151" FontSize="18" FontWeight="Bold" FontFamily="Arial" Grid.Row="3"/>
+        <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Height="23" Margin="22,10,0,0" TextWrapping="Wrap" Text="Top 3 Passengers" VerticalAlignment="Top" Width="164" FontSize="18" FontWeight="Bold" FontFamily="Arial" Grid.Row="3"/>
         <Grid Margin="22,27,872,10" Grid.Row="3">
             <Border Background="white" CornerRadius="50" BorderThickness="5" Margin="0,11,0,0">
                 <Border.Effect>
@@ -122,10 +122,16 @@
         </Grid>
         <Border CornerRadius="50" BorderThickness="1" Margin="889,10,10,17" Grid.RowSpan="4" Background="#FFA6F5FF">
             <Grid>
+                <Canvas Height="40" Width="40" Margin="110,9,150,622">
+                    <fa:FontAwesome Icon="BellOutline" FontSize="20"  Canvas.Left="10" Canvas.Top="10"></fa:FontAwesome>
+                    <Border Height="10" Width="10" CornerRadius="10" Background="WhiteSmoke" Canvas.Left="20" Canvas.Top="5">
+                        <TextBlock Text="0" FontSize="7" Foreground="Red" TextAlignment="Center"></TextBlock>
+                    </Border>
+                </Canvas>
                 <Border BorderBrush="Transparent" Background="Beige" CornerRadius="20" BorderThickness="1" Width="40" Height="40" Margin="220,9,41,622">
                     <Image Source="/Images/avatar.png"/>
                 </Border>
-                <Calendar HorizontalAlignment="Center" Margin="0,103,0,0" VerticalAlignment="Top" Width="201" RenderTransformOrigin="0.52,0.571" Height="247" Background="{x:Null}" FontSize="18" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="#FF11495F" FontFamily="Arial">
+                <Calendar HorizontalAlignment="Center" Margin="0,103,0,0" VerticalAlignment="Top" Width="201" RenderTransformOrigin="0.52,0.571" Height="177" Background="{x:Null}" FontSize="18" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="#FF11495F" FontFamily="Arial">
                     <Calendar.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -159,6 +165,12 @@
                         <TextBlock Height="20" Text="Oct 30 at 6:00 pm" Foreground="#FFA4B5B8" Margin="53,25,61,0" FontWeight="Bold" FontSize="10"/>
                     </Grid>
                 </StackPanel>
+                <Canvas Height="40" Width="40" Margin="156,9,103,622">
+                    <fa:FontAwesome Icon="EnvelopeOutline" FontSize="20"  Canvas.Left="10" Canvas.Top="10"/>
+                    <Border Height="10" Width="10" CornerRadius="10" Background="WhiteSmoke" Canvas.Left="23" Canvas.Top="5">
+                        <TextBlock Text="0" FontSize="7" Foreground="Red" TextAlignment="Center"/>
+                    </Border>
+                </Canvas>
             </Grid>
 
         </Border>
