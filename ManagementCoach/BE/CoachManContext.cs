@@ -3,28 +3,31 @@ using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ManagementCoach.BE
 {
-	internal class CoachManContext : DbContext
+	public class CoachManContext : DbContext
 	{
 		public DbSet<Coach> Coaches { get; set; } 
-		public DbSet<User> Users { get; set; } 
-		public DbSet<Trip> Trips { get; set; } 
+		public DbSet<CoachSeat> CoachSeats { get; set; }
 		public DbSet<Driver> Drivers { get; set; } 
 		public DbSet<Passenger> Passengers { get; set; }
 		public DbSet<Province> Provinces { get; set; }
-		public DbSet<Route> Routes { get; set; } 
-		public DbSet<Station> Stations { get; set; } 
 		public DbSet<RestArea> RestAreas { get; set; } 
+		public DbSet<Route> Routes { get; set; } 
+		public DbSet<RouteRestArea> RouteRestArea { get; set; } 
+		public DbSet<Station> Stations { get; set; } 
 		public DbSet<Ticket> Tickets { get; set; }
+		public DbSet<Trip> Trips { get; set; } 
+		public DbSet<User> Users { get; set; } 
 
-		// để trống để tránh bị lỗi
-		public CoachManContext(DbContextOptions<CoachManContext> options) : base(options)
+		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
+			optionsBuilder.UseNpgsql(File.ReadLines("connection-string.txt").First());
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
