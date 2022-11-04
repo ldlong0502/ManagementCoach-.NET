@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ManagementCoach.BE.Models
 {
-	public class Province
+	public class ModelProvince
 	{
 		[Required]
 		public int Id { get; set; }

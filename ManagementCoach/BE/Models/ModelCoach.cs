@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace ManagementCoach.BE.Models
 {
-	public class Coach : BaseCoach
+	public class ModelCoach : BaseCoach
 	{
 		public int Capacity { get; set; }
-		public List<CoachSeat> CoachSeats { get; set; }
+		public List<ModelCoachSeat> CoachSeats { get; set; }
 	}
 
 	public class BaseCoach
@@ -30,7 +30,7 @@ namespace ManagementCoach.BE.Models
 		/// </summary>
 		public string Status { get; set; }
 		public string Notes { get; set; }
-		[Column(TypeName = "timestamp with time zone")]
-		public DateTime DateAdded { get; set; }
+		[Column(TypeName = "timestamptz")]
+		public DateTimeOffset DateAdded { get; set; }
 	}
 }

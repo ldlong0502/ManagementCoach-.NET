@@ -7,18 +7,15 @@ using System.Threading.Tasks;
 
 namespace ManagementCoach.BE.Models
 {
-	public class CoachSeat
+	public class ModelRestArea
 	{
 		[Required]
 		public int Id { get; set; }
 		[Required]
-		public int CoachId { get; set; }
 		public string Name { get; set; }
-		
-		/// <summary>
-		/// Giá trị là "Taken" hoặc "NotTaken", Mặc định là "NotTaken"
-		/// </summary>
-		public string Status { get; set; }
-
+		[Required]
+		public string Address { get; set; }
+		[Required]
+		public int ProvinceId { get; set; }
 	}
 }

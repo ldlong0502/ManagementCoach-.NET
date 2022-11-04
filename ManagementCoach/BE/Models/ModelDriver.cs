@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ManagementCoach.BE.Models
 {
-	public class Driver
+	public class ModelDriver
 	{
 		[Required]
 		public int Id { get; set; }
@@ -30,8 +30,8 @@ namespace ManagementCoach.BE.Models
 		public string License { get; set; }
 		public string Notes { get; set; }
 
-		[Column(TypeName = "timestamp with time zone")]
-		public DateTime DateAdded { get; set; }
+		[Column(TypeName = "timestamptz")]
+		public DateTimeOffset DateAdded { get; set; }
 
 	}
 }

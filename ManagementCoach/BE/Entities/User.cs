@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ManagementCoach.BE.Entities
 {
-	public class User : Models.User
+	public class User : Models.ModelUser
 	{
 	}
 }

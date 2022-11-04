@@ -8,23 +8,16 @@ using System.Threading.Tasks;
 
 namespace ManagementCoach.BE.Models
 {
-	public class Trip
+	public class ModelTicket
 	{
 		[Required]
 		public int Id { get; set; }
 		[Required]
-		public int RouteId { get; set; }
+		public int TripId { get; set; }
 		[Required]
-		public int CoachId { get; set; }
-		[Required]
-		public int DriverId { get; set; }
-
-		[Column(TypeName = "timestamp with time zone")]
-		public DateTime Date { get; set; }
-
-		/// <summary>
-		/// Mặc định là false
-		/// </summary>
-		public bool Cancelled { get; set; }
+		public int CustomerId { get; set; }
+		
+		[Column(TypeName = "timestamptz")]
+		public DateTimeOffset DateBought { get; set; }
 	}
 }

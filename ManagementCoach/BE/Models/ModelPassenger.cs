@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ManagementCoach.BE.Models
 {
-	public class Passenger
+	public class ModelPassenger
 	{
 		[Required]
 		public int Id { get; set; }
@@ -28,8 +28,8 @@ namespace ManagementCoach.BE.Models
 		public bool Blocked { get; set; }
 		public string Notes { get; set; }
 
-		[Column(TypeName = "timestamp with time zone")]
-		public DateTime DateAdded { get; set; }
+		[Column(TypeName = "timestamptz")]
+		public DateTimeOffset DateAdded { get; set; }
 
 	}
 }

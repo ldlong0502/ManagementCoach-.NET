@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ManagementCoach.BE.Entities
 {
-	public class CoachSeat : Models.CoachSeat
+	public class CoachSeat : Models.ModelCoachSeat
 	{
 		public Coach Coach { get; set; }
 	}

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ManagementCoach.BE.Models
 {
-	public class Route
+	public class ModelRoute
 	{
 		[Required]
 		public int Id { get; set; }

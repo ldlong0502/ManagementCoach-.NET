@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace ManagementCoach.BE.Entities
 {
-	public class RestArea : Models.RestArea
+	public class RestArea : Models.ModelRestArea
 	{
 		public List<RouteRestArea> RouteRestAreas { get; set; }
+		[Required] 
 		public Province Province { get; set; }
 	}
 }

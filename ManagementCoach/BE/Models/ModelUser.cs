@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ManagementCoach.BE.Models
 {
-	public class User
+	public class ModelUser
 	{
 		[Required]
 		public int Id { get; set; }
@@ -25,7 +25,7 @@ namespace ManagementCoach.BE.Models
 		public string Name { get; set; }
 		public string Email { get; set; }
 
-		[Column(TypeName = "timestamp with time zone")]
-		public DateTime DateAdded { get; set; }
+		[Column(TypeName = "timestamptz")]
+		public DateTimeOffset DateAdded { get; set; }
 	}
 }

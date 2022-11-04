@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ManagementCoach.BE.Entities
 {
-	public class Driver : Models.Driver
+	public class Driver : Models.ModelDriver
 	{
 		public List<Trip> Trips { get; set; }
 	}

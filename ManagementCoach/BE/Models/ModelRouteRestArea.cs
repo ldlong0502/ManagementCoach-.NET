@@ -7,15 +7,13 @@ using System.Threading.Tasks;
 
 namespace ManagementCoach.BE.Models
 {
-	public class RestArea
+	public class ModelRouteRestArea
 	{
 		[Required]
-		public int Id { get; set; }
+		public int RouteId { get; set; }
 		[Required]
-		public string Name { get; set; }
+		public string RestAreaId { get; set; }
 		[Required]
-		public string Address { get; set; }
-		[Required]
-		public int ProvinceId { get; set; }
+		public int StopOrder { get; set; }
 	}
 }

@@ -1,8 +1,8 @@
 ﻿using ManagementCoach.BE.Entities;
-using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -25,34 +25,30 @@ namespace ManagementCoach.BE
 		public DbSet<Trip> Trips { get; set; } 
 		public DbSet<User> Users { get; set; } 
 
-		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
-			optionsBuilder.UseNpgsql(File.ReadLines("connection-string.txt").First());
-		}
 
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
-		{
-			modelBuilder.Entity<CoachSeat>()
-						.Property(p => p.Status).HasDefaultValue("NotTaken");
+			//modelBuilder.Entity<CoachSeat>()
+			//			.Property(p => p.Status).HasDefaultValue("NotTaken");
 			modelBuilder.Entity<CoachSeat>()
 						.HasIndex(p => p.Name)
 						.IsUnique();
 
-			modelBuilder.Entity<Coach>()
-						.Property(p => p.Status).HasDefaultValue("Active");
+			//modelBuilder.Entity<Coach>()
+			//			.Property(p => p.Status).HasDefaultValue("Active");
 			modelBuilder.Entity<Coach>()
 						.HasIndex(p => p.RegNo)
 						.IsUnique();
 
-			modelBuilder.Entity<Trip>()
-						.Property(p => p.Cancelled).HasDefaultValue(false);
+			//modelBuilder.Entity<Trip>()
+			//			.Property(p => p.Cancelled).HasDefaultValue(false);
 
 			modelBuilder.Entity<Province>()
 						.HasIndex(p => p.Name)
 						.IsUnique();
 
-			modelBuilder.Entity<Passenger>()
-						.Property(p => p.Blocked).HasDefaultValue(false);
+			//modelBuilder.Entity<Passenger>()
+			//			.Property(p => p.Blocked).HasDefaultValue(false);
 			modelBuilder.Entity<Passenger>()
 						.HasIndex(p => p.Phone)
 						.IsUnique();
@@ -60,8 +56,8 @@ namespace ManagementCoach.BE
 						.HasIndex(p => p.Email)
 						.IsUnique();
 
-			modelBuilder.Entity<Driver>()
-						.Property(p => p.Active).HasDefaultValue(true);
+			//modelBuilder.Entity<Driver>()
+			//			.Property(p => p.Active).HasDefaultValue(true);
 			modelBuilder.Entity<Driver>()
 						.HasIndex(p => p.Phone)
 						.IsUnique();
