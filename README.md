@@ -1,6 +1,6 @@
 # ManagementCoach-.NET
 Đồ án SE347
-Ứng dụng bán mô hình đồ chơi Nhật Bản
+Ứng dụng quản lý xe khách
 
 ## Yêu cầu
 Ứng dụng này sử dụng postgresql để quản lý CSDL.
