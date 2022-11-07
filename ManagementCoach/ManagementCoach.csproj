@@ -38,6 +38,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.10.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -204,7 +207,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BE\Map.cs" />
     <Compile Include="BE\CoachManContext.cs" />
+    <Compile Include="BE\Data\Input\InputCoach.cs" />
+    <Compile Include="BE\Data\Result.cs" />
     <Compile Include="BE\Entities\Coach.cs" />
     <Compile Include="BE\Entities\CoachSeat.cs" />
     <Compile Include="BE\Entities\Driver.cs" />
@@ -229,6 +235,8 @@
     <Compile Include="BE\Models\ModelTicket.cs" />
     <Compile Include="BE\Models\ModelTrip.cs" />
     <Compile Include="BE\Models\ModelUser.cs" />
+    <Compile Include="BE\Data\Page.cs" />
+    <Compile Include="BE\PaginationHelper.cs" />
     <Compile Include="BE\Repositories\RepoCoach.cs" />
     <Compile Include="BE\Repositories\Repository.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
