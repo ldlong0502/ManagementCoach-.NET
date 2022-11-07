@@ -229,12 +229,11 @@
     <Compile Include="BE\Models\ModelTicket.cs" />
     <Compile Include="BE\Models\ModelTrip.cs" />
     <Compile Include="BE\Models\ModelUser.cs" />
-    <Compile Include="BE\Repositories\RepoCoach.cs" />
-    <Compile Include="BE\Repositories\Repository.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\DashBoardViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModel.cs" />
+    <Compile Include="ViewModels\TripViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelCommand.cs" />
     <Compile Include="Views\Screens\AddNewTripScreen.xaml.cs">
@@ -323,6 +322,7 @@
     <Resource Include="Images\avatar.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="BE\Repositories\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

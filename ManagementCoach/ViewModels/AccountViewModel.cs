@@ -8,6 +8,7 @@ namespace ManagementCoach.ViewModels
 {
     public class AccountViewModel:ViewModelBase
     {
+        
         public AccountViewModel()
         {
 

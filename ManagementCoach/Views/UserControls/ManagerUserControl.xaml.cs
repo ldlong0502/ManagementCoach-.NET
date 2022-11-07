@@ -23,8 +23,8 @@ namespace ManagementCoach.Views.UserControls
         public ManagerUserControl()
         {
             InitializeComponent();
-            datagridFrame.Content = new TripsUserControl();
         }
 
+       
     }
 }

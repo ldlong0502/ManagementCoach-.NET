@@ -5,9 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ManagementCoach.Views.UserControls"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:vm="clr-namespace:ManagementCoach.ViewModels"
              mc:Ignorable="d" 
              Background="White"
              d:DesignHeight="505" d:DesignWidth="1200">
+    <UserControl.DataContext>
+        <vm:TripViewModel></vm:TripViewModel>
+    </UserControl.DataContext>
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"></BooleanToVisibilityConverter>
         <SolidColorBrush x:Key="whiteColor" Color="White"></SolidColorBrush>
@@ -95,11 +99,11 @@
             <Grid Width="300" HorizontalAlignment="Left" Margin="0,0,10,0">
                 <TextBlock Margin="20,0" Padding="0,5,0,0" FontSize="14" Text="Search here..." Height="30" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
                            Panel.ZIndex="1" Visibility="{Binding ElementName=txtSearch,Path=Text.IsEmpty, Converter={StaticResource BoolToVis} }"></TextBlock>
-                <TextBox x:Name="txtSearch" Style="{StaticResource textboxSearch}" TextChanged="Search_Event"  />
+                <TextBox x:Name="txtSearch" Style="{StaticResource textboxSearch}"   />
                 <fa:FontAwesome Icon="Search" Foreground="#b0b9c6" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"></fa:FontAwesome>
             </Grid>
         </StackPanel>
-        <DataGrid Margin="0,50,0,0" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="TripsDataGrid">
+        <DataGrid ItemsSource="{Binding TripList}" Margin="0,50,0,0" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="TripsDataGrid">
             <DataGrid.Columns>
                 <!--<DataGridCheckBoxColumn CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
                     <DataGridCheckBoxColumn.HeaderTemplate>
@@ -108,12 +112,11 @@
                         </DataTemplate>
                     </DataGridCheckBoxColumn.HeaderTemplate>
                 </DataGridCheckBoxColumn>-->
-                <DataGridTextColumn Header="IdTrip"  Binding="{Binding IdTrip}" IsReadOnly="True" Width="*"   ></DataGridTextColumn>
+                <DataGridTextColumn Header="IdTrip"  Binding="{Binding Id}" IsReadOnly="True" Width="*"   ></DataGridTextColumn>
                 <DataGridTemplateColumn  Header="Name"  IsReadOnly="True" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-       
                                 <TextBlock Text="{Binding Name}" VerticalAlignment="Center"></TextBlock>
                             </StackPanel>
                         </DataTemplate>
@@ -123,16 +126,16 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border Width="100"  CornerRadius="5" Background="#FFEFEF" Height="25">
-                                <TextBlock Text="{Binding Status}" Foreground="#EDB014" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                                <TextBlock Text="{Binding RegNo}" Foreground="#EDB014" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
                             </Border> 
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Departure Date"  Binding="{Binding DepartureDate}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Departure Time" Binding="{Binding DepartureTime}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="ETA" Binding="{Binding ETA}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Fare" Binding="{Binding Fare}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Departure Date"  Binding="{Binding Route.DestinationStation.Province.Name}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Departure Time" Binding="{Binding Route.DestinationStation.Province.Name}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="ETA" Binding="{Binding RegNo}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Fare" Binding="{Binding RegNo}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Amount" Binding="{Binding RegNo}" Width="*"></DataGridTextColumn>
                 <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

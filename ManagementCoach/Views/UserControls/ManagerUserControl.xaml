@@ -4,11 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ManagementCoach.Views.UserControls"
+             xmlns:vm="clr-namespace:ManagementCoach.ViewModels"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" 
             Background="White"
              d:DesignHeight="700" d:DesignWidth="1200">
+    <UserControl.DataContext>
+        <vm:ManagerViewModel></vm:ManagerViewModel>
+    </UserControl.DataContext>
     <UserControl.Resources>
+        <DataTemplate DataType="{x:Type vm:TripViewModel}">
+            <local:TripsUserControl></local:TripsUserControl>
+        </DataTemplate>
         <BooleanToVisibilityConverter x:Key="BoolToVis"></BooleanToVisibilityConverter>
         <SolidColorBrush x:Key="whiteColor" Color="White"></SolidColorBrush>
         <SolidColorBrush x:Key="primaryColor" Color="#FF274381"></SolidColorBrush>
@@ -25,7 +32,7 @@
                     <ControlTemplate TargetType="TextBoxBase">
                         <Border x:Name="border" Padding="10,3" CornerRadius="20" Background="{TemplateBinding Background}" SnapsToDevicePixels="True"
                                 BorderThickness="2" BorderBrush="#e0e6ed">
-                            
+
                             <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"></ScrollViewer>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -41,7 +48,7 @@
             </Setter>
         </Style>
         <Style x:Key="TabButton" TargetType="Button">
-            <Setter Property="Background" Value="Transparent"> </Setter>
+            <Setter Property="Background" Value="Transparent"></Setter>
             <Setter Property="Foreground" Value="#FF274381"></Setter>
             <Setter Property="FocusVisualStyle" Value="{x:Null}"></Setter>
             <Setter Property="Width" Value="80"></Setter>
@@ -58,11 +65,11 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Style.Triggers>
+            <!--<Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="BorderBrush" Value="#784ff2"></Setter>
                 </Trigger>
-            </Style.Triggers>
+            </Style.Triggers>-->
         </Style>
         <Style x:Key="addButton" TargetType="Button">
             <Setter Property="Background" Value="#FF274381"></Setter>
@@ -84,7 +91,8 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="BorderBrush" Value="#784ff2"></Setter>
+                    <Setter Property="Background" Value="#D8E8E8"></Setter>
+                    <Setter Property="Foreground" Value="#FF274381"></Setter>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -97,22 +105,22 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Trips" FontSize="36" FontWeight="Bold" Foreground="{StaticResource primaryColor}"></TextBlock>
-        <Button Width="150" HorizontalAlignment="Right" Margin="0,0,10,0" Style="{StaticResource addButton}">
-            <StackPanel Orientation="Horizontal">
+        <TextBlock Text="{Binding Title}" FontSize="36" FontWeight="Bold" Foreground="{StaticResource primaryColor}"></TextBlock>
+        <Button Width="178" HorizontalAlignment="Left" Margin="1012,5,0,5" Style="{StaticResource addButton}">
+            <StackPanel Orientation="Horizontal" >
                 <fa:FontAwesome Icon="Plus" VerticalAlignment="Center" Height="20" Width="20" FontSize="20"></fa:FontAwesome>
-                <TextBlock Text="Add New Trip" VerticalAlignment="Center" Margin="10,0,0,0"></TextBlock>
+                <TextBlock Text="{Binding AddAction}" Height="auto" VerticalAlignment="Center" Margin="10,0,0,0"></TextBlock>
             </StackPanel>
         </Button>
         <Separator Background="#dea2ae" Height="1" Margin="0,-20,0,0"   Grid.Row="2"/>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,-5,0,0">
-            <Button Content="Trips" Style="{StaticResource TabButton}" BorderBrush="#784ff2"></Button>
-            <Button Content="Passengers" Style="{StaticResource TabButton}" ></Button>
+            <Button x:Name="Btntrips" Content="Trips" Command="{Binding ShowTripsCommand}" Style="{StaticResource TabButton}" BorderBrush="{Binding BorderBrushTrips}" ></Button>
+            <Button x:Name="BtnPassengers" Content="Passengers" Command="{Binding ShowPassengersCommand}" Style="{StaticResource TabButton}" BorderBrush="{Binding  BorderBrushPassengers}"  ></Button>
             <Button Content="Coaches" Style="{StaticResource TabButton}"></Button>
             <Button Content="Drivers" Style="{StaticResource TabButton}"></Button>
             <Button Content="Stations" Style="{StaticResource TabButton}"></Button>
         </StackPanel>
-        <Frame x:Name="datagridFrame" Grid.Row="3"></Frame>
+        <ContentControl x:Name="datagridContent" Content="{Binding CurrentManagerView}" Grid.Row="3"></ContentControl>
     </Grid>
 </UserControl>
