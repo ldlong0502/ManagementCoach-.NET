@@ -10,7 +10,6 @@ namespace ManagementCoach.BE.Models
 {
 	public class ModelCoach : BaseCoach
 	{
-		public int Capacity { get; set; }
 		public List<ModelCoachSeat> CoachSeats { get; set; }
 	}
 
