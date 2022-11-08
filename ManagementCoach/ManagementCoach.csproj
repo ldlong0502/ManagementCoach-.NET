@@ -141,6 +141,7 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -167,7 +168,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Styles\TextBoxStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\UIColors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Screens\AddNewCoach.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -188,6 +197,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\AdminHome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\CoachUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -239,13 +252,20 @@
     <Compile Include="BE\PaginationHelper.cs" />
     <Compile Include="BE\Repositories\RepoCoach.cs" />
     <Compile Include="BE\Repositories\Repository.cs" />
+    <Compile Include="GetViewModel.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModels\AddCoachViewModel.cs" />
+    <Compile Include="ViewModels\CoachViewModel.cs" />
     <Compile Include="ViewModels\DashBoardViewModel.cs" />
+    <Compile Include="ViewModels\ErrorsViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModel.cs" />
     <Compile Include="ViewModels\TripViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelCommand.cs" />
+    <Compile Include="Views\Screens\AddNewCoach.xaml.cs">
+      <DependentUpon>AddNewCoach.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Screens\AddNewTripScreen.xaml.cs">
       <DependentUpon>AddNewTripScreen.xaml</DependentUpon>
     </Compile>
@@ -260,6 +280,9 @@
     </Compile>
     <Compile Include="Views\UserControls\AdminHome.xaml.cs">
       <DependentUpon>AdminHome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\CoachUserControl.xaml.cs">
+      <DependentUpon>CoachUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\ManagerUserControl.xaml.cs">
       <DependentUpon>ManagerUserControl.xaml</DependentUpon>
@@ -332,7 +355,6 @@
     <Resource Include="Images\avatar.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BE\Repositories\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

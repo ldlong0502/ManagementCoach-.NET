@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ManagementCoach.Views.Screens;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,9 +19,9 @@ namespace ManagementCoach.ViewModels
         private SolidColorBrush borderBrushTrips = new SolidColorBrush(Colors.Transparent);
         private SolidColorBrush borderBrushPassengers = new SolidColorBrush(Colors.Transparent);
         private SolidColorBrush borderBrushCoaches = new SolidColorBrush(Colors.Transparent);
-        private SolidColorBrush borderBrushDrivers= new SolidColorBrush(Colors.Transparent);
+        private SolidColorBrush borderBrushDrivers = new SolidColorBrush(Colors.Transparent);
         private SolidColorBrush borderBrushStations = new SolidColorBrush(Colors.Transparent);
-     
+
 
 
         public ViewModelBase CurrentManagerView
@@ -60,7 +61,7 @@ namespace ManagementCoach.ViewModels
             }
         }
 
-     
+
         public SolidColorBrush BorderBrushTrips
         {
             get
@@ -125,13 +126,33 @@ namespace ManagementCoach.ViewModels
         //Icommand
         public ICommand ShowTripsCommand { get; }
         public ICommand ShowPassengersCommand { get; }
-
+        public ICommand ShowCoachesCommand { get; }
+        public ICommand AddCommand { get; }
 
         public ManagerViewModel()
         {
             ShowTripsCommand = new ViewModelCommand(ExcuteShowTripsCommand);
             ShowPassengersCommand = new ViewModelCommand(ExcuteShowPassengersCommand);
+            ShowCoachesCommand = new ViewModelCommand(ExcuteShowCoachesCommand);
+            AddCommand = new ViewModelCommand(ExcuteAddCommand);
             ExcuteShowTripsCommand(null);
+        }
+
+        private void ExcuteAddCommand(object obj)
+        {
+            if(Title == "Coaches")
+            {
+                var screen = new AddNewCoach();
+                screen.ShowDialog();
+            }
+        }
+
+        private void ExcuteShowCoachesCommand(object obj)
+        {
+            Title = "Coaches";
+            AddAction = "Add new coach";
+            CurrentManagerView = new CoachViewModel();
+            ChangeBrushColor();
         }
 
         private void ChangeBrushColor()

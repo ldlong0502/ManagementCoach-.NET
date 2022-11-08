@@ -1,24 +1,18 @@
-﻿<UserControl x:Class="ManagementCoach.Views.UserControls.ManagerUserControl"
+﻿<UserControl x:Class="ManagementCoach.Views.UserControls.CoachUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ManagementCoach.Views.UserControls"
-             xmlns:vm="clr-namespace:ManagementCoach.ViewModels"
-             xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" 
-            Background="White"
-             d:DesignHeight="700" d:DesignWidth="1200">
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:vm="clr-namespace:ManagementCoach.ViewModels" 
+             Background="White"
+             d:DesignHeight="505" d:DesignWidth="1200">
     <UserControl.DataContext>
-        <vm:ManagerViewModel></vm:ManagerViewModel>
+        <vm:CoachViewModel></vm:CoachViewModel>
     </UserControl.DataContext>
     <UserControl.Resources>
-        <DataTemplate DataType="{x:Type vm:TripViewModel}">
-            <local:TripsUserControl></local:TripsUserControl>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:CoachViewModel}">
-            <local:CoachUserControl></local:CoachUserControl>
-        </DataTemplate>
         <BooleanToVisibilityConverter x:Key="BoolToVis"></BooleanToVisibilityConverter>
         <SolidColorBrush x:Key="whiteColor" Color="White"></SolidColorBrush>
         <SolidColorBrush x:Key="primaryColor" Color="#FF274381"></SolidColorBrush>
@@ -68,11 +62,11 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <!--<Style.Triggers>
+            <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="BorderBrush" Value="#784ff2"></Setter>
                 </Trigger>
-            </Style.Triggers>-->
+            </Style.Triggers>
         </Style>
         <Style x:Key="addButton" TargetType="Button">
             <Setter Property="Background" Value="#FF274381"></Setter>
@@ -94,36 +88,69 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#D8E8E8"></Setter>
-                    <Setter Property="Foreground" Value="#FF274381"></Setter>
+                    <Setter Property="BorderBrush" Value="#784ff2"></Setter>
                 </Trigger>
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="5"></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
-        </Grid.RowDefinitions>
-        <TextBlock Text="{Binding Title}" FontSize="36" FontWeight="Bold" Foreground="{StaticResource primaryColor}"></TextBlock>
-        <Button Command="{ Binding AddCommand}" Width="178" HorizontalAlignment="Left" Margin="1012,5,0,5" Style="{StaticResource addButton}">
-            <StackPanel Orientation="Horizontal" >
-                <fa:FontAwesome Icon="Plus" VerticalAlignment="Center" Height="20" Width="20" FontSize="20"></fa:FontAwesome>
-                <TextBlock Text="{Binding AddAction}" Height="auto" VerticalAlignment="Center" Margin="10,0,0,0"></TextBlock>
-            </StackPanel>
-        </Button>
-        <Separator Background="#dea2ae" Height="1" Margin="0,-20,0,0"   Grid.Row="2"/>
-
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,-5,0,0">
-            <Button x:Name="Btntrips" Content="Trips" Command="{Binding ShowTripsCommand}" Style="{StaticResource TabButton}" BorderBrush="{Binding BorderBrushTrips}" ></Button>
-            <Button x:Name="BtnPassengers" Content="Passengers" Command="{Binding ShowPassengersCommand}" Style="{StaticResource TabButton}" BorderBrush="{Binding  BorderBrushPassengers}"  ></Button>
-            <Button Content="Coaches" Style="{StaticResource TabButton}"  Command="{Binding ShowCoachesCommand}" BorderBrush="{Binding  BorderBrushCoaches}"></Button>
-            <Button Content="Drivers" Style="{StaticResource TabButton}"></Button>
-            <Button Content="Stations" Style="{StaticResource TabButton}"></Button>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <TextBlock Margin="0,0,10,0" Text="Filter by" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"></TextBlock>
+            <Grid Width="300" HorizontalAlignment="Left" Margin="0,0,10,0">
+                <TextBlock Margin="20,0" Padding="0,5,0,0" FontSize="14" Text="Search here..." Height="30" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
+                           Panel.ZIndex="1" Visibility="{Binding ElementName=txtSearch,Path=Text.IsEmpty, Converter={StaticResource BoolToVis} }"></TextBlock>
+                <TextBox x:Name="txtSearch" Style="{StaticResource textboxSearch}"   />
+                <fa:FontAwesome Icon="Search" Foreground="#b0b9c6" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"></fa:FontAwesome>
+            </Grid>
         </StackPanel>
-        <ContentControl x:Name="datagridContent" Content="{Binding CurrentManagerView}" Grid.Row="3"></ContentControl>
+        <DataGrid ItemsSource="{Binding CoachList}" Margin="0,50,0,0" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="TripsDataGrid">
+            <DataGrid.Columns>
+                <!--<DataGridCheckBoxColumn CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
+                    <DataGridCheckBoxColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <CheckBox Style="{StaticResource CheckBoxStyle1}"></CheckBox>
+                        </DataTemplate>
+                    </DataGridCheckBoxColumn.HeaderTemplate>
+                </DataGridCheckBoxColumn>-->
+                <DataGridTextColumn Header="Id"  Binding="{Binding Id}" IsReadOnly="True" Width="*"   ></DataGridTextColumn>
+                <DataGridTemplateColumn  Header="Name"  IsReadOnly="True" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="RegNo"  Binding="{Binding RegNo }" Width="*"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Status"  Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Width="100"  CornerRadius="5"  Background="#FFEFEF" Height="25">
+                                <TextBlock Text="{Binding Status}" Height="25" Padding="0,3,0,0" Foreground="#EDB014"  VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Notes" Binding="{Binding Notes}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="DateAdded" Binding="{Binding DateAdded}" Width="*"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Style="{StaticResource gridEditButton}" 
+                                       Click="Edit_Click">
+                                    <fa:FontAwesome Icon="Pencil" Style="{StaticResource gridButtonIcon}" ></fa:FontAwesome>
+                                </Button>
+                                <Button Style="{StaticResource gridRemoveButton}" Click="Delete_Click">
+                                    <fa:FontAwesome Icon="Eraser" Style="{StaticResource gridButtonIcon}"></fa:FontAwesome>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>
