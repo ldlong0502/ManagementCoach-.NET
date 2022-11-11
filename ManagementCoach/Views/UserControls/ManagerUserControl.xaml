@@ -19,6 +19,9 @@
         <DataTemplate DataType="{x:Type vm:CoachViewModel}">
             <local:CoachUserControl></local:CoachUserControl>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:DriverViewModel}">
+            <local:DriverUserControl></local:DriverUserControl>
+        </DataTemplate>
         <BooleanToVisibilityConverter x:Key="BoolToVis"></BooleanToVisibilityConverter>
         <SolidColorBrush x:Key="whiteColor" Color="White"></SolidColorBrush>
         <SolidColorBrush x:Key="primaryColor" Color="#FF274381"></SolidColorBrush>
@@ -121,7 +124,7 @@
             <Button x:Name="Btntrips" Content="Trips" Command="{Binding ShowTripsCommand}" Style="{StaticResource TabButton}" BorderBrush="{Binding BorderBrushTrips}" ></Button>
             <Button x:Name="BtnPassengers" Content="Passengers" Command="{Binding ShowPassengersCommand}" Style="{StaticResource TabButton}" BorderBrush="{Binding  BorderBrushPassengers}"  ></Button>
             <Button Content="Coaches" Style="{StaticResource TabButton}"  Command="{Binding ShowCoachesCommand}" BorderBrush="{Binding  BorderBrushCoaches}"></Button>
-            <Button Content="Drivers" Style="{StaticResource TabButton}"></Button>
+            <Button Content="Drivers" Style="{StaticResource TabButton}" Command="{Binding ShowDriversCommand}" BorderBrush="{Binding  BorderBrushDrivers}"></Button>
             <Button Content="Stations" Style="{StaticResource TabButton}"></Button>
         </StackPanel>
         <ContentControl x:Name="datagridContent" Content="{Binding CurrentManagerView}" Grid.Row="3"></ContentControl>

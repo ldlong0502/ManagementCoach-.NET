@@ -51,6 +51,21 @@
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
-
+    <Style x:Key="textClick" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource color5}"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontStyle" Value="Oblique"></Setter>
+        <Setter Property="TextDecorations" Value="Underline"></Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Margin" Value="0,0,0,5"/>
+                <Setter Property="Background" Value="{StaticResource panelOverColor}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+        
 
 </ResourceDictionary>

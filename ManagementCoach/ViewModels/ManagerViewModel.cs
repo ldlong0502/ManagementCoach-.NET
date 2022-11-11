@@ -127,6 +127,7 @@ namespace ManagementCoach.ViewModels
         public ICommand ShowTripsCommand { get; }
         public ICommand ShowPassengersCommand { get; }
         public ICommand ShowCoachesCommand { get; }
+        public ICommand ShowDriversCommand { get; }
         public ICommand AddCommand { get; }
 
         public ManagerViewModel()
@@ -134,8 +135,17 @@ namespace ManagementCoach.ViewModels
             ShowTripsCommand = new ViewModelCommand(ExcuteShowTripsCommand);
             ShowPassengersCommand = new ViewModelCommand(ExcuteShowPassengersCommand);
             ShowCoachesCommand = new ViewModelCommand(ExcuteShowCoachesCommand);
+            ShowDriversCommand = new ViewModelCommand(ExcuteShowDriversCommand);
             AddCommand = new ViewModelCommand(ExcuteAddCommand);
             ExcuteShowTripsCommand(null);
+        }
+
+        private void ExcuteShowDriversCommand(object obj)
+        {
+            Title = "Drivers";
+            AddAction = "Add new driver";
+            CurrentManagerView = new DriverViewModel();
+            ChangeBrushColor();
         }
 
         private void ExcuteAddCommand(object obj)
@@ -143,6 +153,11 @@ namespace ManagementCoach.ViewModels
             if(Title == "Coaches")
             {
                 var screen = new AddNewCoach();
+                screen.ShowDialog();
+            }
+            else if(Title == "Drivers")
+            {
+                var screen = new AddNewDriver();
                 screen.ShowDialog();
             }
         }

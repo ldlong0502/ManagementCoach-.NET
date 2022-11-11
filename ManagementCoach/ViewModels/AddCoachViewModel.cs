@@ -99,7 +99,7 @@ namespace ManagementCoach.ViewModels
                 OnPropertyChanged(nameof(DateAdded));
             }
         }
-        private List<string> listStatus = new List<string>() { "Active", "Out of Service"};
+        private List<string> listStatus = new List<string>() { "Active", "Out Of Service"};
         public IEnumerable<string> ListStatus
         {
             get { return listStatus; }

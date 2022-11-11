@@ -26,34 +26,34 @@ namespace ManagementCoach.Views.UserControls
             InitializeComponent();
         }
 
-        private void Edit_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                //get info Account
-                Coach dataRowView = (Coach)((Button)e.Source).DataContext;
+        //private void Edit_Click(object sender, RoutedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        //get info Account
+        //        Coach dataRowView = (Coach)((Button)e.Source).DataContext;
 
-                GetViewModel.coachViewModel.Edit(dataRowView);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString());
-            }
-        }
+        //        GetViewModel.coachViewModel.Edit(dataRowView);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message.ToString());
+        //    }
+        //}
 
-        private void Delete_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                //get info Account
-                Coach dataRowView = (Coach)((Button)e.Source).DataContext;
+        //private void Delete_Click(object sender, RoutedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        //get info Account
+        //        Coach dataRowView = (Coach)((Button)e.Source).DataContext;
 
-                GetViewModel.coachViewModel.Delete(dataRowView);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString());
-            }
-        }
+        //        GetViewModel.coachViewModel.Delete(dataRowView);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message.ToString());
+        //    }
+        //}
     }
 }
