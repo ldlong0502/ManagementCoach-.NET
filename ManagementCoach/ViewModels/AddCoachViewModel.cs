@@ -138,8 +138,28 @@ namespace ManagementCoach.ViewModels
 
         private void ExcuteEditCommand(object obj)
         {
-            //edit data
-        }
+			try
+			{
+				var coach = new RepoCoach();
+				coach.UpdateCoach(
+					id,
+					new InputCoach()
+					{
+						Name = Name,
+						Status = Status,
+						RegNo = RegNo,
+						Notes = Notes,
+					}
+				);
+				GetViewModel.coachViewModel.Load();
+				MessageBox.Show("Successfull");
+				GetViewModel.addNewCoach.Close();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.ToString());
+			}
+		}
 
         private void ExcuteCancelCommand(object obj)
         {

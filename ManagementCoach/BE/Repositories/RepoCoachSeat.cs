@@ -34,6 +34,7 @@ namespace ManagementCoach.BE.Repositories
         {
             return Context.CoachSeats
 						  .Where(c => c.CoachId == coachId)
+						  .ToList()
 					      .Select(cs => Map.To<ModelCoachSeat>(cs))
 						  .ToList();
         }

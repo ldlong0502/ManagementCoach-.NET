@@ -13,7 +13,11 @@ namespace ManagementCoach.BE
 		{
 			return new Page<T>()
 			{
-				Items = getItems().Skip((page - 1) * limit).Take(limit).Select(e => Map.To<T>(e)).ToList(),
+				Items = getItems().Skip((page - 1) * limit)
+								  .Take(limit)
+								  .ToList()
+								  .Select(e => Map.To<T>(e))
+								  .ToList(),
 				CurrentPage = page,
 				PageCount = (int)Math.Ceiling(getItems().Count() / (double)limit)
 			};

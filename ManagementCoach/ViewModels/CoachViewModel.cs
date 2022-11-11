@@ -143,7 +143,8 @@ namespace ManagementCoach.ViewModels
         }       
         public void Load()
         {
-            CoachCollection = CollectionViewSource.GetDefaultView(context.Coaches.ToList());
+			var coachesPagination = new RepoCoach().GetCoaches("");
+			CoachCollection = CollectionViewSource.GetDefaultView(coachesPagination.Items);
         }
     }
 }

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity.SqlServer;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -70,5 +71,18 @@ namespace ManagementCoach.BE.Repositories
 			
 			return new Result<ModelCoach> { Success = true, Payload = Map.To<ModelCoach>(coach) };
 		}
+
+		public Result DeleteCoach(int coachId)
+		{
+			if (!CoachExists(coachId))
+				return new Result { Success = false, ErrorMessage = "Coach with this Id do not exist" };
+
+			var coach = new Coach() { Id = coachId };
+			Context.Coaches.Attach(coach);
+			Context.Coaches.Remove(coach);
+			Context.SaveChanges();
+
+			return new Result { Success = true };
+		} 
 	}
 }

@@ -20,6 +20,8 @@ namespace ManagementCoach.BE
 			{
 				config.CreateMap<InputCoach, Coach>();
 				config.CreateMap<Coach, ModelCoach>();
+				config.CreateMap<InputCoachSeat, CoachSeat>();
+				config.CreateMap<CoachSeat, ModelCoachSeat>();
 			}));
 		}
 
