@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="800" Width="1500" WindowState="Normal">
+        Title="MainWindow" Height="800" Width="1500" WindowState="Normal" Closed="Window_Closed">
     <Grid>
         <Path Data="M-0.59035533,309.35748 C-0.59035533,309.35748 -8.3000599,389.25953 73.29994,389.25953 154.89994,389.25953 1424.9397,398.96145 1424.9397,398.96145 1424.9397,398.96145 1493.3785,406.70805 1496.5622,477.14469 L1494.8714,18.626066 2.4959443,7.3778753" Fill="#FF2E2EE9" HorizontalAlignment="Left" Height="471" Margin="-1,7,0,0" Stroke="Black" Stretch="Fill" VerticalAlignment="Top" Width="1507"/>
 
