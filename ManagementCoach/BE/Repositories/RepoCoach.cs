@@ -34,7 +34,7 @@ namespace ManagementCoach.BE.Repositories
 
 
 		///// <summary>
-		///// Lấy thông tin các xe
+		///// Lấy thông tin các xe theo tên hoặc biển số xe
 		///// </summary>
 		///// <param name="keyword">theo từ khóa, nếu từ khóa trống thì lấy thông tin mới nhất</param>
 		///// <param name="limit">số lượng kết quả trên một trang</param>
@@ -44,7 +44,7 @@ namespace ManagementCoach.BE.Repositories
 			var page = PaginationFactory.Create<ModelCoach>(limit, pageNum, 
 				() => Context.Coaches
 							 .OrderByDescending(c => c.DateAdded)
-							 .Where(c => c.Name.Contains(keyword))
+							 .Where(c => c.Name.Contains(keyword) || c.RegNo.Contains(keyword))
 			);
 
             var coachSeatRepo = new RepoCoachSeat();
