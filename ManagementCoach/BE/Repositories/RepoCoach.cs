@@ -37,9 +37,9 @@ namespace ManagementCoach.BE.Repositories
 		///// <param name="keyword">theo từ khóa, nếu từ khóa trống thì lấy thông tin mới nhất</param>
 		///// <param name="limit">số lượng kết quả trên một trang</param>
 		///// <param name="page">trang muốn lấy</param>
-		public Page<ModelCoach> GetCoaches(string keyword, int page = 1, int limit = 20)
+		public Page<ModelCoach> GetCoaches(string keyword, int pageNum = 1, int limit = 20)
 		{
-			var page = PaginationFactory.Create<ModelCoach>(limit, page, 
+			var page = PaginationFactory.Create<ModelCoach>(limit, pageNum, 
 				() => Context.Coaches
 							 .OrderByDescending(c => c.DateAdded)
 							 .Where(c => c.Name.Contains(keyword))
@@ -52,14 +52,15 @@ namespace ManagementCoach.BE.Repositories
 		}
 
 		public ModelCoach GetCoach(int id) { 
-			return Context.Coaches.Where(c => c.Id = input.Id).FirstOrDefault();
+			return Map.To<ModelCoach>(Context.Coaches.Where(c => c.Id == id).FirstOrDefault());
 		}
 
-		public Result<ModelCoach> UpdateCoach(InputCoach input) {
-			if (RegNoExists(input.RegNo))
+		public Result<ModelCoach> UpdateCoach(int coachId, InputCoach input) {
+			var coach = Context.Coaches.Where(c => c.Id == coachId).FirstOrDefault();
+			
+			if (coach.RegNo != input.RegNo && RegNoExists(input.RegNo))
 				return new Result<ModelCoach> { Success = false, ErrorMessage = "Coach with this registration already exist." };
 
-			var coach = Context.Coaches.Where(c => c.Id = input.Id).FirstOrDefault();
 			coach.Name = input.Name;
 			coach.RegNo = input.RegNo;
 			coach.Status = input.Status;
