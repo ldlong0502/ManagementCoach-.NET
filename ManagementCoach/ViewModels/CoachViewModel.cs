@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Media;
+using ManagementCoach.BE.Models;
 
 namespace ManagementCoach.ViewModels
 {
@@ -23,6 +24,9 @@ namespace ManagementCoach.ViewModels
         private string textSearch;
         private ICollectionView coachCollection;
         private object selectedItem;
+
+		private int currentPage = 1;
+		private int limit = 20;
        
         public object SelectedItem
         {
@@ -46,9 +50,11 @@ namespace ManagementCoach.ViewModels
             {
                 textSearch = value;
                 OnPropertyChanged(nameof(TextSearch));
-                CoachCollection.Filter = Filter;
-            }
-        }
+				currentPage = 1;
+				var pagination = new RepoCoach().GetCoaches(TextSearch, currentPage, limit);
+				CoachCollection = CollectionViewSource.GetDefaultView(pagination.Items);
+			}
+		}
 
         public ICollectionView CoachCollection
         {
@@ -91,17 +97,19 @@ namespace ManagementCoach.ViewModels
         private void ExcuteDeleteCommand(object obj)
         {
             DialogResult ret = System.Windows.Forms.MessageBox.Show("Do you want to delete this row?", "Delete row", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (ret == DialogResult.Cancel)
+            if (ret == DialogResult.Cancel || ret == DialogResult.No)
             {
                 return;
             }
-        }
 
-        private void ExcuteEditCommand(object obj)
+			new RepoCoach().DeleteCoach((obj as ModelCoach).Id);
+			Load();
+		}
+
+		private void ExcuteEditCommand(object obj)
         {
-            var screen = new AddNewCoach((obj as Coach));
+            var screen = new AddNewCoach((obj as ModelCoach));
             screen.ShowDialog();
-
         }
 
         private bool CanExcuteOpenCoachSeatsCommand(object obj)
@@ -133,7 +141,7 @@ namespace ManagementCoach.ViewModels
         {
             if (!string.IsNullOrEmpty(TextSearch))
             {
-                var coachDetail = data as Coach;
+                var coachDetail = data as ModelCoach;
                 return coachDetail != null
                     && (check(coachDetail.Id.ToString(), TextSearch)
                     || check(coachDetail.Name, TextSearch));
@@ -143,7 +151,7 @@ namespace ManagementCoach.ViewModels
         }       
         public void Load()
         {
-			var coachesPagination = new RepoCoach().GetCoaches("");
+			var coachesPagination = new RepoCoach().GetCoaches("", currentPage, limit);
 			CoachCollection = CollectionViewSource.GetDefaultView(coachesPagination.Items);
         }
     }

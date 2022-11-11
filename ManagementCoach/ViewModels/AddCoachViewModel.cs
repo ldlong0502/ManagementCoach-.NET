@@ -1,5 +1,6 @@
 ﻿using ManagementCoach.BE.Data.Input;
 using ManagementCoach.BE.Entities;
+using ManagementCoach.BE.Models;
 using ManagementCoach.BE.Repositories;
 using System;
 using System.Collections;
@@ -122,7 +123,7 @@ namespace ManagementCoach.ViewModels
             Status = ListStatus.First();
             
         }
-        public AddCoachViewModel(Coach data)
+        public AddCoachViewModel(ModelCoach data)
         {
             _errorsViewModel = new ErrorsViewModel();
             _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;

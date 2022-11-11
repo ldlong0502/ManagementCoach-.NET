@@ -1,4 +1,5 @@
 ﻿using ManagementCoach.BE.Entities;
+using ManagementCoach.BE.Models;
 using ManagementCoach.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace ManagementCoach.Views.Screens
             InitializeComponent();
             GetViewModel.addNewCoach = this;
         }
-        public AddNewCoach(Coach data)
+        public AddNewCoach(ModelCoach data)
         {
             InitializeComponent();
             GetViewModel.addNewCoach = this;
