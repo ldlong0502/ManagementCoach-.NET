@@ -220,6 +220,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BE\Data\Input\InputCoachSeat.cs" />
     <Compile Include="BE\Map.cs" />
     <Compile Include="BE\CoachManContext.cs" />
     <Compile Include="BE\Data\Input\InputCoach.cs" />
@@ -251,6 +252,7 @@
     <Compile Include="BE\Data\Page.cs" />
     <Compile Include="BE\PaginationHelper.cs" />
     <Compile Include="BE\Repositories\RepoCoach.cs" />
+    <Compile Include="BE\Repositories\RepoCoachSeats.cs" />
     <Compile Include="BE\Repositories\Repository.cs" />
     <Compile Include="GetViewModel.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
