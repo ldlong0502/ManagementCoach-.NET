@@ -26,6 +26,6 @@ namespace ManagementCoach.BE.Models
 		public string Email { get; set; }
 
 		[Column(TypeName = "timestamptz")]
-		public DateTimeOffset DateAdded { get; set; }
+		public DateTimeOffset DateAdded { get; set; } = DateTimeOffset.Now;
 	}
 }

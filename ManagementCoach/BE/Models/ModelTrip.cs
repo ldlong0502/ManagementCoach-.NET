@@ -20,7 +20,7 @@ namespace ManagementCoach.BE.Models
 		public int DriverId { get; set; }
 
 		[Column(TypeName = "timestamptz")]
-		public DateTimeOffset Date { get; set; }
+		public DateTimeOffset Date { get; set; } = DateTimeOffset.Now;
 
 		/// <summary>
 		/// Mặc định là false

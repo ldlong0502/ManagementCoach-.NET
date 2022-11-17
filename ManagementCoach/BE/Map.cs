@@ -26,5 +26,7 @@ namespace ManagementCoach.BE
 		}
 
 		public static T To<T>(object source) => _mapper.Map<T>(source);
+		
+		public static DestT To<SrcT, DestT>(SrcT source, DestT destination) => _mapper.Map<SrcT, DestT>(source, destination);
 	}
 }

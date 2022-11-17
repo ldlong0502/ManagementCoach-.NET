@@ -152,8 +152,8 @@ namespace ManagementCoach.ViewModels
 						Notes = Notes,
 					}
 				);
-				GetViewModel.coachViewModel.Load();
 				MessageBox.Show("Successfull");
+				GetViewModel.coachViewModel.Load();
 				GetViewModel.addNewCoach.Close();
 			}
 			catch (Exception ex)

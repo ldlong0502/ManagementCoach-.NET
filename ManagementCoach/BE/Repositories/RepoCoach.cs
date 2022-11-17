@@ -26,7 +26,6 @@ namespace ManagementCoach.BE.Repositories
 				return new Result<ModelCoach> { Success = false, ErrorMessage = "Coach with this registration already exist." };
 
 			var coach = Map.To<Coach>(input);
-			coach.DateAdded = DateTimeOffset.Now;
 			Context.Coaches.Add(coach);
 			Context.SaveChanges();
 			return new Result<ModelCoach> { Success = true, Payload = Map.To<ModelCoach>(coach) };
