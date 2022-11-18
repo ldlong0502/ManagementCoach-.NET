@@ -39,7 +39,7 @@ namespace ManagementCoach.BE.Repositories
 			var province = Context.Provinces.Where(c => c.Id == id).FirstOrDefault();
 
 			if (province.Name != provinceName && NameExists(provinceName))
-				return new Result<ModelProvince> { Success = false, ErrorMessage = "Province with this registration already exist." };
+				return new Result<ModelProvince> { Success = false, ErrorMessage = "Province with this name already exist." };
 
 			province.Name = provinceName;
 			Context.SaveChanges();

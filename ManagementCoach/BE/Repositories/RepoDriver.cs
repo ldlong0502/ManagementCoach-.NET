@@ -47,7 +47,7 @@ namespace ManagementCoach.BE.Repositories
 			var driver = Context.Drivers.Where(c => c.Id == id).FirstOrDefault();
 
 			if (driver.IdCard != input.IdCard && IdCardExists(input.IdCard))
-				return new Result<ModelDriver> { Success = false, ErrorMessage = "Driver with this registration already exist." };
+				return new Result<ModelDriver> { Success = false, ErrorMessage = "Driver with this Id card already exist." };
 
 			if (driver.Email != input.Email && EmailExists(input.Email))
 				return new Result<ModelDriver> { Success = false, ErrorMessage = "Driver with this email already exist." };

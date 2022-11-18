@@ -47,7 +47,7 @@ namespace ManagementCoach.BE.Repositories
 			var passenger = Context.Passengers.Where(c => c.Id == id).FirstOrDefault();
 
 			if (passenger.IdCard != input.IdCard && IdCardExists(input.IdCard))
-				return new Result<ModelPassenger> { Success = false, ErrorMessage = "Passenger with this registration already exist." };
+				return new Result<ModelPassenger> { Success = false, ErrorMessage = "Passenger with this Id card already exist." };
 
 			if (passenger.Email != input.Email && EmailExists(input.Email))
 				return new Result<ModelPassenger> { Success = false, ErrorMessage = "Passenger with this email already exist." };
