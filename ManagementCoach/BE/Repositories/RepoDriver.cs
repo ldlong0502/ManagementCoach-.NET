@@ -33,7 +33,7 @@ namespace ManagementCoach.BE.Repositories
 			return Map.To<ModelDriver>(Context.Drivers.Where(c => c.Id == id).FirstOrDefault());
 		}
 
-		public Result<ModelDriver> UpdateCoach(int coachId, InputDriver input)
+		public Result<ModelDriver> UpdateDriver(int coachId, InputDriver input)
 		{
 			var driver = Context.Drivers.Where(c => c.Id == coachId).FirstOrDefault();
 
@@ -46,7 +46,7 @@ namespace ManagementCoach.BE.Repositories
 			return new Result<ModelDriver> { Success = true, Payload = Map.To<ModelDriver>(driver) };
 		}
 
-		public Result DeleteCoach(int id)
+		public Result DeleteDriver(int id)
 		{
 			if (!DriverExists(id))
 				return new Result { Success = false, ErrorMessage = "Coach with this Id do not exist" };
