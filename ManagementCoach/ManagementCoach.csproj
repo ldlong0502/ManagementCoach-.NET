@@ -237,6 +237,8 @@
     <Compile Include="BE\Data\Input\InputRestArea.cs" />
     <Compile Include="BE\Data\Input\InputRoute.cs" />
     <Compile Include="BE\Data\Input\InputStation.cs" />
+    <Compile Include="BE\Data\Input\InputTicket.cs" />
+    <Compile Include="BE\Data\Input\InputTrip.cs" />
     <Compile Include="BE\Data\Input\InputUser.cs" />
     <Compile Include="BE\Map.cs" />
     <Compile Include="BE\CoachManContext.cs" />
@@ -276,6 +278,8 @@
     <Compile Include="BE\Repositories\RepoRestArea.cs" />
     <Compile Include="BE\Repositories\Repository.cs" />
     <Compile Include="BE\Repositories\RepoStation.cs" />
+    <Compile Include="BE\Repositories\RepoTicket.cs" />
+    <Compile Include="BE\Repositories\RepoTrip.cs" />
     <Compile Include="BE\Repositories\RepoUser.cs" />
     <Compile Include="BE\Repositories\RepoRoute.cs" />
     <Compile Include="GetViewModel.cs" />
