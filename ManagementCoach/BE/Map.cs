@@ -20,8 +20,35 @@ namespace ManagementCoach.BE
 			{
 				config.CreateMap<InputCoach, Coach>();
 				config.CreateMap<Coach, ModelCoach>();
+
 				config.CreateMap<InputCoachSeat, CoachSeat>();
 				config.CreateMap<CoachSeat, ModelCoachSeat>();
+
+				config.CreateMap<InputDriver, Driver>();
+				config.CreateMap<Driver, ModelDriver>();
+
+				config.CreateMap<InputPassenger, Passenger>();
+				config.CreateMap<Passenger, ModelPassenger>();
+
+				config.CreateMap<InputRestArea, RestArea>();
+				config.CreateMap<RestArea, ModelRestArea>();
+
+				config.CreateMap<InputRoute, Route>();
+				config.CreateMap<Route, ModelRoute>();
+
+				config.CreateMap<InputStation, Station>();
+				config.CreateMap<Station, ModelStation>();
+
+				config.CreateMap<InputTicket, Ticket>();
+				config.CreateMap<Ticket, ModelTicket>();
+
+				config.CreateMap<InputTrip, Trip>();
+				config.CreateMap<Trip, ModelTrip>();
+
+				config.CreateMap<InputUser, User>();
+				config.CreateMap<User, ModelUser>();
+
+				config.CreateMap<Province, ModelProvince>();
 			}));
 		}
 
