@@ -39,9 +39,12 @@ namespace ManagementCoach.BE.Repositories
 			return Map.To<ModelDriver>(Context.Drivers.Where(c => c.Id == id).FirstOrDefault());
 		}
 
-		public Result<ModelDriver> UpdateDriver(int coachId, InputDriver input)
+		public Result<ModelDriver> UpdateDriver(int id, InputDriver input)
 		{
-			var driver = Context.Drivers.Where(c => c.Id == coachId).FirstOrDefault();
+			if (!DriverExists(id))
+				return new Result<ModelDriver> { Success = false, ErrorMessage = "Driver with this Id do not exist" };
+			
+			var driver = Context.Drivers.Where(c => c.Id == id).FirstOrDefault();
 
 			if (driver.IdCard != input.IdCard && IdCardExists(input.IdCard))
 				return new Result<ModelDriver> { Success = false, ErrorMessage = "Driver with this registration already exist." };

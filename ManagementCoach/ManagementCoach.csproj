@@ -233,6 +233,8 @@
     </Compile>
     <Compile Include="BE\Data\Input\InputCoachSeat.cs" />
     <Compile Include="BE\Data\Input\InputDriver.cs" />
+    <Compile Include="BE\Data\Input\InputPassenger.cs" />
+    <Compile Include="BE\Data\Input\InputUser.cs" />
     <Compile Include="BE\Map.cs" />
     <Compile Include="BE\CoachManContext.cs" />
     <Compile Include="BE\Data\Input\InputCoach.cs" />
@@ -266,7 +268,10 @@
     <Compile Include="BE\Repositories\RepoCoach.cs" />
     <Compile Include="BE\Repositories\RepoCoachSeat.cs" />
     <Compile Include="BE\Repositories\RepoDriver.cs" />
+    <Compile Include="BE\Repositories\RepoPassenger.cs" />
+    <Compile Include="BE\Repositories\RepoProvince.cs" />
     <Compile Include="BE\Repositories\Repository.cs" />
+    <Compile Include="BE\Repositories\RepoUser.cs" />
     <Compile Include="GetViewModel.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\AddCoachViewModel.cs" />

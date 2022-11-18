@@ -35,9 +35,12 @@ namespace ManagementCoach.BE.Repositories
 			return Map.To<ModelUser>(Context.Users.Where(c => c.Id == id).FirstOrDefault());
 		}
 
-		public Result<ModelUser> UpdateUser(int coachId, InputUser input)
+		public Result<ModelUser> UpdateUser(int id, InputUser input)
 		{
-			var user = Context.Users.Where(c => c.Id == coachId).FirstOrDefault();
+			if (!UserExists(id))
+				return new Result<ModelUser> { Success = false, ErrorMessage = "User with this Id do not exist" };
+
+			var user = Context.Users.Where(c => c.Id == id).FirstOrDefault();
 
 			if (user.Username != input.Username && UsernameExists(input.Username))
 				return new Result<ModelUser> { Success = false, ErrorMessage = "User with this username already exist." };

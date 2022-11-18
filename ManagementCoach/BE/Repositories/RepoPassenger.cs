@@ -39,12 +39,15 @@ namespace ManagementCoach.BE.Repositories
 			return Map.To<ModelPassenger>(Context.Passengers.Where(c => c.Id == id).FirstOrDefault());
 		}
 
-		public Result<ModelPassenger> UpdatePassenger(int coachId, InputPassenger input)
+		public Result<ModelPassenger> UpdatePassenger(int id, InputPassenger input)
 		{
-			var passenger = Context.Passengers.Where(c => c.Id == coachId).FirstOrDefault();
+			if (!PassengerExists(id))
+				return new Result<ModelPassenger> { Success = false, ErrorMessage = "Passenger with this Id do not exist" };
+
+			var passenger = Context.Passengers.Where(c => c.Id == id).FirstOrDefault();
 
 			if (passenger.IdCard != input.IdCard && IdCardExists(input.IdCard))
-				return new Result<ModelPassenger> { Success = false, ErrorMessage = "Coach with this registration already exist." };
+				return new Result<ModelPassenger> { Success = false, ErrorMessage = "Passenger with this registration already exist." };
 
 			if (passenger.Email != input.Email && EmailExists(input.Email))
 				return new Result<ModelPassenger> { Success = false, ErrorMessage = "Passenger with this email already exist." };
@@ -61,7 +64,7 @@ namespace ManagementCoach.BE.Repositories
 		public Result DeletePassenger(int id)
 		{
 			if (!PassengerExists(id))
-				return new Result { Success = false, ErrorMessage = "Coach with this Id do not exist" };
+				return new Result { Success = false, ErrorMessage = "Province with this Id do not exist" };
 
 			var passenger = new Passenger() { Id = id };
 			Context.Passengers.Attach(passenger);
