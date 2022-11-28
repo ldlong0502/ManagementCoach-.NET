@@ -108,8 +108,7 @@
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="5"></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="595"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="{Binding Title}" FontSize="36" FontWeight="Bold" Foreground="{StaticResource primaryColor}"></TextBlock>
         <Button Command="{ Binding AddCommand}" Width="178" HorizontalAlignment="Left" Margin="1012,5,0,5" Style="{StaticResource addButton}">
@@ -127,6 +126,6 @@
             <Button Content="Drivers" Style="{StaticResource TabButton}" Command="{Binding ShowDriversCommand}" BorderBrush="{Binding  BorderBrushDrivers}"></Button>
             <Button Content="Stations" Style="{StaticResource TabButton}"></Button>
         </StackPanel>
-        <ContentControl x:Name="datagridContent" Content="{Binding CurrentManagerView}" Grid.Row="3"></ContentControl>
+        <ContentControl x:Name="datagridContent" Content="{Binding CurrentManagerView}" Grid.Row="3" HorizontalAlignment="Right" Width="1200"></ContentControl>
     </Grid>
 </UserControl>

@@ -53,6 +53,8 @@ namespace ManagementCoach.BE.Repositories
             return page;
 		}
 
+
+	
 		public ModelCoach GetCoach(int id) { 
 			return Map.To<ModelCoach>(Context.Coaches.Where(c => c.Id == id).FirstOrDefault());
 		}

@@ -1,12 +1,17 @@
-﻿using System;
+﻿using ManagementCoach.BE.Models;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace ManagementCoach.ViewModels
 {
-    public class AddDriverViewModel: ViewModelBase
+    public class AddDriverViewModel: ViewModelBase, INotifyDataErrorInfo
     {
         private readonly ErrorsViewModel _errorsViewModel;
         private int id;
@@ -195,10 +200,83 @@ namespace ManagementCoach.ViewModels
                 OnPropertyChanged(nameof(Dateadded));
             }
         }
+
+        private List<string> listGender = new List<string>() { "Male", "Female" };
+        public IEnumerable<string> ListGender
+        {
+            get { return listGender; }
+        }
+
+
+        public bool CanCreate => !HasErrors;
+        public bool HasErrors => _errorsViewModel.HasErrors;
+        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+
+
+        public ICommand SaveCommand { get; }
+        public ICommand CancelCommand { get; }
+
+
         public AddDriverViewModel()
         {
+            _errorsViewModel = new ErrorsViewModel();
+            _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
+            SaveCommand = new ViewModelCommand(ExcuteSaveCommand, CanExcuteSaveCommand);
+            CancelCommand = new ViewModelCommand(ExcuteCancelCommand);
+            Datejoined = Dob = DateTime.Now;
+            Dateadded = DateTimeOffset.Now;
+            Gender = ListGender.First();
+        }
+        public AddDriverViewModel(ModelDriver data)
+        {
+            _errorsViewModel = new ErrorsViewModel();
+            _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
+            SaveCommand = new ViewModelCommand(ExcuteEditCommand, CanExcuteSaveCommand);
+            CancelCommand = new ViewModelCommand(ExcuteCancelCommand);
 
-		
-		}
+        }
+
+        private void ExcuteEditCommand(object obj)
+        {
+            //edit data
+        }
+
+        private void ExcuteCancelCommand(object obj)
+        {
+            var window = obj as Window;
+            window.Close();
+        }
+
+        private bool CanExcuteSaveCommand(object obj)
+        {
+            if (_errorsViewModel.HasErrors)
+                return false;
+            return true;
+        }
+
+        private void ExcuteSaveCommand(object obj)
+        {
+            try
+            {
+                
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+        }
+
+        private void ErrorsViewModel_ErrorsChanged(object sender, DataErrorsChangedEventArgs e)
+        {
+            ErrorsChanged?.Invoke(this, e);
+            OnPropertyChanged(nameof(CanCreate));
+        }
+
+        public IEnumerable GetErrors(string propertyName)
+        {
+            return _errorsViewModel.GetErrors(propertyName);
+        }
     }
 }

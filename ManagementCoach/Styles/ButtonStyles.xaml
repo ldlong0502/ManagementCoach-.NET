@@ -36,6 +36,42 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="pagingButton" TargetType="Button" >
+        <!--Normal button style-->
+        <Setter Property="Background" Value="Transparent"></Setter>
+        <Setter Property="Foreground" Value="#6c7682"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Margin" Value="1 0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="5" Padding="10 5">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 -1 0 1"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#7950f2"/>
+                <Setter Property="Foreground" Value="{StaticResource titleColor3}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="pagingText" TargetType="TextBlock" >
+        <!--Normal button style-->
+        <Setter Property="Background" Value="Transparent"></Setter>
+        <Setter Property="Foreground" Value="#6c7682"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Margin" Value="1 0"/>
+    </Style>
+    <Style x:Key="pagingButtonIcon" TargetType="fa:FontAwesome">
+        <Setter Property="FontSize" Value="20"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource panelOverColor}"/>
+    </Style>
     <!--Menu button icon-->
     <Style x:Key="menuButtonIcon" TargetType="fa:FontAwesome">
         <Setter Property="Foreground" Value="{Binding Path=Tag, RelativeSource={RelativeSource AncestorType=RadioButton}}"/>
