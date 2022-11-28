@@ -18,6 +18,6 @@ namespace ManagementCoach.BE.Models
 		public int CustomerId { get; set; }
 		
 		[Column(TypeName = "timestamptz")]
-		public DateTimeOffset DateBought { get; set; }
+		public DateTimeOffset DateBought { get; set; } = DateTimeOffset.Now;
 	}
 }

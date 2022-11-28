@@ -5,17 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ManagementCoach.BE.Models
+namespace ManagementCoach.BE.Data.Input
 {
-	public class ModelRoute
+	public class InputRoute
 	{
-		[Required]
-		public int Id { get; set; }
-		[Required]
 		public int OriginStationId { get; set; }
-		[Required]
 		public int DestinationStationId { get; set; }
-		[Required]
 		public int Price { get; set; }
 
 		/// <summary>
@@ -23,10 +18,9 @@ namespace ManagementCoach.BE.Models
 		/// </summary>
 		public int EstimatedTime { get; set; }
 
-
 		/// <summary>
-		/// Các trạm dừng chân mà tuyến đường này đi qua, thứ tự dừng của trạm sẽ là thứ tự phần từ trong danh sách + 1
+		/// Id các trạm dừng chân mà tuyến đường này đi qua, thứ tự dừng của trạm sẽ là thứ tự phần từ trong danh sách + 1
 		/// </summary>
-		public List<ModelRestArea> RouteRestAreas { get; set; }
+		public List<int> RouteRestAreas { get; set; }
 	}
 }

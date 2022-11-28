@@ -1,30 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
-namespace ManagementCoach.BE.Models
+namespace ManagementCoach.BE.Data.Input
 {
-	public class ModelTrip
+	public class InputTrip
 	{
-		[Required]
-		public int Id { get; set; }
-		[Required]
 		public int RouteId { get; set; }
-		[Required]
 		public int CoachId { get; set; }
-		[Required]
 		public int DriverId { get; set; }
-
-		[Column(TypeName = "timestamptz")]
 		public DateTimeOffset Date { get; set; } = DateTimeOffset.Now;
-
-		/// <summary>
-		/// Mặc định là false
-		/// </summary>
 		public bool Cancelled { get; set; }
 	}
 }

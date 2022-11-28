@@ -5,21 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ManagementCoach.BE.Models
+namespace ManagementCoach.BE.Data.Input
 {
-	public class ModelStation
+	public class InputRestArea
 	{
-		[Required]
-		public int Id { get; set; }
-		[Required]
 		public string Name { get; set; }
-
-		[Required]
-		public string District { get; set; }
-		[Required]
 		public string Address { get; set; }
-		[Required]
 		public int ProvinceId { get; set; }
-		
 	}
 }

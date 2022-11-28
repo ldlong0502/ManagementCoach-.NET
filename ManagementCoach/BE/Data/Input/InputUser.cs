@@ -1,31 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
-namespace ManagementCoach.BE.Models
+namespace ManagementCoach.BE.Data.Input
 {
-	public class ModelUser
+	public class InputUser
 	{
-		[Required]
 		public int Id { get; set; }
-		[Required]
 		public string Username { get; set; }
-		[Required]
 		public string Password { get; set; }
-		
-		/// <summary>
-		/// Là "Employee" hoặc "Admin"
-		/// </summary>
 		public string Role { get; set; }
-		
 		public string Name { get; set; }
 		public string Email { get; set; }
-
-		[Column(TypeName = "timestamptz")]
-		public DateTimeOffset DateAdded { get; set; } = DateTimeOffset.Now;
 	}
 }

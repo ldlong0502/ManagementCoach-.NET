@@ -232,6 +232,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BE\Data\Input\InputCoachSeat.cs" />
+    <Compile Include="BE\Data\Input\InputDriver.cs" />
+    <Compile Include="BE\Data\Input\InputPassenger.cs" />
+    <Compile Include="BE\Data\Input\InputRestArea.cs" />
+    <Compile Include="BE\Data\Input\InputRoute.cs" />
+    <Compile Include="BE\Data\Input\InputStation.cs" />
+    <Compile Include="BE\Data\Input\InputTicket.cs" />
+    <Compile Include="BE\Data\Input\InputTrip.cs" />
+    <Compile Include="BE\Data\Input\InputUser.cs" />
     <Compile Include="BE\Map.cs" />
     <Compile Include="BE\CoachManContext.cs" />
     <Compile Include="BE\Data\Input\InputCoach.cs" />
@@ -264,8 +272,21 @@
     <Compile Include="BE\PaginationHelper.cs" />
     <Compile Include="BE\Repositories\RepoCoach.cs" />
     <Compile Include="BE\Repositories\RepoCoachSeat.cs" />
+    <Compile Include="BE\Repositories\RepoDriver.cs" />
+    <Compile Include="BE\Repositories\RepoPassenger.cs" />
+    <Compile Include="BE\Repositories\RepoProvince.cs" />
+    <Compile Include="BE\Repositories\RepoRestArea.cs" />
     <Compile Include="BE\Repositories\Repository.cs" />
+    <Compile Include="BE\Repositories\RepoStation.cs" />
+    <Compile Include="BE\Repositories\RepoTicket.cs" />
+    <Compile Include="BE\Repositories\RepoTrip.cs" />
+    <Compile Include="BE\Repositories\RepoUser.cs" />
+    <Compile Include="BE\Repositories\RepoRoute.cs" />
     <Compile Include="GetViewModel.cs" />
+    <Compile Include="Migrations\202211180434413_UpdateSchema.cs" />
+    <Compile Include="Migrations\202211180434413_UpdateSchema.designer.cs">
+      <DependentUpon>202211180434413_UpdateSchema.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\AddCoachViewModel.cs" />
     <Compile Include="ViewModels\AddDriverViewModel.cs" />
@@ -337,6 +358,9 @@
     </Compile>
     <EmbeddedResource Include="Migrations\202211040851146_InitialSchema.resx">
       <DependentUpon>202211040851146_InitialSchema.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202211180434413_UpdateSchema.resx">
+      <DependentUpon>202211180434413_UpdateSchema.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

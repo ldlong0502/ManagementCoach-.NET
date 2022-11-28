@@ -12,7 +12,7 @@ namespace ManagementCoach.BE.Models
 		[Required]
 		public int RouteId { get; set; }
 		[Required]
-		public string RestAreaId { get; set; }
+		public int RestAreaId { get; set; }
 		[Required]
 		public int StopOrder { get; set; }
 	}
