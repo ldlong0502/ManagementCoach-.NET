@@ -25,6 +25,7 @@ namespace ManagementCoach.ViewModels
         private DateTimeOffset dateAdded;
 
 
+        public Action Close { get; set; }
         public string Name
         {
             get
@@ -117,7 +118,7 @@ namespace ManagementCoach.ViewModels
         {
             _errorsViewModel = new ErrorsViewModel();
             _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
-            SaveCommand = new ViewModelCommand(ExcuteSaveCommand, CanExcuteSaveCommand);
+            SaveCommand = new ViewModelCommand(ExcuteInsertCommand, CanExcuteSaveCommand);
             CancelCommand = new ViewModelCommand(ExcuteCancelCommand);
             DateAdded = DateTimeOffset.Now;
             Status = ListStatus.First();
@@ -153,8 +154,7 @@ namespace ManagementCoach.ViewModels
 					}
 				);
 				MessageBox.Show("Successfull");
-				GetViewModel.coachViewModel.Load();
-				GetViewModel.addNewCoach.Close();
+                Close();
 			}
 			catch (Exception ex)
 			{
@@ -164,7 +164,7 @@ namespace ManagementCoach.ViewModels
 
         private void ExcuteCancelCommand(object obj)
         {
-           var window = obj as Window;
+            var window = obj as Window;
             window.Close();
         }
 
@@ -175,12 +175,12 @@ namespace ManagementCoach.ViewModels
             return true;
         }
 
-        private void ExcuteSaveCommand(object obj)
+        private void ExcuteInsertCommand(object obj)
         {
             try
             {
                 var coach = new RepoCoach();
-                coach.InsertCoach(
+                 if (coach.InsertCoach(
                     new InputCoach()
                     {
                         Name = Name,
@@ -188,10 +188,17 @@ namespace ManagementCoach.ViewModels
                         RegNo = RegNo,
                         Notes = Notes,
                     }
-                );
-                GetViewModel.coachViewModel.Load();
-                MessageBox.Show("Successfull");
-                GetViewModel.addNewCoach.Close();
+                ).Success == true)
+                {
+                  MessageBox.Show("Successfull");
+                }
+                else
+                {
+                   MessageBox.Show("The RegNo has alreaady existed!");
+                    return;
+                }
+                
+                Close();
 
 
             }

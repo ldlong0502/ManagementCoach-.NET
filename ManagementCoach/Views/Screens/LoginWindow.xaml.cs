@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ManagementCoach.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,10 @@ namespace ManagementCoach.Views.Screens
         public LoginWindow()
         {
             InitializeComponent();
+            LoginViewModel vm = new LoginViewModel(); // this creates an instance of the ViewModel
+            this.DataContext = vm; // this sets the newly created ViewModel as the DataContext for the View
+            if (vm.CloseAction == null)
+                vm.CloseAction = new Action(() => this.Close());
         }
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)

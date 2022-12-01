@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ManagementCoach.BE.Models;
+using ManagementCoach.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,33 @@ namespace ManagementCoach.Views.Screens
     /// </summary>
     public partial class AddNewDriver : Window
     {
-        public AddNewDriver()
+        public AddNewDriver(DriverViewModel driverViewModel)
         {
             InitializeComponent();
+            var vm = new AddDriverViewModel();
+            this.DataContext = vm;
+            if (vm.Close == null)
+            {
+                vm.Close = new Action(() => {
+                    driverViewModel.Load();
+                    this.Close();
+
+                });
+            }
+        }
+        public AddNewDriver(DriverViewModel driverViewModel, ModelDriver modelDriver)
+        {
+            InitializeComponent();
+            var vm = new AddDriverViewModel(modelDriver);
+            this.DataContext = vm;
+            if (vm.Close == null)
+            {
+                vm.Close = new Action(() => {
+                    driverViewModel.Load();
+                    this.Close();
+
+                });
+            }
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

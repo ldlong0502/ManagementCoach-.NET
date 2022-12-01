@@ -14,6 +14,7 @@ namespace ManagementCoach.ViewModels
     public class AddDriverViewModel: ViewModelBase, INotifyDataErrorInfo
     {
         private readonly ErrorsViewModel _errorsViewModel;
+        public Action Close { get; set; }
         private int id;
 		private string name;
 		private string idcard;

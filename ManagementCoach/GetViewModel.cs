@@ -10,7 +10,5 @@ namespace ManagementCoach
 {
     public class GetViewModel
     {
-        public static CoachViewModel coachViewModel = new CoachViewModel();
-        public static AddNewCoach addNewCoach = new AddNewCoach();
     }
 }

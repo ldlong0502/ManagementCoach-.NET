@@ -21,7 +21,6 @@ namespace ManagementCoach.ViewModels
     public class CoachViewModel : ViewModelBase
     {
         public CoachManContext context = new CoachManContext();
-        private List<Coach> coachList;
         private string textSearch = "";
         private ICollectionView coachCollection;
         private object selectedItem;
@@ -129,7 +128,7 @@ namespace ManagementCoach.ViewModels
 
         public CoachViewModel()
         {
-            GetViewModel.coachViewModel = this;
+            
             Load();
             OpenCoachSeatsCommand = new ViewModelCommand(ExcuteOpenCoachSeatsCommand, CanExcuteOpenCoachSeatsCommand);
             EditCommand = new ViewModelCommand(ExcuteEditCommand);
@@ -227,13 +226,13 @@ namespace ManagementCoach.ViewModels
 
 		private void ExcuteEditCommand(object obj)
         {
-            var screen = new AddNewCoach((obj as ModelCoach));
+            var screen = new AddNewCoach((obj as ModelCoach) , this);
             screen.ShowDialog();
         }
 
         private bool CanExcuteOpenCoachSeatsCommand(object obj)
         {
-            if ((SelectedItem as Coach).Status == "Out Of Service")
+            if (SelectedItem == null || (SelectedItem as ModelCoach).Status == "Out Of Service")
                 return false;
             return true;
         }
@@ -242,7 +241,7 @@ namespace ManagementCoach.ViewModels
         {
             if (obj == null)
                 return;
-            System.Windows.MessageBox.Show((obj as Coach).Id.ToString());
+            System.Windows.MessageBox.Show((obj as ModelCoach).Id.ToString());
         }
 
         private bool check(string data, string text)
@@ -256,15 +255,7 @@ namespace ManagementCoach.ViewModels
             return false;
 
         }
-        private int CountAllCoachesFilter()
-        {
-            List<ModelCoach> modelCoaches = new List<ModelCoach>();
-            context.Coaches.ToList().ForEach(x => modelCoaches.Add(new RepoCoach().GetCoach(x.Id)));
-            ICollectionView collection = CollectionViewSource.GetDefaultView(modelCoaches);
-            collection.Filter = Filter;
-            return collection.Cast<ModelCoach>().Count();
-
-        }
+      
         private bool Filter(object data)
         {
             if (!string.IsNullOrEmpty(TextSearch))
@@ -279,11 +270,15 @@ namespace ManagementCoach.ViewModels
         }       
         public void Load()
         {
-
+            if(context.Coaches.Count() == 0)
+            {
+                return;
+            }
 			var coachesPagination = new RepoCoach().GetCoaches(TextSearch, CurrentPage, Limit);
 			CoachCollection = CollectionViewSource.GetDefaultView(coachesPagination.Items);
             NumOfPages = coachesPagination.PageCount;
-            if (CurrentPage > NumOfPages)
+
+            if (NumOfPages != 0 && CurrentPage > NumOfPages)
             {
                 CurrentPage = 1;
                 coachesPagination = new RepoCoach().GetCoaches(TextSearch, CurrentPage, Limit);

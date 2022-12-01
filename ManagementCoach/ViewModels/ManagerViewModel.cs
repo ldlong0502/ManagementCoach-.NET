@@ -1,9 +1,11 @@
 ﻿using ManagementCoach.Views.Screens;
+using ManagementCoach.Views.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -12,6 +14,7 @@ namespace ManagementCoach.ViewModels
     public class ManagerViewModel : ViewModelBase
     {
         private ViewModelBase _currentManagerView;
+        private UserControl _currentControl;
         private string title;
         private string addAction;
 
@@ -23,7 +26,18 @@ namespace ManagementCoach.ViewModels
         private SolidColorBrush borderBrushStations = new SolidColorBrush(Colors.Transparent);
 
 
-
+        public UserControl CurrentControl
+        {
+            get
+            {
+                return _currentControl;
+            }
+            set
+            {
+                _currentControl = value;
+                OnPropertyChanged(nameof(CurrentControl));
+            }
+        }
         public ViewModelBase CurrentManagerView
         {
             get
@@ -144,6 +158,7 @@ namespace ManagementCoach.ViewModels
         {
             Title = "Drivers";
             AddAction = "Add new driver";
+            CurrentControl = new DriverUserControl();
             CurrentManagerView = new DriverViewModel();
             ChangeBrushColor();
         }
@@ -152,7 +167,8 @@ namespace ManagementCoach.ViewModels
         {
             if(Title == "Coaches")
             {
-                var screen = new AddNewCoach();
+                var screen = new AddNewCoach((CurrentManagerView as CoachViewModel));
+                
                 screen.ShowDialog();
             }
             else if(Title == "Drivers")
@@ -166,7 +182,9 @@ namespace ManagementCoach.ViewModels
         {
             Title = "Coaches";
             AddAction = "Add new coach";
+            CurrentControl = new CoachUserControl();
             CurrentManagerView = new CoachViewModel();
+            CurrentControl.DataContext = CurrentManagerView;
             ChangeBrushColor();
         }
 
@@ -228,7 +246,9 @@ namespace ManagementCoach.ViewModels
         {
             Title = "Trips";
             AddAction = "Add new trip";
+            CurrentControl = new TripsUserControl();
             CurrentManagerView = new TripViewModel();
+            CurrentControl.DataContext = CurrentManagerView;
             ChangeBrushColor();
         }
     }

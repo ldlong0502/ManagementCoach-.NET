@@ -1,8 +1,6 @@
 ﻿using ManagementCoach.BE;
-using ManagementCoach.BE.Entities;
 using ManagementCoach.BE.Models;
 using ManagementCoach.BE.Repositories;
-using ManagementCoach.Views.Screens;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,11 +13,14 @@ using System.Windows.Input;
 
 namespace ManagementCoach.ViewModels
 {
-    public class DriverViewModel : ViewModelBase
+    public class UserViewModel : ViewModelBase
     {
+
+        
         public CoachManContext context = new CoachManContext();
-        private ICollectionView driverCollection;
-        private string textSearch;
+        private List<ModelUser> userList;
+        private string textSearch = "";
+        private ICollectionView userCollection;
         private object selectedItem;
         private int currentPage = 1;
         private int limit = 2;
@@ -88,45 +89,31 @@ namespace ManagementCoach.ViewModels
             }
         }
 
-
-        private bool check(string data, string text)
-        {
-            if (!string.IsNullOrEmpty(data))
-            {
-                if (data.Contains(text))
-                    return true;
-                return false;
-            }
-            return false;
-
-        }
-        private bool Filter(object data)
-        {
-            if (!string.IsNullOrEmpty(TextSearch))
-            {
-                var driverDetail = data as Driver;
-                return driverDetail != null
-                    && (check(driverDetail.Id.ToString(), TextSearch)
-                    || check(driverDetail.Name, TextSearch));
-            }
-            return true;
-
-        }
-        public ICollectionView DriverCollection
+        public ICollectionView UserCollection
         {
             get
             {
-                return driverCollection;
+                return userCollection;
             }
             set
             {
-                driverCollection = value;
-                OnPropertyChanged(nameof(DriverCollection));
+                userCollection = value;
+                OnPropertyChanged(nameof(UserCollection));
+            }
+        }
+        public List<ModelUser> UserList
+        {
+            get
+            {
+                return userList;
+            }
+            set
+            {
+                userList = value;
+                OnPropertyChanged(nameof(UserList));
             }
         }
 
-
-        //ICommand
         public ICommand EditCommand { get; }
         public ICommand DeleteCommand { get; }
         public ICommand PreviousPageCommand { get; }
@@ -135,7 +122,8 @@ namespace ManagementCoach.ViewModels
         public ICommand DownLimitCommand { get; }
         public ICommand FirstPageCommand { get; }
         public ICommand EndPageCommand { get; }
-        public DriverViewModel()
+
+        public UserViewModel()
         {
             Load();
             EditCommand = new ViewModelCommand(ExcuteEditCommand);
@@ -147,6 +135,7 @@ namespace ManagementCoach.ViewModels
             FirstPageCommand = new ViewModelCommand(ExcuteFirstPageCommand, CanExcuteFirstPageCommand);
             EndPageCommand = new ViewModelCommand(ExcuteEndPageCommand, CanExcuteEndPageCommand);
         }
+
         private bool CanExcuteEndPageCommand(object obj)
         {
             if (CurrentPage != NumOfPages)
@@ -225,45 +214,62 @@ namespace ManagementCoach.ViewModels
             {
                 return;
             }
-            var delAction = new RepoDriver().DeleteDriver((obj as ModelDriver).Id);
-            if (delAction.Success == true)
-            {
-                MessageBox.Show("Successfully");
-                Load();
-            }
-            else
-            {
-                MessageBox.Show(delAction.ErrorMessage);
-            }
-            
+
+            new RepoUser().DeleteUser((obj as ModelUser).Id);
+            Load();
         }
 
         private void ExcuteEditCommand(object obj)
         {
-            var screen = new AddNewDriver((obj as ModelDriver), this);
-            screen.ShowDialog();
+            //var screen = new Add((obj as ModelCoach));
+            //screen.ShowDialog();
         }
 
 
-        
+        private bool check(string data, string text)
+        {
+            if (!string.IsNullOrEmpty(data))
+            {
+                if (data.Contains(text))
+                    return true;
+                return false;
+            }
+            return false;
+
+        }
+        private int CountAllUserFilter()
+        {
+            List<ModelUser> modelUsers = new List<ModelUser>();
+            context.Users.ToList().ForEach(x => modelUsers.Add(new RepoUser().GetUser(x.Id)));
+            ICollectionView collection = CollectionViewSource.GetDefaultView(modelUsers);
+            collection.Filter = Filter;
+            return collection.Cast<ModelUser>().Count();
+
+        }
+        private bool Filter(object data)
+        {
+            if (!string.IsNullOrEmpty(TextSearch))
+            {
+                var userDetail = data as ModelUser;
+                return userDetail != null
+                    && (check(userDetail.Name, TextSearch));
+            }
+            return true;
+
+        }
         public void Load()
         {
-            if (context.Coaches.Count() == 0)
-            {
-                return;
-            }
-            DriverCollection = CollectionViewSource.GetDefaultView(context.Drivers.ToList());
-            //var coachesPagination = new RepoDriver().GetDriver(TextSearch, CurrentPage, Limit);
-            //DriverCollection = CollectionViewSource.GetDefaultView(coachesPagination.Items);
+            UserCollection = CollectionViewSource.GetDefaultView(context.Users.ToList());
+            //var usersPagination = new RepoUser().(TextSearch, CurrentPage, Limit);
+            //CoachCollection = CollectionViewSource.GetDefaultView(coachesPagination.Items);
             //NumOfPages = coachesPagination.PageCount;
-
-            //if (NumOfPages != 0 && CurrentPage > NumOfPages)
+            //if (CurrentPage > NumOfPages)
             //{
             //    CurrentPage = 1;
-            //    coachesPagination = new RepoDriver().GetCoaches(TextSearch, CurrentPage, Limit);
-            //    DriverCollection = CollectionViewSource.GetDefaultView(coachesPagination.Items);
+            //    coachesPagination = new RepoUser().GetCoaches(TextSearch, CurrentPage, Limit);
+            //    CoachCollection = CollectionViewSource.GetDefaultView(coachesPagination.Items);
             //}
-
         }
     }
+   
 }

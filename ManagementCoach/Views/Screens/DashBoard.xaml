@@ -25,7 +25,7 @@
         <DataTemplate DataType="{x:Type viewModel:ManagerViewModel}">
             <usercontrol:ManagerUserControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModel:AccountViewModel}">
+        <DataTemplate DataType="{x:Type viewModel:UserViewModel}">
             <usercontrol:AccountUserControl></usercontrol:AccountUserControl>
         </DataTemplate>
         <Storyboard x:Key="SlideClose">

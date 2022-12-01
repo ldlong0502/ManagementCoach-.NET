@@ -40,7 +40,7 @@ namespace ManagementCoach.ViewModels
 
         private void ExecuteShowAccountViewCommand(object obj)
         {
-            CurrentChildView = new AccountViewModel();
+            CurrentChildView = new UserViewModel();
             
         }
 

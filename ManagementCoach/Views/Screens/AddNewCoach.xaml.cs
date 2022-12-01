@@ -22,16 +22,32 @@ namespace ManagementCoach.Views.Screens
     /// </summary>
     public partial class AddNewCoach : Window
     {
-        public AddNewCoach()
+        public AddNewCoach(CoachViewModel coachViewModel)
         {
             InitializeComponent();
-            GetViewModel.addNewCoach = this;
+            var vm = new AddCoachViewModel();
+            this.DataContext = vm;
+            if (vm.Close == null)
+            {
+                vm.Close = new Action(() => {
+                    coachViewModel.Load();
+                    this.Close();
+                   
+                });
+            }
         }
-        public AddNewCoach(ModelCoach data)
+        public AddNewCoach(ModelCoach data , CoachViewModel coachViewModel)
         {
             InitializeComponent();
-            GetViewModel.addNewCoach = this;
-            this.DataContext = new AddCoachViewModel(data);
+            var vm = new AddCoachViewModel(data);
+            this.DataContext = vm;
+            if (vm.Close == null)
+            {
+                vm.Close = new Action(() => {
+                    this.Close();
+                    coachViewModel.Load();
+                });
+            }
         }
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)

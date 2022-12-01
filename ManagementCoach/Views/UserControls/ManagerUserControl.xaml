@@ -126,6 +126,6 @@
             <Button Content="Drivers" Style="{StaticResource TabButton}" Command="{Binding ShowDriversCommand}" BorderBrush="{Binding  BorderBrushDrivers}"></Button>
             <Button Content="Stations" Style="{StaticResource TabButton}"></Button>
         </StackPanel>
-        <ContentControl x:Name="datagridContent" Content="{Binding CurrentManagerView}" Grid.Row="3" HorizontalAlignment="Right" Width="1200"></ContentControl>
+        <ContentControl x:Name="datagridContent" Content="{Binding CurrentControl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" HorizontalAlignment="Right" Width="1200"></ContentControl>
     </Grid>
 </UserControl>

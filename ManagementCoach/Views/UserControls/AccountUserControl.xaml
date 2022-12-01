@@ -3,10 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ManagementCoach.Views.UserControls" xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:local="clr-namespace:ManagementCoach.Views.UserControls" 
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:vm="clr-namespace:ManagementCoach.ViewModels" 
              mc:Ignorable="d" 
              Background="White"
              d:DesignHeight="700" d:DesignWidth="1200">
+    <UserControl.DataContext>
+        <vm:UserViewModel></vm:UserViewModel>
+    </UserControl.DataContext>
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"></BooleanToVisibilityConverter>
         <SolidColorBrush x:Key="whiteColor" Color="White"></SolidColorBrush>
@@ -93,7 +98,7 @@
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="90"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Accounts" FontSize="36" FontWeight="Bold" Foreground="{StaticResource primaryColor}"></TextBlock>
         <Button Width="150" HorizontalAlignment="Right" Margin="0,0,10,0" Style="{StaticResource addButton}">
@@ -112,54 +117,111 @@
                 <fa:FontAwesome Icon="Search" Foreground="#b0b9c6" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"></fa:FontAwesome>
             </Grid>
         </StackPanel>
-
-        <DataGrid Grid.Row="2" 
+        <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden">
+            <DataGrid Grid.Row="2" 
                   CanUserSortColumns="True"
                   Style="{DynamicResource DataGridStyle1}" 
                   CellStyle="{DynamicResource DataGridCellStyle1}" 
                   ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                   RowStyle="{DynamicResource DataGridRowStyle1}"
-                  ItemsSource="{Binding listAccounts}"
+                  ItemsSource="{Binding UserCollection}"
                   x:Name="AccountsDataGrid">
-            <DataGrid.Columns>
-                <!--<DataGridCheckBoxColumn CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
+                <DataGrid.Columns>
+                    <!--<DataGridCheckBoxColumn CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
                     <DataGridCheckBoxColumn.HeaderTemplate>
                         <DataTemplate>
                             <CheckBox Style="{StaticResource CheckBoxStyle1}"></CheckBox>
                         </DataTemplate>
                     </DataGridCheckBoxColumn.HeaderTemplate>
                 </DataGridCheckBoxColumn>-->
-                <DataGridTextColumn Header="ID" CanUserSort="True"  Binding="{Binding ID}" IsReadOnly="True" Width="*"   ></DataGridTextColumn>
-                <DataGridTemplateColumn  Header="UserName"  IsReadOnly="True" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding UserName}" VerticalAlignment="Center"></TextBlock>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Password"  Binding="{Binding Password}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Role" Binding="{Binding Role}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Name" Binding="{Binding UserName}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Date created" Binding="{Binding DateCreated}" Width="*"></DataGridTextColumn>
-                <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto" >
-                    <DataGridTemplateColumn.CellTemplate >
-                        <DataTemplate >
-                            <StackPanel Orientation="Horizontal">
-                                <Button Style="{StaticResource gridEditButton}" Click="Edit_CLick" >
-                                    <fa:FontAwesome Icon="Pencil" Style="{StaticResource gridButtonIcon}" ></fa:FontAwesome>
-                                </Button>
-                                <Button Style="{StaticResource gridRemoveButton}" Click="Remove_Click">
-                                    <fa:FontAwesome Icon="Eraser" Style="{StaticResource gridButtonIcon}"></fa:FontAwesome>
-                                </Button>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="ID" CanUserSort="True"  Binding="{Binding ID}" IsReadOnly="True" Width="*"   ></DataGridTextColumn>
+                    <DataGridTemplateColumn  Header="UserName"  IsReadOnly="True" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding UserName}" VerticalAlignment="Center"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Password"  Binding="{Binding Password}" Width="*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Role" Binding="{Binding Role}" Width="*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Name" Binding="{Binding UserName}" Width="*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Date created" Binding="{Binding DateCreated}" Width="*"></DataGridTextColumn>
+                    <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto" >
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Style="{StaticResource gridEditButton}" Click="Edit_CLick" >
+                                        <fa:FontAwesome Icon="Pencil" Style="{StaticResource gridButtonIcon}" ></fa:FontAwesome>
+                                    </Button>
+                                    <Button Style="{StaticResource gridRemoveButton}" Click="Remove_Click">
+                                        <fa:FontAwesome Icon="Eraser" Style="{StaticResource gridButtonIcon}"></fa:FontAwesome>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
 
-            </DataGrid.Columns>
-        </DataGrid>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="50,0,0,0">
+                <TextBlock VerticalAlignment="Center"  Text="Show" FontSize="15" Foreground="#6c7682" FontWeight="Medium"></TextBlock>
+                <Border Height="30" Margin="10,0,10,0" Width="80" BorderBrush="#6c7682" BorderThickness="1" CornerRadius="5">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Margin="10,0,0,0"  Width="30" Foreground="{StaticResource color10}" IsEnabled="False" BorderBrush="Transparent" Text="{Binding Limit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="20" HorizontalAlignment="Left" TextAlignment="Center" Padding="0,0,0,0"></TextBox>
+                        <StackPanel Orientation="Vertical">
+                            <Button FocusVisualStyle="{x:Null}" Height="15" Width="25" Margin="0,0,0,0" Command="{Binding UpLimitCommand}" BorderBrush="Transparent" Background="Transparent">
+                                <fa:FontAwesome Icon="ArrowUp" FontSize="10" Foreground="#6c7682"></fa:FontAwesome>
+                            </Button>
+                            <Button FocusVisualStyle="{x:Null}" Height="15" Width="25" Command="{Binding DownLimitCommand}"   BorderBrush="Transparent" Background="Transparent">
+                                <fa:FontAwesome  FontSize="10" Foreground="#6c7682" Icon="ArrowDown"></fa:FontAwesome>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <TextBlock VerticalAlignment="Center"  Text="Items" FontSize="15" Foreground="#6c7682" FontWeight="Medium"></TextBlock>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Right" Margin="0 5 50 5" Orientation="Horizontal" Grid.Column="1">
+                <TextBlock VerticalAlignment="Center" Margin="0,0,50,0" FontSize="15" Foreground="#6c7682">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="Showing {0} of {1} pages">
+                            <Binding Path="CurrentPage"></Binding>
+                            <Binding Path="NumOfPages"></Binding>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+                <Border  CornerRadius="5" Background="{StaticResource color1}" Padding="5" BorderBrush="#dee4ec" BorderThickness="1" >
+                    <StackPanel Orientation="Horizontal">
+                        <Button ToolTip="Previous" Style="{StaticResource pagingButton}" Command="{Binding FirstPageCommand}">
+                            <fa:FontAwesome Icon="AngleDoubleLeft" Style="{StaticResource pagingButtonIcon}"   Margin="0,2,0,0"  ></fa:FontAwesome>
+                        </Button>
+                        <Button ToolTip="Previous" Style="{StaticResource pagingButton}" Command="{Binding PreviousPageCommand}">
+                            <fa:FontAwesome Icon="AngleLeft" Style="{StaticResource pagingButtonIcon}" FontSize="20"  Margin="0,2,0,0"  ></fa:FontAwesome>
+                        </Button>
+                        <Rectangle Width="1" Fill="#dee4ec" Margin="3 5"></Rectangle>
+
+                        <Button Style="{StaticResource pagingButton}" Content="{Binding CurrentPage}" Width="30" Background="{StaticResource color2}" Foreground="#ffffff"></Button>
+
+                        <Rectangle Width="1" Fill="#dee4ec" Margin="3 5"></Rectangle>
+                        <Button ToolTip="Next" Style="{StaticResource pagingButton}" Command="{Binding NextPageCommand}">
+                            <fa:FontAwesome Icon="AngleRight" Style="{StaticResource pagingButtonIcon}" Margin="0,2,0,0"></fa:FontAwesome>
+                        </Button>
+                        <Button ToolTip="Next" Style="{StaticResource pagingButton}" Command="{Binding EndPageCommand}">
+                            <fa:FontAwesome Icon="AngleDoubleRight" Style="{StaticResource pagingButtonIcon}" Margin="0,2,0,0"></fa:FontAwesome>
+                        </Button>
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

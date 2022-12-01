@@ -8,6 +8,7 @@
              mc:Ignorable="d" 
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:fa1="Fon"
+             
              xmlns:vm="clr-namespace:ManagementCoach.ViewModels" 
              Background="White"
              d:DesignHeight="595" d:DesignWidth="1200">
@@ -110,18 +111,18 @@
                 <fa:FontAwesome Icon="Search" Foreground="#b0b9c6" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"></fa:FontAwesome>
             </Grid>
         </StackPanel>
-        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden">
-        <DataGrid Width="1500" 
+        <DataGrid 
+                   Grid.Row="1"
                   x:Name="dtgCoach"
                   SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding CoachCollection}"  Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" >
-                <DataGrid.ContextMenu>
-                    <ContextMenu >
-                        <MenuItem Header="See coach seats" Command="{Binding OpenCoachSeatsCommand}" CommandParameter="{Binding SelectedItem}"></MenuItem>
-                    </ContextMenu>
-                </DataGrid.ContextMenu>
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id"  Binding="{Binding Id }" IsReadOnly="True" Width="0,3*" ></DataGridTextColumn>
+            <DataGrid.ContextMenu>
+                <ContextMenu >
+                    <MenuItem Header="See coach seats" Command="{Binding OpenCoachSeatsCommand}" CommandParameter="{Binding SelectedItem}"></MenuItem>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id"  Binding="{Binding Id }" IsReadOnly="True" Width="0,3*" ></DataGridTextColumn>
                 <DataGridTemplateColumn  Header="Name"  IsReadOnly="True" >
                     <DataGridTemplateColumn.CellTemplate >
                         <DataTemplate>
@@ -141,20 +142,19 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Notes" Binding="{Binding Notes}" ></DataGridTextColumn>
-                <DataGridTextColumn Header="DateAdded" Binding="{Binding DateAdded}" ></DataGridTextColumn>
+                <DataGridTextColumn Header="DateAdded" Binding="{Binding DateAdded , StringFormat='{}{0:dd/MM/yyyy HH:mm:ss}'}"  ></DataGridTextColumn>
                 <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                    <Button Style="{StaticResource gridEditButton}" 
+                                <Button Style="{StaticResource gridEditButton}" 
                                        Command="{Binding Path=DataContext.EditCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}">
-                                        <fa:FontAwesome Icon="Pencil" Style="{StaticResource gridButtonIcon}" >
-                                        </fa:FontAwesome>
+                                    <fa:FontAwesome Icon="Pencil" Style="{StaticResource gridButtonIcon}" >
+                                    </fa:FontAwesome>
                                 </Button>
                                 <Button Style="{StaticResource gridRemoveButton}" 
                                          Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}">
-                                    <fa:FontAwesome Icon="Eraser" Style="{StaticResource gridButtonIcon}"></fa:FontAwesome>
+                                    <fa:FontAwesome Icon="Remove" Style="{StaticResource gridButtonIcon}"></fa:FontAwesome>
                                 </Button>
                             </StackPanel>
                         </DataTemplate>
@@ -163,7 +163,6 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        </ScrollViewer>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>

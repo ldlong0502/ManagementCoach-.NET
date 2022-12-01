@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ManagementCoach.Views.Screens"
+        xmlns:fa ="http://schemas.fontawesome.io/icons/"
+        xmlns:local="clr-namespace:ManagementCoach.Views.Screens" xmlns:usercontrols="clr-namespace:ManagementCoach.Views.UserControls" xmlns:viewmodels="clr-namespace:ManagementCoach.ViewModels"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
@@ -11,6 +12,14 @@
         AllowsTransparency="True"
         Background="Transparent"
         Title="LoginWindow" Height="540" Width="800">
+    <Window.DataContext>
+        <viewmodels:LoginViewModel></viewmodels:LoginViewModel>
+    </Window.DataContext>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="MouseDown">
+            <BeginStoryboard  Storyboard="{DynamicResource Storyboard1}"/>
+        </EventTrigger>
+    </Window.Triggers>
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -71,71 +80,37 @@
         </Style>
         <Storyboard x:Key="Storyboard1">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.528"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.531"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-147.2"/>
-            </DoubleAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="label" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
-                <DiscreteObjectKeyFrame KeyTime="00:00:01" Value="{x:Static Visibility.Hidden}"/>
-            </ObjectAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="label" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.953"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="label" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-5.718"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.369"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="50.4"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock_Copy" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="105.6"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock_Copy" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="49.2"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="6"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="label1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-124.8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-146.4"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="label1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-3.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="label1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-113.6"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="label2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-121.6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-100.8"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="label2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="6.4"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.6"/>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="image" Storyboard.TargetProperty="(FrameworkElement.Width)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="300"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="200"/>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.6"/>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="image" Storyboard.TargetProperty="(FrameworkElement.Height)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="300"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="200"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-81.6"/>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.504"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-1.6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-4"/>
             </DoubleAnimationUsingKeyFrames>
-
-
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-104.8"/>
+            </DoubleAnimationUsingKeyFrames>
         </Storyboard>
+
     </Window.Resources>
     <Grid Margin="0,0,0,-3">
         <Grid.ColumnDefinitions>
@@ -156,74 +131,31 @@
         <Button Style="{DynamicResource ButtonStyle1}" 
                 Foreground="White"
                 FontSize="18"
+                Command="{Binding LoginCommand}"
+                Grid.ColumnSpan="2"
                 Content="Sign In" HorizontalAlignment="Left" 
-                Height="45" Margin="215,435,0,0" VerticalAlignment="Top" Width="116" Background="#FF6600FF"/>
+                Height="45" Margin="350,435,0,0" VerticalAlignment="Top" Width="116" Background="#FF6600FF"/>
 
         <Grid x:Name="User" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="49" Margin="215,309,0,0" VerticalAlignment="Top" Width="400">
             <Rectangle  HorizontalAlignment="Center" Height="49" Stroke="Black" VerticalAlignment="Center" Width="400" RadiusX="15.847" RadiusY="15.847"/>
             <Image HorizontalAlignment="Left" Height="30" Margin="10,0,0,0" VerticalAlignment="Center" Width="30" Source="/Images/user.png"/>
-            <TextBox HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="48" Margin="58,0,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Center" Width="315" BorderBrush="{x:Null}" Background="{x:Null}" FontSize="16" Cursor="Hand"/>
+            <TextBox HorizontalAlignment="Left" FocusVisualStyle="{x:Null}" BorderThickness="0" VerticalContentAlignment="Center" Height="48" Margin="58,0,0,0" TextWrapping="Wrap" Text="{Binding UserName}"  VerticalAlignment="Center" Width="315" BorderBrush="{x:Null}" Background="{x:Null}" FontSize="16" Cursor="Hand"/>
         </Grid>
         <Grid x:Name="Pass" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="49" Margin="215,373,0,0" VerticalAlignment="Top" Width="400">
             <Rectangle  HorizontalAlignment="Center" Height="49" Stroke="Black" VerticalAlignment="Center" Width="400" RadiusX="15.847" RadiusY="15.847"/>
             <Image HorizontalAlignment="Left" Height="30" Margin="10,0,0,0" VerticalAlignment="Center" Width="30" Source="/Images/lock.png"/>
-            <TextBox HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="48" Margin="58,0,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Center" Width="315" BorderBrush="{x:Null}" Background="{x:Null}" FontSize="16"/>
-
+            <usercontrols:BindablePasswordBoxUC Height="48"
+                                                Width="315"
+                                                FocusVisualStyle="{x:Null}"
+                                                Background="Transparent"
+                                                BorderBrush="{x:Null}"
+                                                HorizontalAlignment="Center"
+                                                Margin="30 0 0 0"
+                                                Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></usercontrols:BindablePasswordBoxUC>
 
         </Grid>
-        <Label x:Name="label" Content="Login to your account" 
-            HorizontalAlignment="Left" 
-            FontWeight="Bold"           
-            Height="68" VerticalAlignment="Top" Width="238" Margin="281,495,0,0" FontSize="22" Grid.ColumnSpan="2" RenderTransformOrigin="0.512,1.787">
-            <Label.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Label.RenderTransform>
-            <Label.Triggers>
-                <EventTrigger RoutedEvent="MouseDown">
-                    <BeginStoryboard  Storyboard="{DynamicResource Storyboard1}"/>
-                </EventTrigger>
-            </Label.Triggers>
-        </Label>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" 
-                       Height="13" 
-                       Margin="363,398,0,0" 
-                       TextWrapping="Wrap" 
-                       FontSize="10"
-                       TextAlignment="Center"
-                       Text="Don't have account ?" VerticalAlignment="Top" Width="93" Grid.ColumnSpan="2" >
-            <TextBlock.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </TextBlock.RenderTransform>
-        </TextBlock>
-        <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" 
-                Height="18" 
-                Margin="363,398,0,0" 
-                TextWrapping="Wrap" 
-                FontSize="14"
-                FontWeight="Bold"
-                TextAlignment="Center"
-                Text="Sign up" VerticalAlignment="Top" Width="50" Grid.ColumnSpan="2" >
-            <TextBlock.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </TextBlock.RenderTransform>
-        </TextBlock>
         <Grid x:Name="Top" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" Height="437" Width="800" >
-            <Path x:Name="path" Data="M9.4796339,211.65496 C9.4796339,211.65496 12.38387,240.5533 59.426881,240.5533 106.46989,240.5533 741.14011,240.06829 737.08636,240.06829 733.03262,240.06829 799.36519,240.55732 804.76804,289.05136 810.17089,337.5454 799.5739,39.595855 799.5739,39.595855 L-6.4646081,39.35207" Fill="#FF4A5BF7" HorizontalAlignment="Center" Stroke="Transparent" Stretch="Fill" Width="837" Margin="0,-54,0,-133" RenderTransformOrigin="0.5,0.5" >
+            <Path x:Name="path" Data="M9.4796339,211.65496 C9.4796339,211.65496 12.38387,240.5533 59.426881,240.5533 106.46989,240.5533 741.14011,240.06829 737.08636,240.06829 733.03262,240.06829 799.36519,240.55732 804.76804,289.05136 810.17089,337.5454 799.5739,39.595855 799.5739,39.595855 L-6.4646081,39.35207" Fill="#FF4A5BF7" HorizontalAlignment="Center" Stroke="Transparent" Stretch="Fill" Width="837" Margin="0,-54,0,-136" RenderTransformOrigin="0.5,0.5" >
                 <Path.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>

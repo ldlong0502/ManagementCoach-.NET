@@ -207,6 +207,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\BindablePasswordBoxUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\CoachUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -287,7 +291,8 @@
     <Compile Include="Migrations\202211180434413_UpdateSchema.designer.cs">
       <DependentUpon>202211180434413_UpdateSchema.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\AddCoachViewModel.cs" />
     <Compile Include="ViewModels\AddDriverViewModel.cs" />
     <Compile Include="ViewModels\CoachViewModel.cs" />
@@ -319,6 +324,9 @@
     </Compile>
     <Compile Include="Views\UserControls\AdminHome.xaml.cs">
       <DependentUpon>AdminHome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\BindablePasswordBoxUC.xaml.cs">
+      <DependentUpon>BindablePasswordBoxUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\CoachUserControl.xaml.cs">
       <DependentUpon>CoachUserControl.xaml</DependentUpon>
