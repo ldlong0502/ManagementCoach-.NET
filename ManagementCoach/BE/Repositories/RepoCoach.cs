@@ -31,13 +31,12 @@ namespace ManagementCoach.BE.Repositories
 			return new Result<ModelCoach> { Success = true, Payload = Map.To<ModelCoach>(coach) };
 		}
 
-
 		///// <summary>
 		///// Lấy thông tin các xe theo tên hoặc biển số xe
 		///// </summary>
 		///// <param name="keyword">theo từ khóa, nếu từ khóa trống thì lấy thông tin mới nhất</param>
+		///// <param name="pageNum">trang muốn lấy</param>
 		///// <param name="limit">số lượng kết quả trên một trang</param>
-		///// <param name="page">trang muốn lấy</param>
 		public Page<ModelCoach> GetCoaches(string keyword, int pageNum = 1, int limit = 20)
 		{
 			var page = PaginationFactory.Create<ModelCoach>(limit, pageNum, 
@@ -51,8 +50,6 @@ namespace ManagementCoach.BE.Repositories
 
             return page;
 		}
-
-
 	
 		public ModelCoach GetCoach(int id) { 
 			return Map.To<ModelCoach>(Context.Coaches.Where(c => c.Id == id).FirstOrDefault());

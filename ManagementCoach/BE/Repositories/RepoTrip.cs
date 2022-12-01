@@ -27,6 +27,45 @@ namespace ManagementCoach.BE.Repositories
 			return Map.To<ModelTrip>(Context.Trips.Where(c => c.Id == id).FirstOrDefault());
 		}
 
+		///// <summary>
+		///// Lấy thông tin các trạm dừng chân theo driver
+		///// </summary>
+		///// <param name="pageNum">trang muốn lấy</param>
+		///// <param name="limit">số lượng kết quả trên một trang</param>
+		public Page<ModelTrip> GetTripsByDriver(int driverId, int pageNum = 1, int limit = 20)
+		{
+			return PaginationFactory.Create<ModelTrip>(limit, pageNum,
+				() => Context.Trips
+							 .Where(c => c.DriverId == driverId)
+			);
+		}
+
+		///// <summary>
+		///// Lấy thông tin các trạm dừng chân theo coach
+		///// </summary>
+		///// <param name="pageNum">trang muốn lấy</param>
+		///// <param name="limit">số lượng kết quả trên một trang</param>
+		public Page<ModelTrip> GetTripsByCoach(int coachId, int pageNum = 1, int limit = 20)
+		{
+			return PaginationFactory.Create<ModelTrip>(limit, pageNum,
+				() => Context.Trips
+							 .Where(c => c.CoachId == coachId)
+			);
+		}
+
+		///// <summary>
+		///// Lấy thông tin các trạm dừng chân theo route
+		///// </summary>
+		///// <param name="pageNum">trang muốn lấy</param>
+		///// <param name="limit">số lượng kết quả trên một trang</param>
+		public Page<ModelTrip> GetTripsByRoute(int routeId, int pageNum = 1, int limit = 20)
+		{
+			return PaginationFactory.Create<ModelTrip>(limit, pageNum,
+				() => Context.Trips
+							 .Where(c => c.RouteId == routeId)
+			);
+		}
+
 		public Result<ModelTrip> UpdateTrip(int id, InputTrip input)
 		{
 			if (!TripExists(id))

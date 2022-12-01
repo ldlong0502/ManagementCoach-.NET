@@ -31,6 +31,17 @@ namespace ManagementCoach.BE.Repositories
 			return Map.To<ModelProvince>(Context.Provinces.Where(c => c.Id == id).FirstOrDefault());
 		}
 
+		///// <summary>
+		///// Lấy thông tin các province theo tên
+		///// </summary>
+		///// <param name="keyword">theo từ khóa, nếu từ khóa trống thì lấy hết</param>
+		public List<ModelProvince> GetProvinces(string keyword)
+		{
+			return Context.Provinces.Where(p => p.Name.Contains(keyword) || p.Id.ToString().Contains(keyword))
+						  .ToList().Select(p => Map.To<ModelProvince>(p))
+						  .ToList();
+		}
+
 		public Result<ModelProvince> UpdateProvince(int id, string provinceName)
 		{
 			if (!ProvinceExists(id))

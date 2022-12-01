@@ -12,6 +12,8 @@ namespace ManagementCoach.BE.Data.Input
 		public int OriginStationId { get; set; }
 		public int DestinationStationId { get; set; }
 		public int Price { get; set; }
+		public int DepartTime { get; set; }
+
 
 		/// <summary>
 		/// Đơn vị là phút

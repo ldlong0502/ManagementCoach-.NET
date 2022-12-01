@@ -291,6 +291,10 @@
     <Compile Include="Migrations\202211180434413_UpdateSchema.designer.cs">
       <DependentUpon>202211180434413_UpdateSchema.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212010544115_AddDepartime.cs" />
+    <Compile Include="Migrations\202212010544115_AddDepartime.designer.cs">
+      <DependentUpon>202212010544115_AddDepartime.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\AddCoachViewModel.cs" />
@@ -369,6 +373,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202211180434413_UpdateSchema.resx">
       <DependentUpon>202211180434413_UpdateSchema.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212010544115_AddDepartime.resx">
+      <DependentUpon>202212010544115_AddDepartime.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
