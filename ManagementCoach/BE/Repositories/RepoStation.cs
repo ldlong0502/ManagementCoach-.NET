@@ -31,6 +31,20 @@ namespace ManagementCoach.BE.Repositories
 			return Map.To<ModelStation>(Context.Stations.Where(c => c.Id == id).FirstOrDefault());
 		}
 
+		///// <summary>
+		///// Lấy thông tin các station theo tên hoặc id
+		///// </summary>
+		///// <param name="keyword">theo từ khóa, nếu từ khóa trống thì lấy thông tin mới nhất</param>
+		///// <param name="pageNum">trang muốn lấy</param>
+		///// <param name="limit">số lượng kết quả trên một trang</param>
+		public Page<ModelStation> GetStations(string keyword, int pageNum = 1, int limit = 20)
+		{
+			return PaginationFactory.Create<ModelStation>(limit, pageNum,
+				() => Context.Stations
+							 .Where(c => c.Name.Contains(keyword) || c.Id.ToString().Contains(keyword))
+			);
+		}
+
 		public Result<ModelStation> UpdateStation(int id, InputStation input)
 		{
 			if (!StationExists(id))

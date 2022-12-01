@@ -19,6 +19,12 @@ namespace ManagementCoach.BE.Models
 		public int Price { get; set; }
 
 		/// <summary>
+		/// Giờ khởi hành, đơn bị là phút, VD: 7h30 --> 450, 15h --> 900
+		/// </summary>
+		public int DepartTime { get; set; }
+
+
+		/// <summary>
 		/// Đơn vị là phút
 		/// </summary>
 		public int EstimatedTime { get; set; }

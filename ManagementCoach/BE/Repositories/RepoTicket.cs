@@ -27,6 +27,46 @@ namespace ManagementCoach.BE.Repositories
 			return Map.To<ModelTicket>(Context.Tickets.Where(c => c.Id == id).FirstOrDefault());
 		}
 
+		///// <summary>
+		///// Lấy thông tin các ticket theo khoảng thời gian
+		///// </summary>
+		///// <param name="pageNum">trang muốn lấy</param>
+		///// <param name="limit">số lượng kết quả trên một trang</param>
+		public Page<ModelTicket> GetTickets(DateTimeOffset dateFrom, DateTimeOffset dateTo, int pageNum = 1, int limit = 20)
+		{
+			return PaginationFactory.Create<ModelTicket>(limit, pageNum,
+				() => Context.Tickets
+							 .Where(c => c.DateBought >= dateFrom && c.DateBought <= dateTo)
+							 .OrderByDescending(t => t.DateBought)
+			);
+		}
+
+		///// <summary>
+		///// Lấy thông tin các ticket từ ngày nào đó về sau
+		///// </summary>
+		///// <param name="pageNum">trang muốn lấy</param>
+		///// <param name="limit">số lượng kết quả trên một trang</param>
+		public Page<ModelTicket> GetTicketsFromThisOnward(DateTimeOffset dateFrom, int pageNum = 1, int limit = 20)
+		{
+			return PaginationFactory.Create<ModelTicket>(limit, pageNum,
+				() => Context.Tickets
+							 .Where(c => c.DateBought >= dateFrom)
+							 .OrderByDescending(t => t.DateBought)
+			);
+		}
+
+		///// <summary>
+		///// Lấy thông tin các ticket mới nhất
+		///// </summary>
+		///// <param name="pageNum">trang muốn lấy</param>
+		///// <param name="limit">số lượng kết quả trên một trang</param>
+		public Page<ModelTicket> GetTickets(int pageNum = 1, int limit = 20)
+		{
+			return PaginationFactory.Create<ModelTicket>(limit, pageNum,
+				() => Context.Tickets.OrderByDescending(t => t.DateBought)
+			);
+		}
+
 		public Result<ModelTicket> UpdateTicket(int id, InputTicket input)
 		{
 			if (!TicketExists(id))

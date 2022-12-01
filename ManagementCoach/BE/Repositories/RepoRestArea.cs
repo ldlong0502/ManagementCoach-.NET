@@ -31,6 +31,22 @@ namespace ManagementCoach.BE.Repositories
 			return Map.To<ModelRestArea>(Context.RestAreas.Where(c => c.Id == id).FirstOrDefault());
 		}
 
+		///// <summary>
+		///// Lấy thông tin các trạm dừng chân theo tên hoặc id
+		///// </summary>
+		///// <param name="keyword">theo từ khóa, nếu từ khóa trống thì lấy thông tin mới nhất</param>
+		///// <param name="pageNum">trang muốn lấy</param>
+		///// <param name="limit">số lượng kết quả trên một trang</param>
+		public Page<ModelRestArea> GetRestAreas(string keyword, int pageNum = 1, int limit = 20)
+		{
+			return PaginationFactory.Create<ModelRestArea>(limit, pageNum,
+				() => Context.RestAreas
+							 .Where(c => c.Name.Contains(keyword) || c.Id.ToString().Contains(keyword))
+			);
+		}
+
+
+
 		public Result<ModelRestArea> UpdateRestArea(int id, InputRestArea input)
 		{
 			if (!RestAreaExists(id))

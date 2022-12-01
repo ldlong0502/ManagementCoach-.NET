@@ -39,6 +39,21 @@ namespace ManagementCoach.BE.Repositories
 			return Map.To<ModelDriver>(Context.Drivers.Where(c => c.Id == id).FirstOrDefault());
 		}
 
+		///// <summary>
+		///// Lấy thông tin các driver theo tên hoặc id hoặc CMND
+		///// </summary>
+		///// <param name="keyword">theo từ khóa, nếu từ khóa trống thì lấy thông tin mới nhất</param>
+		///// <param name="pageNum">trang muốn lấy</param>
+		///// <param name="limit">số lượng kết quả trên một trang</param>
+		public Page<ModelDriver> GetDrivers(string keyword, int pageNum = 1, int limit = 20)
+		{
+			return PaginationFactory.Create<ModelDriver>(limit, pageNum,
+				() => Context.Drivers
+							 .OrderByDescending(c => c.DateAdded)
+							 .Where(c => c.Name.Contains(keyword) || c.Id.ToString().Contains(keyword) || c.IdCard.Contains(keyword))
+			);
+		}
+
 		public Result<ModelDriver> UpdateDriver(int id, InputDriver input)
 		{
 			if (!DriverExists(id))

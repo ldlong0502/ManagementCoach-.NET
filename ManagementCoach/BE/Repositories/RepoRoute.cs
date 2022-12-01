@@ -50,6 +50,33 @@ namespace ManagementCoach.BE.Repositories
 			return Map.To<ModelRoute>(Context.Routes.Where(c => c.Id == id).FirstOrDefault());
 		}
 
+		///// <summary>
+		///// Lấy thông tin các tuyến đường
+		///// </summary>
+		///// <param name="pageNum">trang muốn lấy</param>
+		///// <param name="limit">số lượng kết quả trên một trang</param>
+		public Page<ModelRoute> GetRoutes(int pageNum = 1, int limit = 20)
+		{
+			return PaginationFactory.Create<ModelRoute>(limit, pageNum,
+				() => Context.Routes.Include(r => r.RouteRestAreas)
+			);
+		}
+
+		///// <summary>
+		///// Lấy thông tin các tuyến đường theo station 
+		///// </summary>
+		///// <param name="pageNum">trang muốn lấy</param>
+		///// <param name="limit">số lượng kết quả trên một trang</param>
+		public Page<ModelRoute> GetRoutesFromStation(int originStationId, int destinationStationId, int pageNum = 1, int limit = 20)
+		{
+			return PaginationFactory.Create<ModelRoute>(limit, pageNum,
+				() => Context.Routes
+							 .Where(r => r.OriginStationId == originStationId && r.DestinationStationId == destinationStationId)
+							 .Include(r => r.RouteRestAreas)
+			);
+		}
+
+
 		public Result<ModelRoute> UpdateRoute(int id, InputRoute input)
 		{
 			if (!RouteExists(id))

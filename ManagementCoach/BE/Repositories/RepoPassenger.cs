@@ -39,6 +39,21 @@ namespace ManagementCoach.BE.Repositories
 			return Map.To<ModelPassenger>(Context.Passengers.Where(c => c.Id == id).FirstOrDefault());
 		}
 
+		///// <summary>
+		///// Lấy thông tin các passenger theo tên hoặc id hoặc CMND
+		///// </summary>
+		///// <param name="keyword">theo từ khóa, nếu từ khóa trống thì lấy thông tin mới nhất</param>
+		///// <param name="pageNum">trang muốn lấy</param>
+		///// <param name="limit">số lượng kết quả trên một trang</param>
+		public Page<ModelPassenger> GetPassengers(string keyword, int pageNum = 1, int limit = 20)
+		{
+			return PaginationFactory.Create<ModelPassenger>(limit, pageNum,
+				() => Context.Passengers
+							 .OrderByDescending(c => c.DateAdded)
+							 .Where(c => c.Name.Contains(keyword) || c.Id.ToString().Contains(keyword) || c.IdCard.Contains(keyword))
+			);
+		}
+
 		public Result<ModelPassenger> UpdatePassenger(int id, InputPassenger input)
 		{
 			if (!PassengerExists(id))
