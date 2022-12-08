@@ -18,14 +18,6 @@ namespace ManagementCoach.ViewModels
         private string title;
         private string addAction;
 
-        //borderbrush change 
-        private SolidColorBrush borderBrushTrips = new SolidColorBrush(Colors.Transparent);
-        private SolidColorBrush borderBrushPassengers = new SolidColorBrush(Colors.Transparent);
-        private SolidColorBrush borderBrushCoaches = new SolidColorBrush(Colors.Transparent);
-        private SolidColorBrush borderBrushDrivers = new SolidColorBrush(Colors.Transparent);
-        private SolidColorBrush borderBrushStations = new SolidColorBrush(Colors.Transparent);
-
-
         public UserControl CurrentControl
         {
             get
@@ -76,72 +68,15 @@ namespace ManagementCoach.ViewModels
         }
 
 
-        public SolidColorBrush BorderBrushTrips
-        {
-            get
-            {
-                return borderBrushTrips;
-            }
-            set
-            {
-                borderBrushTrips = value;
-                OnPropertyChanged(nameof(BorderBrushTrips));
-            }
-        }
-        public SolidColorBrush BorderBrushPassengers
-        {
-            get
-            {
-                return borderBrushPassengers;
-            }
-            set
-            {
-                borderBrushPassengers = value;
-                OnPropertyChanged(nameof(BorderBrushPassengers));
-            }
-        }
-        public SolidColorBrush BorderBrushCoaches
-        {
-            get
-            {
-                return borderBrushCoaches;
-            }
-            set
-            {
-                borderBrushCoaches = value;
-                OnPropertyChanged(nameof(BorderBrushCoaches));
-            }
-        }
-        public SolidColorBrush BorderBrushDrivers
-        {
-            get
-            {
-                return borderBrushDrivers;
-            }
-            set
-            {
-                borderBrushDrivers = value;
-                OnPropertyChanged(nameof(BorderBrushDrivers));
-            }
-        }
-        public SolidColorBrush BorderBrushStations
-        {
-            get
-            {
-                return BorderBrushStations;
-            }
-            set
-            {
-                borderBrushStations = value;
-                OnPropertyChanged(nameof(BorderBrushStations));
-            }
-        }
 
         //Icommand
         public ICommand ShowTripsCommand { get; }
         public ICommand ShowPassengersCommand { get; }
         public ICommand ShowCoachesCommand { get; }
         public ICommand ShowDriversCommand { get; }
+        public ICommand ShowStationsCommand { get; }
+        public ICommand ShowRoutesCommand { get; }
+        public ICommand ShowRestAreasCommand { get; }
         public ICommand AddCommand { get; }
 
         public ManagerViewModel()
@@ -150,8 +85,38 @@ namespace ManagementCoach.ViewModels
             ShowPassengersCommand = new ViewModelCommand(ExcuteShowPassengersCommand);
             ShowCoachesCommand = new ViewModelCommand(ExcuteShowCoachesCommand);
             ShowDriversCommand = new ViewModelCommand(ExcuteShowDriversCommand);
+            ShowStationsCommand = new ViewModelCommand(ExcuteShowStationsCommand);
+            ShowRoutesCommand = new ViewModelCommand(ExcuteShowRoutesCommand);
+            ShowRestAreasCommand = new ViewModelCommand(ExcuteShowRestAreasCommand);
             AddCommand = new ViewModelCommand(ExcuteAddCommand);
             ExcuteShowTripsCommand(null);
+        }
+
+        private void ExcuteShowRestAreasCommand(object obj)
+        {
+            Title = "RestAreas";
+            AddAction = "Add new rest area";
+            CurrentControl = new RestAreaUserControl();
+            CurrentManagerView = new RestAreaViewModel();
+            CurrentControl.DataContext = CurrentManagerView;
+        }
+
+        private void ExcuteShowRoutesCommand(object obj)
+        {
+            Title = "Routes";
+            AddAction = "Add new route";
+            CurrentControl = new RouteUserControl();
+            CurrentManagerView = new RouteViewModel();
+            CurrentControl.DataContext = CurrentManagerView;
+        }
+
+        private void ExcuteShowStationsCommand(object obj)
+        {
+            Title = "Stations";
+            AddAction = "Add new station";
+            CurrentControl = new StationUserControl();
+            CurrentManagerView = new StationViewModel();
+            CurrentControl.DataContext = CurrentManagerView;
         }
 
         private void ExcuteShowDriversCommand(object obj)
@@ -160,7 +125,7 @@ namespace ManagementCoach.ViewModels
             AddAction = "Add new driver";
             CurrentControl = new DriverUserControl();
             CurrentManagerView = new DriverViewModel();
-            ChangeBrushColor();
+            CurrentControl.DataContext = CurrentManagerView;
         }
 
         private void ExcuteAddCommand(object obj)
@@ -173,7 +138,27 @@ namespace ManagementCoach.ViewModels
             }
             else if(Title == "Drivers")
             {
-                var screen = new AddNewDriver();
+                var screen = new AddNewDriver((CurrentManagerView as DriverViewModel));
+                screen.ShowDialog();
+            }
+            else if (Title == "Passengers")
+            {
+                //var screen = new ad((currentmanagerview as passengerviewmodel));
+                //screen.showdialog();
+            }
+            else if (Title == "Stations")
+            {
+                var screen = new AddNewStation((CurrentManagerView as StationViewModel ));
+                screen.ShowDialog();
+            }
+            else if (Title == "RestAreas")
+            {
+                var screen = new AddNewRestArea((CurrentManagerView as RestAreaViewModel));
+                screen.ShowDialog();
+            }
+            else if (Title == "Routes")
+            {
+                var screen = new AddNewRoute((CurrentManagerView as RouteViewModel));
                 screen.ShowDialog();
             }
         }
@@ -185,61 +170,15 @@ namespace ManagementCoach.ViewModels
             CurrentControl = new CoachUserControl();
             CurrentManagerView = new CoachViewModel();
             CurrentControl.DataContext = CurrentManagerView;
-            ChangeBrushColor();
-        }
-
-        private void ChangeBrushColor()
-        {
-            if(Title == "Trips")
-            {
-                BorderBrushTrips = new SolidColorBrush(Colors.Blue);
-                BorderBrushPassengers = new SolidColorBrush(Colors.Transparent);
-                BorderBrushCoaches =  new SolidColorBrush(Colors.Transparent);
-                BorderBrushDrivers = new SolidColorBrush(Colors.Transparent);
-                BorderBrushStations = new SolidColorBrush(Colors.Transparent);
-
-            }
-            else if (Title == "Passengers")
-            {
-                BorderBrushTrips = new SolidColorBrush(Colors.Transparent);
-                BorderBrushPassengers = new SolidColorBrush(Colors.Blue);
-                BorderBrushCoaches = new SolidColorBrush(Colors.Transparent);
-                BorderBrushDrivers = new SolidColorBrush(Colors.Transparent);
-                BorderBrushStations = new SolidColorBrush(Colors.Transparent);
-            }
-            else if(Title == "Coaches")
-            {
-                BorderBrushTrips = new SolidColorBrush(Colors.Transparent);
-                BorderBrushPassengers = new SolidColorBrush(Colors.Transparent);
-                BorderBrushCoaches = new SolidColorBrush(Colors.Blue);
-                BorderBrushDrivers = new SolidColorBrush(Colors.Transparent);
-                BorderBrushStations = new SolidColorBrush(Colors.Transparent);
-            }
-            else if (Title == "Drivers")
-            {
-                BorderBrushTrips = new SolidColorBrush(Colors.Transparent);
-                BorderBrushPassengers = new SolidColorBrush(Colors.Transparent);
-                BorderBrushCoaches = new SolidColorBrush(Colors.Transparent);
-                BorderBrushDrivers = new SolidColorBrush(Colors.Blue);
-                BorderBrushStations = new SolidColorBrush(Colors.Transparent);
-            }
-            else if (Title == "Stations")
-            {
-                BorderBrushTrips = new SolidColorBrush(Colors.Transparent);
-                BorderBrushPassengers = new SolidColorBrush(Colors.Transparent);
-                BorderBrushCoaches = new SolidColorBrush(Colors.Transparent);
-                BorderBrushDrivers = new SolidColorBrush(Colors.Transparent);
-                BorderBrushStations = new SolidColorBrush(Colors.Blue);
-            }
-
         }
 
         private void ExcuteShowPassengersCommand(object obj)
         {
             Title = "Passengers";
             AddAction = "Add new passenger";
-
-            ChangeBrushColor();
+            CurrentControl = new PassengerUserControl();
+            CurrentManagerView = new PassengerViewModel();
+            CurrentControl.DataContext = CurrentManagerView;
         }
 
         private void ExcuteShowTripsCommand(object obj)
@@ -249,7 +188,6 @@ namespace ManagementCoach.ViewModels
             CurrentControl = new TripsUserControl();
             CurrentManagerView = new TripViewModel();
             CurrentControl.DataContext = CurrentManagerView;
-            ChangeBrushColor();
         }
     }
 }

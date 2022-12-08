@@ -114,9 +114,7 @@
                 <DataGridTextColumn Header="Id"  Binding="{Binding Id}" IsReadOnly="True"    ></DataGridTextColumn>
                 <DataGridTextColumn Header="Name"  Binding="{Binding Name}" IsReadOnly="True"    ></DataGridTextColumn>
                 <DataGridTextColumn Header="IdCard"  Binding="{Binding IdCard }" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Gender"  Binding="{Binding Gender }" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Dob"  Binding="{Binding Dob }" ></DataGridTextColumn>
-                <DataGridTextColumn  Header="Email"  Binding="{Binding Email}" ></DataGridTextColumn>
+                <DataGridTextColumn  Header="DOB"  Binding="{Binding Dob, StringFormat='{}{0:dd/MM/yyyy}'}" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Phone"  Binding="{Binding Phone }" ></DataGridTextColumn>
                 <DataGridTemplateColumn Header="Active"  >
                     <DataGridTemplateColumn.CellTemplate >
@@ -125,7 +123,6 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="License"  Binding="{Binding License }" ></DataGridTextColumn>
                 <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -145,6 +142,7 @@
 
             </DataGrid.Columns>
         </DataGrid>
+        <Separator Grid.Row="2" Background="#dea2ae" Height="1" Margin="10,-50,10,0"/>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>

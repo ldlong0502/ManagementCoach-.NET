@@ -58,10 +58,11 @@ namespace ManagementCoach.BE.Repositories
 		public Page<ModelRoute> GetRoutes(int pageNum = 1, int limit = 20)
 		{
 			return PaginationFactory.Create<ModelRoute>(limit, pageNum,
-				() => Context.Routes.Include(r => r.RouteRestAreas)
-			);
+				() => Context.Routes.OrderBy(r => r.Id).Include(r => r.RouteRestAreas)
+			) ;
 		}
 
+		
 		///// <summary>
 		///// Lấy thông tin các tuyến đường theo station 
 		///// </summary>
@@ -71,7 +72,7 @@ namespace ManagementCoach.BE.Repositories
 		{
 			return PaginationFactory.Create<ModelRoute>(limit, pageNum,
 				() => Context.Routes
-							 .Where(r => r.OriginStationId == originStationId && r.DestinationStationId == destinationStationId)
+							 .Where(r => r.OriginStationId == originStationId && r.DestinationStationId == destinationStationId).OrderBy(r => r.Id)
 							 .Include(r => r.RouteRestAreas)
 			);
 		}

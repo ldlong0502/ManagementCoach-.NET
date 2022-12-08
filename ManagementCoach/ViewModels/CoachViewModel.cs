@@ -103,18 +103,6 @@ namespace ManagementCoach.ViewModels
                 OnPropertyChanged(nameof(CoachCollection));
             }
         }
-        public List<Coach> CoachList
-        {
-            get
-            {
-                return coachList;
-            }
-            set
-            {
-                coachList = value;
-                OnPropertyChanged(nameof(CoachList));
-            }
-        }
 
         public ICommand OpenCoachSeatsCommand { get; }
         public ICommand EditCommand { get; }
@@ -242,32 +230,7 @@ namespace ManagementCoach.ViewModels
             if (obj == null)
                 return;
             System.Windows.MessageBox.Show((obj as ModelCoach).Id.ToString());
-        }
-
-        private bool check(string data, string text)
-        {
-            if (!string.IsNullOrEmpty(data))
-            {
-                if(data.Contains(text))
-                    return true;
-                return false;
-            }
-            return false;
-
-        }
-      
-        private bool Filter(object data)
-        {
-            if (!string.IsNullOrEmpty(TextSearch))
-            {
-                var coachDetail = data as ModelCoach;
-                return coachDetail != null
-                    && (check(coachDetail.RegNo, TextSearch)
-                    || check(coachDetail.Name, TextSearch));
-            }
-            return true;
-           
-        }       
+        }     
         public void Load()
         {
             if(context.Coaches.Count() == 0)

@@ -120,11 +120,14 @@
         <Separator Background="#dea2ae" Height="1" Margin="0,-20,0,0"   Grid.Row="2"/>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,-5,0,0">
-            <Button x:Name="Btntrips" Content="Trips" Command="{Binding ShowTripsCommand}" Style="{StaticResource TabButton}" BorderBrush="{Binding BorderBrushTrips}" ></Button>
-            <Button x:Name="BtnPassengers" Content="Passengers" Command="{Binding ShowPassengersCommand}" Style="{StaticResource TabButton}" BorderBrush="{Binding  BorderBrushPassengers}"  ></Button>
-            <Button Content="Coaches" Style="{StaticResource TabButton}"  Command="{Binding ShowCoachesCommand}" BorderBrush="{Binding  BorderBrushCoaches}"></Button>
-            <Button Content="Drivers" Style="{StaticResource TabButton}" Command="{Binding ShowDriversCommand}" BorderBrush="{Binding  BorderBrushDrivers}"></Button>
-            <Button Content="Stations" Style="{StaticResource TabButton}"></Button>
+            <RadioButton Content="Trips" Command="{Binding ShowTripsCommand}" IsChecked="True" Style="{StaticResource tabButton}"  ></RadioButton>
+            <RadioButton Content="Passengers" Command="{Binding ShowPassengersCommand}" Style="{StaticResource tabButton}"   ></RadioButton>
+            <RadioButton Content="Coaches" Style="{StaticResource tabButton}"  Command="{Binding ShowCoachesCommand}"></RadioButton>
+            <RadioButton Content="Drivers" Style="{StaticResource tabButton}" Command="{Binding ShowDriversCommand}"></RadioButton>
+            <RadioButton Content="Stations" Style="{StaticResource tabButton}" Command="{Binding ShowStationsCommand}"></RadioButton>
+            <RadioButton Content="Routes" Style="{StaticResource tabButton}" Command="{Binding ShowRoutesCommand}"></RadioButton>
+            <RadioButton Content="RestAreas" Style="{StaticResource tabButton}" Command="{Binding ShowRestAreasCommand}"></RadioButton>
+            <RadioButton Content="Stations" Style="{StaticResource tabButton}" Command="{Binding ShowStationsCommand}"></RadioButton>
         </StackPanel>
         <ContentControl x:Name="datagridContent" Content="{Binding CurrentControl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" HorizontalAlignment="Right" Width="1200"></ContentControl>
     </Grid>

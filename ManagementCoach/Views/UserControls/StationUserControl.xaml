@@ -1,16 +1,17 @@
-﻿<UserControl x:Class="ManagementCoach.Views.UserControls.AccountUserControl"
+﻿<UserControl x:Class="ManagementCoach.Views.UserControls.StationUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ManagementCoach.Views.UserControls" 
-             xmlns:fa="http://schemas.fontawesome.io/icons/"
-             xmlns:vm="clr-namespace:ManagementCoach.ViewModels" 
+             xmlns:local="clr-namespace:ManagementCoach.Views.UserControls"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
+             xmlns:fa="http://schemas.fontawesome.io/icons/" 
+             xmlns:vm="clr-namespace:ManagementCoach.ViewModels" 
              Background="White"
-             d:DesignHeight="700" d:DesignWidth="1200">
+             d:DesignHeight="595" d:DesignWidth="1200">
     <UserControl.DataContext>
-        <vm:UserViewModel></vm:UserViewModel>
+        <vm:StationViewModel></vm:StationViewModel>
     </UserControl.DataContext>
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"></BooleanToVisibilityConverter>
@@ -96,65 +97,57 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Accounts" FontSize="36" FontWeight="Bold" Foreground="{StaticResource primaryColor}"></TextBlock>
-        <Button Width="150" HorizontalAlignment="Right" Margin="0,0,10,0" Style="{StaticResource addButton}">
-            <StackPanel Orientation="Horizontal">
-                <fa:FontAwesome Icon="Plus" VerticalAlignment="Center" Height="20" Width="20" FontSize="20"></fa:FontAwesome>
-                <TextBlock Text="Create" VerticalAlignment="Center" Margin="10,0,0,0" Height="23"></TextBlock>
-            </StackPanel>
+        <Button  Grid.Column="0" Command="{Binding OpenProvinceCommand}" HorizontalAlignment="Left"  Background="Transparent" Margin="10 0 0 0" BorderThickness="0" BorderBrush="Transparent" Height="20" Width="150"  >
+            <TextBlock Style="{StaticResource textClick}" Text="See Provinces" VerticalAlignment="Center"   ></TextBlock>
         </Button>
-
-        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+        <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
             <TextBlock Margin="0,0,10,0" Text="Filter by" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"></TextBlock>
             <Grid Width="300" HorizontalAlignment="Left" Margin="0,0,10,0">
                 <TextBlock Margin="20,0" Padding="0,5,0,0" FontSize="14" Text="Search here..." Height="30" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
                            Panel.ZIndex="1" Visibility="{Binding ElementName=txtSearch,Path=Text.IsEmpty, Converter={StaticResource BoolToVis} }"></TextBlock>
-                <TextBox x:Name="txtSearch" Style="{StaticResource textboxSearch}"   />
+                <TextBox x:Name="txtSearch" Text="{Binding TextSearch, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource textboxSearch}"   />
                 <fa:FontAwesome Icon="Search" Foreground="#b0b9c6" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"></fa:FontAwesome>
             </Grid>
         </StackPanel>
-        <DataGrid Grid.Row="2" 
-                  CanUserSortColumns="True"
-                  Style="{DynamicResource DataGridStyle1}" 
-                  CellStyle="{DynamicResource DataGridCellStyle1}" 
-                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
-                  RowStyle="{DynamicResource DataGridRowStyle1}"
-                  ItemsSource="{Binding UserCollection}"
-                  x:Name="AccountsDataGrid">
+        <Separator Grid.Row="2" Background="#dea2ae" Height="1" Margin="10,-50,10,0"/>
+        <DataGrid 
+                  Grid.Row="1"
+                  x:Name="dtgCoach"
+                  SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding StationCollection}"  Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" >
+            <DataGrid.ContextMenu>
+                <ContextMenu >
+                    <MenuItem Header="See coach seats" Command="{Binding OpenCoachSeatsCommand}" CommandParameter="{Binding SelectedItem}"></MenuItem>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
             <DataGrid.Columns>
-                <!--<DataGridCheckBoxColumn CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
-                    <DataGridCheckBoxColumn.HeaderTemplate>
+                <DataGridTextColumn Header="Id"  Binding="{Binding Id}" IsReadOnly="True" Width="0,3*" ></DataGridTextColumn>
+                <DataGridTemplateColumn  Header="Name"  IsReadOnly="True" >
+                    <DataGridTemplateColumn.CellTemplate >
                         <DataTemplate>
-                            <CheckBox Style="{StaticResource CheckBoxStyle1}"></CheckBox>
-                        </DataTemplate>
-                    </DataGridCheckBoxColumn.HeaderTemplate>
-                </DataGridCheckBoxColumn>-->
-                <DataGridTextColumn Header="ID" CanUserSort="True"  Binding="{Binding ID}" IsReadOnly="True" Width="*"   ></DataGridTextColumn>
-                <DataGridTemplateColumn  Header="UserName"  IsReadOnly="True" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding UserName}" VerticalAlignment="Center"></TextBlock>
+                            <StackPanel Orientation="Horizontal" >
+                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" ></TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Role" Binding="{Binding Role}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Name" Binding="{Binding UserName}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Date created" Binding="{Binding DateCreated}" Width="*"></DataGridTextColumn>
-                <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto" >
-                    <DataGridTemplateColumn.CellTemplate >
-                        <DataTemplate >
+                <DataGridTextColumn Header="District"  Binding="{Binding District}" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Address" Binding="{Binding Address}"  ></DataGridTextColumn>
+                <DataGridTextColumn Header="NameProvince" Binding="{Binding NameProvince}"  ></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Button Style="{StaticResource gridEditButton}" Click="Edit_CLick" >
-                                    <fa:FontAwesome Icon="Pencil" Style="{StaticResource gridButtonIcon}" ></fa:FontAwesome>
+                                <Button Style="{StaticResource gridEditButton}" 
+                                       Command="{Binding Path=DataContext.EditCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}">
+                                    <fa:FontAwesome Icon="Pencil" Style="{StaticResource gridButtonIcon}" >
+                                    </fa:FontAwesome>
                                 </Button>
-                                <Button Style="{StaticResource gridRemoveButton}" Click="Remove_Click">
+                                <Button Style="{StaticResource gridRemoveButton}" 
+                                         Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}">
                                     <fa:FontAwesome Icon="Remove" Style="{StaticResource gridButtonIcon}"></fa:FontAwesome>
                                 </Button>
                             </StackPanel>
@@ -164,8 +157,7 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <Separator Grid.Row="3" Background="#dea2ae" Height="1" Margin="10,-50,10,0"/>
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -221,5 +213,7 @@
 
             </StackPanel>
         </Grid>
+
+
     </Grid>
 </UserControl>

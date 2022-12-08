@@ -187,6 +187,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Screens\AddNewRestArea.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Screens\AddNewRoute.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Screens\AddNewStation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Screens\AddNewTripScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -196,6 +208,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Screens\LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Screens\ProvinceScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -220,6 +236,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\ManagerUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\PassengerUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\RestAreaUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\RouteUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\StationUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -286,7 +318,6 @@
     <Compile Include="BE\Repositories\RepoTrip.cs" />
     <Compile Include="BE\Repositories\RepoUser.cs" />
     <Compile Include="BE\Repositories\RepoRoute.cs" />
-    <Compile Include="GetViewModel.cs" />
     <Compile Include="Migrations\202211180434413_UpdateSchema.cs" />
     <Compile Include="Migrations\202211180434413_UpdateSchema.designer.cs">
       <DependentUpon>202211180434413_UpdateSchema.cs</DependentUpon>
@@ -295,7 +326,15 @@
     <Compile Include="Migrations\202212010544115_AddDepartime.designer.cs">
       <DependentUpon>202212010544115_AddDepartime.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AddRestAreaViewModel.cs" />
+    <Compile Include="ViewModels\AddRouteViewModel.cs" />
+    <Compile Include="ViewModels\AddStationViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\PassengerViewModel.cs" />
+    <Compile Include="ViewModels\ProvinceViewModel.cs" />
+    <Compile Include="ViewModels\RestAreaViewModel.cs" />
+    <Compile Include="ViewModels\RouteViewModel.cs" />
+    <Compile Include="ViewModels\StationViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\AddCoachViewModel.cs" />
     <Compile Include="ViewModels\AddDriverViewModel.cs" />
@@ -314,6 +353,15 @@
     <Compile Include="Views\Screens\AddNewDriver.xaml.cs">
       <DependentUpon>AddNewDriver.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Screens\AddNewRestArea.xaml.cs">
+      <DependentUpon>AddNewRestArea.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Screens\AddNewRoute.xaml.cs">
+      <DependentUpon>AddNewRoute.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Screens\AddNewStation.xaml.cs">
+      <DependentUpon>AddNewStation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Screens\AddNewTripScreen.xaml.cs">
       <DependentUpon>AddNewTripScreen.xaml</DependentUpon>
     </Compile>
@@ -322,6 +370,9 @@
     </Compile>
     <Compile Include="Views\Screens\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Screens\ProvinceScreen.xaml.cs">
+      <DependentUpon>ProvinceScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\AccountUserControl.xaml.cs">
       <DependentUpon>AccountUserControl.xaml</DependentUpon>
@@ -340,6 +391,18 @@
     </Compile>
     <Compile Include="Views\UserControls\ManagerUserControl.xaml.cs">
       <DependentUpon>ManagerUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PassengerUserControl.xaml.cs">
+      <DependentUpon>PassengerUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\RestAreaUserControl.xaml.cs">
+      <DependentUpon>RestAreaUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\RouteUserControl.xaml.cs">
+      <DependentUpon>RouteUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\StationUserControl.xaml.cs">
+      <DependentUpon>StationUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\TripsUserControl.xaml.cs">
       <DependentUpon>TripsUserControl.xaml</DependentUpon>

@@ -64,7 +64,8 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="0.465"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="radioButton" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-42.8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-39.215"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-36.8"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                 <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="0.045"/>
@@ -82,7 +83,7 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="0.47"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="radioButton1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-42.4"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-38.4"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                 <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="0.021"/>
@@ -103,7 +104,7 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="0.46"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="radioButton2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-43.2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-39.2"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                 <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="0.038"/>
@@ -124,7 +125,7 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="0.48"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="radioButton3" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-41.6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-37.6"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock3" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                 <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="0.05"/>
@@ -142,7 +143,7 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="0.465"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="radioButton4" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-42.8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-38.8"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock4" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                 <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="0.053"/>
@@ -164,6 +165,7 @@
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="radioButton5" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
                 <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-42.4"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-38.4"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock5" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                 <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-0.042"/>
@@ -222,8 +224,8 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="radioButton" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-45.6"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-39.6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="2"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-0.057"/>
@@ -246,8 +248,8 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.98"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="radioButton1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-46"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-1.6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-40"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.4"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.041"/>
@@ -270,8 +272,8 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.01"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="radioButton2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-46.4"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-42.4"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="2.8"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.015"/>
@@ -298,8 +300,8 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.995"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="radioButton3" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-45.6"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-0.4"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-41.6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.6"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock3" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.033"/>
@@ -322,8 +324,8 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.01"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="radioButton4" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-45.6"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-39.6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="2.8"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock4" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.044"/>
@@ -421,7 +423,7 @@
                     <ColumnDefinition Width="1300"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0" HorizontalAlignment="Left" Height="746" VerticalAlignment="Center" Width="195">
-                    <Rectangle x:Name="RecDB" HorizontalAlignment="Left" Height="723" Margin="0,24,0,0" Stroke="Transparent" VerticalAlignment="Top" Width="160" Fill="#FF4A5BF7" RadiusX="17.3" RadiusY="17.3" RenderTransformOrigin="0.5,0.5">
+                    <Rectangle x:Name="RecDB" HorizontalAlignment="Left" Height="723" Margin="0,24,0,0" Stroke="Transparent" VerticalAlignment="Top" Width="168" Fill="#FF4A5BF7" RadiusX="17.3" RadiusY="17.3" RenderTransformOrigin="0.5,0.5">
                         <Rectangle.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -445,7 +447,7 @@
 
                         <Rectangle Height="14" Stroke="Transparent" Width="15" RadiusX="7.5" RadiusY="7.5" Fill="#FFE64B4B"/>
                     </StackPanel>
-                    <Border x:Name="border" CornerRadius="20" MouseDown="Border_MouseDown" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="140,60,0,0" RenderTransformOrigin="0.5,0.5">
+                    <Border x:Name="border" CornerRadius="20" MouseDown="Border_MouseDown" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="146,61,0,0" RenderTransformOrigin="0.5,0.5">
 
                         <Border.RenderTransform>
                             <TransformGroup>
@@ -508,222 +510,223 @@
                             </TextBlock.RenderTransform>
                         </TextBlock>
                     </Grid>-->
-                    <RadioButton x:Name="radioButton" Style="{StaticResource menuButton}"
+                    <StackPanel Orientation="Vertical" Width="160" Margin="-40 120 0 0">
+                        <RadioButton x:Name="radioButton" Style="{StaticResource menuButton}"
                                  Tag="{StaticResource color1}"
                                  IsChecked="True"
                                  Width="160"
-                                 Command="{Binding ShowHomeViewCommand}" Margin="0,109,35,587" RenderTransformOrigin="0.5,0.5">
-                        <RadioButton.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </RadioButton.RenderTransform>
-                        <StackPanel Orientation="Horizontal"  Margin="20,0,0,0">
-                            <fa:FontAwesome x:Name="fontAwesome1" Icon="Home" Style="{StaticResource menuButtonIcon}" RenderTransformOrigin="0.5,0.5">
-                                <fa:FontAwesome.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </fa:FontAwesome.RenderTransform>
-                            </fa:FontAwesome>
-                            <TextBlock x:Name="textBlock" Text="Dashboard" Margin="5,0,0,0" Style="{StaticResource menuButtonText}" RenderTransformOrigin="0.5,0.5">
-                                <TextBlock.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </TextBlock.RenderTransform>
-                            </TextBlock>
-                        </StackPanel>
-                    </RadioButton>
-                    <RadioButton x:Name="radioButton1" Style="{StaticResource menuButton}"
+                                 Command="{Binding ShowHomeViewCommand}"  RenderTransformOrigin="0.5,0.5">
+                            <RadioButton.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </RadioButton.RenderTransform>
+                            <StackPanel Orientation="Horizontal"  Margin="20,0,0,0">
+                                <fa:FontAwesome x:Name="fontAwesome1" Icon="Home" Style="{StaticResource menuButtonIcon}" RenderTransformOrigin="0.5,0.5">
+                                    <fa:FontAwesome.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </fa:FontAwesome.RenderTransform>
+                                </fa:FontAwesome>
+                                <TextBlock x:Name="textBlock" Text="Dashboard" Margin="5,0,0,0" Style="{StaticResource menuButtonText}" RenderTransformOrigin="0.5,0.5">
+                                    <TextBlock.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </TextBlock.RenderTransform>
+                                </TextBlock>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton x:Name="radioButton1" Style="{StaticResource menuButton}"
                         Tag="{StaticResource color1}"
                         IsChecked="False"
                         Width="160"
-                        Command="{Binding ShowManagerViewCommand}" Margin="0,164,35,532" RenderTransformOrigin="0.5,0.5">
-                        <RadioButton.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </RadioButton.RenderTransform>
-                        <StackPanel Orientation="Horizontal" Margin="20,0,0,0" >
-                            <fa:FontAwesome x:Name="fontAwesome2" Icon="Bus" Style="{StaticResource menuButtonIcon}" RenderTransformOrigin="0.5,0.5">
-                                <fa:FontAwesome.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </fa:FontAwesome.RenderTransform>
-                            </fa:FontAwesome>
-                            <TextBlock x:Name="textBlock1" Margin="10,0,0,0" Text="Manager" Style="{StaticResource menuButtonText}" RenderTransformOrigin="0.5,0.5">
-                                <TextBlock.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </TextBlock.RenderTransform>
-                            </TextBlock>
-                        </StackPanel>
-                    </RadioButton>
-                    <RadioButton x:Name="radioButton2" Style="{StaticResource menuButton}"
+                        Command="{Binding ShowManagerViewCommand}"  RenderTransformOrigin="0.5,0.5">
+                            <RadioButton.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </RadioButton.RenderTransform>
+                            <StackPanel Orientation="Horizontal" Margin="20,0,0,0" >
+                                <fa:FontAwesome x:Name="fontAwesome2" Icon="Bus" Style="{StaticResource menuButtonIcon}" RenderTransformOrigin="0.5,0.5">
+                                    <fa:FontAwesome.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </fa:FontAwesome.RenderTransform>
+                                </fa:FontAwesome>
+                                <TextBlock x:Name="textBlock1" Margin="10,0,0,0" Text="Manager" Style="{StaticResource menuButtonText}" RenderTransformOrigin="0.5,0.5">
+                                    <TextBlock.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </TextBlock.RenderTransform>
+                                </TextBlock>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton x:Name="radioButton2" Style="{StaticResource menuButton}"
                         Tag="{StaticResource color1}"
                         IsChecked="False"
                         Width="160"
-                        Command="{Binding ShowAccountViewCommand}" Margin="0,219,35,477" RenderTransformOrigin="0.5,0.5">
-                        <RadioButton.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </RadioButton.RenderTransform>
-                        <StackPanel Orientation="Horizontal"  Margin="20,0,0,0">
-                            <fa:FontAwesome x:Name="fontAwesome3" Icon="User" Style="{StaticResource menuButtonIcon}" RenderTransformOrigin="0.5,0.5">
-                                <fa:FontAwesome.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </fa:FontAwesome.RenderTransform>
-                            </fa:FontAwesome>
-                            <TextBlock x:Name="textBlock2" Margin="15,0,0,0" Text="Account" Style="{StaticResource menuButtonText}" RenderTransformOrigin="0.5,0.5">
-                                <TextBlock.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </TextBlock.RenderTransform>
-                            </TextBlock>
-                        </StackPanel>
-                    </RadioButton>
-                    <RadioButton x:Name="radioButton3" Style="{StaticResource menuButton}"
+                        Command="{Binding ShowAccountViewCommand}" RenderTransformOrigin="0.5,0.5">
+                            <RadioButton.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </RadioButton.RenderTransform>
+                            <StackPanel Orientation="Horizontal"  Margin="20,0,0,0">
+                                <fa:FontAwesome x:Name="fontAwesome3" Icon="User" Style="{StaticResource menuButtonIcon}" RenderTransformOrigin="0.5,0.5">
+                                    <fa:FontAwesome.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </fa:FontAwesome.RenderTransform>
+                                </fa:FontAwesome>
+                                <TextBlock x:Name="textBlock2" Margin="15,0,0,0" Text="Account" Style="{StaticResource menuButtonText}" RenderTransformOrigin="0.5,0.5">
+                                    <TextBlock.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </TextBlock.RenderTransform>
+                                </TextBlock>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton x:Name="radioButton3" Style="{StaticResource menuButton}"
                         Tag="{StaticResource color1}"
                         IsChecked="False"
                         Width="160"
-                        Command="{Binding ShowHomeViewCommand}" Margin="0,274,35,422" RenderTransformOrigin="0.5,0.5">
-                        <RadioButton.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </RadioButton.RenderTransform>
-                        <StackPanel Orientation="Horizontal"  Margin="20,0,0,0">
-                            <fa:FontAwesome x:Name="fontAwesome4" Icon="LineChart" Style="{StaticResource menuButtonIcon}" RenderTransformOrigin="0.5,0.5">
-                                <fa:FontAwesome.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </fa:FontAwesome.RenderTransform>
-                            </fa:FontAwesome>
-                            <TextBlock x:Name="textBlock3" Margin="5,0,0,0" Text="Statistics" Style="{StaticResource menuButtonText}" RenderTransformOrigin="0.5,0.5">
-                                <TextBlock.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </TextBlock.RenderTransform>
-                            </TextBlock>
-                        </StackPanel>
-                    </RadioButton>
-                    <RadioButton x:Name="radioButton4" Style="{StaticResource menuButton}"
+                        Command="{Binding ShowHomeViewCommand}"  RenderTransformOrigin="0.5,0.5">
+                            <RadioButton.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </RadioButton.RenderTransform>
+                            <StackPanel Orientation="Horizontal"  Margin="20,0,0,0">
+                                <fa:FontAwesome x:Name="fontAwesome4" Icon="LineChart" Style="{StaticResource menuButtonIcon}" RenderTransformOrigin="0.5,0.5">
+                                    <fa:FontAwesome.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </fa:FontAwesome.RenderTransform>
+                                </fa:FontAwesome>
+                                <TextBlock x:Name="textBlock3" Margin="5,0,0,0" Text="Statistics" Style="{StaticResource menuButtonText}" RenderTransformOrigin="0.5,0.5">
+                                    <TextBlock.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </TextBlock.RenderTransform>
+                                </TextBlock>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton x:Name="radioButton4" Style="{StaticResource menuButton}"
                         Tag="{StaticResource color1}"
                         IsChecked="False"
                         Width="160"
-                        Command="{Binding ShowHomeViewCommand}" Margin="0,329,35,367" RenderTransformOrigin="0.5,0.5">
-                        <RadioButton.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </RadioButton.RenderTransform>
-                        <StackPanel Orientation="Horizontal"  Margin="20,0,0,0">
-                            <fa:FontAwesome x:Name="fontAwesome5" Icon="Info" Style="{StaticResource menuButtonIcon}" RenderTransformOrigin="0.5,0.5">
-                                <fa:FontAwesome.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </fa:FontAwesome.RenderTransform>
-                            </fa:FontAwesome>
-                            <TextBlock x:Name="textBlock4" Margin="30,0,0,0" Text="Info" Style="{StaticResource menuButtonText}" RenderTransformOrigin="0.5,0.5">
-                                <TextBlock.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </TextBlock.RenderTransform>
-                            </TextBlock>
-                        </StackPanel>
-                    </RadioButton>
-                    <RadioButton x:Name="radioButton5" Style="{StaticResource menuButton}"
+                        Command="{Binding ShowHomeViewCommand}"  RenderTransformOrigin="0.5,0.5">
+                            <RadioButton.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </RadioButton.RenderTransform>
+                            <StackPanel Orientation="Horizontal"  Margin="20,0,0,0">
+                                <fa:FontAwesome x:Name="fontAwesome5" Icon="Info" Style="{StaticResource menuButtonIcon}" RenderTransformOrigin="0.5,0.5">
+                                    <fa:FontAwesome.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </fa:FontAwesome.RenderTransform>
+                                </fa:FontAwesome>
+                                <TextBlock x:Name="textBlock4" Margin="30,0,0,0" Text="Info" Style="{StaticResource menuButtonText}" RenderTransformOrigin="0.5,0.5">
+                                    <TextBlock.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </TextBlock.RenderTransform>
+                                </TextBlock>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton x:Name="radioButton5" Style="{StaticResource menuButton}"
                         Tag="{StaticResource color1}"
                         IsChecked="False"
-                        Command="{Binding ShowHomeViewCommand}" Margin="2,673,35,23" RenderTransformOrigin="0.5,0.5">
-                        <RadioButton.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </RadioButton.RenderTransform>
-                        <StackPanel Orientation="Horizontal"  Margin="20,0,0,0">
-                            <fa:FontAwesome x:Name="fontAwesome6" Icon="SignOut" Style="{StaticResource menuButtonIcon}" RenderTransformOrigin="0.5,0.5">
-                                <fa:FontAwesome.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </fa:FontAwesome.RenderTransform>
-                            </fa:FontAwesome>
-                            <TextBlock x:Name="textBlock5" Text="LogOut" Style="{StaticResource menuButtonText}" RenderTransformOrigin="0.5,0.5">
-                                <TextBlock.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </TextBlock.RenderTransform>
-                            </TextBlock>
-                        </StackPanel>
-                    </RadioButton>
-
+                        Command="{Binding ShowHomeViewCommand}" Margin="2,280,0,0" RenderTransformOrigin="0.5,0.5" Width="148">
+                            <RadioButton.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </RadioButton.RenderTransform>
+                            <StackPanel Orientation="Horizontal"  Margin="10,0,0,0">
+                                <fa:FontAwesome x:Name="fontAwesome6" Icon="SignOut" Style="{StaticResource menuButtonIcon}" RenderTransformOrigin="0.5,0.5">
+                                    <fa:FontAwesome.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </fa:FontAwesome.RenderTransform>
+                                </fa:FontAwesome>
+                                <TextBlock x:Name="textBlock5" Text="LogOut" Style="{StaticResource menuButtonText}" RenderTransformOrigin="0.5,0.5">
+                                    <TextBlock.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </TextBlock.RenderTransform>
+                                </TextBlock>
+                            </StackPanel>
+                        </RadioButton>
+                    </StackPanel>
 
                 </Grid>
 

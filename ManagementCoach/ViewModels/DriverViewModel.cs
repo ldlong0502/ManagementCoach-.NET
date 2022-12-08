@@ -19,7 +19,7 @@ namespace ManagementCoach.ViewModels
     {
         public CoachManContext context = new CoachManContext();
         private ICollectionView driverCollection;
-        private string textSearch;
+        private string textSearch = "";
         private object selectedItem;
         private int currentPage = 1;
         private int limit = 2;
@@ -86,31 +86,6 @@ namespace ManagementCoach.ViewModels
                 OnPropertyChanged(nameof(Limit));
                 Load();
             }
-        }
-
-
-        private bool check(string data, string text)
-        {
-            if (!string.IsNullOrEmpty(data))
-            {
-                if (data.Contains(text))
-                    return true;
-                return false;
-            }
-            return false;
-
-        }
-        private bool Filter(object data)
-        {
-            if (!string.IsNullOrEmpty(TextSearch))
-            {
-                var driverDetail = data as Driver;
-                return driverDetail != null
-                    && (check(driverDetail.Id.ToString(), TextSearch)
-                    || check(driverDetail.Name, TextSearch));
-            }
-            return true;
-
         }
         public ICollectionView DriverCollection
         {
@@ -240,7 +215,7 @@ namespace ManagementCoach.ViewModels
 
         private void ExcuteEditCommand(object obj)
         {
-            var screen = new AddNewDriver((obj as ModelDriver), this);
+            var screen = new AddNewDriver(this, (obj as ModelDriver));
             screen.ShowDialog();
         }
 
@@ -248,21 +223,20 @@ namespace ManagementCoach.ViewModels
         
         public void Load()
         {
-            if (context.Coaches.Count() == 0)
+            if (context.Drivers.Count() == 0)
             {
                 return;
             }
-            DriverCollection = CollectionViewSource.GetDefaultView(context.Drivers.ToList());
-            //var coachesPagination = new RepoDriver().GetDriver(TextSearch, CurrentPage, Limit);
-            //DriverCollection = CollectionViewSource.GetDefaultView(coachesPagination.Items);
-            //NumOfPages = coachesPagination.PageCount;
+            var coachesPagination = new RepoDriver().GetDrivers(TextSearch, CurrentPage, Limit);
+            DriverCollection = CollectionViewSource.GetDefaultView(coachesPagination.Items);
+            NumOfPages = coachesPagination.PageCount;
 
-            //if (NumOfPages != 0 && CurrentPage > NumOfPages)
-            //{
-            //    CurrentPage = 1;
-            //    coachesPagination = new RepoDriver().GetCoaches(TextSearch, CurrentPage, Limit);
-            //    DriverCollection = CollectionViewSource.GetDefaultView(coachesPagination.Items);
-            //}
+            if (NumOfPages != 0 && CurrentPage > NumOfPages)
+            {
+                CurrentPage = 1;
+                coachesPagination = new RepoDriver().GetDrivers(TextSearch, CurrentPage, Limit);
+                DriverCollection = CollectionViewSource.GetDefaultView(coachesPagination.Items);
+            }
 
         }
     }

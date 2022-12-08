@@ -13,7 +13,7 @@
         BorderBrush="BlueViolet"
         BorderThickness="2"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        Title="AddNewCoach" Height="500" Width="400" Background="White">
+        Title="AddNewCoach" Height="450" Width="400" Background="White">
     <Window.DataContext>
         <vm:AddCoachViewModel></vm:AddCoachViewModel>
     </Window.DataContext>
@@ -22,14 +22,13 @@
             <Setter Property="FontSize" Value="15" ></Setter>
             <Setter Property="FontWeight" Value="Bold" ></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="Margin" Value="20,0,0,0"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
         </Style>
        
         <Style TargetType="ComboBox" x:Key="comboboxStyle">
             <Setter Property="Height" Value="30"></Setter>
             <Setter Property="Width" Value="250"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="Margin" Value="30,0,0,0"></Setter>
             <Setter Property="FontSize" Value="15" ></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
         </Style>
@@ -115,28 +114,42 @@
             </Button>
         </StackPanel>
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden" Margin="0,0,0,0">
-            <StackPanel Orientation="Vertical" >
+            <StackPanel Orientation="Vertical"  >
 
-                <StackPanel Grid.Row="1" Height="50" Orientation="Horizontal" Margin="0,10,0,0">
-                    <TextBlock Style="{StaticResource textStyle}" Text="Name*"></TextBlock>
-                    <TextBox Style="{StaticResource textboxStyle}" Margin="45,0,0,0" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                </StackPanel>
-                <StackPanel Grid.Row="1" Height="50" Orientation="Horizontal" Margin="0,20,0,0">
-                    <TextBlock Style="{StaticResource textStyle}" Text="RegNo*"></TextBlock>
-                    <TextBox Style="{StaticResource textboxStyle}" Margin="40,0,0,0" Text="{Binding RegNo, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                </StackPanel>
-                <StackPanel Grid.Row="1" Height="50" Orientation="Horizontal" Margin="0,20,0,0">
-                    <TextBlock Style="{StaticResource textStyle}" Text="Status*"></TextBlock>
-                    <ComboBox Style="{StaticResource comboboxStyle}" Margin="45,0,0,0" ItemsSource="{Binding ListStatus}" SelectedItem="{Binding Status, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></ComboBox>
-                </StackPanel>
-                <StackPanel Grid.Row="1" Height="100" Orientation="Horizontal" Margin="0,20,0,0">
-                    <TextBlock Style="{StaticResource textStyle}" Text="Notes"></TextBlock>
-                    <TextBox Style="{StaticResource textboxStyle}" Height="100" Margin="55,0,0,0" Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Top" ></TextBox>
-                </StackPanel>
-                <StackPanel Grid.Row="1" Height="50" Orientation="Horizontal" Margin="0,20,0,0">
-                    <TextBlock Style="{StaticResource textStyle}" Text="Date*"></TextBlock>
-                    <DatePicker Style="{StaticResource datepickerStyle}" IsEnabled="False" Margin="55,0,0,0" SelectedDate="{Binding DateAdded ,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Text="{Binding DateAdded.DateTime}" ></DatePicker>
-                </StackPanel>
+
+                <Grid Grid.Row="1" Height="50"   Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Style="{StaticResource textStyle}" Text="Name*"></TextBlock>
+                    <TextBox Grid.Column="1" Style="{StaticResource textboxStyle}" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                </Grid>
+                <Grid Grid.Row="1" Height="50"  Margin="0 20 0 0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Style="{StaticResource textStyle}" Text="RegNo*"></TextBlock>
+                    <TextBox Grid.Column="1" Style="{StaticResource textboxStyle}" Text="{Binding RegNo, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                </Grid>
+                <Grid Grid.Row="1" Height="50" Margin="0 20 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0"  Style="{StaticResource textStyle}" Text="Status*"></TextBlock>
+                    <ComboBox Grid.Column="1" Style="{StaticResource comboboxStyle}"  ItemsSource="{Binding ListStatus}" SelectedItem="{Binding Status, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></ComboBox>
+                </Grid>
+                <Grid Grid.Row="1" Margin="0 20 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Style="{StaticResource textStyle}" Text="Notes"></TextBlock>
+                    <TextBox Grid.Column="1" Style="{StaticResource textboxStyle}" Height="100"  Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Top" ></TextBox>
+                </Grid>
+               
                 <StackPanel Grid.Row="1" Height="50" Orientation="Horizontal" Margin="0,20,0,0">
                     <Button Click="btnClose_Click" Width="100" Height="40" Background="White" BorderBrush="{StaticResource color2}" BorderThickness="3" Content="CANCEL" Foreground="{StaticResource color8}" FontWeight="Medium" Margin="170,0,0,0"></Button>
                     <Button Command="{Binding SaveCommand}" Width="100" Height="40" Background="{StaticResource color2}"  Content="SAVE" Foreground="{StaticResource color1}" FontWeight="Medium" Margin="10,0,0,0"></Button>

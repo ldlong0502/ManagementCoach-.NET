@@ -1,6 +1,8 @@
 ﻿using ManagementCoach.BE;
+using ManagementCoach.BE.Entities;
 using ManagementCoach.BE.Models;
 using ManagementCoach.BE.Repositories;
+using ManagementCoach.Views.Screens;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,14 +15,11 @@ using System.Windows.Input;
 
 namespace ManagementCoach.ViewModels
 {
-    public class UserViewModel : ViewModelBase
+    public class StationViewModel : ViewModelBase
     {
-
-        
         public CoachManContext context = new CoachManContext();
-        private List<ModelUser> userList;
+        private ICollectionView stationCollection;
         private string textSearch = "";
-        private ICollectionView userCollection;
         private object selectedItem;
         private int currentPage = 1;
         private int limit = 2;
@@ -88,32 +87,21 @@ namespace ManagementCoach.ViewModels
                 Load();
             }
         }
-
-        public ICollectionView UserCollection
+        public ICollectionView StationCollection
         {
             get
             {
-                return userCollection;
+                return stationCollection;
             }
             set
             {
-                userCollection = value;
-                OnPropertyChanged(nameof(UserCollection));
-            }
-        }
-        public List<ModelUser> UserList
-        {
-            get
-            {
-                return userList;
-            }
-            set
-            {
-                userList = value;
-                OnPropertyChanged(nameof(UserList));
+                stationCollection = value;
+                OnPropertyChanged(nameof(StationCollection));
             }
         }
 
+
+        //ICommand
         public ICommand EditCommand { get; }
         public ICommand DeleteCommand { get; }
         public ICommand PreviousPageCommand { get; }
@@ -122,8 +110,8 @@ namespace ManagementCoach.ViewModels
         public ICommand DownLimitCommand { get; }
         public ICommand FirstPageCommand { get; }
         public ICommand EndPageCommand { get; }
-
-        public UserViewModel()
+        public ICommand OpenProvinceCommand { get; }
+        public StationViewModel()
         {
             Load();
             EditCommand = new ViewModelCommand(ExcuteEditCommand);
@@ -134,6 +122,13 @@ namespace ManagementCoach.ViewModels
             DownLimitCommand = new ViewModelCommand(ExcuteDownLimitCommand, CanExcuteDownLimitCommand);
             FirstPageCommand = new ViewModelCommand(ExcuteFirstPageCommand, CanExcuteFirstPageCommand);
             EndPageCommand = new ViewModelCommand(ExcuteEndPageCommand, CanExcuteEndPageCommand);
+            OpenProvinceCommand = new ViewModelCommand(ExcuteOpenProvinceCommand);
+        }
+
+        private void ExcuteOpenProvinceCommand(object obj)
+        {
+            var screen = new ProvinceScreen(this);
+            screen.ShowDialog();
         }
 
         private bool CanExcuteEndPageCommand(object obj)
@@ -214,62 +209,80 @@ namespace ManagementCoach.ViewModels
             {
                 return;
             }
+            var delAction = new RepoStation().DeleteStation((obj as ModelStation).Id);
+            if (delAction.Success == true)
+            {
+                MessageBox.Show("Successfully");
+                Load();
+            }
+            else
+            {
+                MessageBox.Show(delAction.ErrorMessage);
+            }
 
-            new RepoUser().DeleteUser((obj as ModelUser).Id);
-            Load();
         }
 
         private void ExcuteEditCommand(object obj)
         {
-            //var screen = new Add((obj as ModelCoach));
-            //screen.ShowDialog();
+            var objStation = new RepoStation().GetStation((obj as MergeStationAndProvinces).Id);
+            var screen = new AddNewStation(this, objStation);
+            screen.ShowDialog();
         }
 
 
-        private bool check(string data, string text)
-        {
-            if (!string.IsNullOrEmpty(data))
-            {
-                if (data.Contains(text))
-                    return true;
-                return false;
-            }
-            return false;
 
-        }
-        private int CountAllUserFilter()
-        {
-            List<ModelUser> modelUsers = new List<ModelUser>();
-            context.Users.ToList().ForEach(x => modelUsers.Add(new RepoUser().GetUser(x.Id)));
-            ICollectionView collection = CollectionViewSource.GetDefaultView(modelUsers);
-            collection.Filter = Filter;
-            return collection.Cast<ModelUser>().Count();
-
-        }
-        private bool Filter(object data)
-        {
-            if (!string.IsNullOrEmpty(TextSearch))
-            {
-                var userDetail = data as ModelUser;
-                return userDetail != null
-                    && (check(userDetail.Name, TextSearch));
-            }
-            return true;
-
-        }
         public void Load()
         {
-            UserCollection = CollectionViewSource.GetDefaultView(context.Users.ToList());
-            //var usersPagination = new RepoUser().GetUser(TextSearch, CurrentPage, Limit);
-            //CoachCollection = CollectionViewSource.GetDefaultView(coachesPagination.Items);
-            //NumOfPages = coachesPagination.PageCount;
-            //if (CurrentPage > NumOfPages)
-            //{
-            //    CurrentPage = 1;
-            //    coachesPagination = new RepoUser().GetCoaches(TextSearch, CurrentPage, Limit);
-            //    CoachCollection = CollectionViewSource.GetDefaultView(coachesPagination.Items);
-            //}
+            if (context.Stations.Count() == 0)
+            {
+                return;
+            }
+            var stationsPagination = new RepoStation().GetStations(TextSearch, CurrentPage, Limit);
+            var listProvinces = new RepoProvince().GetProvinces("");
+            var mergeList = from c in stationsPagination.Items
+                            join lp in listProvinces
+                            on c.ProvinceId equals lp.Id
+                            select new MergeStationAndProvinces
+                            {
+                                Id = c.Id,
+                                Name = c.Name,
+                                District = c.District,
+                                Address = c.Address,
+                                NameProvince = lp.Name,
+                            };
+                                  
+            StationCollection = CollectionViewSource.GetDefaultView(mergeList.ToList());
+            NumOfPages = stationsPagination.PageCount;
+
+            if (NumOfPages != 0 && CurrentPage > NumOfPages)
+            {
+                CurrentPage = 1;
+                stationsPagination = new RepoStation().GetStations(TextSearch, CurrentPage, Limit);
+                listProvinces = new RepoProvince().GetProvinces("");
+                mergeList = from c in stationsPagination.Items
+                                join lp in listProvinces
+                                on c.Id equals lp.Id
+                                select new MergeStationAndProvinces
+                                {
+                                    Id = c.Id,
+                                    Name = c.Name,
+                                    District = c.District,
+                                    Address = c.Address,
+                                    NameProvince = lp.Name,
+                                };
+
+                StationCollection = CollectionViewSource.GetDefaultView(mergeList.ToList());
+            }
+
         }
+       
     }
-   
+    public class MergeStationAndProvinces
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string District { get; set; }
+        public string Address { get; set; }
+        public string NameProvince { get; set; }
+    }
 }

@@ -14,15 +14,15 @@ using System.Windows.Input;
 
 namespace ManagementCoach.ViewModels
 {
-    public class AddCoachViewModel : ViewModelBase, INotifyDataErrorInfo
+    public class AddStationViewModel : ViewModelBase, INotifyDataErrorInfo
     {
         private readonly ErrorsViewModel _errorsViewModel;
         private string name;
-        private string regNo;
-        private string status;
-        private string notes;
+        private string district;
+        private string address;
+        private string provinceFilter = "";
+        private ModelProvince province;
         private int id;
-        private DateTimeOffset dateAdded;
 
 
         public Action Close { get; set; }
@@ -43,68 +43,79 @@ namespace ManagementCoach.ViewModels
                 OnPropertyChanged(nameof(Name));
             }
         }
-        public string RegNo
+        public string ProvinceFilter
         {
             get
             {
-                return regNo;
+                return provinceFilter;
             }
             set
             {
-                regNo = value;
-                _errorsViewModel.ClearErrors(nameof(RegNo));
-                if (String.IsNullOrEmpty(RegNo) || RegNo.Length < 5)
+                provinceFilter = value;
+                ListProvinces = new RepoProvince().GetProvinces(ProvinceFilter);
+                OnPropertyChanged(nameof(ProvinceFilter));
+            }
+        }
+        public string District
+        {
+            get
+            {
+                return district;
+            }
+            set
+            {
+                district = value;
+                _errorsViewModel.ClearErrors(nameof(District));
+                if (String.IsNullOrEmpty(District))
                 {
-                    _errorsViewModel.AddError(nameof(RegNo), "*Invalid RegNo.");
+                    _errorsViewModel.AddError(nameof(District), "*Invalid District.");
                 }
-                OnPropertyChanged(nameof(RegNo));
+                OnPropertyChanged(nameof(District));
             }
         }
-        public string Status
+        public string Address
         {
             get
             {
-                return status;
+                return address;
             }
             set
             {
-                status = value;
-                _errorsViewModel.ClearErrors(nameof(Status));
-                if (String.IsNullOrEmpty(Status))
+                address = value;
+                _errorsViewModel.ClearErrors(nameof(Address));
+                if (String.IsNullOrEmpty(Address))
                 {
-                    _errorsViewModel.AddError(nameof(Status), "Invalid status");
+                    _errorsViewModel.AddError(nameof(Address), "Invalid Address");
                 }
-                OnPropertyChanged(nameof(Status));
+                OnPropertyChanged(nameof(Address));
             }
         }
-        public string Notes
+        public ModelProvince Province
         {
             get
             {
-                return notes;
+                return province;
             }
             set
             {
-                notes = value;              
-                OnPropertyChanged(nameof(Notes));
+                province = value;
+                OnPropertyChanged(nameof(Province));
             }
         }
-        public DateTimeOffset DateAdded
+
+        private List<ModelProvince> listProvinces = new RepoProvince().GetProvinces("");
+        public List<ModelProvince> ListProvinces
         {
-            get
-            {
-                return dateAdded;
+            get {
+                return listProvinces;
+
             }
             set
             {
-                dateAdded = value;
-                OnPropertyChanged(nameof(DateAdded));
+                listProvinces = value;
+                OnPropertyChanged(nameof(ListProvinces));
             }
-        }
-        private readonly List<string> listStatus = new List<string>() { "Active", "Out Of Service"};
-        public IEnumerable<string> ListStatus
-        {
-            get { return listStatus; }
+            
         }
         public bool CanCreate => !HasErrors;
         public bool HasErrors => _errorsViewModel.HasErrors;
@@ -114,53 +125,53 @@ namespace ManagementCoach.ViewModels
 
         public ICommand SaveCommand { get; }
         public ICommand CancelCommand { get; }
-        public AddCoachViewModel()
+        public AddStationViewModel()
         {
             _errorsViewModel = new ErrorsViewModel();
             _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
             SaveCommand = new ViewModelCommand(ExcuteInsertCommand, CanExcuteSaveCommand);
             CancelCommand = new ViewModelCommand(ExcuteCancelCommand);
-            DateAdded = DateTimeOffset.Now;
-            Status = ListStatus.First();
-            
+            Province = ListProvinces.First();
+            ProvinceFilter = Province.Name;
+
         }
-        public AddCoachViewModel(ModelCoach data)
+        public AddStationViewModel(ModelStation data)
         {
             _errorsViewModel = new ErrorsViewModel();
             _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
             SaveCommand = new ViewModelCommand(ExcuteEditCommand, CanExcuteSaveCommand);
             CancelCommand = new ViewModelCommand(ExcuteCancelCommand);
-            DateAdded = data.DateAdded;
-            Status = data.Status;
-            Name = data.Name;
-            RegNo = data.RegNo;
-            Notes = data.Notes;
             id = data.Id;
+            Name = data.Name;
+            Address = data.Address;
+            District = data.District;
+            Province = ListProvinces.Where(e => e.Id == new RepoProvince().GetProvince(data.Id).Id).FirstOrDefault();
+
         }
 
         private void ExcuteEditCommand(object obj)
         {
-			try
-			{
-				var coach = new RepoCoach();
-				coach.UpdateCoach(
-					id,
-					new InputCoach()
-					{
-						Name = Name,
-						Status = Status,
-						RegNo = RegNo,
-						Notes = Notes,
-					}
-				);
-				MessageBox.Show("Successfull");
+            try
+            {
+                var coach = new RepoStation();
+                coach.UpdateStation(
+                    id,
+                    new InputStation()
+                    {
+                        Name = Name,
+                        Address = Address,
+                        District = District,
+                        ProvinceId = Province.Id,
+                    }
+                );
+                MessageBox.Show("Successfull");
                 Close();
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.ToString());
-			}
-		}
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
 
         private void ExcuteCancelCommand(object obj)
         {
@@ -179,25 +190,25 @@ namespace ManagementCoach.ViewModels
         {
             try
             {
-                var coach = new RepoCoach();
-                 if (coach.InsertCoach(
-                    new InputCoach()
-                    {
-                        Name = Name,
-                        Status = Status,
-                        RegNo = RegNo,
-                        Notes = Notes,
-                    }
-                ).Success == true)
+                var coach = new RepoStation();
+                if (coach.InsertStation(
+                   new InputStation()
+                   {
+                       Name = Name,
+                       Address = Address,
+                       District = District,
+                       ProvinceId = Province.Id,
+                   }
+               ).Success == true)
                 {
-                  MessageBox.Show("Successfull");
+                    MessageBox.Show("Successfull");
                 }
                 else
                 {
-                   MessageBox.Show("The RegNo has alreaady existed!");
+                    MessageBox.Show("The RegNo has alreaady existed!");
                     return;
                 }
-                
+
                 Close();
 
 
@@ -206,7 +217,7 @@ namespace ManagementCoach.ViewModels
             {
                 MessageBox.Show(ex.ToString());
             }
-            
+
         }
 
         private void ErrorsViewModel_ErrorsChanged(object sender, DataErrorsChangedEventArgs e)
