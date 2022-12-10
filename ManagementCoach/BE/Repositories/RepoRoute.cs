@@ -58,7 +58,7 @@ namespace ManagementCoach.BE.Repositories
 		public Page<ModelRoute> GetRoutes(int pageNum = 1, int limit = 20)
 		{
 			return PaginationFactory.Create<ModelRoute>(limit, pageNum,
-				() => Context.Routes.OrderBy(r => r.Id).Include(r => r.RouteRestAreas)
+				() => Context.Routes.Include(r => r.RouteRestAreas)
 			) ;
 		}
 
