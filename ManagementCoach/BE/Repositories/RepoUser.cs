@@ -66,5 +66,20 @@ namespace ManagementCoach.BE.Repositories
 
 			return new Result { Success = true };
 		}
-	}
+
+        ///// <summary>
+        ///// Lấy thông tin các user theo tên hoặc id
+        ///// </summary>
+        ///// <param name="keyword">theo từ khóa, nếu từ khóa trống thì lấy thông tin mới nhất</param>
+        ///// <param name="pageNum">trang muốn lấy</param>
+        ///// <param name="limit">số lượng kết quả trên một trang</param>
+        public Page<ModelUser> GetUsers(string keyword, int pageNum = 1, int limit = 20)
+        {
+            return PaginationFactory.Create<ModelUser>(limit, pageNum,
+                () => Context.Users
+                             .OrderByDescending(u => u.DateAdded)
+                             .Where(u => u.Name.Contains(keyword) || u.Id.ToString().Contains(keyword))
+            );
+        }
+    }
 }
