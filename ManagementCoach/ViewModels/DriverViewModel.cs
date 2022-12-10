@@ -1,4 +1,5 @@
-﻿using ManagementCoach.BE;
+﻿using Aspose.Cells;
+using ManagementCoach.BE;
 using ManagementCoach.BE.Entities;
 using ManagementCoach.BE.Models;
 using ManagementCoach.BE.Repositories;
@@ -219,8 +220,123 @@ namespace ManagementCoach.ViewModels
             screen.ShowDialog();
         }
 
+        public void ImportDriversFromExcel()
+        {
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            openFileDialog.DefaultExt = ".xlsx";
+            openFileDialog.Filter = "Excel Workbook (.xlsx)|*.xlsx";
 
-        
+
+
+            if (false == openFileDialog.ShowDialog()) return;
+            string filename = openFileDialog.FileName;
+
+            Workbook workbook = new Workbook(filename);
+            Worksheet worksheet = workbook.Worksheets[0];
+            if (worksheet.Name == "Drivers" || worksheet.Name == "Driver")
+            {
+                int i = 2;
+                int count = 0;
+                while (worksheet.Cells[$"E{i}"].Value != null)
+                {
+                    if (new RepoDriver().EmailExists(worksheet.Cells[$"E{i}"].Value.ToString()))
+                    {
+                        i++;
+                        continue;
+                    }
+                    try
+                    {
+                        var add = new RepoDriver().InsertDriver(new BE.Data.Input.InputDriver()
+                        {
+                            Name = CheckObjectNull(worksheet.Cells[$"A{i}"].Value),
+                            IdCard = CheckObjectNull(worksheet.Cells[$"B{i}"].Value),
+                            Gender = CheckObjectNull(worksheet.Cells[$"C{i}"].Value),
+                            Dob = DateTime.Parse(worksheet.Cells[$"D{i}"].Value.ToString()),
+                            Email = CheckObjectNull(worksheet.Cells[$"E{i}"].Value),
+                            Phone = "0" + CheckObjectNull(worksheet.Cells[$"F{i}"].Value),
+                            Address = CheckObjectNull(worksheet.Cells[$"G{i}"].Value),
+                            DateJoined = DateTime.Parse(worksheet.Cells[$"H{i}"].Value.ToString()),
+                            Active = bool.Parse(worksheet.Cells[$"I{i}"].Value.ToString()),
+                            License = CheckObjectNull(worksheet.Cells[$"J{i}"].Value),
+                            Notes = CheckObjectNull(worksheet.Cells[$"K{i}"].Value),
+                            
+                        });
+                        if (add.Success)
+                        {
+                            count++;
+                        }
+                        i++;
+                    }
+                    catch
+                    {
+                        i++;
+                    }
+                   
+
+                }
+                System.Windows.MessageBox.Show("Add successfully rows: "+ count.ToString());
+                Load();
+
+            }
+        }
+        public void ExportDriverstoExcel()
+        {
+            DialogResult ret = System.Windows.Forms.MessageBox.Show("Do you want to export drivers to file excel?", "Exports", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (ret == DialogResult.No)
+            {
+                return;
+            }
+            Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog();
+            saveFileDialog.DefaultExt = ".xlsx";
+            saveFileDialog.Filter = "Excel Workbook (.xlsx)|*.xlsx";
+
+            if (false == saveFileDialog.ShowDialog()) return;
+            string filename = saveFileDialog.FileName;
+
+            Workbook workbook = new Workbook();
+            Worksheet worksheet = workbook.Worksheets[0];
+            worksheet.Name = "Drivers";
+
+            worksheet.Cells["A1"].PutValue("Id");
+            worksheet.Cells["B1"].PutValue("Name");
+            worksheet.Cells["C1"].PutValue("IdCard");
+            worksheet.Cells["D1"].PutValue("Gender");
+            worksheet.Cells["E1"].PutValue("Dob");
+            worksheet.Cells["F1"].PutValue("Email");
+            worksheet.Cells["G1"].PutValue("Phone");
+            worksheet.Cells["H1"].PutValue("Address");
+            worksheet.Cells["I1"].PutValue("DateJoined");
+            worksheet.Cells["J1"].PutValue("Active");
+            worksheet.Cells["K1"].PutValue("License");
+            worksheet.Cells["L1"].PutValue("Notes");
+            worksheet.Cells["M1"].PutValue("DateAdded");
+            var driversPagination = new RepoDriver().GetDrivers("", 1, context.Drivers.Count());
+            for (int i = 0; i < driversPagination.Items.Count(); i++)
+            {
+                ModelDriver model = driversPagination.Items[i];
+                worksheet.Cells[$"A{i + 2}"].PutValue(model.Id);
+                worksheet.Cells[$"B{i + 2}"].PutValue(model.Name);
+                worksheet.Cells[$"C{i + 2}"].PutValue(model.IdCard);
+                worksheet.Cells[$"D{i + 2}"].PutValue(model.Gender);
+                worksheet.Cells[$"E{i + 2}"].PutValue(model.Dob.ToString("dd-MM-yyyy"));
+                worksheet.Cells[$"F{i + 2}"].PutValue(model.Email);
+                worksheet.Cells[$"G{i + 2}"].PutValue(model.Phone);
+                worksheet.Cells[$"H{i + 2}"].PutValue(model.Address);
+                worksheet.Cells[$"I{i + 2}"].PutValue(model.DateJoined.ToString("dd-MM-yyyy"));
+                worksheet.Cells[$"J{i + 2}"].PutValue(model.Active.ToString());
+                worksheet.Cells[$"K{i + 2}"].PutValue(model.License);
+                worksheet.Cells[$"L{i + 2}"].PutValue(model.Notes);
+                worksheet.Cells[$"M{i + 2}"].PutValue(model.DateAdded.ToString("dd-MM-yyyy"));
+            }
+            worksheet.AutoFitColumns();
+            workbook.Save(filename);
+            System.Windows.Forms.MessageBox.Show("Export successfully", "Exports");
+        }
+        private string CheckObjectNull(Object obj)
+        {
+            if (obj == null) return "";
+            return obj.ToString();
+        }
         public void Load()
         {
             if (context.Drivers.Count() == 0)

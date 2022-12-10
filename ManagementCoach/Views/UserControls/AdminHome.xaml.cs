@@ -23,6 +23,8 @@ namespace ManagementCoach.Views.UserControls
         public AdminHome()
         {
             InitializeComponent();
+           
+
         }
     }
 }

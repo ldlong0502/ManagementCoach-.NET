@@ -19,7 +19,7 @@
         <viewModel:DashBoardViewModel/>
     </Window.DataContext>
     <Window.Resources>
-        <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+        <DataTemplate DataType="{x:Type viewModel:AdminHomeViewModel}">
             <usercontrol:AdminHome></usercontrol:AdminHome>
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:ManagerViewModel}">
@@ -730,7 +730,7 @@
 
                 </Grid>
 
-                <ContentControl x:Name="frDashBoard"  Content="{Binding CurrentChildView , NotifyOnSourceUpdated=True, Mode=TwoWay}" Grid.Column="1" Height="700" Width="1200"  RenderTransformOrigin="0.5,0.5" >
+                <ContentControl x:Name="frDashBoard"  Content="{Binding CurrentUserControl , NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Column="1" Height="700" Width="1200"  RenderTransformOrigin="0.5,0.5" >
                     <ContentControl.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>

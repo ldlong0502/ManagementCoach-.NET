@@ -98,7 +98,8 @@
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
-        </Grid.RowDefinitions>
+        </Grid.RowDefinitions>                                           
+        
         <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
             <TextBlock Margin="0,0,10,0" Text="Filter by" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"></TextBlock>
             <Grid Width="300" HorizontalAlignment="Left" Margin="0,0,10,0">

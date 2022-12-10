@@ -15,6 +15,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using ManagementCoach.BE.Models;
 using System.Collections;
+using Aspose.Cells;
 
 namespace ManagementCoach.ViewModels
 {
@@ -128,7 +129,63 @@ namespace ManagementCoach.ViewModels
             FirstPageCommand = new ViewModelCommand(ExcuteFirstPageCommand, CanExcuteFirstPageCommand);
             EndPageCommand = new ViewModelCommand(ExcuteEndPageCommand, CanExcuteEndPageCommand);
         }
+        public void ImportCoachesFromExcel()
+        {
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            openFileDialog.DefaultExt = ".xlsx";
+            openFileDialog.Filter = "Excel Workbook (.xlsx)|*.xlsx";
 
+
+
+            if (false == openFileDialog.ShowDialog()) return;
+            string filename = openFileDialog.FileName;
+
+            Workbook workbook = new Workbook(filename);
+            Worksheet worksheet = workbook.Worksheets[0];
+            if (worksheet.Name == "Drivers" || worksheet.Name == "Driver")
+            {
+                int i = 2;
+                int count = 0;
+                while (worksheet.Cells[$"E{i}"].Value != null)
+                {
+                    if (new RepoDriver().EmailExists(worksheet.Cells[$"E{i}"].Value.ToString()))
+                    {
+                        i++;
+                        continue;
+                    }
+                    try
+                    {
+                        var add = new RepoDriver().InsertDriver(new BE.Data.Input.InputDriver()
+                        {
+                            Name = worksheet.Cells[$"A{i}"].Value.ToString(),
+                            IdCard = worksheet.Cells[$"B{i}"].Value.ToString(),
+                            Gender = worksheet.Cells[$"C{i}"].Value.ToString(),
+                            Dob = DateTime.Parse(worksheet.Cells[$"D{i}"].Value.ToString()),
+                            Email = worksheet.Cells[$"E{i}"].Value.ToString(),
+                            Phone = "0" + worksheet.Cells[$"F{i}"].Value.ToString(),
+                            Address = worksheet.Cells[$"G{i}"].Value.ToString(),
+                            DateJoined = DateTime.Parse(worksheet.Cells[$"H{i}"].Value.ToString()),
+                            Active = bool.Parse(worksheet.Cells[$"I{i}"].Value.ToString()),
+                            License = worksheet.Cells[$"J{i}"].Value.ToString(),
+                            Notes = worksheet.Cells[$"K{i}"].Value.ToString(),
+                        });
+                        if (add.Success)
+                        {
+                            count++;
+                        }
+                        i++;
+                    }
+                    catch
+                    {
+                        i++;
+                    }
+                    System.Windows.MessageBox.Show("Add successfully {0} rows", count.ToString());
+                    Load();
+                    
+                }
+            
+            }
+        }
         private bool CanExcuteEndPageCommand(object obj)
         {
             if (CurrentPage != NumOfPages)

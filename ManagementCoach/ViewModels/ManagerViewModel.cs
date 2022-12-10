@@ -78,7 +78,8 @@ namespace ManagementCoach.ViewModels
         public ICommand ShowRoutesCommand { get; }
         public ICommand ShowRestAreasCommand { get; }
         public ICommand AddCommand { get; }
-
+        public ICommand ImportCommand { get; }
+        public ICommand ExportCommand { get; }
         public ManagerViewModel()
         {
             ShowTripsCommand = new ViewModelCommand(ExcuteShowTripsCommand);
@@ -89,7 +90,75 @@ namespace ManagementCoach.ViewModels
             ShowRoutesCommand = new ViewModelCommand(ExcuteShowRoutesCommand);
             ShowRestAreasCommand = new ViewModelCommand(ExcuteShowRestAreasCommand);
             AddCommand = new ViewModelCommand(ExcuteAddCommand);
+            ImportCommand = new ViewModelCommand(ExcuteImportCommand);
+            ExportCommand = new ViewModelCommand(ExcuteExportCommand);
             ExcuteShowTripsCommand(null);
+        }
+
+        private void ExcuteExportCommand(object obj)
+        {
+            if (Title == "Coaches")
+            {
+                (CurrentManagerView as CoachViewModel).ImportCoachesFromExcel();
+
+            }
+            else if (Title == "Drivers")
+            {
+                (CurrentManagerView as DriverViewModel).ExportDriverstoExcel();
+            }
+            else if (Title == "Passengers")
+            {
+                //var screen = new ad((currentmanagerview as passengerviewmodel));
+                //screen.showdialog();
+            }
+            else if (Title == "Stations")
+            {
+                var screen = new AddNewStation((CurrentManagerView as StationViewModel));
+                screen.ShowDialog();
+            }
+            else if (Title == "RestAreas")
+            {
+                var screen = new AddNewRestArea((CurrentManagerView as RestAreaViewModel));
+                screen.ShowDialog();
+            }
+            else if (Title == "Routes")
+            {
+                var screen = new AddNewRoute((CurrentManagerView as RouteViewModel));
+                screen.ShowDialog();
+            }
+        }
+
+        private void ExcuteImportCommand(object obj)
+        {
+            if (Title == "Coaches")
+            {
+                (CurrentManagerView as CoachViewModel).ImportCoachesFromExcel();
+
+            }
+            else if (Title == "Drivers")
+            {
+                (CurrentManagerView as DriverViewModel).ImportDriversFromExcel();
+            }
+            else if (Title == "Passengers")
+            {
+                //var screen = new ad((currentmanagerview as passengerviewmodel));
+                //screen.showdialog();
+            }
+            else if (Title == "Stations")
+            {
+                var screen = new AddNewStation((CurrentManagerView as StationViewModel));
+                screen.ShowDialog();
+            }
+            else if (Title == "RestAreas")
+            {
+                var screen = new AddNewRestArea((CurrentManagerView as RestAreaViewModel));
+                screen.ShowDialog();
+            }
+            else if (Title == "Routes")
+            {
+                var screen = new AddNewRoute((CurrentManagerView as RouteViewModel));
+                screen.ShowDialog();
+            }
         }
 
         private void ExcuteShowRestAreasCommand(object obj)
