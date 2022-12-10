@@ -6,7 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Media.Animation;
 
 namespace ManagementCoach.BE.Repositories
 {
@@ -21,6 +23,7 @@ namespace ManagementCoach.BE.Repositories
 				return new Result<ModelRestArea>() { Success = false, ErrorMessage = "RestArea with this province Id already exist." };
 
 			var restArea = Map.To<RestArea>(input);
+			restArea.Province = Context.Provinces.Where(p => input.ProvinceId == p.Id).FirstOrDefault();
 			Context.RestAreas.Add(restArea);
 			Context.SaveChanges();
 			return new Result<ModelRestArea>() { Success = true, Payload = Map.To<ModelRestArea>(restArea) };
@@ -54,7 +57,7 @@ namespace ManagementCoach.BE.Repositories
 				return new Result<ModelRestArea> { Success = false, ErrorMessage = "RestArea with this Id do not exist" };
 
 			var restArea = Context.RestAreas.Where(c => c.Id == id).FirstOrDefault();
-
+			
 			if (restArea.ProvinceId != input.ProvinceId && ProvinceIdExists(input.ProvinceId))
 				return new Result<ModelRestArea> { Success = false, ErrorMessage = "RestArea with this province Id already exist." };
 
