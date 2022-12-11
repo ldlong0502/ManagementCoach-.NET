@@ -338,6 +338,10 @@
     <Compile Include="Migrations\202212110901193_UpdateRouteSchema.designer.cs">
       <DependentUpon>202212110901193_UpdateRouteSchema.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212110909120_Revert.cs" />
+    <Compile Include="Migrations\202212110909120_Revert.designer.cs">
+      <DependentUpon>202212110909120_Revert.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\AddRestAreaViewModel.cs" />
     <Compile Include="ViewModels\AddRouteViewModel.cs" />
     <Compile Include="ViewModels\AddStationViewModel.cs" />
@@ -455,6 +459,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212110901193_UpdateRouteSchema.resx">
       <DependentUpon>202212110901193_UpdateRouteSchema.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212110909120_Revert.resx">
+      <DependentUpon>202212110909120_Revert.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
