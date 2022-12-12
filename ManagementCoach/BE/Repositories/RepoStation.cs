@@ -41,8 +41,8 @@ namespace ManagementCoach.BE.Repositories
 		{
 			return PaginationFactory.Create<ModelStation>(limit, pageNum,
 				() => Context.Stations
-								.OrderBy(c => c.Id)
 							 .Where(c => c.Name.Contains(keyword) || c.Id.ToString().Contains(keyword))
+							.OrderBy(c => c.Id)
 			);
 		}
 

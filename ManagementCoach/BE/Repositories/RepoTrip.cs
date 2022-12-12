@@ -37,6 +37,7 @@ namespace ManagementCoach.BE.Repositories
 			return PaginationFactory.Create<ModelTrip>(limit, pageNum,
 				() => Context.Trips
 							 .Where(c => c.DriverId == driverId)
+							 .OrderBy(c => c.Id)
 			);
 		}
 
@@ -50,6 +51,7 @@ namespace ManagementCoach.BE.Repositories
 			return PaginationFactory.Create<ModelTrip>(limit, pageNum,
 				() => Context.Trips
 							 .Where(c => c.CoachId == coachId)
+							 .OrderBy(c => c.Id)
 			);
 		}
 
@@ -63,6 +65,7 @@ namespace ManagementCoach.BE.Repositories
 			return PaginationFactory.Create<ModelTrip>(limit, pageNum,
 				() => Context.Trips
 							 .Where(c => c.RouteId == routeId)
+							 .OrderBy(c => c.Id)
 			);
 		}
 
