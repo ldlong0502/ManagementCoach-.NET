@@ -1,4 +1,5 @@
-﻿using ManagementCoach.BE.Data.Input;
+﻿using ManagementCoach.BE;
+using ManagementCoach.BE.Data.Input;
 using ManagementCoach.BE.Entities;
 using ManagementCoach.BE.Models;
 using ManagementCoach.BE.Repositories;
@@ -17,40 +18,98 @@ namespace ManagementCoach.ViewModels
     public class AddRouteViewModel : ViewModelBase, INotifyDataErrorInfo
     {
         private readonly ErrorsViewModel _errorsViewModel;
-        public int originStationId { get; set; }
-        public int destinationStationId { get; set; }
-        public int price { get; set; }
-        public int departTime { get; set; }
-        public int estimatedTime { get; set; }
-        public List<int> routeRestAreas { get; set; }
+        private CoachManContext context = new CoachManContext();
+        private ModelStation originStation;
+        private ModelStation destinationStation;
+        private int price;
+        private object departTime;
+        private int estimatedTime;
+        private List<int> routeRestAreas;
+        private List<ModelStation> listStations ;
+        private List<ModelRestArea> listRestAreas ;
+        private string textRestAreas;
+        private ModelRestArea restArea;
+        private bool visibleListRestArea = false;
         private int id;
-
+        private int count = 0;
 
         public Action Close { get; set; }
-        public int OriginStationId
+        public string TextRestAreas
         {
             get
             {
-                return originStationId;
+                return textRestAreas;
             }
             set
             {
-                originStationId = value;
-                
-                OnPropertyChanged(nameof(OriginStationId));
+                textRestAreas = value;
+
+                OnPropertyChanged(nameof(TextRestAreas));
             }
         }
-        public int DestinationStationId
+        public ModelRestArea RestArea
         {
             get
             {
-                return destinationStationId;
+                return restArea;
             }
             set
             {
-                destinationStationId = value;
+                restArea = value;
 
-                OnPropertyChanged(nameof(DestinationStationId));
+                OnPropertyChanged(nameof(RestArea));
+            }
+        }
+        public bool VisibleListRestArea
+        {
+            get
+            {
+                return visibleListRestArea;
+            }
+            set
+            {
+                visibleListRestArea = value;
+
+                OnPropertyChanged(nameof(VisibleListRestArea));
+            }
+        }
+        public List<ModelRestArea> ListRestAreas
+        {
+            get
+            {
+                return listRestAreas;
+            }
+            set
+            {
+                listRestAreas = value;
+
+                OnPropertyChanged(nameof(ListRestAreas));
+            }
+        }
+        public ModelStation OriginStation
+        {
+            get
+            {
+                return originStation;
+            }
+            set
+            {
+                originStation = value;
+                
+                OnPropertyChanged(nameof(OriginStation));
+            }
+        }
+        public ModelStation DestinationStation
+        {
+            get
+            {
+                return destinationStation;
+            }
+            set
+            {
+                destinationStation = value;
+
+                OnPropertyChanged(nameof(DestinationStation));
             }
         }
         public int Price
@@ -66,7 +125,20 @@ namespace ManagementCoach.ViewModels
                 OnPropertyChanged(nameof(Price));
             }
         }
-        public int DepartTime
+        public List<ModelStation> ListStations
+        {
+            get
+            {
+                return listStations;
+            }
+            set
+            {
+                listStations = value;
+
+                OnPropertyChanged(nameof(ListStations));
+            }
+        }
+        public object DepartTime
         {
             get
             {
@@ -75,7 +147,6 @@ namespace ManagementCoach.ViewModels
             set
             {
                 departTime = value;
-
                 OnPropertyChanged(nameof(DepartTime));
             }
         }
@@ -106,21 +177,6 @@ namespace ManagementCoach.ViewModels
             }
         }
 
-        private List<ModelProvince> listProvinces = new RepoProvince().GetProvinces("");
-        public List<ModelProvince> ListProvinces
-        {
-            get
-            {
-                return listProvinces;
-
-            }
-            set
-            {
-                listProvinces = value;
-                OnPropertyChanged(nameof(ListProvinces));
-            }
-
-        }
         public bool CanCreate => !HasErrors;
         public bool HasErrors => _errorsViewModel.HasErrors;
 
@@ -129,15 +185,75 @@ namespace ManagementCoach.ViewModels
 
         public ICommand SaveCommand { get; }
         public ICommand CancelCommand { get; }
+        public ICommand ChooseRestAreaCommand { get; }
+        public ICommand AddRestAreaCommand { get; }
+        public ICommand RemoveRestAreaCommand { get; }
         public AddRouteViewModel()
         {
+            ListStations = new RepoStation().GetStations("", 1, context.Stations.Count()).Items;
+            ListRestAreas = new RepoRestArea().GetRestAreas("", 1, context.RestAreas.Count()).Items;
+            RouteRestAreas = new List<int>();
             _errorsViewModel = new ErrorsViewModel();
             _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
             SaveCommand = new ViewModelCommand(ExcuteInsertCommand, CanExcuteSaveCommand);
             CancelCommand = new ViewModelCommand(ExcuteCancelCommand);
+            ChooseRestAreaCommand = new ViewModelCommand(ExcuteChooseRestAreaCommand);
+            AddRestAreaCommand = new ViewModelCommand(ExcuteAddRestAreaCommand);
+            RemoveRestAreaCommand = new ViewModelCommand(ExcuteRemoveRestAreaCommand);
+        }
 
+        private void ExcuteAddRestAreaCommand(object obj)
+        {
+           
+            if (RestArea == null || RouteRestAreas.Exists(id => id == RestArea.Id)) return;
+            TextRestAreas = "";
+            count = 0;
+            RouteRestAreas.Add(RestArea.Id);
+            RouteRestAreas.ForEach((route) =>
+            {
+                if (count == 0)
+                {
+                    TextRestAreas += route.ToString() + " ";
+
+                }
+                else
+                {
+                    TextRestAreas += "->" + route.ToString() + " ";
+                }
+                count++;
+            });
 
         }
+        private void ExcuteRemoveRestAreaCommand(object obj)
+        {
+            if (RestArea == null || !RouteRestAreas.Exists(id => id == RestArea.Id)) return;
+            TextRestAreas = "";
+            count = 0;
+            RouteRestAreas.Remove(RestArea.Id);
+            RouteRestAreas.ForEach((route) =>
+            {
+                if (count == 0)
+                {
+                    TextRestAreas += route.ToString() + " ";
+
+                }
+                else
+                {
+                    TextRestAreas += "->" + route.ToString() + " ";
+                }
+                count++;
+            });
+
+        }
+
+        private void ExcuteChooseRestAreaCommand(object obj)
+        {
+            count = 0;
+            TextRestAreas = "";
+            RestArea = null;
+            VisibleListRestArea = !VisibleListRestArea;
+        }
+
         public AddRouteViewModel(ModelRoute data)
         {
             //_errorsViewModel = new ErrorsViewModel();
@@ -161,6 +277,12 @@ namespace ManagementCoach.ViewModels
                     id,
                     new InputRoute()
                     {
+                       DepartTime = DateTime.Parse(DepartTime.ToString()).Minute,
+                       DestinationStationId = DestinationStation.Id,
+                       OriginStationId = OriginStation.Id,
+                       EstimatedTime = EstimatedTime,
+                       Price = Price,
+                       RouteRestAreas = RouteRestAreas,
                        
                     }
                 );
@@ -190,19 +312,24 @@ namespace ManagementCoach.ViewModels
         {
             try
             {
-                var route = new RepoRoute();
-                if (route.InsertRoute(
+                var route = new RepoRoute().InsertRoute(
                    new InputRoute()
                    {
-                      
+                       DepartTime = DateTime.Parse(DepartTime.ToString()).Minute,
+                       DestinationStationId = DestinationStation.Id,
+                       OriginStationId = OriginStation.Id,
+                       EstimatedTime = EstimatedTime,
+                       Price = Price,
+                       RouteRestAreas = RouteRestAreas,
                    }
-               ).Success == true)
+               );
+                if (route.Success == true)
                 {
                     MessageBox.Show("Successfull");
                 }
                 else
                 {
-                    MessageBox.Show("The RegNo has alreaady existed!");
+                    MessageBox.Show(route.ErrorMessage);
                     return;
                 }
 

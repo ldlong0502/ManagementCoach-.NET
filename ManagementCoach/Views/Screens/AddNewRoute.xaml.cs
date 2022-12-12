@@ -23,6 +23,16 @@ namespace ManagementCoach.Views.Screens
         public AddNewRoute(RouteViewModel routeViewModel)
         {
             InitializeComponent();
+            var vm = new AddRouteViewModel();
+            this.DataContext = vm;
+            if (vm.Close == null)
+            {
+                vm.Close = new Action(() => {
+                    routeViewModel.Load();
+                    this.Close();
+
+                });
+            }
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

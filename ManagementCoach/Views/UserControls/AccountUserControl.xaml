@@ -133,20 +133,20 @@
                         </DataTemplate>
                     </DataGridCheckBoxColumn.HeaderTemplate>
                 </DataGridCheckBoxColumn>-->
-                <DataGridTextColumn Header="ID" CanUserSort="True"  Binding="{Binding ID}" IsReadOnly="True" Width="*"   ></DataGridTextColumn>
+                <DataGridTextColumn Header="ID" CanUserSort="True"  Binding="{Binding Id}" IsReadOnly="True" Width="*"   ></DataGridTextColumn>
                 <DataGridTemplateColumn  Header="UserName"  IsReadOnly="True" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding UserName}" VerticalAlignment="Center"></TextBlock>
+                                <TextBlock Text="{Binding Username}" VerticalAlignment="Center"></TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Role" Binding="{Binding Role}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Name" Binding="{Binding UserName}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Date created" Binding="{Binding DateCreated}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Date created" Binding="{Binding DateAdded , StringFormat='{}{0:dd/MM/yyyy HH:mm:ss}'}" Width="*"></DataGridTextColumn>
                 <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto" >
                     <DataGridTemplateColumn.CellTemplate >
                         <DataTemplate >

@@ -250,7 +250,7 @@ namespace ManagementCoach.ViewModels
             {
                 return;
             }
-            var routesPagination = new RepoRoute().GetRoutesFromStation(2,1,CurrentPage, Limit);
+            var routesPagination = new RepoRoute().GetRoutes(CurrentPage, Limit);
            
 
             RouteCollection = CollectionViewSource.GetDefaultView(routesPagination.Items);

@@ -14,19 +14,19 @@ namespace ManagementCoach.BE.Repositories
 {
 	public class RepoRoute : Repository
 	{
-		public bool RoutePathExists(int originSationId, int destStationId) => Context.Routes.Any(d => d.OriginStationId == originSationId && d.DestinationStationId == destStationId);
+		public bool RoutePathExists(int originSationId, int destStationId, int departTime) => Context.Routes.Any(d => d.OriginStationId == originSationId && d.DestinationStationId == destStationId && d.DepartTime ==departTime);
 		public bool RouteExists(int id) => Context.Routes.Any(d => d.Id == id);
 
 		public Result<ModelRoute> InsertRoute(InputRoute input)
 		{
-			if (RoutePathExists(input.DestinationStationId, input.DestinationStationId))
+			if (RoutePathExists(input.DestinationStationId, input.DestinationStationId, input.DepartTime))
 				return new Result<ModelRoute>() { Success = false, ErrorMessage = "Route that goes from and to these routes aleeady exist." };
 
 			var route = Map.To<Route>(input);
 			Context.Routes.Add(route);
-			Context.SaveChanges();
+            Context.SaveChanges();
 
-			var restAreas = input.RouteRestAreas.Select( (restAreaId, index) => new RouteRestArea() { 
+            var restAreas = input.RouteRestAreas.Select( (restAreaId, index) => new RouteRestArea() { 
 				RestAreaId = restAreaId, RouteId = route.Id, StopOrder = index + 1
 			});
 
@@ -58,8 +58,8 @@ namespace ManagementCoach.BE.Repositories
 		public Page<ModelRoute> GetRoutes(int pageNum = 1, int limit = 20)
 		{
 			return PaginationFactory.Create<ModelRoute>(limit, pageNum,
-				() => Context.Routes.Include(r => r.RouteRestAreas)
-			) ;
+				() => Context.Routes.Include(r => r.RouteRestAreas).OrderBy(r => r.Id)
+			); 
 		}
 
 		
@@ -88,7 +88,7 @@ namespace ManagementCoach.BE.Repositories
 			if (
 				(route.OriginStationId != input.OriginStationId
 				|| route.DestinationStationId != input.DestinationStationId)
-				&& RoutePathExists(input.DestinationStationId, input.DestinationStationId)
+				&& RoutePathExists(input.DestinationStationId, input.DestinationStationId, input.DepartTime)
 			)
 				return new Result<ModelRoute>() { Success = false, ErrorMessage = "Route that goes from and to these routes aleeady exist." };
 

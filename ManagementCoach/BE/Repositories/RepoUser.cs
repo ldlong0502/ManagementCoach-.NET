@@ -15,7 +15,7 @@ namespace ManagementCoach.BE.Repositories
 		public bool UsernameExists(string username) => Context.Users.Any(d => d.Username == username);
 		public bool EmailExists(string email) => Context.Users.Any(d => d.Email == email);
 		public bool UserExists(int id) => Context.Users.Any(d => d.Id == id);
-
+		public bool UserValid(string username, string password) => Context.Users.Any(d=> d.Username == username && d.Password == password);
 		public Result<ModelUser> InsertUser(InputUser input)
 		{
 			if (UsernameExists(input.Username))
@@ -33,6 +33,10 @@ namespace ManagementCoach.BE.Repositories
 		public ModelUser GetUser(int id)
 		{
 			return Map.To<ModelUser>(Context.Users.Where(c => c.Id == id).FirstOrDefault());
+		}
+		public ModelUser GetUser(string username)
+		{
+			return Map.To<ModelUser>(Context.Users.Where(c => c.Username == username).FirstOrDefault());
 		}
 
 		public Result<ModelUser> UpdateUser(int id, InputUser input)

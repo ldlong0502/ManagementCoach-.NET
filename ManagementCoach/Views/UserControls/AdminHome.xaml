@@ -23,7 +23,7 @@
             <RowDefinition Height="131*"></RowDefinition>
             <RowDefinition Height="69*"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock HorizontalAlignment="Left" Height="46" Margin="10,0,0,0" TextWrapping="Wrap" Text="Good Evening, Long!" VerticalAlignment="Center" Width="352" FontSize="36" FontWeight="Bold" Foreground="{StaticResource violetIcon}"/>
+        <TextBlock HorizontalAlignment="Left" Height="46" Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding WelcomeText}" VerticalAlignment="Center" Width="352" FontSize="36" FontWeight="Bold" Foreground="{StaticResource violetIcon}"/>
         <Border Background="white" CornerRadius="30" BorderThickness="5" Margin="38,20,990,20" Grid.Row="1">
             <Border.Effect>
                 <DropShadowEffect ShadowDepth="1" BlurRadius="10" Color="SkyBlue"/>

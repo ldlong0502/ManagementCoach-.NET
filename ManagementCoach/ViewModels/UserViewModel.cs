@@ -225,50 +225,18 @@ namespace ManagementCoach.ViewModels
             //screen.ShowDialog();
         }
 
-
-        private bool check(string data, string text)
-        {
-            if (!string.IsNullOrEmpty(data))
-            {
-                if (data.Contains(text))
-                    return true;
-                return false;
-            }
-            return false;
-
-        }
-        private int CountAllUserFilter()
-        {
-            List<ModelUser> modelUsers = new List<ModelUser>();
-            context.Users.ToList().ForEach(x => modelUsers.Add(new RepoUser().GetUser(x.Id)));
-            ICollectionView collection = CollectionViewSource.GetDefaultView(modelUsers);
-            collection.Filter = Filter;
-            return collection.Cast<ModelUser>().Count();
-
-        }
-        private bool Filter(object data)
-        {
-            if (!string.IsNullOrEmpty(TextSearch))
-            {
-                var userDetail = data as ModelUser;
-                return userDetail != null
-                    && (check(userDetail.Name, TextSearch));
-            }
-            return true;
-
-        }
         public void Load()
         {
-            UserCollection = CollectionViewSource.GetDefaultView(context.Users.ToList());
-            //var usersPagination = new RepoUser().GetUser(TextSearch, CurrentPage, Limit);
-            //CoachCollection = CollectionViewSource.GetDefaultView(coachesPagination.Items);
-            //NumOfPages = coachesPagination.PageCount;
-            //if (CurrentPage > NumOfPages)
-            //{
-            //    CurrentPage = 1;
-            //    coachesPagination = new RepoUser().GetCoaches(TextSearch, CurrentPage, Limit);
-            //    CoachCollection = CollectionViewSource.GetDefaultView(coachesPagination.Items);
-            //}
+            if (context.Users.Count() == 0) return;
+            var usersPagination = new RepoUser().GetUsers(TextSearch, CurrentPage, Limit);
+            UserCollection = CollectionViewSource.GetDefaultView(usersPagination.Items);
+            NumOfPages = usersPagination.PageCount;
+            if (CurrentPage > NumOfPages)
+            {
+                CurrentPage = 1;
+                usersPagination = new RepoUser().GetUsers(TextSearch, CurrentPage, Limit);
+                UserCollection = CollectionViewSource.GetDefaultView(usersPagination.Items);
+            }
         }
     }
    

@@ -326,6 +326,7 @@
     <Compile Include="BE\Repositories\RepoTrip.cs" />
     <Compile Include="BE\Repositories\RepoUser.cs" />
     <Compile Include="BE\Repositories\RepoRoute.cs" />
+    <Compile Include="MD5Helper.cs" />
     <Compile Include="Migrations\202211180434413_UpdateSchema.cs" />
     <Compile Include="Migrations\202211180434413_UpdateSchema.designer.cs">
       <DependentUpon>202211180434413_UpdateSchema.cs</DependentUpon>

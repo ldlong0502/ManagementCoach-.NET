@@ -1,9 +1,12 @@
-﻿using ManagementCoach.Views.Screens;
+﻿using ManagementCoach.BE.Repositories;
+using ManagementCoach.Views.Screens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security;
+using System.Security.Principal;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -49,8 +52,11 @@ namespace ManagementCoach.ViewModels
 
         private void ExcuteLoginCommand(object obj)
         {
-            if(UserName == "admin" && Password == "admin")
+            
+            string pass = MD5Helper.GenerateMD5(Password);
+            if(new RepoUser().UserValid(UserName, pass))
             {
+                Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(UserName), null);
                 DashBoard db = new DashBoard();
                 db.Show();
                 CloseAction();

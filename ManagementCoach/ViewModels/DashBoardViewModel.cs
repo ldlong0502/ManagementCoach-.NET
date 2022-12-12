@@ -82,9 +82,11 @@ namespace ManagementCoach.ViewModels
 
         private void ExecuteShowAccountViewCommand(object obj)
         {
-            
+            DispatcherTimerImage.Stop();
             CurrentChildView = new UserViewModel();
-            
+            CurrentUserControl = new AccountUserControl();
+            CurrentUserControl.DataContext = CurrentChildView;
+
         }
 
         private void ExecuteShowManagerViewCommand(object obj)
