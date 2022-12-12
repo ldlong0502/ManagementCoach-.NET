@@ -9,7 +9,7 @@ namespace ManagementCoach.BE
 {
 	internal class PaginationFactory
 	{
-		public static Page<T> Create<T>(int limit, int page, Func<IQueryable<object>> getItems)
+		public static Page<T> Create<T>(int limit, int page, Func<IOrderedQueryable<object>> getItems)
 		{
 			return new Page<T>()
 			{

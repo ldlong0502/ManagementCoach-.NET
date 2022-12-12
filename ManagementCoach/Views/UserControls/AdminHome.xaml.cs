@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ManagementCoach.BE;
+using ManagementCoach.BE.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,9 +24,10 @@ namespace ManagementCoach.Views.UserControls
     {
         public AdminHome()
         {
-            InitializeComponent();
-           
+			var items = new RepoRoute().GetRoutes(1, 99).Items;
+			Excel.ExportAs(items);
 
+			InitializeComponent();
         }
     }
 }

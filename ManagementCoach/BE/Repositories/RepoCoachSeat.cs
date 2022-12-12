@@ -20,7 +20,6 @@ namespace ManagementCoach.BE.Repositories
 
         public Result<ModelCoachSeat> InsertCoachSeat(InputCoachSeat input)
         {
-            throw new NotImplementedException();
             if (NameExists(input.Name))
                 return new Result<ModelCoachSeat> { Success = false, ErrorMessage = "Coach seat with this name already exist." };
 

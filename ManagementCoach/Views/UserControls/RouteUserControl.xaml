@@ -135,8 +135,6 @@
                 <DataGridTextColumn Header="Origin Satation Id"  Binding="{Binding OriginStationId}" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Destination Satation Id"  Binding="{Binding DestinationStationId}" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Price" Binding="{Binding Price}"  ></DataGridTextColumn>
-                <DataGridTextColumn Header="Depart Time" Binding="{Binding DepartTime}"  ></DataGridTextColumn>
-                <DataGridTextColumn Header="Estimated Time" Binding="{Binding EstimatedTime}"  ></DataGridTextColumn>
                 <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

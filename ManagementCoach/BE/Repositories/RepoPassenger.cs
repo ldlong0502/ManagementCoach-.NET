@@ -49,8 +49,8 @@ namespace ManagementCoach.BE.Repositories
 		{
 			return PaginationFactory.Create<ModelPassenger>(limit, pageNum,
 				() => Context.Passengers
-							 .OrderByDescending(c => c.DateAdded)
 							 .Where(c => c.Name.Contains(keyword) || c.Id.ToString().Contains(keyword) || c.IdCard.Contains(keyword))
+							 .OrderByDescending(c => c.DateAdded)
 			);
 		}
 

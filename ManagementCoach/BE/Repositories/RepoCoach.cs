@@ -41,8 +41,8 @@ namespace ManagementCoach.BE.Repositories
 		{
 			var page = PaginationFactory.Create<ModelCoach>(limit, pageNum, 
 				() => Context.Coaches
-							 .OrderByDescending(c => c.DateAdded)
 							 .Where(c => c.Name.Contains(keyword) || c.RegNo.Contains(keyword))
+							 .OrderByDescending(c => c.DateAdded)
 			);
 
             var coachSeatRepo = new RepoCoachSeat();

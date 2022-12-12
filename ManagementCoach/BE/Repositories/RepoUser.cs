@@ -81,8 +81,8 @@ namespace ManagementCoach.BE.Repositories
         {
             return PaginationFactory.Create<ModelUser>(limit, pageNum,
                 () => Context.Users
-                             .OrderByDescending(u => u.DateAdded)
                              .Where(u => u.Name.Contains(keyword) || u.Id.ToString().Contains(keyword))
+                             .OrderByDescending(u => u.DateAdded)
             );
         }
     }
