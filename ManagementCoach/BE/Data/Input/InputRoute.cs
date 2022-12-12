@@ -23,6 +23,6 @@ namespace ManagementCoach.BE.Data.Input
 		/// <summary>
 		/// Id các trạm dừng chân mà tuyến đường này đi qua, thứ tự dừng của trạm sẽ là thứ tự phần từ trong danh sách + 1
 		/// </summary>
-		public List<int> RouteRestAreas { get; set; }
+		public List<int> RouteRestAreaIdList { get; set; }
 	}
 }

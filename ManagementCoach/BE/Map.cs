@@ -38,6 +38,9 @@ namespace ManagementCoach.BE
 				config.CreateMap<RouteRestArea, ModelRestArea>();
 				config.CreateMap<Route, ModelRoute>();
 
+				config.CreateMap<RouteRestArea, ModelRouteRestArea>();
+				config.CreateMap<ModelRouteRestArea, RouteRestArea>();
+
 				config.CreateMap<InputStation, Station>();
 				config.CreateMap<Station, ModelStation>();
 

@@ -26,7 +26,7 @@ namespace ManagementCoach.BE.Repositories
 			Context.Routes.Add(route);
             Context.SaveChanges();
 
-            var restAreas = input.RouteRestAreas.Select( (restAreaId, index) => new RouteRestArea() { 
+			var restAreas = input.RouteRestAreaIdList.Select( (restAreaId, index) => new RouteRestArea() { 
 				RestAreaId = restAreaId, RouteId = route.Id, StopOrder = index + 1
 			});
 
@@ -34,7 +34,7 @@ namespace ManagementCoach.BE.Repositories
 			Context.SaveChanges();
 
 			var payload = Map.To<ModelRoute>(route);
-			payload.RouteRestAreas = Context.RouteRestArea
+			payload.RestAreas = Context.RouteRestArea
 											.Where(r => r.RouteId == route.Id)
 											.Include(r => r.RestArea)
 											.Select(r => r.RestArea)
@@ -47,8 +47,21 @@ namespace ManagementCoach.BE.Repositories
 
 		public ModelRoute GetRoute(int id)
 		{
-			return Map.To<ModelRoute>(Context.Routes.Where(c => c.Id == id).FirstOrDefault());
+			var route = Map.To<ModelRoute>(Context.Routes.Where(c => c.Id == id).First());
+			route.RestAreas = GetRestAreasOfRoute(id);
+			return route;
 		}
+
+		public List<ModelRestArea> GetRestAreasOfRoute(int routeId)
+		{
+			return Context.RouteRestArea
+							.Where(r => r.RouteId == routeId)
+							.Include(r => r.RestArea)
+							.Select(r => r.RestArea)
+							.ToList()
+							.Select(r => Map.To<ModelRestArea>(r))
+							.ToList();
+		} 
 
 		///// <summary>
 		///// Lấy thông tin các tuyến đường
@@ -57,9 +70,12 @@ namespace ManagementCoach.BE.Repositories
 		///// <param name="limit">số lượng kết quả trên một trang</param>
 		public Page<ModelRoute> GetRoutes(int pageNum = 1, int limit = 20)
 		{
-			return PaginationFactory.Create<ModelRoute>(limit, pageNum,
-				() => Context.Routes.Include(r => r.RouteRestAreas).OrderBy(r => r.Id)
-			); 
+			var page = PaginationFactory.Create<ModelRoute>(limit, pageNum,
+				() => Context.Routes.Include(r => r.RouteRestAreas)
+			) ;
+
+			page.Items.ForEach(r => r.RestAreas = GetRestAreasOfRoute(r.Id));
+			return page;
 		}
 
 		
@@ -70,11 +86,13 @@ namespace ManagementCoach.BE.Repositories
 		///// <param name="limit">số lượng kết quả trên một trang</param>
 		public Page<ModelRoute> GetRoutesFromStation(int originStationId, int destinationStationId, int pageNum = 1, int limit = 20)
 		{
-			return PaginationFactory.Create<ModelRoute>(limit, pageNum,
+			var page = PaginationFactory.Create<ModelRoute>(limit, pageNum,
 				() => Context.Routes
 							 .Where(r => r.OriginStationId == originStationId && r.DestinationStationId == destinationStationId).OrderBy(r => r.Id)
-							 .Include(r => r.RouteRestAreas)
 			);
+
+			page.Items.ForEach(r => r.RestAreas = GetRestAreasOfRoute(r.Id));
+			return page;
 		}
 
 
@@ -98,7 +116,7 @@ namespace ManagementCoach.BE.Repositories
 			var routeRestAreas = Context.RouteRestArea.Where(r => r.RouteId == id).ToList();
 			Context.RouteRestArea.RemoveRange(routeRestAreas);
 
-			var restAreas = input.RouteRestAreas.Select((restAreaId, index) => new RouteRestArea()
+			var restAreas = input.RouteRestAreaIdList.Select((restAreaId, index) => new RouteRestArea()
 			{
 				RestAreaId = restAreaId,
 				RouteId = route.Id,
@@ -108,13 +126,7 @@ namespace ManagementCoach.BE.Repositories
 
 			Context.SaveChanges();
 			var payload = Map.To<ModelRoute>(route);
-			payload.RouteRestAreas = Context.RouteRestArea
-											.Where(r => r.RouteId == route.Id)
-											.Include(r => r.RestArea)
-											.Select(r => r.RestArea)
-											.ToList()
-											.Select(r => Map.To<ModelRestArea>(r))
-											.ToList();
+			payload.RestAreas = GetRestAreasOfRoute(id);
 
 			return new Result<ModelRoute> { Success = true, Payload = payload };
 		}
@@ -124,6 +136,11 @@ namespace ManagementCoach.BE.Repositories
 			if (!RouteExists(id))
 				return new Result { Success = false, ErrorMessage = "Route with this Id do not exist" };
 
+			var rr = Context.RouteRestArea
+					.Where(r => r.RouteId == id)
+					.ToList();
+			Context.RouteRestArea.RemoveRange(rr);
+			
 			var route = new Route() { Id = id };
 			Context.Routes.Attach(route);
 			Context.Routes.Remove(route);
