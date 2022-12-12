@@ -342,6 +342,14 @@
     <Compile Include="Migrations\202212110909120_Revert.designer.cs">
       <DependentUpon>202212110909120_Revert.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212121217189_MoveRouteTimeRelatedColumnsToTrip.cs" />
+    <Compile Include="Migrations\202212121217189_MoveRouteTimeRelatedColumnsToTrip.designer.cs">
+      <DependentUpon>202212121217189_MoveRouteTimeRelatedColumnsToTrip.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212121220534_TripDateToDateOnly.cs" />
+    <Compile Include="Migrations\202212121220534_TripDateToDateOnly.designer.cs">
+      <DependentUpon>202212121220534_TripDateToDateOnly.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\AddRestAreaViewModel.cs" />
     <Compile Include="ViewModels\AddRouteViewModel.cs" />
     <Compile Include="ViewModels\AddStationViewModel.cs" />
@@ -462,6 +470,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212110909120_Revert.resx">
       <DependentUpon>202212110909120_Revert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212121217189_MoveRouteTimeRelatedColumnsToTrip.resx">
+      <DependentUpon>202212121217189_MoveRouteTimeRelatedColumnsToTrip.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212121220534_TripDateToDateOnly.resx">
+      <DependentUpon>202212121220534_TripDateToDateOnly.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

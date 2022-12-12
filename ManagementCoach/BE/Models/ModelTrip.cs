@@ -19,12 +19,26 @@ namespace ManagementCoach.BE.Models
 		[Required]
 		public int DriverId { get; set; }
 
-		[Column(TypeName = "timestamptz")]
-		public DateTimeOffset Date { get; set; } = DateTimeOffset.Now;
+		/// <summary>
+		/// Ngày khởi hành
+		/// </summary>
+		[Column(TypeName = "date")]
+		public DateTime Date { get; set; }
 
 		/// <summary>
 		/// Mặc định là false
 		/// </summary>
 		public bool Cancelled { get; set; }
+
+		/// <summary>
+		/// Giờ khởi hành, đơn bị là phút, VD: 7h30 --> 450, 15h --> 900
+		/// </summary>
+		public int DepartTime { get; set; }
+
+
+		/// <summary>
+		/// Đơn vị là phút
+		/// </summary>
+		public int EstimatedTime { get; set; }
 	}
 }
