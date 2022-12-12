@@ -12,7 +12,7 @@ namespace ManagementCoach.BE.Models
 		/// <summary>
 		/// Các trạm dừng chân mà tuyến đường này đi qua, thứ tự dừng của trạm sẽ là thứ tự phần từ trong danh sách + 1
 		/// </summary>
-		public List<ModelRestArea> RouteRestAreas { get; set; }
+		public List<ModelRestArea> RestAreas { get; set; }
 	}
 
 	public class BaseRoute
