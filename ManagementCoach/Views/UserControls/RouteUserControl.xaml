@@ -173,7 +173,7 @@
                                 <fa:FontAwesome Icon="ArrowUp" FontSize="10" Foreground="#6c7682"></fa:FontAwesome>
                             </Button>
                             <Button FocusVisualStyle="{x:Null}" Height="15" Width="25" Command="{Binding DownLimitCommand}"   BorderBrush="Transparent" Background="Transparent">
-                                <fa:FontAwesome  FontSize="10" Foreground="#6c7682" Icon="ArrowDown"></fa:FontAwesome>
+
                             </Button>
                         </StackPanel>
                     </StackPanel>

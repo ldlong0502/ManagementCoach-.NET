@@ -282,8 +282,8 @@ namespace ManagementCoach.ViewModels
                        OriginStationId = OriginStation.Id,
                        EstimatedTime = EstimatedTime,
                        Price = Price,
-                       RouteRestAreas = RouteRestAreas,
-                       
+                       RouteRestAreaIdList = RouteRestAreas
+
                     }
                 );
                 MessageBox.Show("Successfull");
@@ -320,7 +320,7 @@ namespace ManagementCoach.ViewModels
                        OriginStationId = OriginStation.Id,
                        EstimatedTime = EstimatedTime,
                        Price = Price,
-                       RouteRestAreas = RouteRestAreas,
+                       RouteRestAreaIdList = RouteRestAreas,
                    }
                );
                 if (route.Success == true)

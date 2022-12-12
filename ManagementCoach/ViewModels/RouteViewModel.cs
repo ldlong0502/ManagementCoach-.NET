@@ -251,8 +251,13 @@ namespace ManagementCoach.ViewModels
                 return;
             }
             var routesPagination = new RepoRoute().GetRoutes(CurrentPage, Limit);
-           
-
+            if((OriginStationId == 0 || OriginStationId.ToString() == null) && (DestinationStationId == 0 || DestinationStationId.ToString() == null)){
+                routesPagination = new RepoRoute().GetRoutes(CurrentPage, Limit);
+            }
+            else
+            {
+                routesPagination = new RepoRoute().GetRoutesFromStation(OriginStationId,DestinationStationId,CurrentPage, Limit);
+            }
             RouteCollection = CollectionViewSource.GetDefaultView(routesPagination.Items);
             NumOfPages = routesPagination.PageCount;
 
@@ -260,6 +265,14 @@ namespace ManagementCoach.ViewModels
             {
                 CurrentPage = 1;
                 routesPagination = new RepoRoute().GetRoutes(CurrentPage, Limit);
+                if ((OriginStationId == 0 || OriginStationId.ToString() == null) && (DestinationStationId == 0 || DestinationStationId.ToString() == null))
+                {
+                    routesPagination = new RepoRoute().GetRoutes(CurrentPage, Limit);
+                }
+                else
+                {
+                    routesPagination = new RepoRoute().GetRoutesFromStation(OriginStationId, DestinationStationId, CurrentPage, Limit);
+                }
                 RouteCollection = CollectionViewSource.GetDefaultView(routesPagination.Items);
             }
 

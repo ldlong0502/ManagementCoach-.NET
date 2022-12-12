@@ -14,12 +14,12 @@ namespace ManagementCoach.BE.Repositories
 {
 	public class RepoRoute : Repository
 	{
-		public bool RoutePathExists(int originSationId, int destStationId, int departTime) => Context.Routes.Any(d => d.OriginStationId == originSationId && d.DestinationStationId == destStationId && d.DepartTime ==departTime);
+		public bool RoutePathExists(int originSationId, int destStationId) => Context.Routes.Any(d => d.OriginStationId == originSationId && d.DestinationStationId == destStationId);
 		public bool RouteExists(int id) => Context.Routes.Any(d => d.Id == id);
 
 		public Result<ModelRoute> InsertRoute(InputRoute input)
 		{
-			if (RoutePathExists(input.DestinationStationId, input.DestinationStationId, input.DepartTime))
+			if (RoutePathExists(input.DestinationStationId, input.DestinationStationId))
 				return new Result<ModelRoute>() { Success = false, ErrorMessage = "Route that goes from and to these routes aleeady exist." };
 
 			var route = Map.To<Route>(input);
@@ -71,8 +71,8 @@ namespace ManagementCoach.BE.Repositories
 		public Page<ModelRoute> GetRoutes(int pageNum = 1, int limit = 20)
 		{
 			var page = PaginationFactory.Create<ModelRoute>(limit, pageNum,
-				() => Context.Routes.Include(r => r.RouteRestAreas)
-			) ;
+				() => Context.Routes.Include(r => r.RouteRestAreas).OrderBy(r => r.Id)
+			);
 
 			page.Items.ForEach(r => r.RestAreas = GetRestAreasOfRoute(r.Id));
 			return page;
@@ -106,7 +106,7 @@ namespace ManagementCoach.BE.Repositories
 			if (
 				(route.OriginStationId != input.OriginStationId
 				|| route.DestinationStationId != input.DestinationStationId)
-				&& RoutePathExists(input.DestinationStationId, input.DestinationStationId, input.DepartTime)
+				&& RoutePathExists(input.DestinationStationId, input.DestinationStationId)
 			)
 				return new Result<ModelRoute>() { Success = false, ErrorMessage = "Route that goes from and to these routes aleeady exist." };
 
