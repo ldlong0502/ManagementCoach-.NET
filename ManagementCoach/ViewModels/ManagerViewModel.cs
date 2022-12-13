@@ -1,8 +1,10 @@
-﻿using ManagementCoach.Views.Screens;
+﻿using ManagementCoach.BE;
+using ManagementCoach.Views.Screens;
 using ManagementCoach.Views.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
@@ -11,76 +13,77 @@ using System.Windows.Media;
 
 namespace ManagementCoach.ViewModels
 {
-    public class ManagerViewModel : ViewModelBase
-    {
-        private ViewModelBase _currentManagerView;
-        private UserControl _currentControl;
-        private string title;
-        private string addAction;
+	public class ManagerViewModel : ViewModelBase
+	{
+		private ViewModelBase _currentManagerView;
+		private UserControl _currentControl;
+		private string title;
+		private string addAction;
 
-        public UserControl CurrentControl
-        {
-            get
-            {
-                return _currentControl;
-            }
-            set
-            {
-                _currentControl = value;
-                OnPropertyChanged(nameof(CurrentControl));
-            }
-        }
-        public ViewModelBase CurrentManagerView
-        {
-            get
-            {
-                return _currentManagerView;
-            }
-            set
-            {
-                _currentManagerView = value;
-                OnPropertyChanged(nameof(CurrentManagerView));
-            }
-        }
-        public string Title
-        {
-            get
-            {
-                return title;
-            }
-            set
-            {
-                title = value;
-                OnPropertyChanged(nameof(Title));
-            }
-        }
-        public string AddAction
-        {
-            get
-            {
-                return addAction;
-            }
-            set
-            {
-                addAction = value;
-                OnPropertyChanged(nameof(AddAction));
-            }
-        }
+		public UserControl CurrentControl
+		{
+			get
+			{
+				return _currentControl;
+			}
+			set
+			{
+				_currentControl = value;
+				OnPropertyChanged(nameof(CurrentControl));
+			}
+		}
+		public ViewModelBase CurrentManagerView
+		{
+			get
+			{
+				return _currentManagerView;
+			}
+			set
+			{
+				_currentManagerView = value;
+				OnPropertyChanged(nameof(CurrentManagerView));
+			}
+		}
+		public string Title
+		{
+			get
+			{
+				return title;
+			}
+			set
+			{
+				title = value;
+				OnPropertyChanged(nameof(Title));
+			}
+		}
+		public string AddAction
+		{
+			get
+			{
+				return addAction;
+			}
+			set
+			{
+				addAction = value;
+				OnPropertyChanged(nameof(AddAction));
+			}
+		}
 
 
 
-        //Icommand
-        public ICommand ShowTripsCommand { get; }
-        public ICommand ShowPassengersCommand { get; }
-        public ICommand ShowCoachesCommand { get; }
-        public ICommand ShowDriversCommand { get; }
-        public ICommand ShowStationsCommand { get; }
-        public ICommand ShowRoutesCommand { get; }
-        public ICommand ShowRestAreasCommand { get; }
-        public ICommand AddCommand { get; }
-        public ICommand ImportCommand { get; }
-        public ICommand ExportCommand { get; }
-        public ManagerViewModel()
+		//Icommand
+		public ICommand ShowTripsCommand { get; }
+		public ICommand ShowPassengersCommand { get; }
+		public ICommand ShowCoachesCommand { get; }
+		public ICommand ShowDriversCommand { get; }
+		public ICommand ShowStationsCommand { get; }
+		public ICommand ShowRoutesCommand { get; }
+		public ICommand ShowRestAreasCommand { get; }
+		public ICommand AddCommand { get; }
+		public ICommand ImportCommand { get; }
+		public ICommand ExportCommand { get; }
+
+		public ManagerViewModel()
         {
             ShowTripsCommand = new ViewModelCommand(ExcuteShowTripsCommand);
             ShowPassengersCommand = new ViewModelCommand(ExcuteShowPassengersCommand);
@@ -97,35 +100,19 @@ namespace ManagementCoach.ViewModels
 
         private void ExcuteExportCommand(object obj)
         {
-            if (Title == "Coaches")
-            {
-                (CurrentManagerView as CoachViewModel).ImportCoachesFromExcel();
+			var context = new CoachManContext();
 
-            }
-            else if (Title == "Drivers")
-            {
-                (CurrentManagerView as DriverViewModel).ExportDriverstoExcel();
-            }
-            else if (Title == "Passengers")
-            {
-                //var screen = new ad((currentmanagerview as passengerviewmodel));
-                //screen.showdialog();
-            }
-            else if (Title == "Stations")
-            {
-                var screen = new AddNewStation((CurrentManagerView as StationViewModel));
-                screen.ShowDialog();
-            }
-            else if (Title == "RestAreas")
-            {
-                var screen = new AddNewRestArea((CurrentManagerView as RestAreaViewModel));
-                screen.ShowDialog();
-            }
-            else if (Title == "Routes")
-            {
-                var screen = new AddNewRoute((CurrentManagerView as RouteViewModel));
-                screen.ShowDialog();
-            }
+			var exportExcelHandlerByTitle = new Dictionary<string, Action<string>>() {
+				{ "Trips", sheetName => ExcelHelper.ExportSingleSheetAs(sheetName, context.Trips) },
+				{ "Coaches", sheetName => ExcelHelper.ExportSingleSheetAs(sheetName, context.Coaches) },
+				{ "Drivers", sheetName => ExcelHelper.ExportSingleSheetAs(sheetName, context.Drivers) },
+				{ "Passengers", sheetName => ExcelHelper.ExportSingleSheetAs(sheetName, context.Passengers) },
+				{ "Stations", sheetName => ExcelHelper.ExportSingleSheetAs(sheetName, context.Stations) },
+				{ "RestAreas", sheetName => ExcelHelper.ExportSingleSheetAs(sheetName, context.RestAreas) },
+				{ "Routes", sheetName => ExcelHelper.ExportSingleSheetAs(sheetName, context.Routes) },
+			};
+
+			exportExcelHandlerByTitle[Title](Title);
         }
 
         private void ExcuteImportCommand(object obj)

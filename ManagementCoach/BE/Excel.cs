@@ -1,4 +1,5 @@
-﻿using ManagementCoach.BE.Repositories;
+﻿using Aspose.Cells;
+using ManagementCoach.BE.Repositories;
 using Microsoft.Win32;
 using OfficeOpenXml;
 using OfficeOpenXml.Table;
@@ -7,17 +8,19 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
-using System.Windows.Shapes;
+using MessageBox = System.Windows.Forms.MessageBox;
 using SaveFileDialog = System.Windows.Forms.SaveFileDialog;
 
 namespace ManagementCoach.BE
 {
-	public class Excel
+	public class ExcelHelper
 	{
-		public static void ExportAs<T>(IEnumerable<T> items)
+		public static void ExportSingleSheetAs<T>(string sheetName, IEnumerable<T> items)
 		{
 			SaveFileDialog dialog = new SaveFileDialog();
 			dialog.Filter = "Excel File|*.xlsx";
@@ -28,7 +31,27 @@ namespace ManagementCoach.BE
 
 			if (dialog.FileName != "")
 			{
-				Export(dialog.FileName, "Test", items);
+				//check if file is in use
+				try
+				{
+					using (Stream stream = new FileStream(dialog.FileName, FileMode.Open))
+					{
+						//do nothing
+					}
+				}
+				catch
+				{
+					MessageBox.Show($"The file \"{dialog.FileName}\" is being use by another process.\n\nPlease close the file before exporting.", "Export Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					return;
+				}
+
+				Export(dialog.FileName, sheetName, items);
+
+				var result = MessageBox.Show($"Exported to \"{dialog.FileName}\".\n\nDo you want to open the file now?", "Export Sucessfully", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+				if (result == DialogResult.Yes)
+				{
+					Open(dialog.FileName);
+				}
 			}
 		}
 
@@ -41,21 +64,26 @@ namespace ManagementCoach.BE
 				pck.Workbook.Properties.Author = "CMB";
 				pck.Workbook.Properties.Title = $"{fileName} - CoachManContext Export";
 
-				var sheet = pck.Workbook.Worksheets.FirstOrDefault(s => s.Name == sheetName);
-				if (sheet == null)
+				var worksheet = pck.Workbook.Worksheets.FirstOrDefault(s => s.Name == sheetName);
+				if (worksheet == null)
 				{
-					sheet = pck.Workbook.Worksheets.Add(sheetName);
+					worksheet = pck.Workbook.Worksheets.Add(sheetName);
 				}
 				else
 				{
-					sheet.Cells.Clear();
+					int index = worksheet.Index;
+					pck.Workbook.Worksheets.Delete(index); 
+					worksheet = pck.Workbook.Worksheets.Add(sheetName);
+					if (pck.Workbook.Worksheets.Count > 1)
+					{
+						pck.Workbook.Worksheets.MoveBefore(worksheet.Index, index);
+					}
 				}
-				var workSheet = pck.Workbook.Worksheets[sheet.Index];
-				workSheet.Cells[1, 1].LoadFromCollection(items, true, TableStyles.Light21);
+				worksheet.Cells[1, 1].LoadFromCollection(items, true, TableStyles.Light21);
+				worksheet.Cells.AutoFitColumns();
+				worksheet.Select();
 				pck.Save();
 			}
-
-			Open(filePath);
 		}
 
 		public static void Open(string filePath)

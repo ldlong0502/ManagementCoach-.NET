@@ -13,7 +13,6 @@ namespace ManagementCoach.BE.Models
 		/// <summary>
 		/// Các trạm dừng chân mà tuyến đường này đi qua, thứ tự dừng của trạm sẽ là thứ tự phần từ trong danh sách + 1
 		/// </summary>
-		[EpplusIgnore] 
 		public List<ModelRestArea> RestAreas { get; set; }
 	}
 
