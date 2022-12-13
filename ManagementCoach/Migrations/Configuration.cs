@@ -1,6 +1,7 @@
 ﻿namespace ManagementCoach.Migrations
 {
-    using System;
+	using ManagementCoach.BE.Entities;
+	using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -14,10 +15,10 @@
 
         protected override void Seed(ManagementCoach.BE.CoachManContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
-            //  to avoid creating duplicate seed data.
-        }
+			context.Users.AddOrUpdate(x => x.Id,
+				new User() { Id = 1, Name = "Admin", Username="admin", Password = MD5Helper.GenerateMD5("admin"), Role= "Admin" },
+				new User() { Id = 2, Name = "Employee", Username="employee", Password = MD5Helper.GenerateMD5("employee"), Role="Employee" }
+			);
+		}
     }
 }
