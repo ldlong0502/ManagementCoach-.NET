@@ -1,4 +1,5 @@
-﻿using ManagementCoach.ViewModels;
+﻿using ManagementCoach.BE;
+using ManagementCoach.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,9 @@ namespace ManagementCoach.Views.Screens
     {
         public LoginWindow()
         {
-            InitializeComponent();
+			//ExcelHelper.Import("C:\\Users\\ASUS\\Documents\\f.xlsx");
+
+			InitializeComponent();
             LoginViewModel vm = new LoginViewModel(); // this creates an instance of the ViewModel
             this.DataContext = vm; // this sets the newly created ViewModel as the DataContext for the View
             if (vm.CloseAction == null)

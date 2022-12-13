@@ -1,18 +1,23 @@
 ﻿using Aspose.Cells;
+using ManagementCoach.BE.Entities;
 using ManagementCoach.BE.Repositories;
 using Microsoft.Win32;
 using OfficeOpenXml;
 using OfficeOpenXml.Table;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
+using System.Xml;
 using MessageBox = System.Windows.Forms.MessageBox;
 using SaveFileDialog = System.Windows.Forms.SaveFileDialog;
 
@@ -59,10 +64,14 @@ namespace ManagementCoach.BE
 			ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
 			var fileName = System.IO.Path.GetFileNameWithoutExtension(filePath);
-			using (var pck = new ExcelPackage(new FileInfo(filePath)))
+			var fileInfo = new FileInfo(filePath);
+			using (var pck = new ExcelPackage(fileInfo))
 			{
-				pck.Workbook.Properties.Author = "CMB";
-				pck.Workbook.Properties.Title = $"{fileName} - CoachManContext Export";
+				if (!fileInfo.Exists)
+				{
+					pck.Workbook.Properties.Author = "CMB";
+					pck.Workbook.Properties.Title = $"{fileName} - CoachManContext Export";
+				}
 
 				var worksheet = pck.Workbook.Worksheets.FirstOrDefault(s => s.Name == sheetName);
 				if (worksheet == null)
@@ -86,7 +95,58 @@ namespace ManagementCoach.BE
 			}
 		}
 
-		public static void Open(string filePath)
+		public static void Import(string filePath)
+		{
+			ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+			var queryContext = new CoachManContext();
+			var context = new CoachManContext();
+
+			var typeAndHandlerOf = new Dictionary<string, (Type entityType, Func<ExcelWorksheet, IEnumerable<object>> handler)>()
+			{
+				//{ "Trips", (typeof(Trip), worksheet => worksheet.ConvertToObjects<Trip>()) },
+				//{ "Coaches", (typeof(Coach),worksheet => worksheet.ConvertToObjects<Coach>()) },
+				//{ "Drivers", (typeof(Driver),worksheet => worksheet.ConvertToObjects<Driver>()) },
+				//{ "Passengers", (typeof(Passenger),worksheet => worksheet.ConvertToObjects<Passenger>()) },
+				//{ "Stations", (typeof(Station),worksheet => worksheet.ConvertToObjects<Station>()) },
+				//{ "RestAreas",(typeof(RestArea), worksheet => worksheet.ConvertToObjects<RestArea>()) },
+				//{ "Routes", (typeof(Route),worksheet => worksheet.ConvertToObjects<Route>()) },
+			};
+
+			using (var pck = new ExcelPackage(new FileInfo(filePath)))
+			{
+				foreach (var worksheet in pck.Workbook.Worksheets)
+				{
+					if (typeAndHandlerOf.ContainsKey(worksheet.Name))
+					{
+						var name = worksheet.Name;
+						var (entityType, convertToEntities) = typeAndHandlerOf[name];
+						var entities = convertToEntities(worksheet);
+						var queryDbSet = queryContext.Set(entityType);
+						var dbSet = context.Set(entityType);
+
+						var entitiesToAdd = entities.Where(e =>
+							{
+								var a = queryDbSet.Find(entityType.GetProperty("Id").GetValue(e, null)) == null;
+								return a;
+							}
+						).ToList();
+
+						context.Set(entityType).AddRange(entitiesToAdd);
+
+						var entitiesToUpdate = entities.Where(e => !entitiesToAdd.Any(addE => addE == e)).ToList();
+						foreach (var e in entitiesToUpdate)
+						{
+							dbSet.Attach(e);
+							context.Entry(e).State = EntityState.Modified;
+						}
+					}
+				}
+
+				context.SaveChanges();
+			}
+		}
+
+		private static void Open(string filePath)
 		{
 			using (Process fileopener = new Process())
 			{

@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 
 namespace ManagementCoach.BE.Entities
 {
-	public class RestArea : Models.ModelRestArea
+	public class RestArea : Models.BaseRestArea
 	{
 		[EpplusIgnore]
 		public List<RouteRestArea> RouteRestAreas { get; set; }
 		[EpplusIgnore]
-		[Required] 
 		public Province Province { get; set; }
 	}
 }

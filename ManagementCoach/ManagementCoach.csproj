@@ -298,7 +298,8 @@
     <Compile Include="BE\Data\Input\InputTicket.cs" />
     <Compile Include="BE\Data\Input\InputTrip.cs" />
     <Compile Include="BE\Data\Input\InputUser.cs" />
-    <Compile Include="BE\Excel.cs" />
+    <Compile Include="BE\EPPLusExtensions.cs" />
+    <Compile Include="BE\ExcelHelper.cs" />
     <Compile Include="BE\Map.cs" />
     <Compile Include="BE\CoachManContext.cs" />
     <Compile Include="BE\Data\Input\InputCoach.cs" />
@@ -365,6 +366,14 @@
     <Compile Include="Migrations\202212121220534_TripDateToDateOnly.cs" />
     <Compile Include="Migrations\202212121220534_TripDateToDateOnly.designer.cs">
       <DependentUpon>202212121220534_TripDateToDateOnly.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212131825014_RemoveOneToOneRelationship.cs" />
+    <Compile Include="Migrations\202212131825014_RemoveOneToOneRelationship.designer.cs">
+      <DependentUpon>202212131825014_RemoveOneToOneRelationship.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212131855583_Upate.cs" />
+    <Compile Include="Migrations\202212131855583_Upate.designer.cs">
+      <DependentUpon>202212131855583_Upate.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AddRestAreaViewModel.cs" />
     <Compile Include="ViewModels\AddRouteViewModel.cs" />
@@ -492,6 +501,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212121220534_TripDateToDateOnly.resx">
       <DependentUpon>202212121220534_TripDateToDateOnly.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212131825014_RemoveOneToOneRelationship.resx">
+      <DependentUpon>202212131825014_RemoveOneToOneRelationship.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212131855583_Upate.resx">
+      <DependentUpon>202212131855583_Upate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
