@@ -36,18 +36,21 @@ namespace ManagementCoach.BE
 
 			if (dialog.FileName != "")
 			{
-				//check if file is in use
-				try
-				{
-					using (Stream stream = new FileStream(dialog.FileName, FileMode.Open))
+				var fileInfo = new FileInfo(dialog.FileName);
+				if (fileInfo.Exists) { 
+					//check if file is in use
+					try
 					{
-						//do nothing
+						using (Stream stream = new FileStream(dialog.FileName, FileMode.Open))
+						{
+							//do nothing
+						}
 					}
-				}
-				catch
-				{
-					MessageBox.Show($"The file \"{dialog.FileName}\" is being use by another process.\n\nPlease close the file before exporting.", "Export Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-					return;
+					catch
+					{
+						MessageBox.Show($"The file \"{dialog.FileName}\" is being use by another process.\n\nPlease close the file before exporting.", "Export Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						return;
+					}
 				}
 
 				Export(dialog.FileName, sheetName, items);
