@@ -22,5 +22,6 @@ namespace ManagementCoach.BE.Data.Input
 		public bool Active { get; set; }
 		public string License { get; set; }
 		public string Notes { get; set; }
+		public string ImageUrl { get; set; }
 	}
 }

@@ -20,5 +20,6 @@ namespace ManagementCoach.BE.Data.Input
 		public string Address { get; set; }
 		public bool Blocked { get; set; }
 		public string Notes { get; set; }
+		public string ImageUrl { get; set; }
 	}
 }

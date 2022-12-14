@@ -379,6 +379,10 @@
     <Compile Include="Migrations\202212141204039_FixTripIncorrectForeignKeyPart2.designer.cs">
       <DependentUpon>202212141204039_FixTripIncorrectForeignKeyPart2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212141216537_AddImageUrl.cs" />
+    <Compile Include="Migrations\202212141216537_AddImageUrl.designer.cs">
+      <DependentUpon>202212141216537_AddImageUrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PriceConverter.cs" />
     <Compile Include="ViewModels\AddPassengerViewModel.cs" />
     <Compile Include="Migrations\202212131825014_RemoveOneToOneRelationship.cs" />
@@ -535,6 +539,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212141204039_FixTripIncorrectForeignKeyPart2.resx">
       <DependentUpon>202212141204039_FixTripIncorrectForeignKeyPart2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212141216537_AddImageUrl.resx">
+      <DependentUpon>202212141216537_AddImageUrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

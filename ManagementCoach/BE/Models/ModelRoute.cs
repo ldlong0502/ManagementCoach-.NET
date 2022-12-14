@@ -26,5 +26,6 @@ namespace ManagementCoach.BE.Models
 		public int DestinationStationId { get; set; }
 		[Required]
 		public int Price { get; set; }
+		public string ImageUrl { get; set; }
 	}
 }
