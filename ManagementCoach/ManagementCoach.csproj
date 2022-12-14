@@ -383,6 +383,18 @@
     <Compile Include="Migrations\202212121220534_TripDateToDateOnly.designer.cs">
       <DependentUpon>202212121220534_TripDateToDateOnly.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212141204039_FixTripIncorrectForeignKeyPart2.cs" />
+    <Compile Include="Migrations\202212141204039_FixTripIncorrectForeignKeyPart2.designer.cs">
+      <DependentUpon>202212141204039_FixTripIncorrectForeignKeyPart2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212141216537_AddImageUrl.cs" />
+    <Compile Include="Migrations\202212141216537_AddImageUrl.designer.cs">
+      <DependentUpon>202212141216537_AddImageUrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212141224074_AutoIncrement.cs" />
+    <Compile Include="Migrations\202212141224074_AutoIncrement.designer.cs">
+      <DependentUpon>202212141224074_AutoIncrement.cs</DependentUpon>
+    </Compile>
     <Compile Include="PriceConverter.cs" />
     <Compile Include="ViewModels\AddPassengerViewModel.cs" />
     <Compile Include="Migrations\202212131825014_RemoveOneToOneRelationship.cs" />
@@ -392,6 +404,10 @@
     <Compile Include="Migrations\202212131855583_Upate.cs" />
     <Compile Include="Migrations\202212131855583_Upate.designer.cs">
       <DependentUpon>202212131855583_Upate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212141058328_FixTripIncorrectForeignKey.cs" />
+    <Compile Include="Migrations\202212141058328_FixTripIncorrectForeignKey.designer.cs">
+      <DependentUpon>202212141058328_FixTripIncorrectForeignKey.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AddRestAreaViewModel.cs" />
     <Compile Include="ViewModels\AddRouteViewModel.cs" />
@@ -536,6 +552,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212131855583_Upate.resx">
       <DependentUpon>202212131855583_Upate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212141058328_FixTripIncorrectForeignKey.resx">
+      <DependentUpon>202212141058328_FixTripIncorrectForeignKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212141204039_FixTripIncorrectForeignKeyPart2.resx">
+      <DependentUpon>202212141204039_FixTripIncorrectForeignKeyPart2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212141216537_AddImageUrl.resx">
+      <DependentUpon>202212141216537_AddImageUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212141224074_AutoIncrement.resx">
+      <DependentUpon>202212141224074_AutoIncrement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

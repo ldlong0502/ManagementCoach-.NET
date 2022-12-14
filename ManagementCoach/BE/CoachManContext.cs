@@ -88,6 +88,10 @@ namespace ManagementCoach.BE
 
 			modelBuilder.Entity<RestArea>().HasRequired(r => r.Province)
 				.WithRequiredPrincipal(p => p.RestArea);
+
+
+			modelBuilder.Entity<Trip>().HasRequired(r => r.Route)
+				.WithRequiredPrincipal(p => p.Trip);
 		}
 	}
 }
