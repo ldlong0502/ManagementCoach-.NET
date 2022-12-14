@@ -12,13 +12,10 @@ namespace ManagementCoach.BE.Entities
 	public class Trip : Models.ModelTrip
 	{
 		[EpplusIgnore]
-		[Required] 
 		public Route Route { get; set; }
 		[EpplusIgnore]
-		[Required] 
 		public Coach Coach { get; set; }
 		[EpplusIgnore]
-		[Required] 
 		public Driver Driver { get; set; }
 		[EpplusIgnore]
 		public List<Ticket> Tickets { get; set; }
