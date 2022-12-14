@@ -24,9 +24,6 @@ namespace ManagementCoach.Views.UserControls
     {
         public AdminHome()
         {
-			var items = new RepoRoute().GetRoutes(1, 99).Items;
-			Excel.ExportAs(items);
-
 			InitializeComponent();
         }
     }

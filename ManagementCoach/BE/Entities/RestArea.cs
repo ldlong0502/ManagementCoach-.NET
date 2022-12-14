@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OfficeOpenXml.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace ManagementCoach.BE.Entities
 {
-	public class RestArea : Models.ModelRestArea
+	public class RestArea : Models.BaseRestArea
 	{
+		[EpplusIgnore]
 		public List<RouteRestArea> RouteRestAreas { get; set; }
-		[Required] 
+		[EpplusIgnore]
 		public Province Province { get; set; }
 	}
 }
