@@ -229,6 +229,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Screens\AddNewTicket.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Screens\AddNewTrip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -282,6 +286,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\StationUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\TicketUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -396,6 +404,7 @@
     <Compile Include="ViewModels\RestAreaViewModel.cs" />
     <Compile Include="ViewModels\RouteViewModel.cs" />
     <Compile Include="ViewModels\StationViewModel.cs" />
+    <Compile Include="ViewModels\TicketViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\AddCoachViewModel.cs" />
     <Compile Include="ViewModels\AddDriverViewModel.cs" />
@@ -425,6 +434,9 @@
     </Compile>
     <Compile Include="Views\Screens\AddNewStation.xaml.cs">
       <DependentUpon>AddNewStation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Screens\AddNewTicket.xaml.cs">
+      <DependentUpon>AddNewTicket.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Screens\AddNewTrip.xaml.cs">
       <DependentUpon>AddNewTrip.xaml</DependentUpon>
@@ -467,6 +479,9 @@
     </Compile>
     <Compile Include="Views\UserControls\StationUserControl.xaml.cs">
       <DependentUpon>StationUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\TicketUserControl.xaml.cs">
+      <DependentUpon>TicketUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\TripsUserControl.xaml.cs">
       <DependentUpon>TripsUserControl.xaml</DependentUpon>
