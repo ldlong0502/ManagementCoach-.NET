@@ -176,12 +176,13 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBox Margin="10,0,0,0"  Width="30" Foreground="{StaticResource color10}" IsEnabled="False" BorderBrush="Transparent" Text="{Binding Limit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="20" HorizontalAlignment="Left" TextAlignment="Center" Padding="0,0,0,0"></TextBox>
                         <StackPanel Orientation="Vertical">
-                            <Button FocusVisualStyle="{x:Null}" Height="15" Width="25" Margin="0,0,0,0" Command="{Binding UpLimitCommand}" BorderBrush="Transparent" Background="Transparent">
-                                <fa:FontAwesome Icon="ArrowUp" FontSize="10" Foreground="#6c7682"></fa:FontAwesome>
+                            <Button ToolTip="Up" Height="15" Command="{Binding UpLimitCommand}" Background="Transparent" BorderBrush="Transparent" >
+                                <fa:FontAwesome Icon="ArrowUp"  Height="auto" Foreground="Brown" FontSize="8" VerticalAlignment="Center" HorizontalAlignment="Center" ></fa:FontAwesome>
                             </Button>
-                            <Button FocusVisualStyle="{x:Null}" Height="15" Width="25" Command="{Binding DownLimitCommand}"   BorderBrush="Transparent" Background="Transparent">
-                                <fa:FontAwesome  FontSize="10" Foreground="#6c7682" Icon="ArrowDown"></fa:FontAwesome>
+                            <Button ToolTip="Up" Height="15" Command="{Binding DownLimitCommand}" Background="Transparent" BorderBrush="Transparent" >
+                                <fa:FontAwesome Icon="ArrowDown"  Height="auto" Foreground="Brown" FontSize="8" VerticalAlignment="Center" HorizontalAlignment="Center" ></fa:FontAwesome>
                             </Button>
+
                         </StackPanel>
                     </StackPanel>
                 </Border>

@@ -21,7 +21,7 @@ namespace ManagementCoach.ViewModels
         private CoachManContext context = new CoachManContext();
         private ModelStation originStation;
         private ModelStation destinationStation;
-        private int price;
+        private string price;
         private object departTime;
         private int estimatedTime;
         private List<int> routeRestAreas;
@@ -90,12 +90,21 @@ namespace ManagementCoach.ViewModels
         {
             get
             {
+                _errorsViewModel.ClearErrors(nameof(OriginStation));
+                if (originStation == null)
+                {
+                    _errorsViewModel.AddError(nameof(OriginStation), "Field is required.");
+                }
+                else if (destinationStation == originStation)
+                {
+                    _errorsViewModel.AddError(nameof(OriginStation), "The value sames with destinationStation.");
+                }
                 return originStation;
+                
             }
             set
             {
                 originStation = value;
-                
                 OnPropertyChanged(nameof(OriginStation));
             }
         }
@@ -103,25 +112,38 @@ namespace ManagementCoach.ViewModels
         {
             get
             {
+                _errorsViewModel.ClearErrors(nameof(DestinationStation));
+                if (destinationStation == null)
+                {
+                    _errorsViewModel.AddError(nameof(DestinationStation), "Field is required.");
+                }
+                else if(destinationStation == originStation)
+                {
+                    _errorsViewModel.AddError(nameof(DestinationStation), "The value sames with originStation.");
+                }
                 return destinationStation;
+                
             }
             set
             {
                 destinationStation = value;
-
                 OnPropertyChanged(nameof(DestinationStation));
             }
         }
-        public int Price
+        public string Price
         {
             get
             {
+                _errorsViewModel.ClearErrors(nameof(Price));
+                if (string.IsNullOrEmpty(price) || !int.TryParse(price, out int a))
+                {
+                    _errorsViewModel.AddError(nameof(Price), "Value not invalid");
+                }
                 return price;
             }
             set
             {
                 price = value;
-
                 OnPropertyChanged(nameof(Price));
             }
         }
@@ -249,44 +271,71 @@ namespace ManagementCoach.ViewModels
         private void ExcuteChooseRestAreaCommand(object obj)
         {
             count = 0;
-            TextRestAreas = "";
             RestArea = null;
             VisibleListRestArea = !VisibleListRestArea;
         }
 
         public AddRouteViewModel(ModelRoute data)
         {
-            //_errorsViewModel = new ErrorsViewModel();
-            //_errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
-            //SaveCommand = new ViewModelCommand(ExcuteEditCommand, CanExcuteSaveCommand);
-            //CancelCommand = new ViewModelCommand(ExcuteCancelCommand);
-            //id = data.Id;
-            //Name = data.Name;
-            //Address = data.Address;
-            //District = data.District;
-            //Province = ListProvinces.Where(e => e.Id == new RepoProvince().GetProvince(data.Id).Id).FirstOrDefault();
+            ListStations = new RepoStation().GetStations("", 1, context.Stations.Count()).Items;
+            ListRestAreas = new RepoRestArea().GetRestAreas("", 1, context.RestAreas.Count()).Items;
+            RouteRestAreas = new List<int>();
+            _errorsViewModel = new ErrorsViewModel();
+            _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
+            SaveCommand = new ViewModelCommand(ExcuteEditCommand, CanExcuteSaveCommand);
+            CancelCommand = new ViewModelCommand(ExcuteCancelCommand);
+            ChooseRestAreaCommand = new ViewModelCommand(ExcuteChooseRestAreaCommand);
+            AddRestAreaCommand = new ViewModelCommand(ExcuteAddRestAreaCommand);
+            RemoveRestAreaCommand = new ViewModelCommand(ExcuteRemoveRestAreaCommand);
+            Price = data.Price.ToString();
+            DestinationStation = new RepoStation().GetStation(data.DestinationStationId);
+            OriginStation = new RepoStation().GetStation(data.OriginStationId);
+            id = data.Id;
+            data.RestAreas.ForEach(route => {
+            {
+              RouteRestAreas.Add(route.Id);
+            } });
+            count = 0;
+            RouteRestAreas.ForEach((route) =>
+            {
+                if (count == 0)
+                {
+                    TextRestAreas += route.ToString() + " ";
 
+                }
+                else
+                {
+                    TextRestAreas += "-> " + route.ToString() + " ";
+                }
+                count++;
+            });
         }
 
         private void ExcuteEditCommand(object obj)
         {
             try
             {
-                var route = new RepoRoute();
-                route.UpdateRoute(
+                var route = new RepoRoute().UpdateRoute(
                     id,
                     new InputRoute()
                     {
-                       DepartTime = DateTime.Parse(DepartTime.ToString()).Minute,
+                       DepartTime = 0,
                        DestinationStationId = DestinationStation.Id,
                        OriginStationId = OriginStation.Id,
-                       EstimatedTime = EstimatedTime,
-                       Price = Price,
+                       EstimatedTime = 0,
+                       Price = int.Parse(Price),
                        RouteRestAreaIdList = RouteRestAreas
 
                     }
                 );
-                MessageBox.Show("Successfull");
+                if (route.Success)
+                {
+                    MessageBox.Show("Successfull");
+                }
+                else
+                {
+                    MessageBox.Show(route.ErrorMessage);
+                }
                 Close();
             }
             catch (Exception ex)
@@ -315,11 +364,11 @@ namespace ManagementCoach.ViewModels
                 var route = new RepoRoute().InsertRoute(
                    new InputRoute()
                    {
-                       DepartTime = DateTime.Parse(DepartTime.ToString()).Minute,
+                       DepartTime = 0,
                        DestinationStationId = DestinationStation.Id,
                        OriginStationId = OriginStation.Id,
-                       EstimatedTime = EstimatedTime,
-                       Price = Price,
+                       EstimatedTime = 0,
+                       Price = int.Parse(Price),
                        RouteRestAreaIdList = RouteRestAreas,
                    }
                );

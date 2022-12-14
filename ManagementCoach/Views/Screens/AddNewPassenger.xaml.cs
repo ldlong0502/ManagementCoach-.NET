@@ -17,33 +17,33 @@ using System.Windows.Shapes;
 namespace ManagementCoach.Views.Screens
 {
     /// <summary>
-    /// Interaction logic for AddNewRoute.xaml
+    /// Interaction logic for AddNewPassenger.xaml
     /// </summary>
-    public partial class AddNewRoute : Window
+    public partial class AddNewPassenger : Window
     {
-        public AddNewRoute(RouteViewModel routeViewModel)
+        public AddNewPassenger(PassengerViewModel passengerViewModel)
         {
             InitializeComponent();
-            var vm = new AddRouteViewModel();
+            var vm = new AddPassengerViewModel();
             this.DataContext = vm;
             if (vm.Close == null)
             {
                 vm.Close = new Action(() => {
-                    routeViewModel.Load();
+                    passengerViewModel.Load();
                     this.Close();
 
                 });
             }
         }
-        public AddNewRoute(RouteViewModel routeViewModel, ModelRoute modelRoute)
+        public AddNewPassenger(PassengerViewModel passengerViewModel, ModelPassenger modelPassenger)
         {
             InitializeComponent();
-            var vm = new AddRouteViewModel(modelRoute);
+            var vm = new AddPassengerViewModel(modelPassenger);
             this.DataContext = vm;
             if (vm.Close == null)
             {
                 vm.Close = new Action(() => {
-                    routeViewModel.Load();
+                    passengerViewModel.Load();
                     this.Close();
 
                 });
@@ -55,14 +55,14 @@ namespace ManagementCoach.Views.Screens
             DragMove();
         }
 
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
-
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
         }
     }
 }

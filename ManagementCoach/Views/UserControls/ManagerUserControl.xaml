@@ -151,7 +151,7 @@
             <RadioButton Content="Stations" Style="{StaticResource tabButton}" Command="{Binding ShowStationsCommand}"></RadioButton>
             <RadioButton Content="Routes" Style="{StaticResource tabButton}" Command="{Binding ShowRoutesCommand}"></RadioButton>
             <RadioButton Content="RestAreas" Style="{StaticResource tabButton}" Command="{Binding ShowRestAreasCommand}"></RadioButton>
-            <RadioButton Content="Stations" Style="{StaticResource tabButton}" Command="{Binding ShowStationsCommand}"></RadioButton>
+            <RadioButton Content="Tickets" Style="{StaticResource tabButton}" Command="{Binding ShowTicketsCommand}"></RadioButton>
         </StackPanel>
         <ContentControl x:Name="datagridContent" Content="{Binding CurrentControl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" HorizontalAlignment="Right" Width="1200"></ContentControl>
     </Grid>

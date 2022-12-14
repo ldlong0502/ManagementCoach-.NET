@@ -1,11 +1,11 @@
-﻿<Window x:Class="ManagementCoach.Views.Screens.AddNewRestArea"
+﻿<Window x:Class="ManagementCoach.Views.Screens.AddNewPassenger"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ManagementCoach.Views.Screens"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:vm="clr-namespace:ManagementCoach.ViewModels"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
@@ -14,16 +14,16 @@
         BorderBrush="BlueViolet"
         BorderThickness="2"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        Title="AddNewCoach" Height="350" Width="400" Background="White">
+        Title="AddNewCoach" Height="500" Width="400" Background="White">
     <Window.DataContext>
-        <vm:AddRestAreaViewModel></vm:AddRestAreaViewModel>
+        <vm:AddPassengerViewModel></vm:AddPassengerViewModel>
     </Window.DataContext>
     <Window.Resources>
         <Style TargetType="TextBlock" x:Key="textStyle" >
             <Setter Property="FontSize" Value="15" ></Setter>
             <Setter Property="FontWeight" Value="Bold" ></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="Margin" Value="20,0,0,0"></Setter>
         </Style>
 
         <Style TargetType="ComboBox" x:Key="comboboxStyle">
@@ -37,7 +37,6 @@
             <Setter Property="Height" Value="30"></Setter>
             <Setter Property="Width" Value="250"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="Margin" Value="30,0,0,0"></Setter>
             <Setter Property="FontSize" Value="15" ></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
         </Style>
@@ -49,7 +48,7 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Background="{StaticResource color2}">
             <fa:FontAwesome Icon="Bus" FontSize="30" Foreground="White" HorizontalAlignment="Center" Margin="10,0,0,0" VerticalAlignment="Center"></fa:FontAwesome>
-            <TextBlock Text="Rest Area" Foreground="White" FontSize="20" VerticalAlignment="Center" Margin="20,0,0,0"></TextBlock>
+            <TextBlock Text="Add Passenger" Foreground="White" FontSize="20" VerticalAlignment="Center" Margin="20,0,0,0"></TextBlock>
             <Button x:Name="btnMinimize"
                             Grid.Column="1"
                             Content="-"
@@ -59,7 +58,7 @@
                             FontFamily="Montserrat"
                             FontSize="25"
                             Click="btnMinimize_Click" 
-                            Margin="0,0,-420,0"
+                            Margin="0,0,-310,0"
                             >
                 <Button.Style>
                     <Style TargetType="Button">
@@ -91,7 +90,7 @@
             FontFamily="Montserrat"
             FontSize="25"
             Click="btnClose_Click" 
-                    Margin="0,0,-480,0"
+                    Margin="0,0,-380,0"
                             >
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
@@ -115,8 +114,7 @@
             </Button>
         </StackPanel>
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden" Margin="0,0,0,0">
-            <StackPanel Orientation="Vertical"  >
-
+            <StackPanel Orientation="Vertical" >
 
                 <Grid Grid.Row="1" Height="50"   Margin="0,10,0,0">
                     <Grid.ColumnDefinitions>
@@ -135,12 +133,94 @@
 
                     </TextBox>
                 </Grid>
-                <Grid Grid.Row="1" Height="50"  Margin="0 20 0 0" >
+                <Grid Grid.Row="1" Height="50" Margin="0,20,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Style="{StaticResource textStyle}" Text="Address*"></TextBlock>
+                    <TextBlock Grid.Column="0" Style="{StaticResource textStyle}" Text="IdCard*"></TextBlock>
+                    <TextBox
+                        Grid.Column="1"
+                        Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                        Text="{Binding IdCard, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        VerticalAlignment="Top"
+                        Width="250"
+                        materialDesign:HintAssist.Hint="Input Id Card"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}">
+
+                    </TextBox>
+                </Grid>
+                <Grid Grid.Row="1" Height="50"  Margin="0,20,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Style="{StaticResource textStyle}" Text="Gender*"></TextBlock>
+                    <ComboBox  
+                        Grid.Column="1"
+                         Width="250"
+                          SelectedItem="{Binding Gender}"
+                          IsEditable="True"
+                          materialDesign:TextFieldAssist.HasClearButton="True"
+                          ItemsSource="{Binding ListGender}"
+                          Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                          Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                    </ComboBox>
+                </Grid>
+                <Grid Grid.Row="1" Height="50"  Margin="0,20,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Style="{StaticResource textStyle}" Text="Dob*"></TextBlock>
+                    <DatePicker
+                        Grid.Column="1"
+                        Width="250"
+                        Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                        SelectedDate="{Binding Dob}"
+                        materialDesign:HintAssist.Hint="Pick date of birth"
+                        Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+                </Grid>
+                <Grid Grid.Row="1" Height="50"  Margin="0,20,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Style="{StaticResource textStyle}" Text="Email*"></TextBlock>
+                    <TextBox
+                        Grid.Column="1"
+                        Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                        Text="{Binding Email, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        VerticalAlignment="Top"
+                        Width="250"
+                        materialDesign:HintAssist.Hint="Input Email"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}">
+
+                    </TextBox>
+                </Grid>
+                <Grid Grid.Row="1" Height="50" Margin="0,20,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Style="{StaticResource textStyle}" Text="Phone*"></TextBlock>
+                    <TextBox
+                        Grid.Column="1"
+                        Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                        Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        VerticalAlignment="Top"
+                        Width="250"
+                        materialDesign:HintAssist.Hint="Input Phone"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}">
+
+                    </TextBox>
+                </Grid>
+                <Grid Grid.Row="1" Height="50"  Margin="0,20,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Style="{StaticResource textStyle}" Text="Address"></TextBlock>
                     <TextBox
                         Grid.Column="1"
                         Validation.ErrorTemplate="{StaticResource validationTemplate}"
@@ -152,27 +232,33 @@
 
                     </TextBox>
                 </Grid>
-                <Grid Grid.Row="1" Height="50" Margin="0 20 0 0">
+                
+                <Grid Grid.Row="1" Height="50"  Margin="0,20,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0"  Style="{StaticResource textStyle}" Text="Province*"></TextBlock>
-                    <ComboBox
-                       
-                        Grid.Column="1"
-                         Width="250"
-                          SelectedItem="{Binding Province}"
-                          materialDesign:HintAssist.Hint="Input Province Name"
-                          materialDesign:TextFieldAssist.HasClearButton="True"
-                          ItemsSource="{Binding ListProvinces}"
-                          DisplayMemberPath="Name"
-                          IsEditable="True"
-                          Validation.ErrorTemplate="{StaticResource validationTemplate}"
-                          Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                    </ComboBox>
+                    <TextBlock Grid.Column="0" Style="{StaticResource textStyle}" Text="Block"></TextBlock>
+                    <CheckBox Grid.Column="1" Style="{StaticResource CheckBoxStyle1}" VerticalAlignment="Center" HorizontalAlignment="Center"  IsChecked="{Binding Block, Mode=TwoWay}" ></CheckBox>
                 </Grid>
+                <Grid Grid.Row="1" Height="100" Margin="0,20,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Style="{StaticResource textStyle}" Text="Notes"></TextBlock>
+                    <TextBox
+                        Grid.Column="1"
+                        Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                        Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        VerticalAlignment="Top"
+                        Width="250"
+                        Height="100"
+                        materialDesign:HintAssist.Hint="Input Notes"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}">
 
+                    </TextBox>
+                </Grid>
                 <StackPanel Grid.Row="1" Height="50" Orientation="Horizontal" Margin="0,20,0,0">
                     <Button Click="btnClose_Click" Width="100" Height="40" Background="White" BorderBrush="{StaticResource color2}" BorderThickness="3" Content="CANCEL" Foreground="{StaticResource color8}" FontWeight="Medium" Margin="170,0,0,0"></Button>
                     <Button Command="{Binding SaveCommand}" Width="100" Height="40" Background="{StaticResource color2}"  Content="SAVE" Foreground="{StaticResource color1}" FontWeight="Medium" Margin="10,0,0,0"></Button>

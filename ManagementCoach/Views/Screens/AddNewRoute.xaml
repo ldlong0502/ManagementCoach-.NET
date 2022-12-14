@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ManagementCoach.Views.Screens"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
-        xmlns:vm="clr-namespace:ManagementCoach.ViewModels" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:vm="clr-namespace:ManagementCoach.ViewModels" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
@@ -126,12 +127,14 @@
                     <ComboBox
                         Grid.Column="1"
                          Width="250"
-                          SelectedItem="{Binding OriginStation}"
-                          DisplayMemberPath="Name"
-                          IsEditable="True"
                           materialDesign:HintAssist.Hint="Input Origin Station"
                           materialDesign:TextFieldAssist.HasClearButton="True"
                           ItemsSource="{Binding ListStations}"
+                          SelectedItem="{Binding OriginStation}"
+                          Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                          DisplayMemberPath="Id"
+                          Text="{Binding OriginStation.Id}"
+                          IsEditable="True"
                           Style="{StaticResource MaterialDesignOutlinedComboBox}">
                     </ComboBox>
                 </Grid>
@@ -148,7 +151,9 @@
                           materialDesign:TextFieldAssist.HasClearButton="True"
                           ItemsSource="{Binding ListStations}"
                           SelectedItem="{Binding DestinationStation}"
-                          DisplayMemberPath="Name"
+                          Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                          DisplayMemberPath="Id"
+                          Text="{Binding DestinationStation.Id}"
                           IsEditable="True"
                           Style="{StaticResource MaterialDesignOutlinedComboBox}">
                     </ComboBox>
@@ -161,44 +166,17 @@
                     <TextBlock Style="{StaticResource textStyle}" Text="Price*" Height="20" Width="62"/>
                     <TextBox
                         Grid.Column="1"
-                        Text="{Binding Price}"
-  VerticalAlignment="Top"
-                        Width="250"
-  materialDesign:HintAssist.Hint="Input Price"
-  Style="{StaticResource MaterialDesignOutlinedTextBox}">
-
-                    </TextBox>
-                </Grid>
-                <Grid Grid.Row="1" Height="50" Margin="0 20 0 0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0"  Style="{StaticResource textStyle}" Text="Estimated Time*"></TextBlock>
-                    <TextBox
-                        Grid.Column="1"
+                        Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                        Text="{Binding Price, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                         VerticalAlignment="Top"
                         Width="250"
-                        Text="{Binding EstimatedTime}"
-                        materialDesign:HintAssist.Hint="Input Estimated Time"
+                        materialDesign:HintAssist.Hint="Input Price"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}">
+                        
                     </TextBox>
                 </Grid>
-                <Grid Grid.Row="1" Height="50" Margin="0 20 0 0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0"  Style="{StaticResource textStyle}" Text="Depart Time*"></TextBlock>
-                    <materialDesign:TimePicker
-                        Grid.Column="1"
-                        Width="250"
-                        SelectedTime="{Binding DepartTime}"
-                        materialDesign:HintAssist.Hint="Pick Time"
-                        Is24Hours="True"                      
-                        Style="{StaticResource MaterialDesignOutlinedTimePicker}"
-                    />
-                </Grid>
+                
+                
                 <Grid Grid.Row="1" Height="50"   Margin="0,20,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="248"></ColumnDefinition>

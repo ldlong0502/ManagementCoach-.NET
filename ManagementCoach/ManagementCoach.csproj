@@ -201,11 +201,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Styles\ValidationStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Screens\AddNewCoach.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Screens\AddNewDriver.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Screens\AddNewPassenger.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -221,7 +229,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Screens\AddNewTripScreen.xaml">
+    <Page Include="Views\Screens\AddNewTrip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -366,9 +374,12 @@
     <Compile Include="Migrations\202212121220534_TripDateToDateOnly.designer.cs">
       <DependentUpon>202212121220534_TripDateToDateOnly.cs</DependentUpon>
     </Compile>
+    <Compile Include="PriceConverter.cs" />
+    <Compile Include="ViewModels\AddPassengerViewModel.cs" />
     <Compile Include="ViewModels\AddRestAreaViewModel.cs" />
     <Compile Include="ViewModels\AddRouteViewModel.cs" />
     <Compile Include="ViewModels\AddStationViewModel.cs" />
+    <Compile Include="ViewModels\AddTripViewModel.cs" />
     <Compile Include="ViewModels\AdminHomeViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\PassengerViewModel.cs" />
@@ -394,6 +405,9 @@
     <Compile Include="Views\Screens\AddNewDriver.xaml.cs">
       <DependentUpon>AddNewDriver.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Screens\AddNewPassenger.xaml.cs">
+      <DependentUpon>AddNewPassenger.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Screens\AddNewRestArea.xaml.cs">
       <DependentUpon>AddNewRestArea.xaml</DependentUpon>
     </Compile>
@@ -403,8 +417,8 @@
     <Compile Include="Views\Screens\AddNewStation.xaml.cs">
       <DependentUpon>AddNewStation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Screens\AddNewTripScreen.xaml.cs">
-      <DependentUpon>AddNewTripScreen.xaml</DependentUpon>
+    <Compile Include="Views\Screens\AddNewTrip.xaml.cs">
+      <DependentUpon>AddNewTrip.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Screens\DashBoard.xaml.cs">
       <DependentUpon>DashBoard.xaml</DependentUpon>

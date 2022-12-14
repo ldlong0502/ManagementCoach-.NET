@@ -123,7 +123,7 @@ namespace ManagementCoach.ViewModels
         public ICommand DownLimitCommand { get; }
         public ICommand FirstPageCommand { get; }
         public ICommand EndPageCommand { get; }
-        public ICommand OpenProvinceCommand { get; }
+        public ICommand OpenRouteRestAreaCommand { get; }
         public RouteViewModel()
         {
             Load();
@@ -135,18 +135,32 @@ namespace ManagementCoach.ViewModels
             DownLimitCommand = new ViewModelCommand(ExcuteDownLimitCommand, CanExcuteDownLimitCommand);
             FirstPageCommand = new ViewModelCommand(ExcuteFirstPageCommand, CanExcuteFirstPageCommand);
             EndPageCommand = new ViewModelCommand(ExcuteEndPageCommand, CanExcuteEndPageCommand);
-            OpenProvinceCommand = new ViewModelCommand(ExcuteOpenProvinceCommand);
+            OpenRouteRestAreaCommand = new ViewModelCommand(ExcuteOpenRouteRestAreaCommand);
         }
 
-        private void ExcuteOpenProvinceCommand(object obj)
+        private void ExcuteOpenRouteRestAreaCommand(object obj)
         {
-            //var screen = new ProvinceScreen(this);
-            //screen.ShowDialog();
+            if (obj == null) return;
+            var list = (obj as ModelRoute).RestAreas;
+            
+            string route = "The rest area of route "+ (obj as ModelRoute).Id + " is:\n";
+            if (list.Count() == 0)
+            {
+                route = "The rest area of route " + (obj as ModelRoute).Id + " is empty";
+                
+            }
+            else
+            {
+                list.ForEach(item => {
+                    route += item.Id + ": " + item.Name + "\n";
+                });
+            }
+            MessageBox.Show(route);
         }
 
         private bool CanExcuteEndPageCommand(object obj)
         {
-            if (CurrentPage != NumOfPages)
+            if (CurrentPage != NumOfPages )
                 return true;
             return false;
         }
@@ -237,9 +251,9 @@ namespace ManagementCoach.ViewModels
 
         private void ExcuteEditCommand(object obj)
         {
-            //var objRoute = new RepoRoute().GetRoute((obj as MergeRouteAndProvinces).Id);
-            //var screen = new AddNewRoute(this, objRoute);
-            //screen.ShowDialog();
+            var objRoute = new RepoRoute().GetRoute((obj as ModelRoute).Id);
+            var screen = new AddNewRoute(this, objRoute);
+            screen.ShowDialog();
         }
 
 

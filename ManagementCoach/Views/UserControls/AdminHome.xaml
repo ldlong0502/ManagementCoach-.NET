@@ -135,7 +135,7 @@
                 <Border BorderBrush="Transparent" Background="Beige" CornerRadius="20" BorderThickness="1" Width="40" Height="40" Margin="220,9,41,622">
                     <Image Source="/Images/avatar.png"/>
                 </Border>
-                <Calendar HorizontalAlignment="Center" Margin="0,103,0,0" VerticalAlignment="Top" Width="201" RenderTransformOrigin="0.52,0.571" Height="351" Background="{x:Null}" FontSize="18" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="#FF11495F" FontFamily="Arial">
+                <Calendar HorizontalAlignment="Center" Margin="0,103,0,0" VerticalAlignment="Top" Width="236" RenderTransformOrigin="0.52,0.571" Height="351" Background="{x:Null}" FontSize="18" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="#FF11495F" FontFamily="Arial">
                     <Calendar.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>

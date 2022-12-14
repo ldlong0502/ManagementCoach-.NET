@@ -20,7 +20,7 @@ namespace ManagementCoach.ViewModels
         private string name;
         private string district;
         private string address;
-        private string provinceFilter = "";
+
         private ModelProvince province;
         private int id;
 
@@ -30,46 +30,35 @@ namespace ManagementCoach.ViewModels
         {
             get
             {
+                _errorsViewModel.ClearErrors(nameof(Name));
+                if (String.IsNullOrEmpty(name))
+                {
+                    _errorsViewModel.AddError(nameof(Name), "Field is required.");
+                }
                 return name;
             }
             set
             {
                 name = value;
-                _errorsViewModel.ClearErrors(nameof(Name));
-                if (String.IsNullOrEmpty(Name))
-                {
-                    _errorsViewModel.AddError(nameof(Name), "*Invalid Name.");
-                }
+               
                 OnPropertyChanged(nameof(Name));
             }
         }
-        public string ProvinceFilter
-        {
-            get
-            {
-                return provinceFilter;
-            }
-            set
-            {
-                provinceFilter = value;
-                ListProvinces = new RepoProvince().GetProvinces(ProvinceFilter);
-                OnPropertyChanged(nameof(ProvinceFilter));
-            }
-        }
+        
         public string District
         {
             get
             {
+                _errorsViewModel.ClearErrors(nameof(District));
+                if (String.IsNullOrEmpty(district))
+                {
+                    _errorsViewModel.AddError(nameof(District), "Field is required.");
+                }
                 return district;
             }
             set
             {
                 district = value;
-                _errorsViewModel.ClearErrors(nameof(District));
-                if (String.IsNullOrEmpty(District))
-                {
-                    _errorsViewModel.AddError(nameof(District), "*Invalid District.");
-                }
                 OnPropertyChanged(nameof(District));
             }
         }
@@ -77,16 +66,17 @@ namespace ManagementCoach.ViewModels
         {
             get
             {
+                _errorsViewModel.ClearErrors(nameof(Address));
+                if (String.IsNullOrEmpty(address))
+                {
+                    _errorsViewModel.AddError(nameof(Address), "Field is required.");
+                }
                 return address;
             }
             set
             {
                 address = value;
-                _errorsViewModel.ClearErrors(nameof(Address));
-                if (String.IsNullOrEmpty(Address))
-                {
-                    _errorsViewModel.AddError(nameof(Address), "Invalid Address");
-                }
+                
                 OnPropertyChanged(nameof(Address));
             }
         }
@@ -94,6 +84,11 @@ namespace ManagementCoach.ViewModels
         {
             get
             {
+                _errorsViewModel.ClearErrors(nameof(Province));
+                if (province == null)
+                {
+                    _errorsViewModel.AddError(nameof(Province), "Field is required.");
+                }
                 return province;
             }
             set
@@ -132,7 +127,6 @@ namespace ManagementCoach.ViewModels
             SaveCommand = new ViewModelCommand(ExcuteInsertCommand, CanExcuteSaveCommand);
             CancelCommand = new ViewModelCommand(ExcuteCancelCommand);
             Province = ListProvinces.First();
-            ProvinceFilter = Province.Name;
 
         }
         public AddStationViewModel(ModelStation data)
@@ -153,8 +147,7 @@ namespace ManagementCoach.ViewModels
         {
             try
             {
-                var coach = new RepoStation();
-                coach.UpdateStation(
+                var station = new RepoStation().UpdateStation(
                     id,
                     new InputStation()
                     {
@@ -164,7 +157,15 @@ namespace ManagementCoach.ViewModels
                         ProvinceId = Province.Id,
                     }
                 );
-                MessageBox.Show("Successfull");
+                if (station.Success)
+                {
+                    MessageBox.Show("Successfull");
+                }
+                else
+                {
+                    MessageBox.Show(station.ErrorMessage);
+                    return;
+                }
                 Close();
             }
             catch (Exception ex)
@@ -190,8 +191,7 @@ namespace ManagementCoach.ViewModels
         {
             try
             {
-                var coach = new RepoStation();
-                if (coach.InsertStation(
+                var station = new RepoStation().InsertStation(
                    new InputStation()
                    {
                        Name = Name,
@@ -199,13 +199,14 @@ namespace ManagementCoach.ViewModels
                        District = District,
                        ProvinceId = Province.Id,
                    }
-               ).Success == true)
+               );
+                if (station.Success == true)
                 {
                     MessageBox.Show("Successfull");
                 }
                 else
                 {
-                    MessageBox.Show("The RegNo has alreaady existed!");
+                    MessageBox.Show(station.ErrorMessage);
                     return;
                 }
 

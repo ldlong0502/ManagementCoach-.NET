@@ -215,8 +215,8 @@ namespace ManagementCoach.ViewModels
 
         private void ExcuteEditCommand(object obj)
         {
-            //var screen = new AddNewPassenger(this, (obj as ModelPassenger));
-            //screen.ShowDialog();
+            var screen = new AddNewPassenger(this, (obj as ModelPassenger));
+            screen.ShowDialog();
         }
 
 
@@ -228,7 +228,7 @@ namespace ManagementCoach.ViewModels
                 return;
             }
             var coachesPagination = new RepoPassenger().GetPassengers(TextSearch, CurrentPage, Limit);
-            passengerCollection = CollectionViewSource.GetDefaultView(coachesPagination.Items);
+            PassengerCollection = CollectionViewSource.GetDefaultView(coachesPagination.Items);
             NumOfPages = coachesPagination.PageCount;
 
             if (NumOfPages != 0 && CurrentPage > NumOfPages)

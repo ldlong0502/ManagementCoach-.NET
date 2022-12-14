@@ -27,6 +27,13 @@ namespace ManagementCoach.BE.Repositories
 			return Map.To<ModelTrip>(Context.Trips.Where(c => c.Id == id).FirstOrDefault());
 		}
 
+
+		public Page<ModelTrip> GetTrips(int pageNum = 1, int limit = 20)
+		{
+			return PaginationFactory.Create<ModelTrip>(limit, pageNum,
+				() => Context.Trips.OrderBy(c => c.Id)
+			);
+		}
 		///// <summary>
 		///// Lấy thông tin các trạm dừng chân theo driver
 		///// </summary>

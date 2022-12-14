@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ManagementCoach.Views.Screens"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:vm="clr-namespace:ManagementCoach.ViewModels"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
@@ -47,7 +48,7 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Background="{StaticResource color2}">
             <fa:FontAwesome Icon="Bus" FontSize="30" Foreground="White" HorizontalAlignment="Center" Margin="10,0,0,0" VerticalAlignment="Center"></fa:FontAwesome>
-            <TextBlock Text="Driver" Foreground="White" FontSize="20" VerticalAlignment="Center" Margin="20,0,0,0"></TextBlock>
+            <TextBlock Text="Add Driver" Foreground="White" FontSize="20" VerticalAlignment="Center" Margin="20,0,0,0"></TextBlock>
             <Button x:Name="btnMinimize"
                             Grid.Column="1"
                             Content="-"
@@ -57,7 +58,7 @@
                             FontFamily="Montserrat"
                             FontSize="25"
                             Click="btnMinimize_Click" 
-                            Margin="0,0,-450,0"
+                            Margin="0,0,-390,0"
                             >
                 <Button.Style>
                     <Style TargetType="Button">
@@ -89,7 +90,7 @@
             FontFamily="Montserrat"
             FontSize="25"
             Click="btnClose_Click" 
-                    Margin="0,0,-520,0"
+                    Margin="0,0,-460,0"
                             >
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
@@ -121,7 +122,16 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Style="{StaticResource textStyle}" Text="Name*"></TextBlock>
-                    <TextBox Grid.Column="1" Style="{StaticResource textboxStyle}" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    <TextBox
+                        Grid.Column="1"
+                        Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                        Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        VerticalAlignment="Top"
+                        Width="250"
+                        materialDesign:HintAssist.Hint="Input Name"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}">
+
+                    </TextBox>
                 </Grid>
                 <Grid Grid.Row="1" Height="50" Margin="0,20,0,0">
                     <Grid.ColumnDefinitions>
@@ -129,7 +139,16 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Style="{StaticResource textStyle}" Text="IdCard*"></TextBlock>
-                    <TextBox Grid.Column="1" Style="{StaticResource textboxStyle}" Text="{Binding IdCard, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    <TextBox
+                        Grid.Column="1"
+                        Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                        Text="{Binding IdCard, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        VerticalAlignment="Top"
+                        Width="250"
+                        materialDesign:HintAssist.Hint="Input Id Card"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}">
+
+                    </TextBox>
                 </Grid>
                 <Grid Grid.Row="1" Height="50"  Margin="0,20,0,0">
                     <Grid.ColumnDefinitions>
@@ -137,7 +156,16 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Style="{StaticResource textStyle}" Text="Gender*"></TextBlock>
-                    <ComboBox Grid.Column="1" Style="{StaticResource comboboxStyle}" ItemsSource="{Binding ListGender}" SelectedItem="{Binding Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="249"/>
+                    <ComboBox  
+                        Grid.Column="1"
+                         Width="250"
+                          SelectedItem="{Binding Gender}"
+                          IsEditable="True"
+                          materialDesign:TextFieldAssist.HasClearButton="True"
+                          ItemsSource="{Binding ListGender}"
+                          Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                          Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                    </ComboBox>
                 </Grid>
                 <Grid Grid.Row="1" Height="50"  Margin="0,20,0,0">
                     <Grid.ColumnDefinitions>
@@ -145,15 +173,30 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Style="{StaticResource textStyle}" Text="Dob*"></TextBlock>
-                    <DatePicker Grid.Column="1" Style="{StaticResource datepickerStyle}"  SelectedDate="{Binding Dob}" ></DatePicker>
+                    <DatePicker
+                        Grid.Column="1"
+                        Width="250"
+                        Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                        SelectedDate="{Binding Dob}"
+                        materialDesign:HintAssist.Hint="Pick date of birth"
+                        Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
                 </Grid>
                 <Grid Grid.Row="1" Height="50"  Margin="0,20,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Style="{StaticResource textStyle}" Text="Email"></TextBlock>
-                    <TextBox Grid.Column="1" Style="{StaticResource textboxStyle}"  Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    <TextBlock Grid.Column="0" Style="{StaticResource textStyle}" Text="Email*"></TextBlock>
+                    <TextBox
+                        Grid.Column="1"
+                        Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                        Text="{Binding Email, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        VerticalAlignment="Top"
+                        Width="250"
+                        materialDesign:HintAssist.Hint="Input Email"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}">
+
+                    </TextBox>
                 </Grid>
                 <Grid Grid.Row="1" Height="50" Margin="0,20,0,0">
                     <Grid.ColumnDefinitions>
@@ -161,7 +204,16 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Style="{StaticResource textStyle}" Text="Phone*"></TextBlock>
-                    <TextBox Grid.Column="1" Style="{StaticResource textboxStyle}"  Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    <TextBox
+                        Grid.Column="1"
+                        Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                        Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        VerticalAlignment="Top"
+                        Width="250"
+                        materialDesign:HintAssist.Hint="Input Phone"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}">
+
+                    </TextBox>
                 </Grid>
                 <Grid Grid.Row="1" Height="50"  Margin="0,20,0,0">
                     <Grid.ColumnDefinitions>
@@ -169,7 +221,16 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Style="{StaticResource textStyle}" Text="Address"></TextBlock>
-                    <TextBox Grid.Column="1" Style="{StaticResource textboxStyle}"  Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    <TextBox
+                        Grid.Column="1"
+                        Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                        Text="{Binding Address, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        VerticalAlignment="Top"
+                        Width="250"
+                        materialDesign:HintAssist.Hint="Input Address"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}">
+
+                    </TextBox>
                 </Grid>
                 <Grid Grid.Row="1" Height="50"  Margin="0,20,0,0">
                     <Grid.ColumnDefinitions>
@@ -177,7 +238,13 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Style="{StaticResource textStyle}" Text="DateJoined*"></TextBlock>
-                    <DatePicker Grid.Column="1" Style="{StaticResource datepickerStyle}"  SelectedDate="{Binding DateJoined, StringFormat='{}{0:dd/MM/yyyy}' }" ></DatePicker>
+                    <DatePicker
+                        Grid.Column="1"
+                        Width="250"
+                        Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                        SelectedDate="{Binding DateJoined}"
+                        materialDesign:HintAssist.Hint="Pick date join"
+                        Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
                 </Grid>
                 <Grid Grid.Row="1" Height="50"  Margin="0,20,0,0">
                     <Grid.ColumnDefinitions>
@@ -194,12 +261,14 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Style="{StaticResource textStyle}" Text="License"></TextBlock>
-                    <Button Grid.Column="1" Command="{Binding SeeLicenseCommand}" Background="Transparent" BorderThickness="0" BorderBrush="Transparent" Height="20" Width="40"  >
-                        <TextBlock Style="{StaticResource textClick}" Text="See" VerticalAlignment="Center"   ></TextBlock>
+                    <Button Grid.Column="1" Command="{Binding SeeLicenseCommand}" Background="Transparent" BorderThickness="0" BorderBrush="Transparent" Height="20" Width="70"  >
+                        <TextBlock Style="{StaticResource textClick}"
+                                   Width="24" TextWrapping="Wrap" 
+                                   Text="See"   />
                     </Button>
 
-                    <Button Grid.Column="2" Command="{Binding ChooseLicenseCommand}" Background="Transparent" BorderThickness="0"  BorderBrush="Transparent" Height="20" Width="60"  >
-                        <TextBlock Style="{StaticResource textClick}" Text="Import" VerticalAlignment="Center"   ></TextBlock>
+                    <Button Grid.Column="2" Command="{Binding ChooseLicenseCommand}" Background="Transparent" BorderThickness="0"  BorderBrush="Transparent" Height="20" Margin="39,15,30,15"  >
+                        <TextBlock Style="{StaticResource textClick}" Text="Import" Width="47"   />
                     </Button>
                 </Grid>
                 <Grid Grid.Row="1" Height="100" Margin="0,20,0,0">
@@ -208,7 +277,17 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Style="{StaticResource textStyle}" Text="Notes"></TextBlock>
-                    <TextBox Grid.Column="1" Style="{StaticResource textboxStyle}" Height="100"  Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Top" ></TextBox>
+                    <TextBox
+                        Grid.Column="1"
+                        Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                        Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        VerticalAlignment="Top"
+                        Width="250"
+                        Height="100"
+                        materialDesign:HintAssist.Hint="Input Notes"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}">
+
+                    </TextBox>
                 </Grid>
                 <StackPanel Grid.Row="1" Height="50" Orientation="Horizontal" Margin="0,20,0,0">
                     <Button Click="btnClose_Click" Width="100" Height="40" Background="White" BorderBrush="{StaticResource color2}" BorderThickness="3" Content="CANCEL" Foreground="{StaticResource color8}" FontWeight="Medium" Margin="170,0,0,0"></Button>

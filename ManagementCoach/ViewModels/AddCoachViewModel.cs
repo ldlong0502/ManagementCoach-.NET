@@ -30,16 +30,16 @@ namespace ManagementCoach.ViewModels
         {
             get
             {
+                _errorsViewModel.ClearErrors(nameof(Name));
+                if (String.IsNullOrEmpty(name))
+                {
+                    _errorsViewModel.AddError(nameof(Name), "Field is required.");
+                }
                 return name;
             }
             set
             {
                 name = value;
-                _errorsViewModel.ClearErrors(nameof(Name));
-                if (String.IsNullOrEmpty(Name))
-                {
-                    _errorsViewModel.AddError(nameof(Name), "*Invalid Name.");
-                }
                 OnPropertyChanged(nameof(Name));
             }
         }
@@ -47,16 +47,16 @@ namespace ManagementCoach.ViewModels
         {
             get
             {
+                _errorsViewModel.ClearErrors(nameof(RegNo));
+                if (String.IsNullOrEmpty(regNo))
+                {
+                    _errorsViewModel.AddError(nameof(RegNo), "Field is required");
+                }
                 return regNo;
             }
             set
             {
                 regNo = value;
-                _errorsViewModel.ClearErrors(nameof(RegNo));
-                if (String.IsNullOrEmpty(RegNo) || RegNo.Length < 5)
-                {
-                    _errorsViewModel.AddError(nameof(RegNo), "*Invalid RegNo.");
-                }
                 OnPropertyChanged(nameof(RegNo));
             }
         }
@@ -64,16 +64,17 @@ namespace ManagementCoach.ViewModels
         {
             get
             {
+                _errorsViewModel.ClearErrors(nameof(Status));
+                if (String.IsNullOrEmpty(status))
+                {
+                    _errorsViewModel.AddError(nameof(Status), "Field is required");
+                }
                 return status;
             }
             set
             {
                 status = value;
-                _errorsViewModel.ClearErrors(nameof(Status));
-                if (String.IsNullOrEmpty(Status))
-                {
-                    _errorsViewModel.AddError(nameof(Status), "Invalid status");
-                }
+               
                 OnPropertyChanged(nameof(Status));
             }
         }
@@ -150,7 +151,7 @@ namespace ManagementCoach.ViewModels
 						Name = Name,
 						Status = Status,
 						RegNo = RegNo,
-						Notes = Notes,
+						Notes = string.IsNullOrEmpty(Notes) ? "" :Notes ,
 					}
 				);
 				MessageBox.Show("Successfull");
@@ -186,7 +187,7 @@ namespace ManagementCoach.ViewModels
                         Name = Name,
                         Status = Status,
                         RegNo = RegNo,
-                        Notes = Notes,
+                        Notes = string.IsNullOrEmpty(Notes) ? "" : Notes,
                     }
                 ).Success == true)
                 {

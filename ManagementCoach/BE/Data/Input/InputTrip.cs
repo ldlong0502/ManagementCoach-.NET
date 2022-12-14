@@ -18,7 +18,7 @@ namespace ManagementCoach.BE.Data.Input
 		/// <summary>
 		/// Ngày khởi hành
 		/// </summary>
-		public DateTimeOffset Date { get; set; }
+		public DateTime Date { get; set; }
 		public bool Cancelled { get; set; }
 
 		/// <summary>

@@ -41,6 +41,7 @@ namespace ManagementCoach.ViewModels
 
         public void ClearErrors(string propertyName)
         {
+            
             if (_propertyErrors.Remove(propertyName))
             {
                 OnErrorsChanged(propertyName);

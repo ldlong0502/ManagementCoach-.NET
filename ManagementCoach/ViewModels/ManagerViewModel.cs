@@ -108,8 +108,7 @@ namespace ManagementCoach.ViewModels
             }
             else if (Title == "Passengers")
             {
-                //var screen = new ad((currentmanagerview as passengerviewmodel));
-                //screen.showdialog();
+                
             }
             else if (Title == "Stations")
             {
@@ -212,8 +211,8 @@ namespace ManagementCoach.ViewModels
             }
             else if (Title == "Passengers")
             {
-                //var screen = new ad((currentmanagerview as passengerviewmodel));
-                //screen.showdialog();
+                var screen = new AddNewPassenger((CurrentManagerView as PassengerViewModel));
+                screen.ShowDialog();
             }
             else if (Title == "Stations")
             {
@@ -228,6 +227,11 @@ namespace ManagementCoach.ViewModels
             else if (Title == "Routes")
             {
                 var screen = new AddNewRoute((CurrentManagerView as RouteViewModel));
+                screen.ShowDialog();
+            }
+            else if (Title == "Trips")
+            {
+                var screen = new AddNewTrip((CurrentManagerView as TripViewModel));
                 screen.ShowDialog();
             }
         }

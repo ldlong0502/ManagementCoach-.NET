@@ -53,7 +53,7 @@ namespace ManagementCoach.ViewModels
         private void Load()
         {
             //Welcome text
-            var user = new RepoUser().GetUser(Thread.CurrentPrincipal.Identity.Name);
+            var user = new RepoUser().GetUser("admin");
             var name = user.Name.Split(' ');
             WelcomeText = "Hello, " + name[name.Length-1];
             

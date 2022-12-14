@@ -17,7 +17,7 @@ using System.Windows.Input;
 
 namespace ManagementCoach.ViewModels
 {
-    public class AddDriverViewModel : ViewModelBase, INotifyDataErrorInfo
+    public class AddPassengerViewModel : ViewModelBase, INotifyDataErrorInfo
     {
         private readonly ErrorsViewModel _errorsViewModel;
         public Action Close { get; set; }
@@ -30,7 +30,7 @@ namespace ManagementCoach.ViewModels
         private string phone;
         private string address;
         private DateTime dateJoined;
-        private bool active;
+        private bool block;
         private string license;
         private string notes;
         private List<string> listGender = new List<string>() { "Male", "Female" };
@@ -64,7 +64,7 @@ namespace ManagementCoach.ViewModels
         }
         public string IdCard
         {
-            get 
+            get
             {
                 _errorsViewModel.ClearErrors(nameof(IdCard));
                 if (String.IsNullOrEmpty(idCard))
@@ -75,7 +75,7 @@ namespace ManagementCoach.ViewModels
                 {
                     _errorsViewModel.AddError(nameof(IdCard), "Value length >= 9 characters.");
                 }
-                return idCard; 
+                return idCard;
             }
             set
             {
@@ -83,7 +83,7 @@ namespace ManagementCoach.ViewModels
                 OnPropertyChanged(nameof(IdCard));
             }
         }
-        public string Gender 
+        public string Gender
         {
             get
             {
@@ -94,17 +94,18 @@ namespace ManagementCoach.ViewModels
                 }
                 return gender;
             }
-            set { 
-                gender = value; 
-                OnPropertyChanged(nameof(Gender)); 
-            } 
+            set
+            {
+                gender = value;
+                OnPropertyChanged(nameof(Gender));
+            }
         }
         public DateTime Dob
         {
             get
             {
                 _errorsViewModel.ClearErrors(nameof(Dob));
-                if(DateTime.Compare(dob, DateTime.Now) > 0)
+                if (DateTime.Compare(dob, DateTime.Now) > 0)
                 {
                     _errorsViewModel.AddError(nameof(Dob), "*Dob must earlier than now");
                 }
@@ -116,7 +117,7 @@ namespace ManagementCoach.ViewModels
                 OnPropertyChanged(nameof(Dob));
             }
         }
-        public string Email 
+        public string Email
         {
             get
             {
@@ -134,11 +135,11 @@ namespace ManagementCoach.ViewModels
                 }
                 return email;
             }
-            set 
-            { 
-                email = value; 
-                OnPropertyChanged(nameof(Email)); 
-            } 
+            set
+            {
+                email = value;
+                OnPropertyChanged(nameof(Email));
+            }
         }
         public string Phone
         {
@@ -150,8 +151,8 @@ namespace ManagementCoach.ViewModels
                 // The IsMatch method is used to validate
                 // a string or to ensure that a string
                 // conforms to a particular pattern.
-                
-                 _errorsViewModel.ClearErrors(nameof(Phone));
+
+                _errorsViewModel.ClearErrors(nameof(Phone));
                 if (String.IsNullOrEmpty(phone))
                 {
                     _errorsViewModel.AddError(nameof(Phone), "Field is required.");
@@ -182,7 +183,7 @@ namespace ManagementCoach.ViewModels
                 OnPropertyChanged(nameof(DateJoined));
             }
         }
-        public bool Active { get => active; set { active = value; OnPropertyChanged(nameof(Active)); } }
+        public bool Block { get => block; set { block = value; OnPropertyChanged(nameof(Block)); } }
         public string License { get => license; set { license = value; OnPropertyChanged(nameof(License)); } }
         public string Notes { get => notes; set { notes = value; OnPropertyChanged(nameof(Notes)); } }
         public IEnumerable<string> ListGender
@@ -196,65 +197,33 @@ namespace ManagementCoach.ViewModels
 
         public ICommand SaveCommand { get; }
         public ICommand CancelCommand { get; }
-        public ICommand ChooseLicenseCommand { get; }
-        public ICommand SeeLicenseCommand { get; }
 
-        public AddDriverViewModel()
+
+        public AddPassengerViewModel()
         {
             _errorsViewModel = new ErrorsViewModel();
             _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
             SaveCommand = new ViewModelCommand(ExcuteSaveCommand, CanExcuteSaveCommand);
             CancelCommand = new ViewModelCommand(ExcuteCancelCommand);
-            ChooseLicenseCommand = new ViewModelCommand(ExcuteChooseLicenseCommand);
-            SeeLicenseCommand = new ViewModelCommand(ExcuteSeeLicenseCommand, CanExcuteSeeLicenseCommand);
             DateJoined = DateTime.Now;
             Dob = DateTime.Now;
             Gender = ListGender.First();
 
         }
-        private bool CanExcuteSeeLicenseCommand(object obj)
-        {
-            if (string.IsNullOrEmpty(License))
-            {
-                return false;
-            }
-            return true;
-        }
-        private void ExcuteSeeLicenseCommand(object obj)
-        {
-            System.Diagnostics.Process.Start("explorer.exe", License);
-        }
-
-        private void ExcuteChooseLicenseCommand(object obj)
-        {
-            System.Windows.Forms.OpenFileDialog openFD = new System.Windows.Forms.OpenFileDialog();
-            openFD.Filter = "Bitmaps|*.bmp|jpeg|*.jpg";
-
-            if (openFD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                License = openFD.FileName;
-            }
-
-        }
-
-        public AddDriverViewModel(ModelDriver data)
+        public AddPassengerViewModel(ModelPassenger data)
         {
             _errorsViewModel = new ErrorsViewModel();
             _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
             SaveCommand = new ViewModelCommand(ExcuteEditCommand, CanExcuteSaveCommand);
             CancelCommand = new ViewModelCommand(ExcuteCancelCommand);
-            ChooseLicenseCommand = new ViewModelCommand(ExcuteChooseLicenseCommand);
-            SeeLicenseCommand = new ViewModelCommand(ExcuteSeeLicenseCommand, CanExcuteSeeLicenseCommand);
             Id = data.Id;
             Name = data.Name;
-            Active = data.Active;
+            block = data.Blocked;
             Address = data.Address;
-            DateJoined = data.DateJoined;
             Dob = data.Dob;
             Email = data.Email;
             Gender = data.Gender;
             IdCard = data.IdCard;
-            License = data.License;
             Notes = data.Notes;
             Phone = data.Phone;
 
@@ -264,29 +233,27 @@ namespace ManagementCoach.ViewModels
         {
             try
             {
-                var editDriver = new RepoDriver().UpdateDriver(Id, new InputDriver()
+                var editPassenger = new RepoPassenger().UpdatePassenger(Id, new InputPassenger()
                 {
                     Name = Name,
-                    Active = Active,
+                    Blocked = Block,
                     Address = Address,
-                    DateJoined = DateJoined,
                     Dob = Dob,
                     Email = Email,
                     Gender = Gender,
                     IdCard = IdCard,
-                    License = License,
                     Notes = Notes,
                     Phone = Phone,
 
                 });
-                if (editDriver.Success == true)
+                if (editPassenger.Success == true)
                 {
                     MessageBox.Show("Successfully");
                     Close();
                 }
                 else
                 {
-                    MessageBox.Show(editDriver.ErrorMessage);
+                    MessageBox.Show(editPassenger.ErrorMessage);
                 }
 
             }
@@ -313,28 +280,26 @@ namespace ManagementCoach.ViewModels
         {
             try
             {
-                var addDriver = new RepoDriver().InsertDriver(new InputDriver()
+                var addPassenger = new RepoPassenger().InsertPassenger(new InputPassenger()
                 {
                     Name = Name,
-                    Active = Active,
+                    Blocked = Block,
                     Address = Address,
-                    DateJoined = DateJoined,
                     Dob = Dob,
                     Email = Email,
                     Gender = Gender,
                     IdCard = IdCard,
-                    License = License,
                     Notes = Notes,
                     Phone = Phone,
                 });
-                if (addDriver.Success == true)
+                if (addPassenger.Success == true)
                 {
                     MessageBox.Show("Successfully");
                     Close();
                 }
                 else
                 {
-                    MessageBox.Show(addDriver.ErrorMessage);
+                    MessageBox.Show(addPassenger.ErrorMessage);
                 }
 
             }

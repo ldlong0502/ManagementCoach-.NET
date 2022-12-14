@@ -17,39 +17,38 @@ using System.Windows.Shapes;
 namespace ManagementCoach.Views.Screens
 {
     /// <summary>
-    /// Interaction logic for AddNewRoute.xaml
+    /// Interaction logic for AddNewTrip.xaml
     /// </summary>
-    public partial class AddNewRoute : Window
+    public partial class AddNewTrip : Window
     {
-        public AddNewRoute(RouteViewModel routeViewModel)
+        public AddNewTrip(TripViewModel tripViewModel)
         {
             InitializeComponent();
-            var vm = new AddRouteViewModel();
+            var vm = new AddTripViewModel();
             this.DataContext = vm;
             if (vm.Close == null)
             {
                 vm.Close = new Action(() => {
-                    routeViewModel.Load();
+                    tripViewModel.Load();
                     this.Close();
 
                 });
             }
         }
-        public AddNewRoute(RouteViewModel routeViewModel, ModelRoute modelRoute)
+        public AddNewTrip(TripViewModel tripViewModel, ModelTrip modelTrip)
         {
             InitializeComponent();
-            var vm = new AddRouteViewModel(modelRoute);
+            var vm = new AddTripViewModel(modelTrip);
             this.DataContext = vm;
             if (vm.Close == null)
             {
                 vm.Close = new Action(() => {
-                    routeViewModel.Load();
+                    tripViewModel.Load();
                     this.Close();
 
                 });
             }
         }
-
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
@@ -57,7 +56,7 @@ namespace ManagementCoach.Views.Screens
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
-            WindowState = WindowState.Minimized;
+            this.WindowState = WindowState.Minimized;
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
