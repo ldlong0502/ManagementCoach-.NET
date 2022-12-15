@@ -31,5 +31,6 @@ namespace ManagementCoach.BE.Models
 		public string Notes { get; set; }
 		[Column(TypeName = "timestamptz")]
 		public DateTimeOffset DateAdded { get; set; } = DateTimeOffset.Now;
+		public string ImageUrl { get; set; }
 	}
 }

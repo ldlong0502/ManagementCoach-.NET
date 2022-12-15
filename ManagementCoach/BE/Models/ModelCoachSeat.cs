@@ -14,11 +14,6 @@ namespace ManagementCoach.BE.Models
 		[Required]
 		public int CoachId { get; set; }
 		public string Name { get; set; }
-		
-		/// <summary>
-		/// Giá trị là "Taken" hoặc "NotTaken", Mặc định là "NotTaken"
-		/// </summary>
-		public string Status { get; set; }
 
 	}
 }

@@ -224,12 +224,12 @@ namespace ManagementCoach.ViewModels
             var listPassengers = new RepoPassenger().GetPassengers("", 1, context.Passengers.Count());
             var mergeList = from t in ticketsPagination.Items
                             join lp in listPassengers.Items
-                            on t.CustomerId equals lp.Id
+                            on t.PassengerId equals lp.Id
                             select new MergeTicketsAndPassengers
                             {
                                 Id = t.Id,
                                 TripId = t.TripId,
-                                PassengerId = t.CustomerId,
+                                PassengerId = t.PassengerId,
                                 PassengerName = lp.Name,
                                 DateBought = t.DateBought
                             };
@@ -243,12 +243,12 @@ namespace ManagementCoach.ViewModels
                 listPassengers = new RepoPassenger().GetPassengers("", 1, context.Passengers.Count());
                 mergeList = from t in ticketsPagination.Items
                                 join lp in listPassengers.Items
-                                on t.CustomerId equals lp.Id
+                                on t.PassengerId equals lp.Id
                                 select new MergeTicketsAndPassengers
                                 {
                                     Id = t.Id,
                                     TripId = t.TripId,
-                                    PassengerId = t.CustomerId,
+                                    PassengerId = t.PassengerId,
                                     PassengerName = lp.Name,
                                     DateBought = t.DateBought
                                 };

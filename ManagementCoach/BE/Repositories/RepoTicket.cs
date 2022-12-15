@@ -16,6 +16,22 @@ namespace ManagementCoach.BE.Repositories
 
 		public Result<ModelTicket> InsertTicket(InputTicket input)
 		{
+
+			if (!new RepoPassenger().PassengerExists(input.PassengerId))
+			{
+				return new Result<ModelTicket>() { Success = false, ErrorMessage = "Passenger of this Id does not exists" };
+			}
+
+			if (!new RepoTrip().TripExists(input.TripId))
+			{
+				return new Result<ModelTicket>() { Success = false, ErrorMessage = "Trip of this Id does not exists" };
+			}
+
+			if (Context.Trips.Any(t => t.RouteId == input.TripId && input.CoachSeatId == input.CoachSeatId))
+			{
+				return new Result<ModelTicket>() { Success = false, ErrorMessage = "This coach seat already taken" };
+			}
+				
 			var ticket = Map.To<Ticket>(input);
 			Context.Tickets.Add(ticket);
 			Context.SaveChanges();

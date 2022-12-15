@@ -2,7 +2,7 @@
 {
 	using ManagementCoach.BE.Entities;
 	using System;
-    using System.Data.Entity;
+	using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
@@ -11,9 +11,9 @@
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-        }
+		}
 
-        protected override void Seed(ManagementCoach.BE.CoachManContext context)
+		protected override void Seed(ManagementCoach.BE.CoachManContext context)
         {
 			context.Users.AddOrUpdate(x => x.Id,
 				new User() { Id = 1, Name = "Admin", Username="admin", Password = MD5Helper.Encrypt("admin"), Role= "Admin" },

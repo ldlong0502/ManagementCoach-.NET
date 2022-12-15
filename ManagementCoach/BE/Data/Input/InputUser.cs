@@ -17,5 +17,6 @@ namespace ManagementCoach.BE.Data.Input
 		public string Role { get; set; }
 		public string Name { get; set; }
 		public string Email { get; set; }
+		public string ImageUrl { get; set; }
 	}
 }

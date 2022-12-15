@@ -126,7 +126,7 @@ namespace ManagementCoach.ViewModels
             _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
             SaveCommand = new ViewModelCommand(ExcuteInsertCommand, CanExcuteSaveCommand);
             CancelCommand = new ViewModelCommand(ExcuteCancelCommand);
-            Province = ListProvinces.First();
+            Province = ListProvinces.FirstOrDefault();
 
         }
         public AddStationViewModel(ModelStation data)

@@ -23,7 +23,7 @@ namespace ManagementCoach.BE.Repositories
 				return new Result<ModelRestArea>() { Success = false, ErrorMessage = "RestArea with this province Id already exist." };
 
 			var restArea = Map.To<RestArea>(input);
-			restArea.Province = Context.Provinces.Where(p => input.ProvinceId == p.Id).FirstOrDefault();
+			//restArea.Province = Context.Provinces.Where(p => input.ProvinceId == p.Id).FirstOrDefault();
 			Context.RestAreas.Add(restArea);
 			Context.SaveChanges();
 			return new Result<ModelRestArea>() { Success = true, Payload = Map.To<ModelRestArea>(restArea) };

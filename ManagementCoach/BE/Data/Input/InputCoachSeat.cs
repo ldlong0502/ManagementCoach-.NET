@@ -10,6 +10,5 @@ namespace ManagementCoach.BE.Data.Input
     {
         public int CoachId { get; set; }
         public string Name { get; set; }
-        public string Status { get; set; }
     }
 }
