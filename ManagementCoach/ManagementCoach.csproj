@@ -237,6 +237,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Screens\AddNewUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Screens\DashBoard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -413,6 +417,7 @@
     <Compile Include="ViewModels\AddRouteViewModel.cs" />
     <Compile Include="ViewModels\AddStationViewModel.cs" />
     <Compile Include="ViewModels\AddTripViewModel.cs" />
+    <Compile Include="ViewModels\AddUserViewModel.cs" />
     <Compile Include="ViewModels\AdminHomeViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\PassengerViewModel.cs" />
@@ -456,6 +461,9 @@
     </Compile>
     <Compile Include="Views\Screens\AddNewTrip.xaml.cs">
       <DependentUpon>AddNewTrip.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Screens\AddNewUser.xaml.cs">
+      <DependentUpon>AddNewUser.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Screens\DashBoard.xaml.cs">
       <DependentUpon>DashBoard.xaml</DependentUpon>

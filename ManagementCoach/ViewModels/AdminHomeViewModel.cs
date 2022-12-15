@@ -42,28 +42,20 @@ namespace ManagementCoach.ViewModels
             }
         }
 
-        public ICommand Show { get;}
         public AdminHomeViewModel()
         {
             Load();
-            Show = new ViewModelCommand(ExcuteShow);
-            //LoadImage();
         }
 
         private void Load()
         {
             //Welcome text
-            var user = new RepoUser().GetUser("admin");
+            var user = new RepoUser().GetUser(Thread.CurrentPrincipal.Identity.Name);
             var name = user.Name.Split(' ');
             WelcomeText = "Hello, " + name[name.Length-1];
             
         }
 
-        private void ExcuteShow(object obj)
-        {
-            this.ToString();
-            
-        }
 
         
         

@@ -86,11 +86,6 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="BorderBrush" Value="#784ff2"></Setter>
-                </Trigger>
-            </Style.Triggers>
         </Style>
     </UserControl.Resources>
     <Grid>
@@ -101,7 +96,7 @@
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Accounts" FontSize="36" FontWeight="Bold" Foreground="{StaticResource primaryColor}"></TextBlock>
-        <Button Width="150" HorizontalAlignment="Right" Margin="0,0,10,0" Style="{StaticResource addButton}">
+        <Button Width="150" HorizontalAlignment="Right" Command="{Binding AddNewUserCommand}" Margin="0,0,10,0" Style="{StaticResource addButton}">
             <StackPanel Orientation="Horizontal">
                 <fa:FontAwesome Icon="Plus" VerticalAlignment="Center" Height="20" Width="20" FontSize="20"></fa:FontAwesome>
                 <TextBlock Text="Create" VerticalAlignment="Center" Margin="10,0,0,0" Height="23"></TextBlock>
@@ -151,10 +146,12 @@
                     <DataGridTemplateColumn.CellTemplate >
                         <DataTemplate >
                             <StackPanel Orientation="Horizontal">
-                                <Button Style="{StaticResource gridEditButton}" Click="Edit_CLick" >
+                                <Button Style="{StaticResource gridEditButton}" 
+                                        Command="{Binding Path=DataContext.EditCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}">
                                     <fa:FontAwesome Icon="Pencil" Style="{StaticResource gridButtonIcon}" ></fa:FontAwesome>
                                 </Button>
-                                <Button Style="{StaticResource gridRemoveButton}" Click="Remove_Click">
+                                <Button Style="{StaticResource gridRemoveButton}" 
+                                         Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}">
                                     <fa:FontAwesome Icon="Remove" Style="{StaticResource gridButtonIcon}"></fa:FontAwesome>
                                 </Button>
                             </StackPanel>

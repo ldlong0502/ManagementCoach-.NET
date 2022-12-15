@@ -53,7 +53,7 @@ namespace ManagementCoach.ViewModels
         private void ExcuteLoginCommand(object obj)
         {
             
-            string pass = MD5Helper.GenerateMD5(Password);
+            string pass = MD5Helper.Encrypt(Password);
             if(new RepoUser().UserValid(UserName, pass))
             {
                 Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(UserName), null);

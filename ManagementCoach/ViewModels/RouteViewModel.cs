@@ -19,8 +19,8 @@ namespace ManagementCoach.ViewModels
     {
         public CoachManContext context = new CoachManContext();
         private ICollectionView routeCollection;
-        private int originStationId;
-        private int destinationStationId;
+        private string originStationId = "";
+        private string destinationStationId = "";
         private object selectedItem;
         private int currentPage = 1;
         private int limit = 2;
@@ -37,7 +37,7 @@ namespace ManagementCoach.ViewModels
                 OnPropertyChanged(nameof(SelectedItem));
             }
         }
-        public int OriginStationId
+        public string OriginStationId
         {
             get
             {
@@ -47,9 +47,10 @@ namespace ManagementCoach.ViewModels
             {
                 originStationId = value;
                 OnPropertyChanged(nameof(OriginStationId));
+                Load();
             }
         }
-        public int DestinationStationId
+        public string DestinationStationId
         {
             get
             {
@@ -59,6 +60,7 @@ namespace ManagementCoach.ViewModels
             {
                 destinationStationId = value;
                 OnPropertyChanged(nameof(DestinationStationId));
+                Load();
             }
         }
        
@@ -265,12 +267,13 @@ namespace ManagementCoach.ViewModels
                 return;
             }
             var routesPagination = new RepoRoute().GetRoutes(CurrentPage, Limit);
-            if((OriginStationId == 0 || OriginStationId.ToString() == null) && (DestinationStationId == 0 || DestinationStationId.ToString() == null)){
+            if( string.IsNullOrEmpty(OriginStationId) || string.IsNullOrEmpty(DestinationStationId) || !int.TryParse(OriginStationId, out int a) || !int.TryParse(OriginStationId, out int b))
+            {
                 routesPagination = new RepoRoute().GetRoutes(CurrentPage, Limit);
             }
             else
             {
-                routesPagination = new RepoRoute().GetRoutesFromStation(OriginStationId,DestinationStationId,CurrentPage, Limit);
+                routesPagination = new RepoRoute().GetRoutesFromStation(int.Parse(OriginStationId), int.Parse(DestinationStationId), CurrentPage, Limit);
             }
             RouteCollection = CollectionViewSource.GetDefaultView(routesPagination.Items);
             NumOfPages = routesPagination.PageCount;
@@ -279,13 +282,13 @@ namespace ManagementCoach.ViewModels
             {
                 CurrentPage = 1;
                 routesPagination = new RepoRoute().GetRoutes(CurrentPage, Limit);
-                if ((OriginStationId == 0 || OriginStationId.ToString() == null) && (DestinationStationId == 0 || DestinationStationId.ToString() == null))
+                if (string.IsNullOrEmpty(OriginStationId) && string.IsNullOrEmpty(DestinationStationId) || !int.TryParse(OriginStationId, out _) || !int.TryParse(OriginStationId, out _))
                 {
                     routesPagination = new RepoRoute().GetRoutes(CurrentPage, Limit);
                 }
                 else
                 {
-                    routesPagination = new RepoRoute().GetRoutesFromStation(OriginStationId, DestinationStationId, CurrentPage, Limit);
+                    routesPagination = new RepoRoute().GetRoutesFromStation(int.Parse(OriginStationId), int.Parse(DestinationStationId), CurrentPage, Limit);
                 }
                 RouteCollection = CollectionViewSource.GetDefaultView(routesPagination.Items);
             }

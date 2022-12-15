@@ -24,6 +24,25 @@ namespace ManagementCoach.ViewModels
         private int currentPage = 1;
         private int limit = 2;
         private int numOfPages;
+        private string filterTrip;
+        private List<string> listFilterTrip;
+        private string textSearch = "";
+        public string TextSearch
+        {
+            get
+            {
+                return textSearch;
+            }
+            set
+            {
+
+                if (FilterTrip == "None")
+                    return;
+                textSearch = value;
+                OnPropertyChanged(nameof(TextSearch));
+                Load();
+            }
+        }
         public object SelectedItem
         {
             get
@@ -88,6 +107,30 @@ namespace ManagementCoach.ViewModels
                 OnPropertyChanged(nameof(TripCollection));
             }
         }
+        public string FilterTrip
+        {
+            get
+            {
+                return filterTrip;
+            }
+            set
+            {
+                filterTrip = value;
+                OnPropertyChanged(nameof(FilterTrip));
+            }
+        }
+        public List<string> ListFilterTrip
+        {
+            get
+            {
+                return listFilterTrip;
+            }
+            set
+            {
+                listFilterTrip = value;
+                OnPropertyChanged(nameof(ListFilterTrip));
+            }
+        }
 
 
         //ICommand
@@ -101,6 +144,8 @@ namespace ManagementCoach.ViewModels
         public ICommand EndPageCommand { get; }
         public TripViewModel()
         {
+            ListFilterTrip = new List<string>() { "None", "By Driver Id", "By Coach Id", "By Route Id" };
+            FilterTrip = ListFilterTrip.First();
             Load();
             EditCommand = new ViewModelCommand(ExcuteEditCommand);
             DeleteCommand = new ViewModelCommand(ExcuteDeleteCommand);
@@ -220,7 +265,19 @@ namespace ManagementCoach.ViewModels
             {
                 return;
             }
-            var tripsPagination = new RepoTrip().GetTrips(CurrentPage, Limit);
+            var  tripsPagination = new RepoTrip().GetTrips(CurrentPage, Limit);
+            if(FilterTrip == "By Driver Id" && int.TryParse(TextSearch, out _))
+            {
+                tripsPagination = new RepoTrip().GetTripsByDriver(int.Parse(TextSearch),CurrentPage, Limit);
+            }
+            else if (FilterTrip == "By Coach Id" && int.TryParse(TextSearch, out _))
+            {
+                tripsPagination = new RepoTrip().GetTripsByCoach(int.Parse(TextSearch), CurrentPage, Limit);
+            }
+            else if (FilterTrip == "By Route Id" && int.TryParse(TextSearch, out _))
+            {
+                tripsPagination = new RepoTrip().GetTripsByRoute(int.Parse(TextSearch), CurrentPage, Limit);
+            }
             TripCollection = CollectionViewSource.GetDefaultView(tripsPagination.Items);
             NumOfPages = tripsPagination.PageCount;
 
@@ -228,6 +285,18 @@ namespace ManagementCoach.ViewModels
             {
                 CurrentPage = 1;
                 tripsPagination = new RepoTrip().GetTrips(CurrentPage, Limit);
+                if (FilterTrip == "By Driver Id" && int.TryParse(TextSearch, out _))
+                {
+                    tripsPagination = new RepoTrip().GetTripsByDriver(int.Parse(TextSearch), CurrentPage, Limit);
+                }
+                else if (FilterTrip == "By Coach Id" && int.TryParse(TextSearch, out _))
+                {
+                    tripsPagination = new RepoTrip().GetTripsByCoach(int.Parse(TextSearch), CurrentPage, Limit);
+                }
+                else if (FilterTrip == "By Route Id" && int.TryParse(TextSearch, out _))
+                {
+                    tripsPagination = new RepoTrip().GetTripsByRoute(int.Parse(TextSearch), CurrentPage, Limit);
+                }
                 TripCollection = CollectionViewSource.GetDefaultView(tripsPagination.Items);
             }
         }

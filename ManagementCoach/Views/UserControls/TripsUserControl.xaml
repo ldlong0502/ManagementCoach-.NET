@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ManagementCoach.Views.UserControls"
+              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
              mc:Ignorable="d" 
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:vm="clr-namespace:ManagementCoach.ViewModels" xmlns:managementcoach="clr-namespace:ManagementCoach"
@@ -103,8 +104,19 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
-            <TextBlock Margin="0,0,10,0" Text="Filter by" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"></TextBlock>
-            <Grid Width="300" HorizontalAlignment="Left" Margin="0,0,10,0">
+            
+            <TextBlock Margin="0,0,20,0" Text="Filter by" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"></TextBlock>
+            <ComboBox
+                         Width="150"
+                VerticalAlignment="Top"
+                          SelectedItem="{Binding FilterTrip}"
+                          materialDesign:HintAssist.Hint="Input Mode"
+                          materialDesign:TextFieldAssist.HasClearButton="True"
+                          ItemsSource="{Binding ListFilterTrip}"
+                          IsEditable="True"
+                          Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
+            <Grid Width="300" HorizontalAlignment="Left" Margin="20,0,10,0">
                 <TextBlock Margin="20,0" Padding="0,5,0,0" FontSize="14" Text="Search here..." Height="30" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
                            Panel.ZIndex="1" Visibility="{Binding ElementName=txtSearch,Path=Text.IsEmpty, Converter={StaticResource BoolToVis} }"></TextBlock>
                 <TextBox x:Name="txtSearch" Text="{Binding TextSearch, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource textboxSearch}"   />

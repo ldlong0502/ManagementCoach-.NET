@@ -1,4 +1,6 @@
-﻿using ManagementCoach.Views.UserControls;
+﻿using ManagementCoach.BE.Models;
+using ManagementCoach.BE.Repositories;
+using ManagementCoach.Views.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +20,7 @@ namespace ManagementCoach.ViewModels
         private ViewModelBase _currentChildView;
         private UserControl currentUserControl;
         private DispatcherTimer dispatcherTimer = null;
+        private ModelUser user = new RepoUser().GetUser(Thread.CurrentPrincipal.Identity.Name);
         private int time = 1;
         public int Time
         {
@@ -82,6 +85,11 @@ namespace ManagementCoach.ViewModels
 
         private void ExecuteShowAccountViewCommand(object obj)
         {
+            if (user.Role == "Employee")
+            {
+                MessageBox.Show( "You don't have permission", "Permission", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
             DispatcherTimerImage.Stop();
             CurrentChildView = new UserViewModel();
             CurrentUserControl = new AccountUserControl();

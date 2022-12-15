@@ -16,8 +16,8 @@
         protected override void Seed(ManagementCoach.BE.CoachManContext context)
         {
 			context.Users.AddOrUpdate(x => x.Id,
-				new User() { Id = 1, Name = "Admin", Username="admin", Password = MD5Helper.GenerateMD5("admin"), Role= "Admin" },
-				new User() { Id = 2, Name = "Employee", Username="employee", Password = MD5Helper.GenerateMD5("employee"), Role="Employee" }
+				new User() { Id = 1, Name = "Admin", Username="admin", Password = MD5Helper.Encrypt("admin"), Role= "Admin" },
+				new User() { Id = 2, Name = "Employee", Username="employee", Password = MD5Helper.Encrypt("employee"), Role="Employee" }
 			);
 		}
     }

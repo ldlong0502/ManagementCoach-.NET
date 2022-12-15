@@ -71,7 +71,7 @@
                 <fa:FontAwesome Icon="Users" Foreground="{StaticResource violetIcon}" FontSize="30" Margin="10,28,97,90"/>
                 <Image Height="15" Width="20" Source="/Images/more.png" Margin="130,21,8,114"/>
                 <TextBlock HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Height="24" Margin="21,75,0,0" TextWrapping="Wrap" Text="7" VerticalAlignment="Top" Width="96" FontSize="22" FontWeight="Bold" FontFamily="Arial"/>
-                <TextBlock HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Height="30"  TextWrapping="Wrap" Text="Employees working today" VerticalAlignment="Top" Width="77" FontWeight="Normal" FontFamily="Arial" Margin="21,110,0,0"/>
+                <TextBlock HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Height="17"  TextWrapping="Wrap" Text="Employees" VerticalAlignment="Top" Width="77" FontWeight="Normal" FontFamily="Arial" Margin="21,114,0,0"/>
             </Grid>
 
 

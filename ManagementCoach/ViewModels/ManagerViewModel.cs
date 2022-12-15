@@ -79,7 +79,9 @@ namespace ManagementCoach.ViewModels
 		public ICommand ShowStationsCommand { get; }
 		public ICommand ShowRoutesCommand { get; }
 		public ICommand ShowRestAreasCommand { get; }
-		public ICommand AddCommand { get; }
+        public ICommand ShowTicketsCommand { get; }
+
+        public ICommand AddCommand { get; }
 		public ICommand ImportCommand { get; }
 		public ICommand ExportCommand { get; }
 
@@ -92,10 +94,20 @@ namespace ManagementCoach.ViewModels
             ShowStationsCommand = new ViewModelCommand(ExcuteShowStationsCommand);
             ShowRoutesCommand = new ViewModelCommand(ExcuteShowRoutesCommand);
             ShowRestAreasCommand = new ViewModelCommand(ExcuteShowRestAreasCommand);
+            ShowTicketsCommand = new ViewModelCommand(ExcuteShowTicketsCommand);
             AddCommand = new ViewModelCommand(ExcuteAddCommand);
             ImportCommand = new ViewModelCommand(ExcuteImportCommand);
             ExportCommand = new ViewModelCommand(ExcuteExportCommand);
             ExcuteShowTripsCommand(null);
+        }
+
+        private void ExcuteShowTicketsCommand(object obj)
+        {
+            Title = "Tickets";
+            AddAction = "Add new ticket";
+            CurrentControl = new TicketUserControl();
+            CurrentManagerView = new TicketViewModel();
+            CurrentControl.DataContext = CurrentManagerView;
         }
 
         private void ExcuteExportCommand(object obj)

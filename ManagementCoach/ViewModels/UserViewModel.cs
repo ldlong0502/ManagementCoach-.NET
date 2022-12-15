@@ -1,6 +1,7 @@
 ﻿using ManagementCoach.BE;
 using ManagementCoach.BE.Models;
 using ManagementCoach.BE.Repositories;
+using ManagementCoach.Views.Screens;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -122,6 +123,7 @@ namespace ManagementCoach.ViewModels
         public ICommand DownLimitCommand { get; }
         public ICommand FirstPageCommand { get; }
         public ICommand EndPageCommand { get; }
+        public ICommand AddNewUserCommand { get; }
 
         public UserViewModel()
         {
@@ -134,6 +136,13 @@ namespace ManagementCoach.ViewModels
             DownLimitCommand = new ViewModelCommand(ExcuteDownLimitCommand, CanExcuteDownLimitCommand);
             FirstPageCommand = new ViewModelCommand(ExcuteFirstPageCommand, CanExcuteFirstPageCommand);
             EndPageCommand = new ViewModelCommand(ExcuteEndPageCommand, CanExcuteEndPageCommand);
+            AddNewUserCommand = new ViewModelCommand(ExcuteAddNewUserCommand);
+        }
+
+        private void ExcuteAddNewUserCommand(object obj)
+        {
+            var screen = new AddNewUser(this);
+            screen.ShowDialog();
         }
 
         private bool CanExcuteEndPageCommand(object obj)
@@ -221,8 +230,8 @@ namespace ManagementCoach.ViewModels
 
         private void ExcuteEditCommand(object obj)
         {
-            //var screen = new Add((obj as ModelCoach));
-            //screen.ShowDialog();
+            var screen = new AddNewUser(this,(obj as ModelUser));
+            screen.ShowDialog();
         }
 
         public void Load()
