@@ -12,6 +12,7 @@ namespace ManagementCoach.BE.Data.Input
 	public class InputTicket
 	{
 		public int TripId { get; set; }
-		public int CustomerId { get; set; }
+		public int PassengerId { get; set; }
+		public int CoachSeatId { get; set; }
 	}
 }

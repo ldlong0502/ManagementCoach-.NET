@@ -15,5 +15,7 @@ namespace ManagementCoach.BE.Entities
 		public Trip Trip { get; set; }
 		[EpplusIgnore]
 		public Passenger Passenger { get; set; }
+		[EpplusIgnore]
+		public CoachSeat CoachSeat { get; set; }
 	}
 }

@@ -15,8 +15,11 @@ namespace ManagementCoach.BE.Models
 		[Required]
 		public int TripId { get; set; }
 		[Required]
-		public int CustomerId { get; set; }
-		
+		public int PassengerId { get; set; }
+
+		[Required]
+		public int CoachSeatId { get; set; }
+
 		[Column(TypeName = "timestamptz")]
 		public DateTimeOffset DateBought { get; set; } = DateTimeOffset.Now;
 	}
