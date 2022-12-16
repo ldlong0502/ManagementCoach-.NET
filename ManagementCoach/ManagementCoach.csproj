@@ -420,6 +420,10 @@
     <Compile Include="Migrations\202212151414061_RestArea2.designer.cs">
       <DependentUpon>202212151414061_RestArea2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212160157471_CoachSeatNoUnique.cs" />
+    <Compile Include="Migrations\202212160157471_CoachSeatNoUnique.designer.cs">
+      <DependentUpon>202212160157471_CoachSeatNoUnique.cs</DependentUpon>
+    </Compile>
     <Compile Include="PriceConverter.cs" />
     <Compile Include="ViewModels\AddPassengerViewModel.cs" />
     <Compile Include="Migrations\202212131825014_RemoveOneToOneRelationship.cs" />
@@ -608,6 +612,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212151414061_RestArea2.resx">
       <DependentUpon>202212151414061_RestArea2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212160157471_CoachSeatNoUnique.resx">
+      <DependentUpon>202212160157471_CoachSeatNoUnique.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

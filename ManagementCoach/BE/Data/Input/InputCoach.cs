@@ -16,5 +16,7 @@ namespace ManagementCoach.BE.Data.Input
 		public string Status { get; set; }
 		public string Notes { get; set; }
 		public string ImageUrl { get; set; }
+
+		public int Capacity { get; set; }
 	}
 }

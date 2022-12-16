@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace ManagementCoach.BE.Repositories
 {
@@ -22,13 +23,53 @@ namespace ManagementCoach.BE.Repositories
 
 		public Result<ModelCoach> InsertCoach(InputCoach input)
 		{
+			if (input.Capacity < 2)
+			{
+				return new Result<ModelCoach>
+				{
+					Success = false,
+					ErrorMessage = "Capacity must be at least 2"
+				};
+			}
+
+			if (input.Capacity % 2 == 1)
+			{
+				return new Result<ModelCoach> { 
+					Success = false, ErrorMessage = "Capacity must be an even number"
+				};
+			}
+
 			if (RegNoExists(input.RegNo))
-				return new Result<ModelCoach> { Success = false, ErrorMessage = "Coach with this registration already exist." };
+			{
+				return new Result<ModelCoach> { 
+					Success = false, ErrorMessage = "Coach with this registration already exist"
+				};
+			}
 
 			var coach = Map.To<Coach>(input);
 			Context.Coaches.Add(coach);
 			Context.SaveChanges();
-			return new Result<ModelCoach> { Success = true, Payload = Map.To<ModelCoach>(coach) };
+
+			var payload = Map.To<ModelCoach>(coach);
+			payload.CoachSeats = InsertCoachSeats(coach.Id, input.Capacity);
+
+			return new Result<ModelCoach> { Success = true, Payload = payload };
+		}
+
+		private List<ModelCoachSeat> InsertCoachSeats(int coachId, int capacity)
+		{
+			var coachSeats = new List<CoachSeat>();
+			
+			for (int i = 1; i <= capacity / 2; i++)
+			{
+				coachSeats.Add(new CoachSeat() { Name = $"A{i}", CoachId = coachId });
+				coachSeats.Add(new CoachSeat() { Name = $"B{i}", CoachId = coachId });
+			}
+
+			Context.CoachSeats.AddRange(coachSeats);
+			Context.SaveChanges();
+
+			return coachSeats.Select(cs => Map.To<ModelCoachSeat>(cs)).ToList();
 		}
 
 		///// <summary>
@@ -60,6 +101,23 @@ namespace ManagementCoach.BE.Repositories
 		}
 
 		public Result<ModelCoach> UpdateCoach(int coachId, InputCoach input) {
+			if (input.Capacity < 2)
+			{
+				return new Result<ModelCoach>
+				{
+					Success = false,
+					ErrorMessage = "Capacity must be at least 2"
+				};
+			}
+
+			if (input.Capacity % 2 == 1)
+			{
+				return new Result<ModelCoach>
+				{
+					Success = false, ErrorMessage = "Capacity must be an even number"
+				};
+			}
+
 			var coach = Context.Coaches.Where(c => c.Id == coachId).FirstOrDefault();
 			
 			if (coach.RegNo != input.RegNo && RegNoExists(input.RegNo))
@@ -70,8 +128,15 @@ namespace ManagementCoach.BE.Repositories
 			coach.Status = input.Status;
 			coach.Notes = input.Notes;
 			Context.SaveChanges();
-			
-			return new Result<ModelCoach> { Success = true, Payload = Map.To<ModelCoach>(coach) };
+
+			var payload = Map.To<ModelCoach>(coach);
+
+			var oldCoachSeats = Context.CoachSeats.Where(cs => cs.Id == coach.Id);
+			Context.CoachSeats.RemoveRange(oldCoachSeats);
+			Context.SaveChanges();
+			payload.CoachSeats = InsertCoachSeats(coach.Id, input.Capacity);
+
+			return new Result<ModelCoach> { Success = true, Payload = payload };
 		}
 
 		public Result DeleteCoach(int coachId)
@@ -82,6 +147,10 @@ namespace ManagementCoach.BE.Repositories
 			var coach = new Coach() { Id = coachId };
 			Context.Coaches.Attach(coach);
 			Context.Coaches.Remove(coach);
+
+			var coachSeats = Context.CoachSeats.Where(cs => cs.CoachId == coachId);
+			Context.CoachSeats.RemoveRange(coachSeats);
+			
 			Context.SaveChanges();
 
 			return new Result { Success = true };
