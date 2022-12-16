@@ -20,7 +20,6 @@ namespace ManagementCoach.ViewModels
         private ViewModelBase _currentChildView;
         private UserControl currentUserControl;
         private DispatcherTimer dispatcherTimer = null;
-        private ModelUser user = new RepoUser().GetUser(Thread.CurrentPrincipal.Identity.Name);
         private int time = 1;
         public int Time
         {
@@ -76,20 +75,24 @@ namespace ManagementCoach.ViewModels
         {
             ShowHomeViewCommand = new ViewModelCommand(ExecuteShowHomeViewCommand);
             ShowManagerViewCommand = new ViewModelCommand(ExecuteShowManagerViewCommand);
-            ShowAccountViewCommand = new ViewModelCommand(ExecuteShowAccountViewCommand);
+            ShowAccountViewCommand = new ViewModelCommand(ExecuteShowAccountViewCommand, CanExecuteShowAccountViewCommand);
             ExecuteShowHomeViewCommand(null);
 
 
 
         }
 
+        private bool CanExecuteShowAccountViewCommand(object obj)
+        {
+            if (CurrentUser.currentUser.Role == "Admin")
+            {
+                return true;
+            }
+            return false;
+        }
+
         private void ExecuteShowAccountViewCommand(object obj)
         {
-            if (user.Role == "Employee")
-            {
-                MessageBox.Show( "You don't have permission", "Permission", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
             DispatcherTimerImage.Stop();
             CurrentChildView = new UserViewModel();
             CurrentUserControl = new AccountUserControl();

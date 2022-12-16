@@ -54,6 +54,10 @@ namespace ManagementCoach.BE.Repositories
 		public ModelCoach GetCoach(int id) { 
 			return Map.To<ModelCoach>(Context.Coaches.Where(c => c.Id == id).FirstOrDefault());
 		}
+		public ModelCoach GetCoachByRegNo(string regNo)
+		{
+			return Map.To<ModelCoach>(Context.Coaches.Where(c => c.RegNo == regNo).FirstOrDefault());
+		}
 
 		public Result<ModelCoach> UpdateCoach(int coachId, InputCoach input) {
 			var coach = Context.Coaches.Where(c => c.Id == coachId).FirstOrDefault();

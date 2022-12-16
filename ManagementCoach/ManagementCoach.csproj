@@ -289,6 +289,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\StaffHome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\StationUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -362,6 +366,7 @@
     <Compile Include="BE\Repositories\RepoTrip.cs" />
     <Compile Include="BE\Repositories\RepoUser.cs" />
     <Compile Include="BE\Repositories\RepoRoute.cs" />
+    <Compile Include="CurrentUser.cs" />
     <Compile Include="MD5Helper.cs" />
     <Compile Include="Migrations\202211180434413_UpdateSchema.cs" />
     <Compile Include="Migrations\202211180434413_UpdateSchema.designer.cs">
@@ -516,6 +521,9 @@
     </Compile>
     <Compile Include="Views\UserControls\RouteUserControl.xaml.cs">
       <DependentUpon>RouteUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\StaffHome.xaml.cs">
+      <DependentUpon>StaffHome.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\StationUserControl.xaml.cs">
       <DependentUpon>StationUserControl.xaml</DependentUpon>

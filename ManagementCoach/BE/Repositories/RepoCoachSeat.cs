@@ -19,10 +19,7 @@ namespace ManagementCoach.BE.Repositories
             => Context.CoachSeats.Any(c => c.Name == name);
 
         public Result<ModelCoachSeat> InsertCoachSeat(InputCoachSeat input)
-        {
-            if (NameExists(input.Name))
-                return new Result<ModelCoachSeat> { Success = false, ErrorMessage = "Coach seat with this name already exist." };
-
+        {      
             var coachSeat = Map.To<CoachSeat>(input);
             Context.CoachSeats.Add(coachSeat);
             Context.SaveChanges();

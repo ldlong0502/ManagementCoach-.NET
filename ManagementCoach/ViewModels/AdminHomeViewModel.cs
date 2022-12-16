@@ -17,6 +17,19 @@ namespace ManagementCoach.ViewModels
     {
         private string welcomeText;
         private string displayedImagePath;
+        private string avatar;
+        public string Avatar
+        {
+            get
+            {
+                return avatar;
+            }
+            set
+            {
+                avatar = value;
+                OnPropertyChanged(nameof(Avatar));
+            }
+        }
         public string DisplayedImagePath
         {
             get
@@ -53,7 +66,9 @@ namespace ManagementCoach.ViewModels
             var user = new RepoUser().GetUser(Thread.CurrentPrincipal.Identity.Name);
             var name = user.Name.Split(' ');
             WelcomeText = "Hello, " + name[name.Length-1];
-            
+            Avatar = string.IsNullOrEmpty(CurrentUser.currentUser.ImageUrl) ? "Images/user.png" : CurrentUser.currentUser.ImageUrl;
+
+
         }
 
 
