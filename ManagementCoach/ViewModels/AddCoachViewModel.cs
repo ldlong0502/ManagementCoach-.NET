@@ -19,7 +19,8 @@ namespace ManagementCoach.ViewModels
         private readonly ErrorsViewModel _errorsViewModel;
         private string name;
         private string regNo;
-        private string status;
+        private int? capacity;
+		private string status;
         private string notes;
         private int id;
         private DateTimeOffset dateAdded;
@@ -60,7 +61,24 @@ namespace ManagementCoach.ViewModels
                 OnPropertyChanged(nameof(RegNo));
             }
         }
-        public string Status
+		public int? Capacity
+		{
+			get
+			{
+				_errorsViewModel.ClearErrors(nameof(Capacity));
+				if (capacity == null)
+				{
+					_errorsViewModel.AddError(nameof(Capacity), "Field is required");
+				}
+				return capacity;
+			}
+			set
+			{
+				capacity = value;
+				OnPropertyChanged(nameof(Capacity));
+			}
+		}
+		public string Status
         {
             get
             {
@@ -136,7 +154,8 @@ namespace ManagementCoach.ViewModels
             Name = data.Name;
             RegNo = data.RegNo;
             Notes = data.Notes;
-            id = data.Id;
+            Capacity = data.CoachSeats.Count;
+			id = data.Id;
         }
 
         private void ExcuteEditCommand(object obj)
@@ -144,18 +163,27 @@ namespace ManagementCoach.ViewModels
 			try
 			{
 				var coach = new RepoCoach();
-				coach.UpdateCoach(
-					id,
+				var result = coach.UpdateCoach(id,
 					new InputCoach()
 					{
 						Name = Name,
 						Status = Status,
 						RegNo = RegNo,
-						Notes = string.IsNullOrEmpty(Notes) ? "" :Notes ,
+						Notes = string.IsNullOrEmpty(Notes) ? "" : Notes,
+						Capacity = Capacity.Value,
 					}
 				);
-				MessageBox.Show("Successfull");
-                Close();
+
+				if (result.Success == true)
+				{
+					MessageBox.Show("Successfull");
+				}
+				else
+				{
+					MessageBox.Show(result.ErrorMessage);
+					return;
+				}
+				Close();
 			}
 			catch (Exception ex)
 			{
@@ -181,21 +209,24 @@ namespace ManagementCoach.ViewModels
             try
             {
                 var coach = new RepoCoach();
-                 if (coach.InsertCoach(
-                    new InputCoach()
-                    {
-                        Name = Name,
-                        Status = Status,
-                        RegNo = RegNo,
-                        Notes = string.IsNullOrEmpty(Notes) ? "" : Notes,
-                    }
-                ).Success == true)
+				var result = coach.InsertCoach(
+					new InputCoach()
+					{
+						Name = Name,
+						Status = Status,
+						RegNo = RegNo,
+						Notes = string.IsNullOrEmpty(Notes) ? "" : Notes,
+						Capacity = Capacity.Value,
+					}
+				);
+
+				 if (result.Success == true)
                 {
                   MessageBox.Show("Successfull");
                 }
                 else
                 {
-                   MessageBox.Show("The RegNo has alreaady existed!");
+                   MessageBox.Show(result.ErrorMessage);
                     return;
                 }
                 
