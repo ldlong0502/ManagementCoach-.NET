@@ -11,7 +11,7 @@ namespace ManagementCoach.BE.Entities
 	public class Route : Models.BaseRoute
 	{
 		[EpplusIgnore]
-		public new List<RouteRestArea> RouteRestAreas { get; set; }
+		public List<RouteRestArea> RouteRestAreas { get; set; }
 		[EpplusIgnore]
 		public Station OriginStation { get; set; }
 		[EpplusIgnore]

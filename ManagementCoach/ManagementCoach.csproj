@@ -175,6 +175,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Z.EntityFramework.Extensions, Version=7.18.0.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Z.EntityFramework.Extensions.7.18.0\lib\net45\Z.EntityFramework.Extensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -424,6 +427,26 @@
     <Compile Include="Migrations\202212160157471_CoachSeatNoUnique.designer.cs">
       <DependentUpon>202212160157471_CoachSeatNoUnique.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212180823325_DelteCascadeProvince.cs" />
+    <Compile Include="Migrations\202212180823325_DelteCascadeProvince.designer.cs">
+      <DependentUpon>202212180823325_DelteCascadeProvince.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212180828502_DelteCascadeTrips.cs" />
+    <Compile Include="Migrations\202212180828502_DelteCascadeTrips.designer.cs">
+      <DependentUpon>202212180828502_DelteCascadeTrips.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212180845225_WTF.cs" />
+    <Compile Include="Migrations\202212180845225_WTF.designer.cs">
+      <DependentUpon>202212180845225_WTF.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212180851195_WTFPart2.cs" />
+    <Compile Include="Migrations\202212180851195_WTFPart2.designer.cs">
+      <DependentUpon>202212180851195_WTFPart2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212180907372_WTFPart3ButIGetItNow.cs" />
+    <Compile Include="Migrations\202212180907372_WTFPart3ButIGetItNow.designer.cs">
+      <DependentUpon>202212180907372_WTFPart3ButIGetItNow.cs</DependentUpon>
+    </Compile>
     <Compile Include="PriceConverter.cs" />
     <Compile Include="ViewModels\AddPassengerViewModel.cs" />
     <Compile Include="Migrations\202212131825014_RemoveOneToOneRelationship.cs" />
@@ -615,6 +638,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212160157471_CoachSeatNoUnique.resx">
       <DependentUpon>202212160157471_CoachSeatNoUnique.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212180823325_DelteCascadeProvince.resx">
+      <DependentUpon>202212180823325_DelteCascadeProvince.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212180828502_DelteCascadeTrips.resx">
+      <DependentUpon>202212180828502_DelteCascadeTrips.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212180845225_WTF.resx">
+      <DependentUpon>202212180845225_WTF.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212180851195_WTFPart2.resx">
+      <DependentUpon>202212180851195_WTFPart2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212180907372_WTFPart3ButIGetItNow.resx">
+      <DependentUpon>202212180907372_WTFPart3ButIGetItNow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
