@@ -447,6 +447,10 @@
     <Compile Include="Migrations\202212180907372_WTFPart3ButIGetItNow.designer.cs">
       <DependentUpon>202212180907372_WTFPart3ButIGetItNow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212181225152_WTFPart4ButIReallyGetItThisTime.cs" />
+    <Compile Include="Migrations\202212181225152_WTFPart4ButIReallyGetItThisTime.designer.cs">
+      <DependentUpon>202212181225152_WTFPart4ButIReallyGetItThisTime.cs</DependentUpon>
+    </Compile>
     <Compile Include="PriceConverter.cs" />
     <Compile Include="ViewModels\AddPassengerViewModel.cs" />
     <Compile Include="Migrations\202212131825014_RemoveOneToOneRelationship.cs" />
@@ -486,6 +490,7 @@
     <Compile Include="ViewModels\TripViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelCommand.cs" />
+    <Compile Include="Views\ILoadableView.cs" />
     <Compile Include="Views\Screens\AddNewCoach.xaml.cs">
       <DependentUpon>AddNewCoach.xaml</DependentUpon>
     </Compile>
@@ -653,6 +658,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212180907372_WTFPart3ButIGetItNow.resx">
       <DependentUpon>202212180907372_WTFPart3ButIGetItNow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212181225152_WTFPart4ButIReallyGetItThisTime.resx">
+      <DependentUpon>202212181225152_WTFPart4ButIReallyGetItThisTime.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

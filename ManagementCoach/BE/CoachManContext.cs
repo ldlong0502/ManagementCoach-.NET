@@ -78,7 +78,7 @@ namespace ManagementCoach.BE
 										 .WithRequired(r => r.Province);
 
 			modelBuilder.Entity<Trip>().HasRequired(r => r.Route)
-				.WithRequiredPrincipal(p => p.Trip);
+				.WithOptional(p => p.Trip);
 		}
 	}
 }

@@ -6,6 +6,7 @@ using OfficeOpenXml;
 using OfficeOpenXml.Table;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Data.Entity;
 using System.Data.Entity.Core.Metadata.Edm;
 using System.Diagnostics;
@@ -28,7 +29,7 @@ namespace ManagementCoach.BE
 {
 	public class ExcelHelper
 	{
-		public static void ExportSingleSheetAs<T>(string sheetName, IEnumerable<T> items)
+		public static void ExportSingleSheetAs<TEntity>(string sheetName, IEnumerable<TEntity> items) 
 		{
 			SaveFileDialog dialog = new SaveFileDialog();
 			dialog.Filter = "Excel File|*.xlsx";
@@ -65,7 +66,7 @@ namespace ManagementCoach.BE
 			}
 		}
 
-		public static void ImportSingleSheet(string sheetName)
+		public static void ImportFromFile<TEntity>(string sheetName = null) where TEntity : class, new()
 		{
 			OpenFileDialog dialog = new OpenFileDialog();
 			dialog.Filter = "Excel File|*.xlsx";
@@ -80,15 +81,15 @@ namespace ManagementCoach.BE
 			var result = MessageBox.Show($"Do you want to delete all of the current data before importing?", "Export Sucessfully", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 			if (result == DialogResult.Yes)
 			{
-				Import(dialog.FileName, sheetName, dropCurrentData: true);
+				Import<TEntity>(dialog.FileName, sheetName, dropCurrentData: true);
 			}
 			else
 			{
-				Import(dialog.FileName, sheetName, dropCurrentData: false);
+				Import<TEntity>(dialog.FileName, sheetName, dropCurrentData: false);
 			}
 		}
 
-		public static void Export<T>(string filePath, string sheetName, IEnumerable<T> items) {
+		public static void Export<TEntity>(string filePath, string sheetName, IEnumerable<TEntity> items) {
 			ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
 			var fileName = System.IO.Path.GetFileNameWithoutExtension(filePath);
@@ -123,92 +124,39 @@ namespace ManagementCoach.BE
 			}
 		}
 
-		private static readonly Dictionary<string, (Type entityType, Func<ExcelWorksheet, IEnumerable<object>> handler)> 
-			_typeAndHandlerOf = new Dictionary<string, (Type entityType, Func<ExcelWorksheet, IEnumerable<object>> handler)>()
-		{
-			{ "Trips", (typeof(Trip), worksheet => worksheet.ConvertToObjects<Trip>()) },
-			{ "Coaches", (typeof(Coach),worksheet => worksheet.ConvertToObjects<Coach>()) },
-			{ "Drivers", (typeof(Driver),worksheet => worksheet.ConvertToObjects<Driver>()) },
-			{ "Passengers", (typeof(Passenger),worksheet => worksheet.ConvertToObjects<Passenger>()) },
-			{ "Stations", (typeof(Station),worksheet => worksheet.ConvertToObjects<Station>()) },
-			{ "RestAreas",(typeof(RestArea), worksheet => worksheet.ConvertToObjects<RestArea>()) },
-			{ "Routes", (typeof(Route),worksheet => worksheet.ConvertToObjects<Route>()) },
-		};
-
-		public static void ImportAll(string filePath, bool dropCurrentData)
+		public static void Import<TEntity>(string filePath, string sheetName = null, bool dropCurrentData = false) where TEntity : class, new()
 		{
 			ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 			var context = new CoachManContext();
 
 			using (var pck = new ExcelPackage(new FileInfo(filePath)))
 			{
-				foreach (var worksheet in pck.Workbook.Worksheets)
+				var worksheets = pck.Workbook.Worksheets.ToList();
+				if (!string.IsNullOrWhiteSpace(sheetName))
 				{
-					if (_typeAndHandlerOf.ContainsKey(worksheet.Name))
-					{
-						var name = worksheet.Name;
-						var (entityType, convertToEntities) = _typeAndHandlerOf[name];
-						var entities = convertToEntities(worksheet);
-
-						try
-						{
-							if (dropCurrentData)
-							{
-								context.BulkSynchronize(entityType, entities);
-							}
-							else
-							{
-								context.BulkMerge(entityType, entities);
-							}
-						}
-						catch (TargetInvocationException ex)
-						{
-							if (ex.InnerException is Npgsql.PostgresException postgresEx)
-							{
-								var result = MessageBox.Show($"Error While importing from Sheet \"{worksheet.Name}\":\n\n{postgresEx.MessageText}\n\n{postgresEx.Detail}", "Import Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-							}
-							return;
-						}
-					}
+					worksheets = worksheets.Where(w => w.Name == sheetName).ToList();
 				}
-			}
-		}
-		public static void Import(string filePath, string sheetName, bool dropCurrentData)
-		{
-			ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-			var context = new CoachManContext();
-
-			using (var pck = new ExcelPackage(new FileInfo(filePath)))
-			{
-				var worksheets = pck.Workbook.Worksheets.Where(w => w.Name == sheetName);
 
 				if (worksheets.Count() == 0)
 				{
 					MessageBox.Show($"Could not find Sheet \"{sheetName}\" in file \"{filePath}\"", "Import Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					return;
 				}
-
-
-				if (!_typeAndHandlerOf.ContainsKey(sheetName))
-				{
-					MessageBox.Show($"Could not indentify table to import to for Sheet of name \"{sheetName}\"", "Import Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-					return;
-				}
 				else 
 				{
 					foreach (var worksheet in worksheets) {
-						var (entityType, convertToEntities) = _typeAndHandlerOf[sheetName];
-						var entities = convertToEntities(worksheet);
+						var entities = worksheet.ConvertToObjects<TEntity>();
 
+						context.Set<TEntity>().AttachRange(entities);
 						try
 						{
 							if (dropCurrentData)
 							{
-								context.BulkSynchronize(entityType, entities);
+								context.BulkSynchronize(entities);
 							}
 							else
 							{
-								context.BulkMerge(entityType, entities);
+								context.BulkMerge(entities);
 							}
 						}
 						catch (TargetInvocationException ex)
