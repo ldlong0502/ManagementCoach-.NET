@@ -451,6 +451,10 @@
     <Compile Include="Migrations\202212181225152_WTFPart4ButIReallyGetItThisTime.designer.cs">
       <DependentUpon>202212181225152_WTFPart4ButIReallyGetItThisTime.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212181252085_RouteUnique.cs" />
+    <Compile Include="Migrations\202212181252085_RouteUnique.designer.cs">
+      <DependentUpon>202212181252085_RouteUnique.cs</DependentUpon>
+    </Compile>
     <Compile Include="PriceConverter.cs" />
     <Compile Include="ViewModels\AddPassengerViewModel.cs" />
     <Compile Include="Migrations\202212131825014_RemoveOneToOneRelationship.cs" />
@@ -661,6 +665,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212181225152_WTFPart4ButIReallyGetItThisTime.resx">
       <DependentUpon>202212181225152_WTFPart4ButIReallyGetItThisTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212181252085_RouteUnique.resx">
+      <DependentUpon>202212181252085_RouteUnique.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
