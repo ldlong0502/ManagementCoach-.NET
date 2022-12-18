@@ -2,6 +2,7 @@
 using ManagementCoach.BE.Entities;
 using ManagementCoach.BE.Repositories;
 using Microsoft.Win32;
+using Npgsql;
 using OfficeOpenXml;
 using OfficeOpenXml.Table;
 using System;
@@ -79,14 +80,24 @@ namespace ManagementCoach.BE
 			}
 
 			var result = MessageBox.Show($"Do you want to delete all of the current data before importing?", "Export Sucessfully", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-			if (result == DialogResult.Yes)
+			try
 			{
-				Import<TEntity>(dialog.FileName, sheetName, dropCurrentData: true);
+				if (result == DialogResult.Yes)
+				{
+					Import<TEntity>(dialog.FileName, sheetName, dropCurrentData: true);
+				}
+				else
+				{
+					Import<TEntity>(dialog.FileName, sheetName, dropCurrentData: false);
+				}
 			}
-			else
+			catch 
 			{
-				Import<TEntity>(dialog.FileName, sheetName, dropCurrentData: false);
+				return;
 			}
+
+			MessageBox.Show($"Import Completed.", "Import Sucessfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
 		}
 
 		public static void Export<TEntity>(string filePath, string sheetName, IEnumerable<TEntity> items) {
@@ -159,13 +170,21 @@ namespace ManagementCoach.BE
 								context.BulkMerge(entities);
 							}
 						}
-						catch (TargetInvocationException ex)
+						catch (Exception ex)
 						{
-							if (ex.InnerException is Npgsql.PostgresException postgresEx)
+							if (ex is TargetInvocationException tex && tex.InnerException is Npgsql.PostgresException postgresEx)
 							{
 								var result = MessageBox.Show($"Error While importing from Sheet \"{worksheet.Name}\":\n\n{postgresEx.MessageText}\n\n{postgresEx.Detail}", "Import Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
 							}
-							return;
+							else if (ex is PostgresException postEx)
+							{
+								var result = MessageBox.Show($"{postEx.MessageText}\n\n{postEx.Detail}", "Import Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+							}
+							else
+							{
+								var result = MessageBox.Show(ex.Message, "Import Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+							}
+							throw ex;
 						}
 					}
 				}
