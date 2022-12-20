@@ -1,4 +1,9 @@
-﻿using System;
+﻿using ManagementCoach.ViewModels;
+using MaterialDesignThemes.Wpf;
+using System.Diagnostics;
+using System.Globalization;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +29,7 @@ namespace ManagementCoach.Views.UserControls
         {
             InitializeComponent();
         }
+
+      
     }
 }

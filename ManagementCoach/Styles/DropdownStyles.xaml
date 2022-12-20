@@ -1,5 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:fa="http://schemas.fontawesome.io/icons/"
+                      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                     xmlns:system="clr-namespace:System;assembly=mscorlib"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style x:Key="MenuItem_With_Dropdown"
@@ -86,6 +88,93 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style x:Key="MenuItem_With_Dropdown_Avatar"
+               TargetType="MenuItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type MenuItem}">
+                    <Border x:Name="border"
+                                CornerRadius="10"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                >
+                        <Grid>
+                            <!--// Icon //-->
+                            <ContentPresenter ContentSource="Icon"
+                                                  HorizontalAlignment="Left"
+                                                  VerticalAlignment="Center"
+                                                  Height="25"
+                                                  Width="25"
+                                                  Margin="5,0,0,0" />
+
+                            <!--// Text //-->
+                            <ContentPresenter ContentSource="Header"
+                                                  TextBlock.Foreground="WhiteSmoke"
+                                                  TextBlock.FontFamily="Rubik Medium"
+                                                  TextBlock.FontSize="15"
+                                                  HorizontalAlignment="Left"
+                                                  VerticalAlignment="Center"
+                                                  Margin="40,0,0,0" />
+
+                            <!--// Dropdown Icon //-->
+                            <materialDesign:PackIcon Kind="DotsVertical" Foreground="White" Height="30" Width="30" VerticalAlignment="Center" />
+
+                            <!--// Popup //-->
+                            <Popup x:Name="PART_Popup"
+       
+                                       AllowsTransparency="True"
+                                       IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                                       Placement="Bottom"
+                                       Margin="0 0 20 0"
+                                       FlowDirection="RightToLeft"
+                                       PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}">
+                                        
+                                <Border x:Name="SubMenuBorder"
+                                            CornerRadius="10"
+                                            Background="White"
+                                             BorderThickness="1"
+                                            BorderBrush="#DDDDDD">
+
+                                    <ScrollViewer x:Name="SubMenuScrollViewer"
+                                                      Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer,TypeInTargetAssembly={x:Type FrameworkElement}}}">
+
+                                        <Grid RenderOptions.ClearTypeHint="Enabled">
+
+                                            <Canvas HorizontalAlignment="Left"
+                                                        VerticalAlignment="Top" />
+
+                                            <ItemsPresenter x:Name="ItemsPresenter" />
+
+                                        </Grid>
+                                    </ScrollViewer>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+
+                        <Trigger Property="IsSuspendingPopupAnimation"
+                                     Value="True">
+                            <Setter Property="PopupAnimation"
+                                        TargetName="PART_Popup"
+                                        Value="None" />
+                        </Trigger>
+                        <Trigger Property="IsHighlighted"
+                                     Value="True">
+                            <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="Transparent" />
+                            <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="Transparent" />
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <Style x:Key="Services_Sub_MenuItem"
                TargetType="MenuItem">
         <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
@@ -132,6 +221,48 @@
                             <Setter Property="Visibility"
                                         TargetName="Highlighter"
                                         Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="Avatar_Sub_MenuItem"
+               TargetType="MenuItem">
+        <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type MenuItem}">
+                    <Border x:Name="border"
+                                Background="White"
+                                BorderThickness="0">
+                        <Grid>
+                            <!--// Icon //-->
+                            <ContentPresenter ContentSource="Icon"
+                                                  HorizontalAlignment="Left"
+                                                  VerticalAlignment="Center"
+                                                  Margin="8,0,0,0" />
+                            <!--// Text //-->
+                            <ContentPresenter ContentSource="Header"
+                                                  TextBlock.Foreground="{StaticResource color2}"
+                                                  TextBlock.FontFamily="Rubik Medium"
+                                                  TextBlock.FontSize="15"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Margin="35,0,0,0" />
+
+
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsHighlighted"
+                                     Value="True">
+                            <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="SkyBlue" />
+                            <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{x:Null}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

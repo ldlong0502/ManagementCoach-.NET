@@ -131,7 +131,7 @@ namespace ManagementCoach.ViewModels
         {
             if (Title == "Coaches")
             {
-                (CurrentManagerView as CoachViewModel).ImportCoachesFromExcel();
+              
 
             }
             else if (Title == "Drivers")

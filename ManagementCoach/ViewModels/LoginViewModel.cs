@@ -57,32 +57,12 @@ namespace ManagementCoach.ViewModels
             string pass = MD5Helper.Encrypt(Password);
             if(new RepoUser().UserValid(UserName, pass))
             {
-                //for (int k = 11; k <= 14; k++)
-                //{
-
-                //    for (int i = 1; i <= 12; i++)
-                //    {
-                //        string seatDown = "A" + i.ToString();
-                //        string seatUp = "B" + i.ToString();
-                //        new RepoCoachSeat().InsertCoachSeat(new InputCoachSeat()
-                //        {
-                //            CoachId = k,
-                //            Name = seatDown
-
-                //        });
-                //        new RepoCoachSeat().InsertCoachSeat(new InputCoachSeat()
-                //        {
-                //            CoachId = k,
-                //            Name = seatUp
-
-                //        });
-                //    }
-                //}
-                
                 Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(UserName), null);
                 CurrentUser.currentUser = new RepoUser().GetUser(Thread.CurrentPrincipal.Identity.Name);
                 DashBoard db = new DashBoard();
+                CurrentUser.dashBoard = db;
                 db.Show();
+                
                 CloseAction();
             }
         }

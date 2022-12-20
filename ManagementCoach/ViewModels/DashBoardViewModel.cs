@@ -19,7 +19,8 @@ namespace ManagementCoach.ViewModels
     {
         private ViewModelBase _currentChildView;
         private UserControl currentUserControl;
-        private DispatcherTimer dispatcherTimer = null;
+        private DispatcherTimer dispatcherTimerAdmin = null;
+        private DispatcherTimer dispatcherTimerStaff = null;
         private int time = 1;
         public int Time
         {
@@ -59,16 +60,28 @@ namespace ManagementCoach.ViewModels
         public ICommand ShowHomeViewCommand { get; }
         public ICommand ShowManagerViewCommand { get; }
         public ICommand ShowAccountViewCommand { get; }
-        public DispatcherTimer DispatcherTimerImage
+        public DispatcherTimer DispatcherTimerAdmin
         {
             get
             {
-                return dispatcherTimer;
+                return dispatcherTimerAdmin;
             }
             set
             {
-                dispatcherTimer = value;
-                OnPropertyChanged(nameof(DispatcherTimerImage));
+                dispatcherTimerAdmin = value;
+                OnPropertyChanged(nameof(DispatcherTimerAdmin));
+            }
+        }
+        public DispatcherTimer DispatcherTimerStaff
+        {
+            get
+            {
+                return dispatcherTimerStaff;
+            }
+            set
+            {
+                dispatcherTimerStaff = value;
+                OnPropertyChanged(nameof(DispatcherTimerStaff));
             }
         }
         public DashBoardViewModel()
@@ -93,7 +106,7 @@ namespace ManagementCoach.ViewModels
 
         private void ExecuteShowAccountViewCommand(object obj)
         {
-            DispatcherTimerImage.Stop();
+            ResetTime();
             CurrentChildView = new UserViewModel();
             CurrentUserControl = new AccountUserControl();
             CurrentUserControl.DataContext = CurrentChildView;
@@ -102,7 +115,7 @@ namespace ManagementCoach.ViewModels
 
         private void ExecuteShowManagerViewCommand(object obj)
         {
-            DispatcherTimerImage.Stop();
+            ResetTime();
             CurrentChildView = new ManagerViewModel();
             CurrentUserControl = new ManagerUserControl();
             CurrentUserControl.DataContext = CurrentChildView;
@@ -110,33 +123,74 @@ namespace ManagementCoach.ViewModels
 
         private void ExecuteShowHomeViewCommand(object obj)
         {
-            CurrentChildView = new AdminHomeViewModel();
-            CurrentUserControl = new AdminHome();
-            CurrentUserControl.DataContext = CurrentChildView;
-            (CurrentChildView as AdminHomeViewModel).DisplayedImagePath = @"C:/Users/LENOVO/Downloads/ImageCoach/coach1.jpg";
-            LoadImage();
+            if(CurrentUser.currentUser.Role == "Admin")
+            {
+                CurrentChildView = new AdminHomeViewModel();
+                CurrentUserControl = new AdminHome();
+                CurrentUserControl.DataContext = CurrentChildView;
+                (CurrentChildView as AdminHomeViewModel).DisplayedImagePath = @"C:/Users/LENOVO/Downloads/ImageCoach/coach1.jpg";
+                LoadImageAdmin();
+            }
+            else
+            {
+                CurrentChildView = new StaffHomeViewModel();
+                CurrentUserControl = new StaffHome();
+                CurrentUserControl.DataContext = CurrentChildView;
+                (CurrentChildView as StaffHomeViewModel).DisplayedImagePath = @"C:/Users/LENOVO/Downloads/ImageCoach/coach1.jpg";
+                LoadImageSatff();
+            }
+           
 
         }
 
-        public void LoadImage()
+        public void LoadImageAdmin()
         {
 
-            DispatcherTimerImage = new DispatcherTimer();
-            DispatcherTimerImage.Tick += new EventHandler(dispatcherTimer_Tick);
-            DispatcherTimerImage.Interval = new TimeSpan(0, 0, 1);
-            DispatcherTimerImage.Start();
+            DispatcherTimerAdmin = new DispatcherTimer();
+            DispatcherTimerAdmin.Tick += new EventHandler(dispatcherTimerAdmin_Tick);
+            DispatcherTimerAdmin.Interval = new TimeSpan(0, 0, 1);
+            DispatcherTimerAdmin.Start();
+        }
+        public void LoadImageSatff()
+        {
+
+            DispatcherTimerStaff = new DispatcherTimer();
+            DispatcherTimerStaff.Tick += new EventHandler(dispatcherTimerStaff_Tick);
+            DispatcherTimerStaff.Interval = new TimeSpan(0, 0, 1);
+            DispatcherTimerStaff.Start();
         }
 
-        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        private void dispatcherTimerAdmin_Tick(object sender, EventArgs e)
         {
             TimeSpan.FromSeconds(time).Duration();
-            (CurrentChildView as AdminHomeViewModel).DisplayedImagePath = @"C:/Users/LENOVO/Downloads/ImageCoach/coach" + time + ".jpg";
+            (CurrentChildView as AdminHomeViewModel).DisplayedImagePath = @"C:/Users/LENOVO/Downloads/ImageCoach/coach" + time + ".jpg";            
             if (time == 4)
             {
 
                 time = 1;
             }
             time++;
+        }
+        private void dispatcherTimerStaff_Tick(object sender, EventArgs e)
+        {
+            TimeSpan.FromSeconds(time).Duration();
+            (CurrentChildView as StaffHomeViewModel).DisplayedImagePath = @"C:/Users/LENOVO/Downloads/ImageCoach/coach" + time + ".jpg";
+            if (time == 4)
+            {
+
+                time = 1;
+            }
+            time++;
+        }
+
+        private void ResetTime()
+        {
+            if(DispatcherTimerAdmin != null)
+                DispatcherTimerAdmin.Stop();
+            if (DispatcherTimerStaff != null)
+                DispatcherTimerStaff.Stop();
+            
+            time = 0;
         }
     }
 }

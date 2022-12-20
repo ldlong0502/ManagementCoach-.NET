@@ -1,0 +1,202 @@
+﻿<Window x:Class="ManagementCoach.Views.Screens.CoachSeatWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ManagementCoach.Views.Screens"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:vm="clr-namespace:ManagementCoach.ViewModels"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        BorderBrush="BlueViolet"
+        BorderThickness="2"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        Title="AddNewCoach" Height="450" Width="400" Background="White">
+    <Window.DataContext>
+        <vm:CoachSeatViewModel></vm:CoachSeatViewModel>
+    </Window.DataContext>
+    <Window.Resources>
+        <Style TargetType="TextBlock" x:Key="textStyle" >
+            <Setter Property="FontSize" Value="15" ></Setter>
+            <Setter Property="FontWeight" Value="Bold" ></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        </Style>
+
+        <Style TargetType="ComboBox" x:Key="comboboxStyle">
+            <Setter Property="Height" Value="30"></Setter>
+            <Setter Property="Width" Value="250"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="15" ></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        </Style>
+        <Style TargetType="DatePicker" x:Key="datepickerStyle">
+            <Setter Property="Height" Value="30"></Setter>
+            <Setter Property="Width" Value="250"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="Margin" Value="30,0,0,0"></Setter>
+            <Setter Property="FontSize" Value="15" ></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="28*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Background="{StaticResource color2}">
+            <fa:FontAwesome Icon="Bus" FontSize="30" Foreground="White" HorizontalAlignment="Center" Margin="10,0,0,0" VerticalAlignment="Center"></fa:FontAwesome>
+            <TextBlock Text="Coach Seat" Foreground="White" FontSize="20" VerticalAlignment="Center" Margin="20,0,0,0"></TextBlock>
+            <Button x:Name="btnMinimize"
+                            Grid.Column="1"
+                            Content="-"
+                Height="30" Width="30"
+                            Cursor="Hand"
+                            Foreground="White"
+                            FontFamily="Montserrat"
+                            FontSize="25"
+                            Click="btnMinimize_Click" 
+                            Margin="0,0,-390,0"
+                            >
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="LightSkyBlue">
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="AntiqueWhite"></Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Height="30" Width="30" CornerRadius="15"
+                                        Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"></ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="btnClose"
+            Grid.Column="1"
+            Content="x"
+            Height="30" Width="30"
+            Cursor="Hand"
+            Foreground="White"
+            FontFamily="Montserrat"
+            FontSize="25"
+            Click="btnClose_Click" 
+                    Margin="0,0,-460,0"
+                            >
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Red"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="AntiqueWhite"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Height="30" Width="30" CornerRadius="15"
+                        Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </StackPanel>
+        <TabControl
+          Width="300"
+          Grid.Row="1"
+          materialDesign:ColorZoneAssist.Background="{DynamicResource MaterialDesignCardBackground}"
+          materialDesign:ColorZoneAssist.Foreground="{DynamicResource PrimaryHueMidBrush}"
+          materialDesign:ColorZoneAssist.Mode="Custom"
+          Style="{StaticResource MaterialDesignFilledTabControl}">
+            <TabItem
+            Header="SEAT DOWN">
+                <ListView 
+                  ItemsSource="{Binding ListSeatDown}"
+                  Name="lvproduct"
+                  VerticalAlignment="Stretch" 
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Center"
+                  >
+
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="2" 
+                                 Rows="{Binding Path=DataContext.Rows, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                            </UniformGrid>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Height="40" Width="40" CornerRadius="10" BorderBrush="#DDDDDD" BorderThickness="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock Text="{Binding Name}"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap"
+                                   FontSize="15"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   FontFamily="Roboto"
+                                   FontWeight="Bold"
+                                   Foreground="{StaticResource color2}"/>
+                                </Border>
+                               
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                   
+                </ListView>
+            </TabItem>
+                    <TabItem
+            Header="SEAT UP">
+                <ListView 
+                  ItemsSource="{Binding ListSeatUp}"
+  
+                  VerticalAlignment="Stretch" 
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Center"
+                  >
+
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="2" 
+                                 Rows="{Binding Path=DataContext.Rows, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                            </UniformGrid>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Height="40" Width="40" CornerRadius="10" BorderBrush="#DDDDDD" BorderThickness="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock Text="{Binding Name}"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap"
+                                   FontSize="15"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   FontFamily="Roboto"
+                                   FontWeight="Bold"
+                                   Foreground="{StaticResource color2}"/>
+                            </Border>
+
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+            </TabItem>
+                </TabControl>
+
+
+    </Grid>
+</Window>

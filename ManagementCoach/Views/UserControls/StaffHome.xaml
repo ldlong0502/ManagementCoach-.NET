@@ -5,38 +5,299 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ManagementCoach.Views.UserControls"
              xmlns:fa="http://schemas.fontawesome.io/icons/" 
-             xmlns:vm="clr-namespace:ManagementCoach.ViewModels"
+             xmlns:vm="clr-namespace:ManagementCoach.ViewModels" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:managementcoach="clr-namespace:ManagementCoach"
              mc:Ignorable="d" 
              Background="White"
+             x:Name="staffHome"
              d:DesignHeight="700" d:DesignWidth="1200">
     <UserControl.DataContext>
-        <vm:AdminHomeViewModel></vm:AdminHomeViewModel>
+        <vm:StaffHomeViewModel></vm:StaffHomeViewModel>
     </UserControl.DataContext>
     <UserControl.Resources>
+        <managementcoach:PriceConverter x:Key="PriceConverter"></managementcoach:PriceConverter>
+        <managementcoach:TimeConverter x:Key="TimeConverter"/>
         <SolidColorBrush x:Key="whiteIcon" Color="White"></SolidColorBrush>
         <SolidColorBrush x:Key="violetIcon" Color="#FF274381"></SolidColorBrush>
+
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"></RowDefinition>
-            <RowDefinition Height="100*"></RowDefinition>
-            <RowDefinition Height="131*"></RowDefinition>
-            <RowDefinition Height="69*"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="110"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition ></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock HorizontalAlignment="Left" Height="46" Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding WelcomeText}" VerticalAlignment="Center" Width="352" FontSize="36" FontWeight="Bold" Foreground="{StaticResource violetIcon}"/>
+        <Border Grid.Row="1" Height="100" Width="800" HorizontalAlignment="Left" Margin="10 0 0 0" CornerRadius="30" BorderThickness="2" BorderBrush="#DDDDDD">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="60"></ColumnDefinition>
+
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Column="0">
+                    <materialDesign:PackIcon Kind="RecordCircle" Foreground="SkyBlue" Height="30" Width="30" VerticalAlignment="Center" Margin="20 0 0 0"/>
+                    <ComboBox
+                      Width="180"
+                        Margin="10 0 0 0"
+                        IsEditable="True"
+                        FontSize="15"
+                      materialDesign:HintAssist.Hint="Departure"
+                      materialDesign:TextFieldAssist.HasClearButton="True"
+                      ItemsSource="{Binding ListProvinces}"
+                        DisplayMemberPath="Name"
+                        SelectedItem="{Binding Departure}"
+                      Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                    </ComboBox>
+                </StackPanel>
+                <Button Command="{Binding SwapCommand}" Grid.Column="1" Background="Transparent" BorderBrush="{x:Null}" BorderThickness="0" FocusVisualStyle="{x:Null}">
+                    <materialDesign:PackIcon Kind="SwapHorizontalCircle" Foreground="Gray" Height="25" Width="30" VerticalAlignment="Center"/>
+                </Button>
+                <StackPanel Orientation="Horizontal" Grid.Column="2">
+                    <materialDesign:PackIcon Kind="RecordCircle" Foreground="OrangeRed" Height="30" Width="30" VerticalAlignment="Center" Margin="15 0 0 0"/>
+                    <ComboBox
+                      Width="180"
+                        Margin="10 0 0 0"
+                        FontSize="15"
+                        IsEditable="True"
+                      materialDesign:HintAssist.Hint="Destination"
+                      materialDesign:TextFieldAssist.HasClearButton="True"
+                      ItemsSource="{Binding ListProvinces}"
+                          DisplayMemberPath="Name"
+                           SelectedItem="{Binding Destination}"
+                      Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                    </ComboBox>
+                </StackPanel>
+                <DatePicker
+                  Grid.Column="3"
+                  Width="200"
+                    Height="55"
+                  SelectedDate="{Binding Date}"
+                  Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                  materialDesign:HintAssist.Hint="Choose Date"
+                  Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+            </Grid>
+        </Border>
+        <Button 
+        Margin="500 0 0 0"
+        Grid.Row="1"
+            HorizontalAlignment="Center"
+            FocusVisualStyle="{x:Null}"
+            Height="50"
+            Command="{Binding SearchRouteCommand}"
+            Style="{StaticResource MaterialDesignFlatButton}"
+            ToolTip="GO">
+            <materialDesign:PackIcon
+             Height="30"
+             Width="30"
+             Foreground="YellowGreen"
+             Kind="MapSearchOutline" />
+        </Button>
+        <TextBlock Grid.Row="2" Width="100" HorizontalAlignment="Left" Margin="30 0 0 0" Text="Routes" Style="{StaticResource MaterialDesignHeadline5TextBlock}" Foreground="{StaticResource color2}" FontWeight="Bold"></TextBlock>
+        <ScrollViewer VerticalScrollBarVisibility="Hidden" Grid.Row="3" Width="890" HorizontalAlignment="Left" Margin="0,0,0,2">
+            <ListView 
+                  ItemsSource="{Binding ListRoutes}"
+                  Name="lvproduct"
+                  BorderBrush="Black"
+                  BorderThickness="2"
+                  VerticalAlignment="Stretch" 
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Center"
+                  >
+
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="3" 
+                                 Rows="1">
+                        </UniformGrid>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <materialDesign:Card
+                             Width="220">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition
+                                        Height="140" />
+                                    <RowDefinition
+                                          Height="Auto" />
+                                    <RowDefinition
+                                          Height="Auto" />
+                                    <RowDefinition
+                                            Height="Auto" />
+                                    <RowDefinition
+                                            Height="Auto" />
+                                    <RowDefinition
+            Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Image
+                                  Height="140"
+                                  Source="{Binding ImageUrl}"
+                                  Stretch="UniformToFill" />
+                                <Button
+                                  Grid.Row="0"
+                                  Margin="0,0,16,-20"
+                                  HorizontalAlignment="Right"
+                                  VerticalAlignment="Bottom"
+                                  Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                                    <materialDesign:PackIcon Kind="ShareVariant" />
+                                </Button>
+                                <StackPanel
+                                  Grid.Row="1"
+                                  Margin="8,24,8,4">
+                                    <TextBlock
+                                        Margin="0"
+                                        Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                        Text="{Binding Title}" />
+                                    <Viewbox
+                                        Height="16"
+                                        Margin="0,4,0,8"
+                                        HorizontalAlignment="Left">
+                                        <materialDesign:RatingBar
+                                          Margin="0"
+                                          Foreground="Gold"
+                                          Orientation="Horizontal"
+                                          Value="3" />
+                                    </Viewbox>
+                                    <TextBlock
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource MaterialDesignBody1TextBlock}"
+                                    Text="{Binding Price, Converter={StaticResource PriceConverter}}"
+                                    TextWrapping="Wrap" />
+                                </StackPanel>
+                                <Separator
+                                  Grid.Row="2"
+                                  Margin="8,0,8,0"
+                                  Style="{StaticResource MaterialDesignDarkSeparator}" />
+                                <TextBlock
+                                  Grid.Row="3"
+                                  Margin="8,4,8,4"
+                                  Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                  Text="Today's availability" />
+                                <Grid
+                                  Grid.Row="4">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition
+                                             Width="Auto" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <materialDesign:PackIcon
+                                        Grid.Column="0"
+                                        Margin="8,4,4,4"
+                                        VerticalAlignment="Center"
+                                        Kind="Clock" />
+                                    <ListBox
+                                        Grid.Column="1"
+                                        Margin="4,8,8,4"
+                                        SelectedIndex="0"
+                                        Style="{StaticResource MaterialDesignToolToggleFlatListBox}">
+                                        <ListBox.Resources>
+                                            <Style
+                                            TargetType="{x:Type ListBoxItem}"
+                                            BasedOn="{StaticResource MaterialDesignToolToggleListBoxItem}">
+                                                <Setter
+                                              Property="Padding"
+                                              Value="4,6,4,6" />
+                                            </Style>
+                                        </ListBox.Resources>
+                                        <ListBoxItem>
+                                            <TextBlock
+            Text="{Binding ListTime[0], Converter={StaticResource TimeConverter}}" />
+                                        </ListBoxItem>
+                                        <ListBoxItem>
+                                            <TextBlock
+             Text="{Binding ListTime[1] , Converter={StaticResource TimeConverter}}"  />
+                                        </ListBoxItem>
+                                        <ListBoxItem>
+                                            <TextBlock
+            Text="{Binding ListTime[2], Converter={StaticResource TimeConverter}}"  />
+                                        </ListBoxItem>
+                                    </ListBox>
+                                </Grid>
+                                <StackPanel
+      Grid.Row="5">
+                                    <Button
+        Margin="8,4,8,8"
+        HorizontalAlignment="Left"
+        Content="RESERVE"             
+        Command="{Binding Path=DataContext.ReserveCommand , RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+        CommandParameter="{Binding Id}"
+        Style="{StaticResource MaterialDesignFlatButton}" />
+                                </StackPanel>
+                            </Grid>
+                        </materialDesign:Card>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+
+        </ScrollViewer>
+        <Canvas Grid.Row="4" >
+            <Image x:Name="image" Source="/Images/bus.png" Height="40" Width="40" Canvas.Left="350" RenderTransformOrigin="0.5,0.5" >
+                <Image.Triggers>
+                    <!-- Animates the Image's opacity. -->
+                    <EventTrigger RoutedEvent="UserControl.Loaded">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation From="350" To="850" Duration="0:0:5"
+                                             RepeatBehavior="Forever"
+                                Storyboard.TargetName="image"
+                                Storyboard.TargetProperty="(Canvas.Left)"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Image.Triggers>
+            </Image>
+        </Canvas>
 
         <Border CornerRadius="50" BorderThickness="1" Margin="889,10,10,17" Grid.RowSpan="4" Background="#FFA6F5FF">
             <Grid>
-                <Canvas Height="40" Width="40" Margin="110,9,150,622">
-                    <fa:FontAwesome Icon="BellOutline" FontSize="20"  Canvas.Left="10" Canvas.Top="10"></fa:FontAwesome>
-                    <Border Height="10" Width="10" CornerRadius="10" Background="WhiteSmoke" Canvas.Left="20" Canvas.Top="5">
-                        <TextBlock Text="0" FontSize="7" Foreground="Red" TextAlignment="Center"></TextBlock>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"></RowDefinition>
+                    <RowDefinition Height="399*"></RowDefinition>
+                    <RowDefinition Height="172*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 20 0">
+                    <Border BorderBrush="Transparent" Background="Beige" CornerRadius="20" BorderThickness="1" Width="40" Height="40" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 10 0 0" >
+                        <Image Source="{Binding Avatar}" Stretch="Uniform"/>
                     </Border>
-                </Canvas>
-                <Border BorderBrush="Transparent" Background="Beige" CornerRadius="20" BorderThickness="1" Width="40" Height="40" Margin="220,9,41,622">
-                    <Image Source="/Images/avatar.png"/>
-                </Border>
-                <Calendar HorizontalAlignment="Center" Margin="0,103,0,0" VerticalAlignment="Top" Width="236" RenderTransformOrigin="0.52,0.571" Height="351" Background="{x:Null}" FontSize="18" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="#FF11495F" FontFamily="Arial">
+                    <Menu  >
+                        <MenuItem Margin="0 16 0 0" Height="30" Width="30" VerticalAlignment="Center" Style="{StaticResource MenuItem_With_Dropdown_Avatar}" >
+
+                            <MenuItem Header="Change Password"  Command="{Binding ChangePasswordCommand}" Width="140" Height="35" Style="{StaticResource Avatar_Sub_MenuItem}" >
+                                <MenuItem.Icon>
+                                    <fa:FontAwesome Icon="Key" Foreground="{StaticResource color2}" FontSize="15"></fa:FontAwesome>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Header="About us"  Command="{Binding MyAccountCommand}" Width="140" Height="35" Style="{StaticResource Avatar_Sub_MenuItem}" >
+                                <MenuItem.Icon>
+                                    <fa:FontAwesome Icon="InfoCircle" Foreground="{StaticResource color2}" FontSize="15"></fa:FontAwesome>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Header="Setting"  Command="{Binding ExportCommand}" Width="140" Height="35" Style="{StaticResource Avatar_Sub_MenuItem}" >
+                                <MenuItem.Icon>
+                                    <fa:FontAwesome Icon="Gear" Foreground="{StaticResource color2}" FontSize="15"></fa:FontAwesome>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator></Separator>
+                            <MenuItem Header="Log Out" Command="{Binding LogOutCommand}" CommandParameter="{Binding ElementName=staffHome}" Width="140" Height="35" Style="{StaticResource Avatar_Sub_MenuItem}" >
+                                <MenuItem.Icon>
+                                    <fa:FontAwesome Icon="SignOut" Foreground="{StaticResource color2}" FontSize="15"></fa:FontAwesome>
+                                </MenuItem.Icon>
+                            </MenuItem>
+
+                        </MenuItem>
+                    </Menu>
+                </StackPanel>
+                <Calendar Grid.Row="1" HorizontalAlignment="Center" Margin="0,33,0,0" VerticalAlignment="Top" Width="236" RenderTransformOrigin="0.52,0.571" Height="351" Background="{x:Null}" FontSize="18" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="#FF11495F" FontFamily="Arial">
                     <Calendar.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -47,13 +308,8 @@
                     </Calendar.RenderTransform>
                 </Calendar>
 
-                <Canvas Height="40" Width="40" Margin="156,9,103,622">
-                    <fa:FontAwesome Icon="EnvelopeOutline" FontSize="20"  Canvas.Left="10" Canvas.Top="10"/>
-                    <Border Height="10" Width="10" CornerRadius="10" Background="WhiteSmoke" Canvas.Left="23" Canvas.Top="5">
-                        <TextBlock Text="0" FontSize="7" Foreground="Red" TextAlignment="Center"/>
-                    </Border>
-                </Canvas>
-                <WrapPanel Name ="container"  Height="150" Width="200" Margin="0 400 0 0">
+                <Canvas Grid.Row="2"/>
+                <WrapPanel Name ="container" Margin="40 10 40 20" Grid.Row="2">
                     <Image  Source="{Binding DisplayedImagePath, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill"/>
                     <WrapPanel.OpacityMask>
                         <VisualBrush >

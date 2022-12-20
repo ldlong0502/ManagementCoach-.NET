@@ -55,7 +55,7 @@ namespace ManagementCoach.BE.Repositories
 		public List<ModelRestArea> GetRestAreasOfRoute(int routeId)
 		{
 			return Context.RouteRestArea
-							.Where(r => r.RouteId == routeId)
+							.Where(r => r.RouteId == routeId).OrderBy(r => r.StopOrder)
 							.Include(r => r.RestArea)
 							.Select(r => r.RestArea)
 							.ToList()
