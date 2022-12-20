@@ -17,6 +17,6 @@ namespace ManagementCoach.BE.Entities
 		[EpplusIgnore]
 		public Station DestinationStation { get; set; }
 		[EpplusIgnore]
-		public Trip Trip { get; set; }
+		public List<Trip> Trips { get; set; }
 	}
 }

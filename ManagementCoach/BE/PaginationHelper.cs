@@ -11,6 +11,8 @@ namespace ManagementCoach.BE
 	{
 		public static Page<T> Create<T>(int limit, int page, Func<IOrderedQueryable<object>> getItems)
 		{
+			var result = getItems().ToList();
+
 			return new Page<T>()
 			{
 				Items = getItems().Skip((page - 1) * limit)

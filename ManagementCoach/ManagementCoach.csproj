@@ -354,6 +354,7 @@
     <Compile Include="BE\Models\ModelStation.cs" />
     <Compile Include="BE\Models\ModelTicket.cs" />
     <Compile Include="BE\Models\ModelTrip.cs" />
+    <Compile Include="BE\Models\ModelTripCoachSeat.cs" />
     <Compile Include="BE\Models\ModelUser.cs" />
     <Compile Include="BE\Data\Page.cs" />
     <Compile Include="BE\PaginationHelper.cs" />
@@ -454,6 +455,42 @@
     <Compile Include="Migrations\202212181252085_RouteUnique.cs" />
     <Compile Include="Migrations\202212181252085_RouteUnique.designer.cs">
       <DependentUpon>202212181252085_RouteUnique.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212200318485_IDontEvenKnowAnymore.cs" />
+    <Compile Include="Migrations\202212200318485_IDontEvenKnowAnymore.designer.cs">
+      <DependentUpon>202212200318485_IDontEvenKnowAnymore.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212200326417_IDontEvenKnowAnymorePart2.cs" />
+    <Compile Include="Migrations\202212200326417_IDontEvenKnowAnymorePart2.designer.cs">
+      <DependentUpon>202212200326417_IDontEvenKnowAnymorePart2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212200330133_IDontEvenKnowAnymorePart3.cs" />
+    <Compile Include="Migrations\202212200330133_IDontEvenKnowAnymorePart3.designer.cs">
+      <DependentUpon>202212200330133_IDontEvenKnowAnymorePart3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212200334457_IDontEvenKnowAnymorePart4.cs" />
+    <Compile Include="Migrations\202212200334457_IDontEvenKnowAnymorePart4.designer.cs">
+      <DependentUpon>202212200334457_IDontEvenKnowAnymorePart4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212200339200_IDontEvenKnowAnymorePart5.cs" />
+    <Compile Include="Migrations\202212200339200_IDontEvenKnowAnymorePart5.designer.cs">
+      <DependentUpon>202212200339200_IDontEvenKnowAnymorePart5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212200343215_IDontEvenKnowAnymorePart6.cs" />
+    <Compile Include="Migrations\202212200343215_IDontEvenKnowAnymorePart6.designer.cs">
+      <DependentUpon>202212200343215_IDontEvenKnowAnymorePart6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212200348385_IDontEvenKnowAnymorePart7.cs" />
+    <Compile Include="Migrations\202212200348385_IDontEvenKnowAnymorePart7.designer.cs">
+      <DependentUpon>202212200348385_IDontEvenKnowAnymorePart7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212200359572_IDontEvenKnowAnymorePart8.cs" />
+    <Compile Include="Migrations\202212200359572_IDontEvenKnowAnymorePart8.designer.cs">
+      <DependentUpon>202212200359572_IDontEvenKnowAnymorePart8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212200404150_RemoveCustomerColumn.cs" />
+    <Compile Include="Migrations\202212200404150_RemoveCustomerColumn.designer.cs">
+      <DependentUpon>202212200404150_RemoveCustomerColumn.cs</DependentUpon>
     </Compile>
     <Compile Include="PriceConverter.cs" />
     <Compile Include="ViewModels\AddPassengerViewModel.cs" />
@@ -668,6 +705,33 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212181252085_RouteUnique.resx">
       <DependentUpon>202212181252085_RouteUnique.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212200318485_IDontEvenKnowAnymore.resx">
+      <DependentUpon>202212200318485_IDontEvenKnowAnymore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212200326417_IDontEvenKnowAnymorePart2.resx">
+      <DependentUpon>202212200326417_IDontEvenKnowAnymorePart2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212200330133_IDontEvenKnowAnymorePart3.resx">
+      <DependentUpon>202212200330133_IDontEvenKnowAnymorePart3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212200334457_IDontEvenKnowAnymorePart4.resx">
+      <DependentUpon>202212200334457_IDontEvenKnowAnymorePart4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212200339200_IDontEvenKnowAnymorePart5.resx">
+      <DependentUpon>202212200339200_IDontEvenKnowAnymorePart5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212200343215_IDontEvenKnowAnymorePart6.resx">
+      <DependentUpon>202212200343215_IDontEvenKnowAnymorePart6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212200348385_IDontEvenKnowAnymorePart7.resx">
+      <DependentUpon>202212200348385_IDontEvenKnowAnymorePart7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212200359572_IDontEvenKnowAnymorePart8.resx">
+      <DependentUpon>202212200359572_IDontEvenKnowAnymorePart8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212200404150_RemoveCustomerColumn.resx">
+      <DependentUpon>202212200404150_RemoveCustomerColumn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

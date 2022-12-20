@@ -79,11 +79,8 @@ namespace ManagementCoach.BE
 				.HasIndex(p => p.Email)
 				.IsUnique();
 
-			modelBuilder.Entity<Province>().HasOptional(p => p.RestArea)
-										 .WithRequired(r => r.Province);
-
-			modelBuilder.Entity<Trip>().HasRequired(r => r.Route)
-				.WithOptional(p => p.Trip);
+			//modelBuilder.Entity<Trip>().HasRequired(r => r.Route)
+			//	.WithMany(p => p.Trips);
 		}
 	}
 }

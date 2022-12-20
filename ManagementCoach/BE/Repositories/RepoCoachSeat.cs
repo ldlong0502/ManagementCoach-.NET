@@ -34,6 +34,25 @@ namespace ManagementCoach.BE.Repositories
 			return Map.To<ModelCoachSeat>(Context.CoachSeats.Where(c => c.Id == seatId).FirstOrDefault());
 		}
 
+		public List<ModelTripCoachSeat> GetCoachSeatsOfTrip(int tripId)
+		{
+			var coachId = Context.Trips.Where(t => t.Id == tripId).Select(t => t.CoachId).FirstOrDefault();
+			
+			var seats = Context.CoachSeats
+							   .Where(c => c.CoachId == coachId)
+							   .ToList();
+
+			var takenSeatIdList = Context.Tickets
+									  .Where(t => t.TripId == tripId)
+									  .Select(t => t.CoachSeatId)
+									  .ToList();
+
+			var modelSeats = seats.Select(s => Map.To<ModelTripCoachSeat>(s)).ToList();
+			modelSeats.ForEach(ms => ms.Taken = takenSeatIdList.Contains(ms.Id));
+
+			return modelSeats;
+		}
+
 		public List<ModelCoachSeat> GetCoachSeats(int coachId)
         {
             return Context.CoachSeats

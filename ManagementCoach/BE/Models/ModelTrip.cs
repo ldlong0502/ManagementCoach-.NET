@@ -11,6 +11,7 @@ namespace ManagementCoach.BE.Models
 	public class ModelTrip
 	{
 		[Required]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int Id { get; set; }
 		[Required]
 		public int RouteId { get; set; }

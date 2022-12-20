@@ -52,6 +52,9 @@ namespace ManagementCoach.BE
 				config.CreateMap<User, ModelUser>();
 
 				config.CreateMap<Province, ModelProvince>();
+
+				config.CreateMap<ModelCoachSeat, ModelTripCoachSeat>();
+				config.CreateMap<CoachSeat, ModelTripCoachSeat>();
 			}));
 		}
 
