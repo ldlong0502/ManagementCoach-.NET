@@ -2,6 +2,7 @@
 using ManagementCoach.BE.Entities;
 using ManagementCoach.BE.Models;
 using ManagementCoach.BE.Repositories;
+using ManagementCoach.Views;
 using ManagementCoach.Views.Screens;
 using System;
 using System.Collections.Generic;
@@ -15,8 +16,8 @@ using System.Windows.Input;
 
 namespace ManagementCoach.ViewModels
 {
-    public class RouteViewModel : ViewModelBase
-    {
+    public class RouteViewModel : ViewModelBase, ILoadableViewModel
+	{
         public CoachManContext context = new CoachManContext();
         private ICollectionView routeCollection;
         private string originStationId = "";

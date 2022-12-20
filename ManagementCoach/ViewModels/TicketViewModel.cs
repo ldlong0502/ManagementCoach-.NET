@@ -2,6 +2,7 @@
 using ManagementCoach.BE.Entities;
 using ManagementCoach.BE.Models;
 using ManagementCoach.BE.Repositories;
+using ManagementCoach.Views;
 using ManagementCoach.Views.Screens;
 using System;
 using System.Collections.Generic;
@@ -15,8 +16,8 @@ using System.Windows.Input;
 
 namespace ManagementCoach.ViewModels
 {
-    public class TicketViewModel : ViewModelBase
-    {
+    public class TicketViewModel : ViewModelBase, ILoadableViewModel
+	{
 
         public CoachManContext context = new CoachManContext();
         private ICollectionView ticketCollection;

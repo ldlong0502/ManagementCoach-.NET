@@ -1,6 +1,7 @@
 ﻿using ManagementCoach.BE;
 using ManagementCoach.BE.Models;
 using ManagementCoach.BE.Repositories;
+using ManagementCoach.Views;
 using ManagementCoach.Views.Screens;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,8 @@ using System.Windows.Input;
 
 namespace ManagementCoach.ViewModels
 {
-    public class UserViewModel : ViewModelBase
-    {
+    public class UserViewModel : ViewModelBase, ILoadableViewModel
+	{
 
         
         public CoachManContext context = new CoachManContext();

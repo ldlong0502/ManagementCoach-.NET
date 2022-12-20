@@ -134,7 +134,6 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="District"  Binding="{Binding District}" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Address" Binding="{Binding Address}"  ></DataGridTextColumn>
                 <DataGridTextColumn Header="NameProvince" Binding="{Binding NameProvince}"  ></DataGridTextColumn>
                 <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">

@@ -2,10 +2,12 @@
 using ManagementCoach.BE.Entities;
 using ManagementCoach.BE.Repositories;
 using Microsoft.Win32;
+using Npgsql;
 using OfficeOpenXml;
 using OfficeOpenXml.Table;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Data.Entity;
 using System.Data.Entity.Core.Metadata.Edm;
 using System.Diagnostics;
@@ -18,21 +20,23 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using MessageBox = System.Windows.Forms.MessageBox;
+using OpenFileDialog = System.Windows.Forms.OpenFileDialog;
 using SaveFileDialog = System.Windows.Forms.SaveFileDialog;
 
 namespace ManagementCoach.BE
 {
 	public class ExcelHelper
 	{
-		public static void ExportSingleSheetAs<T>(string sheetName, IEnumerable<T> items)
+		public static void ExportSingleSheetAs<TEntity>(string sheetName, IEnumerable<TEntity> items) 
 		{
 			SaveFileDialog dialog = new SaveFileDialog();
 			dialog.Filter = "Excel File|*.xlsx";
-			dialog.Title = "Save an Image File";
+			dialog.Title = "Save an Excel File";
 			dialog.ShowDialog();
-			//var documentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-			//var filePath = System.IO.Path.Combine(documentPath, $"{fileName}.xlsx");
+	
 
 			if (dialog.FileName != "")
 			{
@@ -63,7 +67,40 @@ namespace ManagementCoach.BE
 			}
 		}
 
-		public static void Export<T>(string filePath, string sheetName, IEnumerable<T> items) {
+		public static void ImportFromFile<TEntity>(string sheetName = null) where TEntity : class, new()
+		{
+			OpenFileDialog dialog = new OpenFileDialog();
+			dialog.Filter = "Excel File|*.xlsx";
+			dialog.Title = "Open an Excel File";
+			dialog.ShowDialog();
+
+			if (dialog.FileName == "")
+			{
+				return;
+			}
+
+			var result = MessageBox.Show($"Do you want to delete all of the current data before importing?", "Export Sucessfully", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+			try
+			{
+				if (result == DialogResult.Yes)
+				{
+					Import<TEntity>(dialog.FileName, sheetName, dropCurrentData: true);
+				}
+				else
+				{
+					Import<TEntity>(dialog.FileName, sheetName, dropCurrentData: false);
+				}
+			}
+			catch 
+			{
+				return;
+			}
+
+			MessageBox.Show($"Import Completed.", "Import Sucessfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+		}
+
+		public static void Export<TEntity>(string filePath, string sheetName, IEnumerable<TEntity> items) {
 			ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
 			var fileName = System.IO.Path.GetFileNameWithoutExtension(filePath);
@@ -98,54 +135,59 @@ namespace ManagementCoach.BE
 			}
 		}
 
-		public static void Import(string filePath)
+		public static void Import<TEntity>(string filePath, string sheetName = null, bool dropCurrentData = false) where TEntity : class, new()
 		{
 			ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-			var queryContext = new CoachManContext();
 			var context = new CoachManContext();
-
-			var typeAndHandlerOf = new Dictionary<string, (Type entityType, Func<ExcelWorksheet, IEnumerable<object>> handler)>()
-			{
-				//{ "Trips", (typeof(Trip), worksheet => worksheet.ConvertToObjects<Trip>()) },
-				//{ "Coaches", (typeof(Coach),worksheet => worksheet.ConvertToObjects<Coach>()) },
-				//{ "Drivers", (typeof(Driver),worksheet => worksheet.ConvertToObjects<Driver>()) },
-				//{ "Passengers", (typeof(Passenger),worksheet => worksheet.ConvertToObjects<Passenger>()) },
-				//{ "Stations", (typeof(Station),worksheet => worksheet.ConvertToObjects<Station>()) },
-				//{ "RestAreas",(typeof(RestArea), worksheet => worksheet.ConvertToObjects<RestArea>()) },
-				//{ "Routes", (typeof(Route),worksheet => worksheet.ConvertToObjects<Route>()) },
-			};
 
 			using (var pck = new ExcelPackage(new FileInfo(filePath)))
 			{
-				foreach (var worksheet in pck.Workbook.Worksheets)
+				var worksheets = pck.Workbook.Worksheets.ToList();
+				if (!string.IsNullOrWhiteSpace(sheetName))
 				{
-					if (typeAndHandlerOf.ContainsKey(worksheet.Name))
-					{
-						var name = worksheet.Name;
-						var (entityType, convertToEntities) = typeAndHandlerOf[name];
-						var entities = convertToEntities(worksheet);
-						var queryDbSet = queryContext.Set(entityType);
-						var dbSet = context.Set(entityType);
+					worksheets = worksheets.Where(w => w.Name == sheetName).ToList();
+				}
 
-						var entitiesToAdd = entities.Where(e =>
-							{
-								var a = queryDbSet.Find(entityType.GetProperty("Id").GetValue(e, null)) == null;
-								return a;
-							}
-						).ToList();
+				if (worksheets.Count() == 0)
+				{
+					MessageBox.Show($"Could not find Sheet \"{sheetName}\" in file \"{filePath}\"", "Import Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					return;
+				}
+				else 
+				{
+					foreach (var worksheet in worksheets) {
+						var entities = worksheet.ConvertToObjects<TEntity>();
 
-						context.Set(entityType).AddRange(entitiesToAdd);
-
-						var entitiesToUpdate = entities.Where(e => !entitiesToAdd.Any(addE => addE == e)).ToList();
-						foreach (var e in entitiesToUpdate)
+						context.Set<TEntity>().AttachRange(entities);
+						try
 						{
-							dbSet.Attach(e);
-							context.Entry(e).State = EntityState.Modified;
+							if (dropCurrentData)
+							{
+								context.BulkSynchronize(entities);
+							}
+							else
+							{
+								context.BulkMerge(entities);
+							}
+						}
+						catch (Exception ex)
+						{
+							if (ex is TargetInvocationException tex && tex.InnerException is Npgsql.PostgresException postgresEx)
+							{
+								var result = MessageBox.Show($"Error While importing from Sheet \"{worksheet.Name}\":\n\n{postgresEx.MessageText}\n\n{postgresEx.Detail}", "Import Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+							}
+							else if (ex is PostgresException postEx)
+							{
+								var result = MessageBox.Show($"{postEx.MessageText}\n\n{postEx.Detail}", "Import Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+							}
+							else
+							{
+								var result = MessageBox.Show(ex.Message, "Import Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+							}
+							throw ex;
 						}
 					}
 				}
-
-				context.SaveChanges();
 			}
 		}
 

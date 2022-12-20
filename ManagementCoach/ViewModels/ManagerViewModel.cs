@@ -1,4 +1,6 @@
 ﻿using ManagementCoach.BE;
+using ManagementCoach.BE.Entities;
+using ManagementCoach.Views;
 using ManagementCoach.Views.Screens;
 using ManagementCoach.Views.UserControls;
 using System;
@@ -110,55 +112,48 @@ namespace ManagementCoach.ViewModels
             CurrentControl.DataContext = CurrentManagerView;
         }
 
-        private void ExcuteExportCommand(object obj)
+		private static Dictionary<string, Action<string, CoachManContext>> _exportExcelHandlerByTitle =
+			new Dictionary<string, Action<string, CoachManContext>>() 
+		{
+				{ "Tickets", (sheetName, context) => ExcelHelper.ExportSingleSheetAs(sheetName, context.Tickets) },
+				{ "Trips", (sheetName, context) => ExcelHelper.ExportSingleSheetAs(sheetName, context.Trips) },
+				{ "Coaches", (sheetName, context) => ExcelHelper.ExportSingleSheetAs(sheetName, context.Coaches) },
+				{ "Drivers", (sheetName, context) => ExcelHelper.ExportSingleSheetAs(sheetName, context.Drivers) },
+				{ "Passengers", (sheetName, context) => ExcelHelper.ExportSingleSheetAs(sheetName, context.Passengers) },
+				{ "Stations", (sheetName, context) => ExcelHelper.ExportSingleSheetAs(sheetName, context.Stations) },
+				{ "RestAreas", (sheetName, context) => ExcelHelper.ExportSingleSheetAs(sheetName, context.RestAreas) },
+				{ "Routes", (sheetName, context) => ExcelHelper.ExportSingleSheetAs(sheetName, context.Routes) },
+				{ "Users", (sheetName, context) => ExcelHelper.ExportSingleSheetAs(sheetName, context.Users) },
+		};
+
+		private void ExcuteExportCommand(object obj)
         {
 			var context = new CoachManContext();
-
-			var exportExcelHandlerByTitle = new Dictionary<string, Action<string>>() {
-				{ "Trips", sheetName => ExcelHelper.ExportSingleSheetAs(sheetName, context.Trips) },
-				{ "Coaches", sheetName => ExcelHelper.ExportSingleSheetAs(sheetName, context.Coaches) },
-				{ "Drivers", sheetName => ExcelHelper.ExportSingleSheetAs(sheetName, context.Drivers) },
-				{ "Passengers", sheetName => ExcelHelper.ExportSingleSheetAs(sheetName, context.Passengers) },
-				{ "Stations", sheetName => ExcelHelper.ExportSingleSheetAs(sheetName, context.Stations) },
-				{ "RestAreas", sheetName => ExcelHelper.ExportSingleSheetAs(sheetName, context.RestAreas) },
-				{ "Routes", sheetName => ExcelHelper.ExportSingleSheetAs(sheetName, context.Routes) },
-			};
-
-			exportExcelHandlerByTitle[Title](Title);
+			_exportExcelHandlerByTitle[Title](Title, context);
         }
 
-        private void ExcuteImportCommand(object obj)
+		private static Dictionary<string, Action<string>> _importExcelHandlerByTitle =
+			new Dictionary<string, Action<string>>()
+		{
+				{ "Tickets", (sheetName) => ExcelHelper.ImportFromFile<Ticket>(sheetName) },
+				{ "Trips", (sheetName) => ExcelHelper.ImportFromFile<Trip>(sheetName) },
+				{ "Coaches", (sheetName) => ExcelHelper.ImportFromFile<Coach>(sheetName) },
+				{ "Drivers", (sheetName) => ExcelHelper.ImportFromFile<Driver>(sheetName) },
+				{ "Passengers", (sheetName) => ExcelHelper.ImportFromFile<Passenger>(sheetName) },
+				{ "Stations", (sheetName) => ExcelHelper.ImportFromFile<Station>(sheetName) },
+				{ "RestAreas", (sheetName) => ExcelHelper.ImportFromFile<RestArea>(sheetName) },
+				{ "Routes", (sheetName) => ExcelHelper.ImportFromFile<Route>(sheetName) },
+				{ "Users", (sheetName) => ExcelHelper.ImportFromFile<User>(sheetName) },
+		};
+
+		private void ExcuteImportCommand(object obj)
         {
-            if (Title == "Coaches")
-            {
-              
-
-            }
-            else if (Title == "Drivers")
-            {
-                (CurrentManagerView as DriverViewModel).ImportDriversFromExcel();
-            }
-            else if (Title == "Passengers")
-            {
-                //var screen = new ad((currentmanagerview as passengerviewmodel));
-                //screen.showdialog();
-            }
-            else if (Title == "Stations")
-            {
-                var screen = new AddNewStation((CurrentManagerView as StationViewModel));
-                screen.ShowDialog();
-            }
-            else if (Title == "RestAreas")
-            {
-                var screen = new AddNewRestArea((CurrentManagerView as RestAreaViewModel));
-                screen.ShowDialog();
-            }
-            else if (Title == "Routes")
-            {
-                var screen = new AddNewRoute((CurrentManagerView as RouteViewModel));
-                screen.ShowDialog();
-            }
-        }
+			_importExcelHandlerByTitle[Title](Title);
+			if (CurrentManagerView is ILoadableViewModel loadableViewModel)
+			{
+				loadableViewModel.Load();
+			}
+		}
 
         private void ExcuteShowRestAreasCommand(object obj)
         {

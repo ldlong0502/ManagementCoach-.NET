@@ -16,11 +16,12 @@ using System.Windows.Media;
 using ManagementCoach.BE.Models;
 using System.Collections;
 using Aspose.Cells;
+using ManagementCoach.Views;
 
 namespace ManagementCoach.ViewModels
 {
-    public class CoachViewModel : ViewModelBase
-    {
+    public class CoachViewModel : ViewModelBase, ILoadableViewModel
+	{
         public CoachManContext context = new CoachManContext();
         private string textSearch = "";
         private ICollectionView coachCollection;

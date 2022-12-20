@@ -138,7 +138,6 @@ namespace ManagementCoach.ViewModels
             id = data.Id;
             Name = data.Name;
             Address = data.Address;
-            District = data.District;
             Province = ListProvinces.Where(e => e.Id == new RepoProvince().GetProvince(data.Id).Id).FirstOrDefault();
 
         }
@@ -153,7 +152,6 @@ namespace ManagementCoach.ViewModels
                     {
                         Name = Name,
                         Address = Address,
-                        District = District,
                         ProvinceId = Province.Id,
                     }
                 );
@@ -196,7 +194,6 @@ namespace ManagementCoach.ViewModels
                    {
                        Name = Name,
                        Address = Address,
-                       District = District,
                        ProvinceId = Province.Id,
                    }
                );

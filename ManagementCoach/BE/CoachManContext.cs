@@ -2,6 +2,7 @@
 using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
@@ -34,6 +35,9 @@ namespace ManagementCoach.BE
 			modelBuilder.Entity<Province>()
 						.HasIndex(p => p.Name)
 						.IsUnique();
+			modelBuilder.Entity<Province>()
+						.Property(p => p.Id)
+						.HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
 			modelBuilder.Entity<Passenger>()
 						.HasIndex(p => p.Phone)
@@ -59,9 +63,10 @@ namespace ManagementCoach.BE
 			modelBuilder.Entity<RouteRestArea>()
 						.HasKey(p => new { p.RouteId, p.RestAreaId });
 
-			modelBuilder.Entity<Station>()
-						.HasIndex(p => p.District)
-						.IsUnique();
+
+			modelBuilder.Entity<Route>()
+						.HasIndex(p => new { p.OriginStationId, p.DestinationStationId }).IsUnique();
+
 
 			modelBuilder.Entity<User>()
 				.HasIndex(p => p.Username)
@@ -70,12 +75,8 @@ namespace ManagementCoach.BE
 				.HasIndex(p => p.Email)
 				.IsUnique();
 
-			modelBuilder.Entity<RestArea>().HasRequired(r => r.Province)
-				.WithRequiredPrincipal(p => p.RestArea);
-
-
-			modelBuilder.Entity<Trip>().HasRequired(r => r.Route)
-				.WithRequiredPrincipal(p => p.Trip);
+			//modelBuilder.Entity<Trip>().HasRequired(r => r.Route)
+			//	.WithMany(p => p.Trips);
 		}
 	}
 }

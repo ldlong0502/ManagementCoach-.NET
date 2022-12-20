@@ -10,7 +10,6 @@ namespace ManagementCoach.BE.Data.Input
 	public class InputStation
 	{
 		public string Name { get; set; }
-		public string District { get; set; }
 		public string Address { get; set; }
 		public int ProvinceId { get; set; }
 	}

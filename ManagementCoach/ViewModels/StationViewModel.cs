@@ -2,6 +2,7 @@
 using ManagementCoach.BE.Entities;
 using ManagementCoach.BE.Models;
 using ManagementCoach.BE.Repositories;
+using ManagementCoach.Views;
 using ManagementCoach.Views.Screens;
 using System;
 using System.Collections.Generic;
@@ -15,8 +16,8 @@ using System.Windows.Input;
 
 namespace ManagementCoach.ViewModels
 {
-    public class StationViewModel : ViewModelBase
-    {
+    public class StationViewModel : ViewModelBase, ILoadableViewModel
+	{
         public CoachManContext context = new CoachManContext();
         private ICollectionView stationCollection;
         private string textSearch = "";
@@ -246,7 +247,6 @@ namespace ManagementCoach.ViewModels
                             {
                                 Id = c.Id,
                                 Name = c.Name,
-                                District = c.District,
                                 Address = c.Address,
                                 NameProvince = lp.Name,
                             };
@@ -266,7 +266,6 @@ namespace ManagementCoach.ViewModels
                                 {
                                     Id = c.Id,
                                     Name = c.Name,
-                                    District = c.District,
                                     Address = c.Address,
                                     NameProvince = lp.Name,
                                 };

@@ -11,8 +11,6 @@ namespace ManagementCoach.BE.Entities
 	public class Province : Models.ModelProvince
 	{
 		[EpplusIgnore]
-		public RestArea RestArea { get; set; }
-		[EpplusIgnore]
 		public List<Station> Stations { get; set; }
 	}
 }

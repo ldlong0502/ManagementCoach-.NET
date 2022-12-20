@@ -27,14 +27,21 @@ namespace ManagementCoach.BE.Repositories
 				return new Result<ModelTicket>() { Success = false, ErrorMessage = "Trip of this Id does not exists" };
 			}
 
-			//if (Context.Trips.Any(t => t.RouteId == input.TripId && input.CoachSeatId == input.CoachSeatId))
-			//{
-			//	return new Result<ModelTicket>() { Success = false, ErrorMessage = "This coach seat already taken" };
-			//}
+			var coachSeat = Context.CoachSeats.Where(cs => cs.Id == input.CoachSeatId).FirstOrDefault();
+			if (coachSeat == null)
+			{
+				return new Result<ModelTicket>() { Success = false, ErrorMessage = "Coach seat of this Id does not exists" };
+			}
+
+			if (Context.Tickets.Any(t => t.TripId == input.TripId && t.CoachSeatId == input.CoachSeatId))
+			{
+				return new Result<ModelTicket>() { Success = false, ErrorMessage = "This coach seat already taken" };
+			}
 				
 			var ticket = Map.To<Ticket>(input);
 			Context.Tickets.Add(ticket);
 			Context.SaveChanges();
+
 			return new Result<ModelTicket>() { Success = true, Payload = Map.To<ModelTicket>(ticket) };
 		}
 

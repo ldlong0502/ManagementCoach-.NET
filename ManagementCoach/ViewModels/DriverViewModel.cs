@@ -3,6 +3,7 @@ using ManagementCoach.BE;
 using ManagementCoach.BE.Entities;
 using ManagementCoach.BE.Models;
 using ManagementCoach.BE.Repositories;
+using ManagementCoach.Views;
 using ManagementCoach.Views.Screens;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,8 @@ using System.Windows.Input;
 
 namespace ManagementCoach.ViewModels
 {
-    public class DriverViewModel : ViewModelBase
-    {
+    public class DriverViewModel : ViewModelBase, ILoadableViewModel
+	{
         public CoachManContext context = new CoachManContext();
         private ICollectionView driverCollection;
         private string textSearch = "";
