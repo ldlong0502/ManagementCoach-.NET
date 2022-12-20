@@ -68,10 +68,6 @@ namespace ManagementCoach.BE
 						.HasIndex(p => new { p.OriginStationId, p.DestinationStationId }).IsUnique();
 
 
-			modelBuilder.Entity<Station>()
-						.HasIndex(p => p.District)
-						.IsUnique();
-
 			modelBuilder.Entity<User>()
 				.HasIndex(p => p.Username)
 				.IsUnique();

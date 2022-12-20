@@ -12,13 +12,12 @@ namespace ManagementCoach.BE.Repositories
 {
 	public class RepoStation : Repository
 	{
-		public bool DistrictExists(string district) => Context.Stations.Any(d => d.District == district);
 		public bool StationExists(int id) => Context.Stations.Any(d => d.Id == id);
 
 		public Result<ModelStation> InsertStation(InputStation input)
 		{
-			if (DistrictExists(input.District))
-				return new Result<ModelStation>() { Success = false, ErrorMessage = "Station with this district already exist." };
+			if (Context.Stations.Any(s => s.ProvinceId == input.ProvinceId))
+				return new Result<ModelStation>() { Success = false, ErrorMessage = "Station with this province already exist." };
 
 			var station = Map.To<Station>(input);
 			Context.Stations.Add(station);
@@ -53,8 +52,8 @@ namespace ManagementCoach.BE.Repositories
 
 			var station = Context.Stations.Where(c => c.Id == id).FirstOrDefault();
 
-			if (station.District != input.District && DistrictExists(input.District))
-				return new Result<ModelStation> { Success = false, ErrorMessage = "Station with this district already exist." };
+			if (station.ProvinceId != input.ProvinceId && Context.Stations.Any(s => s.ProvinceId == input.ProvinceId))
+					return new Result<ModelStation>() { Success = false, ErrorMessage = "Station with this province already exist." };
 
 			station = Map.To(input, station);
 			Context.SaveChanges();

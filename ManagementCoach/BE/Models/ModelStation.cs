@@ -15,8 +15,6 @@ namespace ManagementCoach.BE.Models
 		public string Name { get; set; }
 
 		[Required]
-		public string District { get; set; }
-		[Required]
 		public string Address { get; set; }
 		[Required]
 		public int ProvinceId { get; set; }

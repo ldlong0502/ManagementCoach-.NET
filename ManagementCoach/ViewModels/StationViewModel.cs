@@ -247,7 +247,6 @@ namespace ManagementCoach.ViewModels
                             {
                                 Id = c.Id,
                                 Name = c.Name,
-                                District = c.District,
                                 Address = c.Address,
                                 NameProvince = lp.Name,
                             };
@@ -267,7 +266,6 @@ namespace ManagementCoach.ViewModels
                                 {
                                     Id = c.Id,
                                     Name = c.Name,
-                                    District = c.District,
                                     Address = c.Address,
                                     NameProvince = lp.Name,
                                 };

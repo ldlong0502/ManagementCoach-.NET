@@ -492,6 +492,10 @@
     <Compile Include="Migrations\202212200404150_RemoveCustomerColumn.designer.cs">
       <DependentUpon>202212200404150_RemoveCustomerColumn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212200433034_SimplifyStation.cs" />
+    <Compile Include="Migrations\202212200433034_SimplifyStation.designer.cs">
+      <DependentUpon>202212200433034_SimplifyStation.cs</DependentUpon>
+    </Compile>
     <Compile Include="PriceConverter.cs" />
     <Compile Include="ViewModels\AddPassengerViewModel.cs" />
     <Compile Include="Migrations\202212131825014_RemoveOneToOneRelationship.cs" />
@@ -732,6 +736,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212200404150_RemoveCustomerColumn.resx">
       <DependentUpon>202212200404150_RemoveCustomerColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212200433034_SimplifyStation.resx">
+      <DependentUpon>202212200433034_SimplifyStation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
