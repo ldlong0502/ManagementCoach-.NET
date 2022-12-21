@@ -623,7 +623,7 @@
                         Tag="{StaticResource color1}"
                         IsChecked="False"
                         Width="160"
-                        Command="{Binding ShowHomeViewCommand}"  RenderTransformOrigin="0.5,0.5">
+                        Command="{Binding ShowStatisticsCommand}"  RenderTransformOrigin="0.5,0.5">
                             <RadioButton.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>

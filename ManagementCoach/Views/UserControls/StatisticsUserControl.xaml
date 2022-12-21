@@ -1,0 +1,177 @@
+﻿<UserControl x:Class="ManagementCoach.Views.UserControls.StatisticsUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ManagementCoach.Views.UserControls" 
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:vm="clr-namespace:ManagementCoach.ViewModels" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
+             mc:Ignorable="d" 
+             Background="White"
+             d:DesignHeight="700" d:DesignWidth="1200">
+    <UserControl.DataContext>
+        <vm:StatisticsViewModel></vm:StatisticsViewModel>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"></BooleanToVisibilityConverter>
+        <SolidColorBrush x:Key="whiteColor" Color="White"></SolidColorBrush>
+        <SolidColorBrush x:Key="primaryColor" Color="#FF274381"></SolidColorBrush>
+        <Style x:Key="textboxSearch" TargetType="TextBox">
+            <Setter Property="Background" Value="#ffffff"></Setter>
+            <Setter Property="Foreground" Value="#FF274381"></Setter>
+            <Setter Property="Height" Value="30"></Setter>
+            <Setter Property="BorderThickness" Value="0"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="Margin" Value="0 10"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBoxBase">
+                        <Border x:Name="border" Padding="10,3" CornerRadius="20" Background="{TemplateBinding Background}" SnapsToDevicePixels="True"
+                                BorderThickness="2" BorderBrush="#e0e6ed">
+
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"></ScrollViewer>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" Value="#d9d9d9" TargetName="border"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="BorderBrush" Value="#d9d9d9" TargetName="border"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="TabButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="Foreground" Value="#FF274381"></Setter>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"></Setter>
+            <Setter Property="Width" Value="80"></Setter>
+            <Setter Property="Height" Value="40"></Setter>
+            <Setter Property="BorderBrush" Value="Transparent"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="FontWeight" Value="SemiBold"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,0,3">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"></ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="#784ff2"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="addButton" TargetType="Button">
+            <Setter Property="Background" Value="#FF274381"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"></Setter>
+            <Setter Property="Width" Value="80"></Setter>
+            <Setter Property="Height" Value="40"></Setter>
+            <Setter Property="BorderBrush" Value="Transparent"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="FontWeight" Value="SemiBold"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border  CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,0,3">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"></ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Statistics" FontSize="36" FontWeight="Bold" Foreground="{StaticResource primaryColor}"></TextBlock>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="707*" ></ColumnDefinition>
+                <ColumnDefinition Width="3"></ColumnDefinition>
+                <ColumnDefinition Width="474*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="180"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel  Orientation="Vertical" Margin="0,0,0,0" VerticalAlignment="Center">
+                    <TextBlock  HorizontalAlignment="Center" Text="Sales Report" Style="{StaticResource MaterialDesignHeadline6TextBlock}" Foreground="{StaticResource color2}" FontSize="30" VerticalAlignment="Center"></TextBlock>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
+                        <DatePicker
+                        Grid.Column="1"
+                        Width="250"
+                        Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                        SelectedDate="{Binding FromDate}"
+                        materialDesign:HintAssist.Hint="From Date"
+                        Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+                        <DatePicker
+                        Grid.Column="1"
+                        Width="250"
+                        Margin="20 0 0 0"
+                        Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                        SelectedDate="{Binding ToDate}"
+                        materialDesign:HintAssist.Hint="To Date"
+                        Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+                    </StackPanel>
+
+                </StackPanel>
+                <Border Background="white" CornerRadius="30" BorderThickness="5" Grid.Row="1" Margin="20 0 20 0" >
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="1" BlurRadius="10" Color="SkyBlue"/>
+                    </Border.Effect>
+
+                    <lvc:CartesianChart
+                        Grid.Row="1"
+                        Margin="20"
+                        Series="{Binding SeriesSales}"
+                        TooltipPosition="Top"
+                        XAxes="{Binding XAxes}"
+                        ZoomMode="Both">
+                    </lvc:CartesianChart>
+                </Border>
+            </Grid>
+            <Rectangle Fill="#DDDDDD" Grid.Column="1" Margin="0 50"></Rectangle>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="180"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    
+                </Grid.RowDefinitions>
+                <StackPanel VerticalAlignment="Center">
+                <TextBlock  HorizontalAlignment="Center" Text="Top 3 routes" Style="{StaticResource MaterialDesignHeadline6TextBlock}" Foreground="{StaticResource color2}" FontSize="30" VerticalAlignment="Center"></TextBlock>
+                <ComboBox
+                       
+                        Grid.Column="1"
+                         Width="250"
+                            Margin="0 20 0 0"
+                          SelectedItem="{Binding ModeRoutes}"
+                          materialDesign:HintAssist.Hint="Input Mode"
+                          materialDesign:TextFieldAssist.HasClearButton="True"
+                          ItemsSource="{Binding ListModeRoutes}"
+                          Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                </ComboBox>
+                </StackPanel>
+                <lvc:PieChart
+            Grid.Row="1"
+                    Margin="20"
+        Series="{Binding SeriesRoutes}"    
+        LegendPosition="Hidden">
+                </lvc:PieChart>
+            </Grid>
+        </Grid>
+        
+    </Grid>
+</UserControl>

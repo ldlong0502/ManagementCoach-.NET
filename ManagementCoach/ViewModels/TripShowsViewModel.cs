@@ -354,7 +354,7 @@ namespace ManagementCoach.ViewModels
             ChooseSeats.Clear();
             var listDown = new RepoCoachSeat().GetCoachSeats(ChooseTrip.CoachId).Where(c => c.Name.StartsWith("A")).ToList();
             var temp = new List<Seat>();
-            listDown.Sort((a, b) => a.Name.Split('A')[0].CompareTo(b.Name.Split('A')[0]));
+            listDown.Sort((a, b) => int.Parse(a.Name.Split('A')[1]).CompareTo(int.Parse(b.Name.Split('A')[1])));
             listDown.ForEach(seat =>
             {
                 if (context.Tickets.Any(c => c.CoachSeatId == seat.Id))
@@ -379,7 +379,7 @@ namespace ManagementCoach.ViewModels
             });
             ListSeatDown = temp;
             var listUp = new RepoCoachSeat().GetCoachSeats(ChooseTrip.CoachId).Where(c => c.Name.StartsWith("B")).ToList();
-            listUp.Sort((a, b) => a.Name.Split('B')[0].CompareTo(b.Name.Split('B')[0]));
+            listUp.Sort((a, b) => int.Parse(a.Name.Split('B')[1]).CompareTo(int.Parse(b.Name.Split('B')[1])));
             temp = new List<Seat>();
             listUp.ForEach(seat =>
             {

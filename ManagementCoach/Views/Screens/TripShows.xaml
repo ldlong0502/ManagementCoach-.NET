@@ -282,7 +282,7 @@
                                    BorderThickness="1"
                                    Background="Transparent"
                                    BorderBrush="Black"
-                                   IsEnabled="{Binding IsBought}"
+                                   IsEnabled="{Binding IsEnabled}"
                                    Foreground="{StaticResource color2}"/>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
@@ -321,7 +321,7 @@
                                    CommandParameter="{Binding ElementName=btnSeatUp}"
                                    Background="Transparent"
                                    BorderBrush="Black"
-                                   IsEnabled="{Binding IsBought}"
+                                   IsEnabled="{Binding IsEnabled}"
                                    Foreground="{StaticResource color2}"/>
 
                                         </DataTemplate>

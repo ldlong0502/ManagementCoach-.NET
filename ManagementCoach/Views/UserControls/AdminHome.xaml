@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ManagementCoach.Views.UserControls"
              xmlns:fa="http://schemas.fontawesome.io/icons/" 
-             xmlns:vm="clr-namespace:ManagementCoach.ViewModels"
+             xmlns:vm="clr-namespace:ManagementCoach.ViewModels" xmlns:managementcoach="clr-namespace:ManagementCoach" xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
              mc:Ignorable="d" 
              Background="White"
              d:DesignHeight="700" d:DesignWidth="1200">
@@ -13,129 +13,202 @@
         <vm:AdminHomeViewModel></vm:AdminHomeViewModel>
     </UserControl.DataContext>
     <UserControl.Resources>
+        <managementcoach:PriceConverter x:Key="PriceConverter"></managementcoach:PriceConverter>
         <SolidColorBrush x:Key="whiteIcon" Color="White"></SolidColorBrush>
         <SolidColorBrush x:Key="violetIcon" Color="#FF274381"></SolidColorBrush>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"></RowDefinition>
-            <RowDefinition Height="100*"></RowDefinition>
-            <RowDefinition Height="131*"></RowDefinition>
-            <RowDefinition Height="69*"></RowDefinition>
+            <RowDefinition Height="200"></RowDefinition>
+            <RowDefinition ></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock HorizontalAlignment="Left" Height="46" Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding WelcomeText}" VerticalAlignment="Center" Width="352" FontSize="36" FontWeight="Bold" Foreground="{StaticResource violetIcon}"/>
-        <Border Background="white" CornerRadius="30" BorderThickness="5" Margin="38,20,990,20" Grid.Row="1">
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="1" BlurRadius="10" Color="SkyBlue"/>
-            </Border.Effect>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="891"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
             <Grid>
-                <fa:FontAwesome Icon="CreditCard" Foreground="{StaticResource violetIcon}" FontSize="30" Margin="10,28,97,90"/>
-                <Image Height="15" Width="20" Source="/Images/more.png" Margin="130,21,8,114"></Image>
-                <TextBlock HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Height="24" Margin="21,75,0,0" TextWrapping="Wrap" Text="$150,000" VerticalAlignment="Top" Width="96" FontSize="22" FontWeight="Bold" FontFamily="Arial"/>
-                <TextBlock HorizontalAlignment="Center" Foreground="{StaticResource violetIcon}" Height="24"  TextWrapping="Wrap" Text="Total Income" VerticalAlignment="Top" Width="115" FontWeight="Normal" FontFamily="Arial" Margin="0,116,0,0"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Border Background="white" CornerRadius="30" BorderThickness="5" Margin="10"  Grid.Column="0">
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="1" BlurRadius="10" Color="SkyBlue"/>
+                    </Border.Effect>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <fa:FontAwesome Grid.Row="0" Icon="CreditCard" Foreground="{StaticResource violetIcon}" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 0 0 0"/>
+                        <TextBlock HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Grid.Row="1" Margin="20 0 0 0 " Height="auto" VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding TotalIncome, Converter={StaticResource PriceConverter}}"  Width="auto" FontSize="20" FontWeight="Bold" FontFamily="Arial"/>
+                        <TextBlock HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Grid.Row="2" Height="24"  TextWrapping="Wrap" Text="Total Income" VerticalAlignment="Center" Width="115" FontWeight="Normal" FontFamily="Arial" Margin="20,0,0,0"/>
+                    </Grid>
+
+
+                </Border>
+                <Border Background="white" CornerRadius="30" BorderThickness="5" Margin="10"  Grid.Column="1">
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="1" BlurRadius="10" Color="SkyBlue"/>
+                    </Border.Effect>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <fa:FontAwesome Grid.Row="0" Icon="Bus" Foreground="{StaticResource violetIcon}" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 0 0 0"/>
+                        <TextBlock HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Grid.Row="1" Margin="20 0 0 0 " Height="24" VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding TotalTrips}"  Width="auto" FontSize="20" FontWeight="Bold" FontFamily="Arial"/>
+                        <TextBlock HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Grid.Row="2" Height="24"  TextWrapping="Wrap" Text="Total Trips" VerticalAlignment="Center" Width="115" FontWeight="Normal" FontFamily="Arial" Margin="20,0,0,0"/>
+                    </Grid>
+
+
+                </Border>
+                <Border Background="white" CornerRadius="30" BorderThickness="5" Margin="10"  Grid.Column="2">
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="1" BlurRadius="10" Color="SkyBlue"/>
+                    </Border.Effect>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <fa:FontAwesome Grid.Row="0" Icon="Users" Foreground="{StaticResource violetIcon}" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 0 0 0"/>
+                        <TextBlock HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Grid.Row="1" Margin="20 0 0 0 " Height="24" VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding TotalEmployees}"  Width="auto" FontSize="20" FontWeight="Bold" FontFamily="Arial"/>
+                        <TextBlock HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Grid.Row="2" Height="24"  TextWrapping="Wrap" Text="Total Employees" VerticalAlignment="Center" Width="115" FontWeight="Normal" FontFamily="Arial" Margin="20,0,0,0"/>
+                    </Grid>
+
+
+                </Border>
+                <Border Background="white" CornerRadius="30" BorderThickness="5" Margin="10"  Grid.Column="3">
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="1" BlurRadius="10" Color="SkyBlue"/>
+                    </Border.Effect>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <fa:FontAwesome Grid.Row="0" Icon="Ticket" Foreground="{StaticResource violetIcon}" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 0 0 0"/>
+                        <TextBlock HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Grid.Row="1" Margin="20 0 0 0 " Height="24" VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding TotalTicketsSelled}"  Width="auto" FontSize="20" FontWeight="Bold" FontFamily="Arial"/>
+                        <TextBlock HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Grid.Row="2" Height="24"  TextWrapping="Wrap" Text="Total Tickets Sell" VerticalAlignment="Center" Width="115" FontWeight="Normal" FontFamily="Arial" Margin="20,0,0,0"/>
+                    </Grid>
+
+
+                </Border>
             </Grid>
 
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="891"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <Border Background="white" CornerRadius="30" BorderThickness="5" Margin="20" Grid.Row="2" Width="572" >
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="1" BlurRadius="10" Color="SkyBlue"/>
+                    </Border.Effect>
 
-        </Border>
-        <Border Background="white" CornerRadius="30" BorderThickness="5" Margin="685,20,333,20" Grid.Row="1">
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="1" BlurRadius="10" Color="SkyBlue"/>
-            </Border.Effect>
-            <Grid>
-                <fa:FontAwesome Icon="Money" Foreground="{StaticResource violetIcon}" FontSize="30" Margin="10,28,97,90"/>
-                <Image Height="15" Width="20" Source="/Images/more.png" Margin="130,21,8,114"/>
-                <TextBlock HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Height="24" Margin="21,75,0,0" TextWrapping="Wrap" Text="$10,000" VerticalAlignment="Top" Width="96" FontSize="22" FontWeight="Bold" FontFamily="Arial"/>
-                <TextBlock HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Height="30"  TextWrapping="Wrap" Text="This week's income" VerticalAlignment="Top" Width="77" FontWeight="Normal" FontFamily="Arial" Margin="21,110,0,0" Cursor="Arrow"/>
-            </Grid>
+                    <lvc:CartesianChart
+            Grid.Row="1"
+            Margin="20"
+            Series="{Binding SeriesCollection}"
+            TooltipPosition="Hidden"
+            XAxes="{Binding XAxes}"
+            ZoomMode="X">
+                    </lvc:CartesianChart>
+                </Border>
+                <StackPanel Width="240">
 
-
-        </Border>
-        <Border Background="white" CornerRadius="30" BorderThickness="5" Margin="250,20,769,20" Grid.Row="1">
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="1" BlurRadius="10" Color="SkyBlue"/>
-            </Border.Effect>
-            <Grid>
-                <fa:FontAwesome Icon="Bus" Foreground="{StaticResource violetIcon}" FontSize="30" Margin="10,28,97,90"/>
-                <Image Height="15" Width="20" Source="/Images/more.png" Margin="130,21,8,114"/>
-                <TextBlock HorizontalAlignment="Center" Foreground="{StaticResource violetIcon}" Height="24" Margin="0,75,0,0" TextWrapping="Wrap" Text="3000" VerticalAlignment="Top" Width="115" FontSize="22" FontWeight="Bold" FontFamily="Arial"/>
-                <TextBlock HorizontalAlignment="Center" Foreground="{StaticResource violetIcon}" Height="24"  TextWrapping="Wrap" Text="Total trips" VerticalAlignment="Top" Width="115" FontWeight="Normal" FontFamily="Arial" Margin="0,116,0,0"/>
-            </Grid>
-
-
-        </Border>
-        <Border Background="white" CornerRadius="30" BorderThickness="5" Margin="468,20,554,20" Grid.Row="1">
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="1" BlurRadius="10" Color="SkyBlue"/>
-            </Border.Effect>
-            <Grid>
-                <fa:FontAwesome Icon="Users" Foreground="{StaticResource violetIcon}" FontSize="30" Margin="10,28,97,90"/>
-                <Image Height="15" Width="20" Source="/Images/more.png" Margin="130,21,8,114"/>
-                <TextBlock HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Height="24" Margin="21,75,0,0" TextWrapping="Wrap" Text="7" VerticalAlignment="Top" Width="96" FontSize="22" FontWeight="Bold" FontFamily="Arial"/>
-                <TextBlock HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Height="17"  TextWrapping="Wrap" Text="Employees" VerticalAlignment="Top" Width="77" FontWeight="Normal" FontFamily="Arial" Margin="21,114,0,0"/>
-            </Grid>
-
-
-        </Border>
-        <Border Background="white" CornerRadius="30" BorderThickness="5" Margin="38,10,643,10" Grid.Row="2">
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="1" BlurRadius="10" Color="SkyBlue"/>
-            </Border.Effect>
-            <Grid/>
+                    <Border Background="white" CornerRadius="30" Height="150" Margin="0 40 0 0" BorderThickness="5" Grid.Row="2">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="1" BlurRadius="10" Color="SkyBlue"/>
+                        </Border.Effect>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock TextAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Height="45" Margin="0,10,0,0" TextWrapping="Wrap" Text="New passengers this week" VerticalAlignment="Top" Width="150" FontSize="18" FontWeight="Bold" FontFamily="Arial"/>
+                            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                                <TextBlock VerticalAlignment="Center" Margin="30 0 50 0" HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Height="54"  TextWrapping="Wrap" Text="{Binding NewPassengersWeek}" Width="54" FontSize="48" FontWeight="Bold" FontFamily="Arial"/>
+                                <TextBlock TextAlignment="Center" Foreground="#FFAEC314" Height="22" TextWrapping="Wrap" Text="{Binding PercentNewPassengersWeek}" VerticalAlignment="Center" Width="89" FontSize="18" FontWeight="Bold" FontFamily="Arial" Background="#FFF3FDC7"/>
+                            </StackPanel>
+                        </Grid>
 
 
-        </Border>
-        <Border Background="white" CornerRadius="30" BorderThickness="5" Margin="614,10,375,140" Grid.Row="2">
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="1" BlurRadius="10" Color="SkyBlue"/>
-            </Border.Effect>
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
-                <TextBlock TextAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Height="23" Margin="0,10,0,0" TextWrapping="Wrap" Text="New customers" VerticalAlignment="Top" Width="151" FontSize="18" FontWeight="Bold" FontFamily="Arial"/>
-                <TextBlock HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Height="54" Margin="18,38,0,0" TextWrapping="Wrap" Text="50" VerticalAlignment="Top" Width="54" FontSize="48" FontWeight="Bold" FontFamily="Arial"/>
-                <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Foreground="#FFAEC314" Height="23" Margin="94,54,0,0" TextWrapping="Wrap" Text="+18.7%" VerticalAlignment="Top" Width="76" FontSize="18" FontWeight="Bold" FontFamily="Arial" Background="#FFF3FDC7"/>
-            </Grid>
+                    </Border>
+                    <Border Background="white" CornerRadius="30" Height="150" Margin="0 20 0 0" BorderThickness="5" Grid.Row="2">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="1" BlurRadius="10" Color="SkyBlue"/>
+                        </Border.Effect>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock TextAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Margin="0,10,0,0" TextWrapping="Wrap" Text="Today Income" VerticalAlignment="Top" Width="150" FontSize="18" FontWeight="Bold" FontFamily="Arial"/>
+                            <TextBlock VerticalAlignment="Center"  HorizontalAlignment="Center" Foreground="{StaticResource violetIcon}" Grid.Row="1" TextWrapping="Wrap" Text="{Binding TodayIncome, Converter={StaticResource PriceConverter}}" FontSize="35" FontWeight="Bold" FontFamily="Arial"/>
+                            <TextBlock TextAlignment="Center" HorizontalAlignment="Center" Foreground="#FFAEC314" Height="23" TextWrapping="Wrap" Text="{Binding PercentTodayIncome}" Grid.Row="2" VerticalAlignment="Center" Width="98" FontSize="18" FontWeight="Bold" FontFamily="Arial" Background="#FFF3FDC7"/>
+                        </Grid>
 
 
-        </Border>
-        <Border Background="white" CornerRadius="30" BorderThickness="5" Margin="614,140,375,10" Grid.Row="2">
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="1" BlurRadius="10" Color="SkyBlue"/>
-            </Border.Effect>
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
-                <TextBlock TextAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Height="23" Margin="0,10,0,0" TextWrapping="Wrap" Text="Today Income" VerticalAlignment="Top" Width="151" FontSize="18" FontWeight="Bold" FontFamily="Arial"/>
-                <TextBlock HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Height="38" Margin="0,47,0,0" TextWrapping="Wrap" Text="$2000" VerticalAlignment="Top" Width="114" FontSize="36" FontWeight="Bold" FontFamily="Arial"/>
-                <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Foreground="#FF92957B" Height="23" Margin="119,56,0,0" TextWrapping="Wrap" Text="+2.7%" VerticalAlignment="Top" Width="71" FontSize="18" FontWeight="Bold" FontFamily="Arial" Background="#FFCED1C2"/>
-            </Grid>
-
-
-        </Border>
-        <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Height="23" Margin="22,10,0,0" TextWrapping="Wrap" Text="Top 3 Passengers" VerticalAlignment="Top" Width="164" FontSize="18" FontWeight="Bold" FontFamily="Arial" Grid.Row="3"/>
-        <Grid Margin="22,27,872,10" Grid.Row="3">
-            <Border Background="white" CornerRadius="50" BorderThickness="5" Margin="0,11,0,0">
-                <Border.Effect>
-                    <DropShadowEffect ShadowDepth="1" BlurRadius="10" Color="SkyBlue"/>
-                </Border.Effect>
-                <Image Source="/Images/number1.png" Width="50" Height="50" Margin="22,15,224,15"/>
-
-
-            </Border>
-            <StackPanel HorizontalAlignment="Center" Margin="0,20,0,0" Orientation="Vertical" VerticalAlignment="Top" Width="160" Height="79">
-                <TextBlock Foreground="{StaticResource violetIcon}" Height="24"  TextWrapping="Wrap" Text="Nguyen Van A" Width="115" FontWeight="Normal" FontFamily="Arial" FontSize="16"/>
-                <TextBlock Foreground="{StaticResource violetIcon}" Height="24"  TextWrapping="Wrap" Text="$70000" Width="115" FontWeight="Normal" FontFamily="Arial" FontSize="16"/>
-                <TextBlock Foreground="{StaticResource violetIcon}" Height="24"  TextWrapping="Wrap" Text="TPHCM" Width="115" FontWeight="Normal" FontFamily="Arial" FontSize="16"/>
+                    </Border>
+                </StackPanel>
             </StackPanel>
         </Grid>
+
+
         <Border CornerRadius="50" BorderThickness="1" Margin="889,10,10,17" Grid.RowSpan="4" Background="#FFA6F5FF">
             <Grid>
-                <Canvas Height="40" Width="40" Margin="110,9,150,622">
-                    <fa:FontAwesome Icon="BellOutline" FontSize="20"  Canvas.Left="10" Canvas.Top="10"></fa:FontAwesome>
-                    <Border Height="10" Width="10" CornerRadius="10" Background="WhiteSmoke" Canvas.Left="20" Canvas.Top="5">
-                        <TextBlock Text="0" FontSize="7" Foreground="Red" TextAlignment="Center"></TextBlock>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"></RowDefinition>
+                    <RowDefinition Height="399*"></RowDefinition>
+                    <RowDefinition Height="172*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 20 0">
+                    <Border BorderBrush="Transparent" Background="Beige" CornerRadius="20" BorderThickness="1" Width="40" Height="40" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 10 0 0" >
+                        <Image Source="{Binding Avatar}" Stretch="Uniform"/>
                     </Border>
-                </Canvas>
-                <Border BorderBrush="White" Background="Transparent" CornerRadius="20" BorderThickness="1" Width="40" Height="40" Margin="216,9,43,622">
-                    <Image  Source="{Binding Avatar, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill"/>
-                </Border>
-                <Calendar HorizontalAlignment="Center" Margin="0,103,0,0" VerticalAlignment="Top" Width="236" RenderTransformOrigin="0.52,0.571" Height="351" Background="{x:Null}" FontSize="18" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="#FF11495F" FontFamily="Arial">
+                    <Menu  >
+                        <MenuItem Margin="0 16 0 0" Height="30" Width="30" VerticalAlignment="Center" Style="{StaticResource MenuItem_With_Dropdown_Avatar}" >
+
+                            <MenuItem Header="Change Password"  Command="{Binding ChangePasswordCommand}" Width="140" Height="35" Style="{StaticResource Avatar_Sub_MenuItem}" >
+                                <MenuItem.Icon>
+                                    <fa:FontAwesome Icon="Key" Foreground="{StaticResource color2}" FontSize="15"></fa:FontAwesome>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Header="About us"  Command="{Binding MyAccountCommand}" Width="140" Height="35" Style="{StaticResource Avatar_Sub_MenuItem}" >
+                                <MenuItem.Icon>
+                                    <fa:FontAwesome Icon="InfoCircle" Foreground="{StaticResource color2}" FontSize="15"></fa:FontAwesome>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Header="Setting"  Command="{Binding ExportCommand}" Width="140" Height="35" Style="{StaticResource Avatar_Sub_MenuItem}" >
+                                <MenuItem.Icon>
+                                    <fa:FontAwesome Icon="Gear" Foreground="{StaticResource color2}" FontSize="15"></fa:FontAwesome>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator></Separator>
+                            <MenuItem Header="Log Out" Command="{Binding LogOutCommand}" CommandParameter="{Binding ElementName=staffHome}" Width="140" Height="35" Style="{StaticResource Avatar_Sub_MenuItem}" >
+                                <MenuItem.Icon>
+                                    <fa:FontAwesome Icon="SignOut" Foreground="{StaticResource color2}" FontSize="15"></fa:FontAwesome>
+                                </MenuItem.Icon>
+                            </MenuItem>
+
+                        </MenuItem>
+                    </Menu>
+                </StackPanel>
+                <Calendar Grid.Row="1" HorizontalAlignment="Center" Margin="0,33,0,0" VerticalAlignment="Top" Width="236" RenderTransformOrigin="0.52,0.571" Height="351" Background="{x:Null}" FontSize="18" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="#FF11495F" FontFamily="Arial">
                     <Calendar.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -146,13 +219,8 @@
                     </Calendar.RenderTransform>
                 </Calendar>
 
-                <Canvas Height="40" Width="40" Margin="156,9,103,622">
-                    <fa:FontAwesome Icon="EnvelopeOutline" FontSize="20"  Canvas.Left="10" Canvas.Top="10"/>
-                    <Border Height="10" Width="10" CornerRadius="10" Background="WhiteSmoke" Canvas.Left="23" Canvas.Top="5">
-                        <TextBlock Text="0" FontSize="7" Foreground="Red" TextAlignment="Center"/>
-                    </Border>
-                </Canvas>
-                <WrapPanel Name ="container"  Height="150" Width="200" Margin="0 400 0 0">
+                <Canvas Grid.Row="2"/>
+                <WrapPanel Name ="container" Margin="40 10 40 20" Grid.Row="2">
                     <Image  Source="{Binding DisplayedImagePath, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill"/>
                     <WrapPanel.OpacityMask>
                         <VisualBrush >
@@ -167,28 +235,6 @@
             </Grid>
 
         </Border>
-        <Border Background="white" CornerRadius="50" BorderThickness="5" Margin="228,35,666,10" Grid.Row="3">
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="1" BlurRadius="10" Color="SkyBlue"/>
-            </Border.Effect>
-            <Image Source="/Images/number2.png" Width="50" Height="50" Margin="22,16,224,16"/>
-
-
-        </Border>
-        <TextBlock HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Height="24"  TextWrapping="Wrap" Text="Nguyen Van A" VerticalAlignment="Top" Width="115" FontWeight="Normal" FontFamily="Arial" Margin="333,45,0,0" Grid.Row="3" FontSize="16"/>
-        <TextBlock HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Height="24"  TextWrapping="Wrap" Text="$70000" VerticalAlignment="Top" Width="115" FontWeight="Normal" FontFamily="Arial" Margin="333,70,0,0" Grid.Row="3" FontSize="16"/>
-        <TextBlock HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Height="24"  TextWrapping="Wrap" Text="TPHCM" VerticalAlignment="Top" Width="115" FontWeight="Normal" FontFamily="Arial" Margin="333,94,0,0" Grid.Row="3" FontSize="16"/>
-        <Border Background="white" CornerRadius="50" BorderThickness="5" Margin="468,35,426,10" Grid.Row="3">
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="1" BlurRadius="10" Color="SkyBlue"/>
-            </Border.Effect>
-            <Image Source="/Images/number3.png" Width="50" Height="50" Margin="23,16,223,16"/>
-
-
-        </Border>
-        <TextBlock HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Height="24"  TextWrapping="Wrap" Text="Nguyen Van A" VerticalAlignment="Top" Width="115" FontWeight="Normal" FontFamily="Arial" Margin="564,45,0,0" Grid.Row="3" FontSize="16"/>
-        <TextBlock HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Height="24"  TextWrapping="Wrap" Text="$70000" VerticalAlignment="Top" Width="115" FontWeight="Normal" FontFamily="Arial" Margin="564,70,0,0" Grid.Row="3" FontSize="16"/>
-        <TextBlock HorizontalAlignment="Left" Foreground="{StaticResource violetIcon}" Height="24"  TextWrapping="Wrap" Text="TPHCM" VerticalAlignment="Top" Width="115" FontWeight="Normal" FontFamily="Arial" Margin="564,94,0,0" Grid.Row="3" FontSize="16"/>
 
     </Grid>
 </UserControl>

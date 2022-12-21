@@ -60,6 +60,7 @@ namespace ManagementCoach.ViewModels
         public ICommand ShowHomeViewCommand { get; }
         public ICommand ShowManagerViewCommand { get; }
         public ICommand ShowAccountViewCommand { get; }
+        public ICommand ShowStatisticsCommand { get; }
         public DispatcherTimer DispatcherTimerAdmin
         {
             get
@@ -89,10 +90,29 @@ namespace ManagementCoach.ViewModels
             ShowHomeViewCommand = new ViewModelCommand(ExecuteShowHomeViewCommand);
             ShowManagerViewCommand = new ViewModelCommand(ExecuteShowManagerViewCommand);
             ShowAccountViewCommand = new ViewModelCommand(ExecuteShowAccountViewCommand, CanExecuteShowAccountViewCommand);
+            ShowStatisticsCommand = new ViewModelCommand(ExecuteShowStatisticsCommand, CanExecuteShowStatisticsCommand);
+
             ExecuteShowHomeViewCommand(null);
 
 
 
+        }
+
+        private bool CanExecuteShowStatisticsCommand(object obj)
+        {
+            if (CurrentUser.currentUser.Role == "Admin")
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private void ExecuteShowStatisticsCommand(object obj)
+        {
+            ResetTime();
+            CurrentChildView = new StatisticsViewModel();
+            CurrentUserControl = new StatisticsUserControl();
+            CurrentUserControl.DataContext = CurrentChildView;
         }
 
         private bool CanExecuteShowAccountViewCommand(object obj)
