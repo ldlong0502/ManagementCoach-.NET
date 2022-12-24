@@ -24,8 +24,20 @@ namespace ManagementCoach.ViewModels
         private string notes;
         private int id;
         private DateTimeOffset dateAdded;
+        private string title;
 
-
+        public string Title
+        {
+            get
+            {
+                return title;
+            }
+            set
+            {
+                title = value;
+                OnPropertyChanged(nameof(Title));
+            }
+        }
         public Action Close { get; set; }
         public string Name
         {
@@ -141,6 +153,7 @@ namespace ManagementCoach.ViewModels
             CancelCommand = new ViewModelCommand(ExcuteCancelCommand);
             DateAdded = DateTimeOffset.Now;
             Status = ListStatus.First();
+            Title = "Add Coach";
             
         }
         public AddCoachViewModel(ModelCoach data)
@@ -156,6 +169,7 @@ namespace ManagementCoach.ViewModels
             Notes = data.Notes;
             Capacity = data.CoachSeats.Count;
 			id = data.Id;
+            Title = "Update Coach";
         }
 
         private void ExcuteEditCommand(object obj)

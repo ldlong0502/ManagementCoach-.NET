@@ -208,9 +208,9 @@ namespace ManagementCoach.ViewModels
 
         private void ExcuteEditCommand(object obj)
         {
-            //var objTicket = new RepoTicket().GetTicket((obj as ModelTicket).Id);
-            //var screen = new AddNewTicket(this, objTicket);
-            //screen.ShowDialog();
+            var objTicket = new RepoTicket().GetTicket((obj as MergeTicketsAndPassengers).Id);
+            var screen = new AddNewTicket(this, objTicket);
+            screen.ShowDialog();
         }
 
 

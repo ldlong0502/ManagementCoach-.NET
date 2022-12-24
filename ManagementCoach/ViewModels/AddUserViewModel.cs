@@ -28,6 +28,20 @@ namespace ManagementCoach.ViewModels
         private string email;
         private string role;
         private List<string> listRole = new List<string>() {  "Employee", "Admin"};
+        private string title;
+
+        public string Title
+        {
+            get
+            {
+                return title;
+            }
+            set
+            {
+                title = value;
+                OnPropertyChanged(nameof(Title));
+            }
+        }
 
         public int Id
         {
@@ -158,7 +172,7 @@ namespace ManagementCoach.ViewModels
             _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
             SaveCommand = new ViewModelCommand(ExcuteSaveCommand, CanExcuteSaveCommand);
             CancelCommand = new ViewModelCommand(ExcuteCancelCommand);
-           
+            Title = "Add User";
             Role = ListRole.First();
 
         }
@@ -176,7 +190,7 @@ namespace ManagementCoach.ViewModels
             Password = MD5Helper.Decrypt(data.Password);
             Username = data.Username;
             Email =data.Email;
-           
+            Title = "Update User";
 
         }
 

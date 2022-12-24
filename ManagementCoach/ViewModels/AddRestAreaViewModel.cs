@@ -22,7 +22,20 @@ namespace ManagementCoach.ViewModels
         private string address;
         private ModelProvince province;
         private int id;
+        private string title;
 
+        public string Title
+        {
+            get
+            {
+                return title;
+            }
+            set
+            {
+                title = value;
+                OnPropertyChanged(nameof(Title));
+            }
+        }
 
         public Action Close { get; set; }
         public string Name
@@ -108,6 +121,7 @@ namespace ManagementCoach.ViewModels
             SaveCommand = new ViewModelCommand(ExcuteInsertCommand, CanExcuteSaveCommand);
             CancelCommand = new ViewModelCommand(ExcuteCancelCommand);
             Province = ListProvinces.First();
+            Title = "Add Rest Area";
 
         }
         public AddRestAreaViewModel(ModelRestArea data)
@@ -120,7 +134,7 @@ namespace ManagementCoach.ViewModels
             Name = data.Name;
             Address = data.Address;
             Province = ListProvinces.Where(e => e.Id == new RepoProvince().GetProvince(data.Id).Id).FirstOrDefault();
-
+            Title = "Update Rest Area";
         }
 
         private void ExcuteEditCommand(object obj)

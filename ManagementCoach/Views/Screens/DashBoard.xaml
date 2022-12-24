@@ -65,7 +65,7 @@
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="radioButton" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
                 <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-39.215"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-36.8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-42.8"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                 <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="0.045"/>
@@ -83,7 +83,7 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="0.47"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="radioButton1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-38.4"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-42.4"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                 <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="0.021"/>
@@ -104,7 +104,7 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="0.46"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="radioButton2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-39.2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-43.2"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                 <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="0.038"/>
@@ -125,7 +125,7 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="0.48"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="radioButton3" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-37.6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-41.6"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock3" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                 <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="0.05"/>
@@ -138,49 +138,6 @@
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="fontAwesome4" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
                 <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="38.333"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="radioButton4" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="0.465"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="radioButton4" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-38.8"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock4" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="0.053"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock4" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="12.903"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="fontAwesome5" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="1.642"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="fontAwesome5" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="36.129"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="fontAwesome5" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-0.8"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="radioButton5" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.464"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="radioButton5" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-42.4"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-38.4"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock5" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-0.042"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock5" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="26.478"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="fontAwesome6" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="2.222"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="fontAwesome6" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="44.836"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="fontAwesome6" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-0.8"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="SlideOpen">
@@ -224,8 +181,8 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="radioButton" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-39.6"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-45.6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-2"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-0.057"/>
@@ -248,8 +205,8 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.98"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="radioButton1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-40"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.4"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-46"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-3.6"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.041"/>
@@ -272,8 +229,8 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.01"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="radioButton2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-42.4"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="2.8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-46.4"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-1.2"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.015"/>
@@ -300,8 +257,8 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.995"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="radioButton3" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-41.6"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-46.6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-2.4"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock3" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.033"/>
@@ -319,54 +276,7 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="39.07"/>
                 <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-3.543"/>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="radioButton4" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.43"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.01"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="radioButton4" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-39.6"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="2.8"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock4" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.044"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.148"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock4" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="13.023"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="10.647"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="fontAwesome5" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="26.047"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.097"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="radioButton5" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.428"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.01"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="radioButton5" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-45.2"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.8"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock5" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.007"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.957"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock5" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="25.234"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="12.165"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="fontAwesome6" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="2.275"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.365"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="fontAwesome6" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="42.056"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="5.621"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="fontAwesome6" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-1.6"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-0.8"/>
-            </DoubleAnimationUsingKeyFrames>
+
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
                 <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.8"/>
@@ -394,18 +304,6 @@
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock3" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
                 <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-0.8"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock4" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-0.8"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="fontAwesome5" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.8"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="fontAwesome5" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.778"/>
             </DoubleAnimationUsingKeyFrames>
 
         </Storyboard>
@@ -510,11 +408,11 @@
                             </TextBlock.RenderTransform>
                         </TextBlock>
                     </Grid>-->
-                    <StackPanel Orientation="Vertical" Width="160" Margin="-40 120 0 0">
+                    <StackPanel Orientation="Vertical" Margin="-2,120,28,0">
                         <RadioButton x:Name="radioButton" Style="{StaticResource menuButton}"
                                  Tag="{StaticResource color1}"
                                  IsChecked="True"
-                                 Width="160"
+                                 Width="164"
                                  Command="{Binding ShowHomeViewCommand}"  RenderTransformOrigin="0.5,0.5">
                             <RadioButton.RenderTransform>
                                 <TransformGroup>
@@ -550,7 +448,7 @@
                         <RadioButton x:Name="radioButton1" Style="{StaticResource menuButton}"
                         Tag="{StaticResource color1}"
                         IsChecked="False"
-                        Width="160"
+                        Width="164"
                         Command="{Binding ShowManagerViewCommand}"  RenderTransformOrigin="0.5,0.5">
                             <RadioButton.RenderTransform>
                                 <TransformGroup>
@@ -586,7 +484,7 @@
                         <RadioButton x:Name="radioButton2" Style="{StaticResource menuButton}"
                         Tag="{StaticResource color1}"
                         IsChecked="False"
-                        Width="160"
+                        Width="164"
                         Command="{Binding ShowAccountViewCommand}" RenderTransformOrigin="0.5,0.5">
                             <RadioButton.RenderTransform>
                                 <TransformGroup>
@@ -622,7 +520,7 @@
                         <RadioButton x:Name="radioButton3" Style="{StaticResource menuButton}"
                         Tag="{StaticResource color1}"
                         IsChecked="False"
-                        Width="160"
+                        Width="164"
                         Command="{Binding ShowStatisticsCommand}"  RenderTransformOrigin="0.5,0.5">
                             <RadioButton.RenderTransform>
                                 <TransformGroup>
@@ -655,77 +553,7 @@
                                 </TextBlock>
                             </StackPanel>
                         </RadioButton>
-                        <RadioButton x:Name="radioButton4" Style="{StaticResource menuButton}"
-                        Tag="{StaticResource color1}"
-                        IsChecked="False"
-                        Width="160"
-                        Command="{Binding ShowHomeViewCommand}"  RenderTransformOrigin="0.5,0.5">
-                            <RadioButton.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </RadioButton.RenderTransform>
-                            <StackPanel Orientation="Horizontal"  Margin="20,0,0,0">
-                                <fa:FontAwesome x:Name="fontAwesome5" Icon="Info" Style="{StaticResource menuButtonIcon}" RenderTransformOrigin="0.5,0.5">
-                                    <fa:FontAwesome.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform/>
-                                            <SkewTransform/>
-                                            <RotateTransform/>
-                                            <TranslateTransform/>
-                                        </TransformGroup>
-                                    </fa:FontAwesome.RenderTransform>
-                                </fa:FontAwesome>
-                                <TextBlock x:Name="textBlock4" Margin="30,0,0,0" Text="Info" Style="{StaticResource menuButtonText}" RenderTransformOrigin="0.5,0.5">
-                                    <TextBlock.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform/>
-                                            <SkewTransform/>
-                                            <RotateTransform/>
-                                            <TranslateTransform/>
-                                        </TransformGroup>
-                                    </TextBlock.RenderTransform>
-                                </TextBlock>
-                            </StackPanel>
-                        </RadioButton>
-                        <RadioButton x:Name="radioButton5" Style="{StaticResource menuButton}"
-                        Tag="{StaticResource color1}"
-                        IsChecked="False"
-                        Command="{Binding ShowHomeViewCommand}" Margin="2,280,0,0" RenderTransformOrigin="0.5,0.5" Width="148">
-                            <RadioButton.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </RadioButton.RenderTransform>
-                            <StackPanel Orientation="Horizontal"  Margin="10,0,0,0">
-                                <fa:FontAwesome x:Name="fontAwesome6" Icon="SignOut" Style="{StaticResource menuButtonIcon}" RenderTransformOrigin="0.5,0.5">
-                                    <fa:FontAwesome.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform/>
-                                            <SkewTransform/>
-                                            <RotateTransform/>
-                                            <TranslateTransform/>
-                                        </TransformGroup>
-                                    </fa:FontAwesome.RenderTransform>
-                                </fa:FontAwesome>
-                                <TextBlock x:Name="textBlock5" Text="LogOut" Style="{StaticResource menuButtonText}" RenderTransformOrigin="0.5,0.5">
-                                    <TextBlock.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform/>
-                                            <SkewTransform/>
-                                            <RotateTransform/>
-                                            <TranslateTransform/>
-                                        </TransformGroup>
-                                    </TextBlock.RenderTransform>
-                                </TextBlock>
-                            </StackPanel>
-                        </RadioButton>
+
                     </StackPanel>
 
                 </Grid>

@@ -229,6 +229,11 @@ namespace ManagementCoach.ViewModels
                 var screen = new AddNewTrip((CurrentManagerView as TripViewModel));
                 screen.ShowDialog();
             }
+            else if (Title == "Tickets")
+            {
+                var screen = new AddNewTicket((CurrentManagerView as TicketViewModel));
+                screen.ShowDialog();
+            }
         }
 
         private void ExcuteShowCoachesCommand(object obj)

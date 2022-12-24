@@ -26,7 +26,7 @@ namespace ManagementCoach.ViewModels
        
         private CoachManContext context = new CoachManContext();
         private string welcomeText;
-        private string displayedImagePath;
+        private string displayedImagePath = "C:/Users/LENOVO/Downloads/ImageCoach/coach1.jpg";
         private string avatar;
         private string percentNewPassengersWeek;
         private int newPassengersWeek = 0;

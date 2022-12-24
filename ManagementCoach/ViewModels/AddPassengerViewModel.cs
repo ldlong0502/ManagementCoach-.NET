@@ -34,7 +34,20 @@ namespace ManagementCoach.ViewModels
         private string license;
         private string notes;
         private List<string> listGender = new List<string>() { "Male", "Female" };
+        private string title;
 
+        public string Title
+        {
+            get
+            {
+                return title;
+            }
+            set
+            {
+                title = value;
+                OnPropertyChanged(nameof(Title));
+            }
+        }
         public int Id
         {
             get => id; set
@@ -208,6 +221,7 @@ namespace ManagementCoach.ViewModels
             DateJoined = DateTime.Now;
             Dob = DateTime.Now;
             Gender = ListGender.First();
+            Title = "Add Passenger";
 
         }
         public AddPassengerViewModel(ModelPassenger data)
@@ -226,6 +240,7 @@ namespace ManagementCoach.ViewModels
             IdCard = data.IdCard;
             Notes = data.Notes;
             Phone = data.Phone;
+            Title = "Update Passenger";
 
         }
 

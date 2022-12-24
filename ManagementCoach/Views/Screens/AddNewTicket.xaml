@@ -4,9 +4,199 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ManagementCoach.Views.Screens"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:vm="clr-namespace:ManagementCoach.ViewModels" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         mc:Ignorable="d"
-        Title="AddNewTicket" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        BorderBrush="BlueViolet"
+        BorderThickness="2"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        Title="AddNewCoach" Height="400" Width="450" Background="White">
+    <Window.DataContext>
+        <vm:AddTicketViewModel></vm:AddTicketViewModel>
+    </Window.DataContext>
+    <Window.Resources>
+        <Style TargetType="TextBlock" x:Key="textStyle" >
+            <Setter Property="FontSize" Value="15" ></Setter>
+            <Setter Property="FontWeight" Value="Bold" ></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        </Style>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"></BooleanToVisibilityConverter>
+        <Style TargetType="ComboBox" x:Key="comboboxStyle">
+            <Setter Property="Height" Value="30"></Setter>
+            <Setter Property="Width" Value="250"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="15" ></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        </Style>
+        <Style TargetType="DatePicker" x:Key="datepickerStyle">
+            <Setter Property="Height" Value="30"></Setter>
+            <Setter Property="Width" Value="250"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="Margin" Value="30,0,0,0"></Setter>
+            <Setter Property="FontSize" Value="15" ></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="28*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Background="{StaticResource color2}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <fa:FontAwesome Icon="Bus" FontSize="30" Foreground="White" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"></fa:FontAwesome>
+                <TextBlock Text="{Binding Title}" Foreground="White" FontSize="20" VerticalAlignment="Center" Margin="20,0,0,0"></TextBlock>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 10 0" >
+                <Button x:Name="btnMinimize"
+                            Grid.Column="1"
+                            Content="-"
+                Height="30" Width="30"
+                            Cursor="Hand"
+                            Foreground="White"
+                            FontFamily="Montserrat"
+                            FontSize="25"
+                            Click="btnMinimize_Click" 
+                            >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="LightSkyBlue">
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="AntiqueWhite"></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Height="30" Width="30" CornerRadius="15"
+                                        Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"></ContentPresenter>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button x:Name="btnClose"
+            Grid.Column="1"
+            Content="x"
+            Height="30" Width="30"
+            Cursor="Hand"
+            Foreground="White"
+            FontFamily="Montserrat"
+            FontSize="25"
+            Click="btnClose_Click" 
+
+                            >
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Red"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="AntiqueWhite"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Height="30" Width="30" CornerRadius="15"
+                        Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+
+        </Grid>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden" Margin="0,0,0,0">
+            <StackPanel Orientation="Vertical"  >
+
+
+                <Grid Grid.Row="1" Height="50"   Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource textStyle}" Text="Trip Id*" Height="20" Width="58"/>
+                    <ComboBox
+                        Grid.Column="1"
+                         Width="250"
+                        
+                          materialDesign:HintAssist.Hint="Input Trip Id"
+                          materialDesign:TextFieldAssist.HasClearButton="True"
+                          ItemsSource="{Binding ListTrips}"
+                          SelectedItem="{Binding Trip}"
+                            Text="{Binding Trip.Id}"
+                          Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                          DisplayMemberPath="Id"
+                          IsEditable="True"
+                          Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                    </ComboBox>
+                </Grid>
+                <Grid Grid.Row="1" Height="50"  Margin="0 20 0 0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Style="{StaticResource textStyle}" Text="Passenger Id*"></TextBlock>
+                    <ComboBox
+                        Grid.Column="1"
+                         Width="250"
+                          materialDesign:HintAssist.Hint="Input Passenger Id"
+                          materialDesign:TextFieldAssist.HasClearButton="True"
+                          ItemsSource="{Binding ListPassengers}"
+                          SelectedItem="{Binding Passenger}"
+                          Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                          DisplayMemberPath="Id"
+                        Text="{Binding Passenger.Id}"
+                          IsEditable="True"
+                          Style="{StaticResource MaterialDesignOutlinedComboBox}" >
+                    </ComboBox>
+                </Grid>
+                <Grid Grid.Row="1" Height="50"  Margin="0 20 0 0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource textStyle}" Text="Coach Seat Id*" Height="20" Width="110"/>
+                    <ComboBox
+                        Grid.Column="1"
+                         Width="250"
+                          materialDesign:HintAssist.Hint="Input Coach Seat Id"
+                          materialDesign:TextFieldAssist.HasClearButton="True"
+                          ItemsSource="{Binding ListModelCoachSeats}"
+                          SelectedItem="{Binding CoachSeat}"
+                          Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                          DisplayMemberPath="Name"
+                          Text="{Binding CoachSeat.Name}"
+                          IsEditable="True"
+                        
+                          Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                    </ComboBox>
+                </Grid>
+                <StackPanel Grid.Row="1" Height="50" Orientation="Horizontal" Margin="0,50,0,0">
+                    <Button Click="btnClose_Click" Width="100" Height="40" Background="White" BorderBrush="{StaticResource color2}" BorderThickness="3" Content="CANCEL" Foreground="{StaticResource color8}" FontWeight="Medium" Margin="170,0,0,0"></Button>
+                    <Button Command="{Binding SaveCommand}" Width="100" Height="40" Background="{StaticResource color2}"  Content="SAVE" Foreground="{StaticResource color1}" FontWeight="Medium" Margin="10,0,0,0" ></Button>
+                </StackPanel>
+            </StackPanel>
+
+        </ScrollViewer>
+
+
     </Grid>
 </Window>

@@ -173,7 +173,6 @@ namespace ManagementCoach.ViewModels
         }
         public void LoadImageSatff()
         {
-
             DispatcherTimerStaff = new DispatcherTimer();
             DispatcherTimerStaff.Tick += new EventHandler(dispatcherTimerStaff_Tick);
             DispatcherTimerStaff.Interval = new TimeSpan(0, 0, 1);
@@ -182,6 +181,7 @@ namespace ManagementCoach.ViewModels
 
         private void dispatcherTimerAdmin_Tick(object sender, EventArgs e)
         {
+            
             TimeSpan.FromSeconds(time).Duration();
             (CurrentChildView as AdminHomeViewModel).DisplayedImagePath = @"C:/Users/LENOVO/Downloads/ImageCoach/coach" + time + ".jpg";            
             if (time == 4)
@@ -193,6 +193,7 @@ namespace ManagementCoach.ViewModels
         }
         private void dispatcherTimerStaff_Tick(object sender, EventArgs e)
         {
+            
             TimeSpan.FromSeconds(time).Duration();
             (CurrentChildView as StaffHomeViewModel).DisplayedImagePath = @"C:/Users/LENOVO/Downloads/ImageCoach/coach" + time + ".jpg";
             if (time == 4)
@@ -205,6 +206,7 @@ namespace ManagementCoach.ViewModels
 
         private void ResetTime()
         {
+            
             if(DispatcherTimerAdmin != null)
                 DispatcherTimerAdmin.Stop();
             if (DispatcherTimerStaff != null)

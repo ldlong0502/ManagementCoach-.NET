@@ -1,4 +1,5 @@
-﻿using ManagementCoach.BE.Data.Input;
+﻿using ManagementCoach.BE;
+using ManagementCoach.BE.Data.Input;
 using ManagementCoach.BE.Entities;
 using ManagementCoach.BE.Models;
 using ManagementCoach.BE.Repositories;
@@ -14,14 +15,16 @@ using System.Windows.Input;
 
 namespace ManagementCoach.ViewModels
 {
-    public class AddStationViewModel : ViewModelBase, INotifyDataErrorInfo
+    public class AddTicketViewModel : ViewModelBase, INotifyDataErrorInfo
     {
         private readonly ErrorsViewModel _errorsViewModel;
-        private string name;
-        private string district;
-        private string address;
-
-        private ModelProvince province;
+        private CoachManContext context = new CoachManContext();
+        private ModelPassenger passenger;
+        private ModelTrip trip;
+        private List<ModelCoachSeat> listModelCoachSeats;
+        private List<ModelPassenger> listPassengers;
+        private List<ModelTrip> listTrips;
+        private ModelCoachSeat coachSeat;
         private int id;
         private string title;
 
@@ -37,89 +40,105 @@ namespace ManagementCoach.ViewModels
                 OnPropertyChanged(nameof(Title));
             }
         }
-
         public Action Close { get; set; }
-        public string Name
+        public ModelTrip Trip
         {
             get
             {
-                _errorsViewModel.ClearErrors(nameof(Name));
-                if (String.IsNullOrEmpty(name))
+                _errorsViewModel.ClearErrors(nameof(Trip));
+                if (trip == null)
                 {
-                    _errorsViewModel.AddError(nameof(Name), "Field is required.");
+                    _errorsViewModel.AddError(nameof(Trip), "Field is required");
                 }
-                return name;
+                return trip;
             }
             set
             {
-                name = value;
+                trip = value;
+                OnPropertyChanged(nameof(Trip));
+                if (Trip != null)
+                     ListModelCoachSeats = new RepoCoachSeat().GetCoachSeats(Trip.CoachId).ToList();
                
-                OnPropertyChanged(nameof(Name));
             }
         }
-        
-        public string District
+        public ModelPassenger Passenger
         {
             get
             {
-                _errorsViewModel.ClearErrors(nameof(District));
-                if (String.IsNullOrEmpty(district))
+                _errorsViewModel.ClearErrors(nameof(Passenger));
+                if (passenger == null)
                 {
-                    _errorsViewModel.AddError(nameof(District), "Field is required.");
+                    _errorsViewModel.AddError(nameof(Passenger), "Field is required");
                 }
-                return district;
+                return passenger;
             }
             set
             {
-                district = value;
-                OnPropertyChanged(nameof(District));
+                passenger = value;
+
+                OnPropertyChanged(nameof(Passenger));
             }
         }
-        public string Address
+        public List<ModelPassenger> ListPassengers
         {
             get
             {
-                return address;
+                return listPassengers;
             }
             set
             {
-                address = value;
+                listPassengers = value;
+
+                OnPropertyChanged(nameof(ListPassengers));
+            }
+        }
+        public List<ModelTrip> ListTrips
+        {
+            get
+            {
                 
-                OnPropertyChanged(nameof(Address));
+                return listTrips;
+
+            }
+            set
+            {
+                listTrips = value;
+                OnPropertyChanged(nameof(ListTrips));
             }
         }
-        public ModelProvince Province
+        public ModelCoachSeat CoachSeat
         {
             get
             {
-                _errorsViewModel.ClearErrors(nameof(Province));
-                if (province == null)
+                _errorsViewModel.ClearErrors(nameof(CoachSeat));
+                if (coachSeat == null)
                 {
-                    _errorsViewModel.AddError(nameof(Province), "Field is required.");
+                    _errorsViewModel.AddError(nameof(CoachSeat), "Field is required");
                 }
-                return province;
+                return coachSeat;
+
             }
             set
             {
-                province = value;
-                OnPropertyChanged(nameof(Province));
+                coachSeat = value;
+                OnPropertyChanged(nameof(CoachSeat));
             }
         }
-
-        private List<ModelProvince> listProvinces = new RepoProvince().GetProvinces("");
-        public List<ModelProvince> ListProvinces
+        public List<ModelCoachSeat> ListModelCoachSeats
         {
-            get {
-                return listProvinces;
-
+            get
+            {
+                return listModelCoachSeats;
             }
             set
             {
-                listProvinces = value;
-                OnPropertyChanged(nameof(ListProvinces));
+                listModelCoachSeats = value;
+
+                OnPropertyChanged(nameof(ListModelCoachSeats));
             }
-            
         }
+       
+        
         public bool CanCreate => !HasErrors;
         public bool HasErrors => _errorsViewModel.HasErrors;
 
@@ -128,50 +147,58 @@ namespace ManagementCoach.ViewModels
 
         public ICommand SaveCommand { get; }
         public ICommand CancelCommand { get; }
-        public AddStationViewModel()
+        public ICommand ChooseRestAreaCommand { get; }
+        public ICommand AddRestAreaCommand { get; }
+        public ICommand RemoveRestAreaCommand { get; }
+        public AddTicketViewModel()
         {
+            ListTrips = new RepoTrip().GetTrips(1, context.Trips.Count()).Items;           
+            ListPassengers = new RepoPassenger().GetPassengers("", 1, context.Passengers.Count()).Items;
+         
             _errorsViewModel = new ErrorsViewModel();
             _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
             SaveCommand = new ViewModelCommand(ExcuteInsertCommand, CanExcuteSaveCommand);
             CancelCommand = new ViewModelCommand(ExcuteCancelCommand);
-            Province = ListProvinces.FirstOrDefault();
-            Title = "Add Station";
-
+            Title = "Add Ticket";
         }
-        public AddStationViewModel(ModelStation data)
+
+     
+        public AddTicketViewModel(ModelTicket data)
         {
+            ListTrips = new RepoTrip().GetTrips(1, context.Trips.Count()).Items;
+            ListPassengers = new RepoPassenger().GetPassengers("", 1, context.Passengers.Count()).Items;
             _errorsViewModel = new ErrorsViewModel();
             _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
             SaveCommand = new ViewModelCommand(ExcuteEditCommand, CanExcuteSaveCommand);
             CancelCommand = new ViewModelCommand(ExcuteCancelCommand);
+            Title = "Update Ticket";
             id = data.Id;
-            Name = data.Name;
-            Address = data.Address;
-            Province = ListProvinces.Where(e => e.Id == new RepoProvince().GetProvince(data.Id).Id).FirstOrDefault();
-            Title = "Update Station";
+            CoachSeat = new RepoCoachSeat().GetCoachSeat(data.CoachSeatId);
+            Passenger = new RepoPassenger().GetPassenger(data.PassengerId);
+            Trip = new RepoTrip().GetTrip(data.TripId);
         }
 
         private void ExcuteEditCommand(object obj)
         {
             try
             {
-                var station = new RepoStation().UpdateStation(
+                var ticket = new RepoTicket().UpdateTicket(
                     id,
-                    new InputStation()
+                    new InputTicket()
                     {
-                        Name = Name,
-                        Address = Address,
-                        ProvinceId = Province.Id,
+                        CoachSeatId = CoachSeat.Id,
+                        PassengerId = Passenger.Id,
+                        TripId = Trip.Id,
+
                     }
                 );
-                if (station.Success)
+                if (ticket.Success)
                 {
                     MessageBox.Show("Successfull");
                 }
                 else
                 {
-                    MessageBox.Show(station.ErrorMessage);
-                    return;
+                    MessageBox.Show(ticket.ErrorMessage);
                 }
                 Close();
             }
@@ -198,21 +225,22 @@ namespace ManagementCoach.ViewModels
         {
             try
             {
-                var station = new RepoStation().InsertStation(
-                   new InputStation()
+                var ticket = new RepoTicket().InsertTicket(
+                   new InputTicket()
                    {
-                       Name = Name,
-                       Address = Address,
-                       ProvinceId = Province.Id,
+                       CoachSeatId = CoachSeat.Id,
+                       PassengerId = Passenger.Id,
+                       TripId = Trip.Id,
+
                    }
                );
-                if (station.Success == true)
+                if (ticket.Success == true)
                 {
                     MessageBox.Show("Successfull");
                 }
                 else
                 {
-                    MessageBox.Show(station.ErrorMessage);
+                    MessageBox.Show(ticket.ErrorMessage);
                     return;
                 }
 

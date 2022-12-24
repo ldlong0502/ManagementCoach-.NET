@@ -34,6 +34,20 @@ namespace ManagementCoach.ViewModels
         private List<ModelRoute> listRoute ;
         private List<ModelCoach> listCoach;
         private List<ModelDriver> listDriver;
+        private string title;
+
+        public string Title
+        {
+            get
+            {
+                return title;
+            }
+            set
+            {
+                title = value;
+                OnPropertyChanged(nameof(Title));
+            }
+        }
         public int Id
         {
             get => id; set
@@ -223,7 +237,7 @@ namespace ManagementCoach.ViewModels
             SaveCommand = new ViewModelCommand(ExcuteSaveCommand, CanExcuteSaveCommand);
             CancelCommand = new ViewModelCommand(ExcuteCancelCommand);
             Date = DateTime.Now;
-
+            Title = "Add Trip";
         }
        
         
@@ -244,7 +258,7 @@ namespace ManagementCoach.ViewModels
             DepartTime = ConvertIntToDateTime(data.DepartTime);
             Cancelled = data.Cancelled;
             Date = data.Date;
-
+            Title = "Update Trip";
 
            
 

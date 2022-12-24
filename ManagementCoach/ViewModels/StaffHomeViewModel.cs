@@ -22,7 +22,7 @@ namespace ManagementCoach.ViewModels
     {
         private CoachManContext context = new CoachManContext();
         private string welcomeText;
-        private string displayedImagePath;
+        private string displayedImagePath = "C:/Users/LENOVO/Downloads/ImageCoach/coach1.jpg";
         private string avatar;
         private ModelProvince departure;
         private ModelProvince destination;
@@ -206,7 +206,7 @@ namespace ManagementCoach.ViewModels
         {
             int id = (int)obj;
             var route = new RepoRoute().GetRoute(id);
-            var listTrip = new RepoTrip().GetTripsByRoute(route.Id).Items.Where(trip => trip.Date.CompareTo( DateTime.Now) >= 0).ToList();
+            var listTrip = new RepoTrip().GetTripsByRoute(route.Id).Items.Where(trip => trip.Date.CompareTo( DateTime.Today) >= 0).ToList();
             if (listTrip.Count == 0)
                 return false;
             return true;
@@ -250,8 +250,8 @@ namespace ManagementCoach.ViewModels
 
                 string title = new RepoProvince().GetProvince(new RepoStation().GetStation(item.OriginStationId).ProvinceId).Name + " -> " + new RepoProvince().GetProvince(new RepoStation().GetStation(item.DestinationStationId).ProvinceId).Name;
                 string price = item.Price.ToString();
-                string imageUrl = string.IsNullOrEmpty(item.ImageUrl) ? "/Images/avatar.png" : item.ImageUrl;
-                var listTrip = new RepoTrip().GetTripsByRoute(item.Id).Items.Where(trip => trip.Date == DateTime.Now).ToList();
+                string imageUrl = string.IsNullOrEmpty(item.ImageUrl) ? "/Images/coach.jpg" : item.ImageUrl;
+                var listTrip = new RepoTrip().GetTripsByRoute(item.Id).Items.Where(trip => trip.Date == DateTime.Today).ToList();
                 listTrip.Sort((a, b) => a.DepartTime.CompareTo(b.DepartTime));
                 List<int> listTime = new List<int>();
                 listTrip.ForEach(trip => {

@@ -47,10 +47,18 @@
             <RowDefinition Height="3*"></RowDefinition>
             <RowDefinition Height="28*"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Background="{StaticResource color2}">
-            <fa:FontAwesome Icon="Bus" FontSize="30" Foreground="White" HorizontalAlignment="Center" Margin="10,0,0,0" VerticalAlignment="Center"></fa:FontAwesome>
-            <TextBlock Text="Coach Seat" Foreground="White" FontSize="20" VerticalAlignment="Center" Margin="20,0,0,0"></TextBlock>
-            <Button x:Name="btnMinimize"
+        <Grid Background="{StaticResource color2}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <fa:FontAwesome Icon="Bus" FontSize="30" Foreground="White" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"></fa:FontAwesome>
+                <TextBlock Text="Coach Seat" Foreground="White" FontSize="20" VerticalAlignment="Center" Margin="20,0,0,0"></TextBlock>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 10 0" >
+                <Button x:Name="btnMinimize"
                             Grid.Column="1"
                             Content="-"
                 Height="30" Width="30"
@@ -59,30 +67,29 @@
                             FontFamily="Montserrat"
                             FontSize="25"
                             Click="btnMinimize_Click" 
-                            Margin="0,0,-390,0"
                             >
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="LightSkyBlue">
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="AntiqueWhite"></Setter>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border Height="30" Width="30" CornerRadius="15"
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="LightSkyBlue">
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="AntiqueWhite"></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Height="30" Width="30" CornerRadius="15"
                                         Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center"
+                                <ContentPresenter HorizontalAlignment="Center"
                                                       VerticalAlignment="Center"></ContentPresenter>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            <Button x:Name="btnClose"
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button x:Name="btnClose"
             Grid.Column="1"
             Content="x"
             Height="30" Width="30"
@@ -91,29 +98,31 @@
             FontFamily="Montserrat"
             FontSize="25"
             Click="btnClose_Click" 
-                    Margin="0,0,-460,0"
+
                             >
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Red"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="AntiqueWhite"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Height="30" Width="30" CornerRadius="15"
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Red"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="AntiqueWhite"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Height="30" Width="30" CornerRadius="15"
                         Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center"
+                                <ContentPresenter HorizontalAlignment="Center"
                             VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-        </StackPanel>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+
+        </Grid>
         <TabControl
           Width="300"
           Grid.Row="1"

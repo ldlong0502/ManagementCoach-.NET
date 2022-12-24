@@ -289,6 +289,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Screens\InvoiceScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Screens\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -562,12 +566,14 @@
     <Compile Include="ViewModels\AddRestAreaViewModel.cs" />
     <Compile Include="ViewModels\AddRouteViewModel.cs" />
     <Compile Include="ViewModels\AddStationViewModel.cs" />
+    <Compile Include="ViewModels\AddTicketViewModel.cs" />
     <Compile Include="ViewModels\AddTripViewModel.cs" />
     <Compile Include="ViewModels\AddUserViewModel.cs" />
     <Compile Include="ViewModels\AdminHomeViewModel.cs" />
     <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\ChartViewModel.cs" />
     <Compile Include="ViewModels\CoachSeatViewModel.cs" />
+    <Compile Include="ViewModels\InvoiceViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\PassengerViewModel.cs" />
     <Compile Include="ViewModels\ProvinceViewModel.cs" />
@@ -626,6 +632,9 @@
     </Compile>
     <Compile Include="Views\Screens\DashBoard.xaml.cs">
       <DependentUpon>DashBoard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Screens\InvoiceScreen.xaml.cs">
+      <DependentUpon>InvoiceScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Screens\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>

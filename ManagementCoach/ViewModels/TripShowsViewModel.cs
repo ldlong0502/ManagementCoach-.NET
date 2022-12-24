@@ -1,6 +1,7 @@
 ﻿using ManagementCoach.BE;
 using ManagementCoach.BE.Models;
 using ManagementCoach.BE.Repositories;
+using ManagementCoach.Views.Screens;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -276,7 +277,7 @@ namespace ManagementCoach.ViewModels
             DialogResult ret = MessageBox.Show("Do you choose this option?", "Payment", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if(ret == DialogResult.OK)
             {
-
+                    var list = new List<TempSeat>();
                     ChooseSeats.ForEach(seat =>
                     {
                         var modelSeat = new RepoCoachSeat().GetCoachSeats(ChooseTrip.CoachId).Find(c=> c.Name == seat);
@@ -284,15 +285,40 @@ namespace ManagementCoach.ViewModels
                         {
                             CoachSeatId = modelSeat.Id,
                             TripId = ChooseTrip.Id,
-                            PassengerId = Passenger.Id,                         
+                            PassengerId = Passenger.Id,
                         });
+                        var x = new TempSeat
+                        {
+                            Name = seat,
+                            Price = Route.Price,
+                            Floor = seat.StartsWith("A") ? "Down" : "Up"
+                        };
+                        list.Add(x);
                     });
+                var temp = ListTrips.Find(c => c.Id == ChooseTrip.Id);
+                var invoice = new Invoice()
+                {
+                    ListSeatDetail = list,
+                    NumOfSeat = ChooseSeats.Count(),
+                    PassengerName = Passenger.Name,
+                    Total = Route.Price * ChooseSeats.Count(),
+                    Id = CurrentUser.invoiceId++.ToString(),
+                    DateTrip = temp.Date,
+                    DepartureTime = temp.DepartureTime,
+                    FromProvince = new RepoProvince().GetProvince(new RepoStation().GetStation(Route.OriginStationId).ProvinceId).Name,
+                    ToProvince = new RepoProvince().GetProvince(new RepoStation().GetStation(Route.DestinationStationId).ProvinceId).Name,
+                 };
                     MessageBox.Show("Payment Successfully", "Payment", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ExcuteChooseCommand(ChooseTrip.Id);
- 
+                    var invoiceScreen = new InvoiceScreen();
+                    var invoiceContext = new InvoiceViewModel(invoice);
+                    invoiceScreen.DataContext = invoiceContext;
+                    invoiceScreen.ShowDialog();
+                    
                
                
             }
+
         }
 
         private void ExcuteChooseSeatCommand(object obj)
@@ -497,4 +523,25 @@ namespace ManagementCoach.ViewModels
         public bool IsEnabled { get; set; }
         public Brush Brush { get; set; }
     }
+
+    public class Invoice 
+    { 
+        public string Id { get; set; }
+        public string PassengerName { get; set; }
+        public DateTime DateIssued = DateTime.Now;
+        public List<TempSeat> ListSeatDetail { get; set; }
+        public int Total { get; set; }
+        public int NumOfSeat { get; set; }
+        public string FromProvince { get; set; }
+        public string ToProvince { get; set; }
+        public DateTime DateTrip { get; set; }
+        public int DepartureTime { get; set; }
+    }
+    public class TempSeat
+    {
+        public string Name { get; set; }
+        public int Price { get; set; }
+        public string Floor { get; set; }
+    }
+
 }

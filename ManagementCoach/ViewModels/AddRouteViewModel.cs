@@ -32,7 +32,20 @@ namespace ManagementCoach.ViewModels
         private bool visibleListRestArea = false;
         private int id;
         private int count = 0;
+        private string title;
 
+        public string Title
+        {
+            get
+            {
+                return title;
+            }
+            set
+            {
+                title = value;
+                OnPropertyChanged(nameof(Title));
+            }
+        }
         public Action Close { get; set; }
         public string TextRestAreas
         {
@@ -222,6 +235,7 @@ namespace ManagementCoach.ViewModels
             ChooseRestAreaCommand = new ViewModelCommand(ExcuteChooseRestAreaCommand);
             AddRestAreaCommand = new ViewModelCommand(ExcuteAddRestAreaCommand);
             RemoveRestAreaCommand = new ViewModelCommand(ExcuteRemoveRestAreaCommand);
+            Title = "Add Route";
         }
 
         private void ExcuteAddRestAreaCommand(object obj)
@@ -291,6 +305,7 @@ namespace ManagementCoach.ViewModels
             DestinationStation = new RepoStation().GetStation(data.DestinationStationId);
             OriginStation = new RepoStation().GetStation(data.OriginStationId);
             id = data.Id;
+            Title = "Update Route";
             data.RestAreas.ForEach(route => {
             {
               RouteRestAreas.Add(route.Id);

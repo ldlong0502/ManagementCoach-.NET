@@ -18,5 +18,6 @@ namespace ManagementCoach
         }
 
         public static DashBoard dashBoard = new DashBoard();
+        public static int invoiceId = 1;
     }
 }

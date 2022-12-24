@@ -117,8 +117,8 @@
                 <DataGridTextColumn Header="Id"  Binding="{Binding Id}" IsReadOnly="True"    ></DataGridTextColumn>
                 <DataGridTextColumn Header="Trip Id"  Binding="{Binding TripId}" IsReadOnly="True"    ></DataGridTextColumn>
                 <DataGridTextColumn Header="Passenger Id"  Binding="{Binding PassengerId}" ></DataGridTextColumn>
-                <DataGridTextColumn  Header="Passeger Name"  Binding="{Binding PassegerName}" ></DataGridTextColumn>
-                <DataGridTextColumn  Header="Date Bought"  Binding="{Binding Date, StringFormat='{}{0:dd/MM/yyyy hh:mm:ss}'}" ></DataGridTextColumn>
+                <DataGridTextColumn  Header="Passeger Name"  Binding="{Binding PassengerName}" ></DataGridTextColumn>
+                <DataGridTextColumn  Header="Date Bought"  Binding="{Binding DateBought, StringFormat='{}{0:dd/MM/yyyy hh:mm:ss}'}" ></DataGridTextColumn>
                 <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
