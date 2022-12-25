@@ -33,7 +33,19 @@ namespace ManagementCoach.ViewModels
         private int id;
         private int count = 0;
         private string title;
-
+        private string imageUrl = "/Images/coach.jpg";
+        public string ImageUrl
+        {
+            get
+            {
+                return imageUrl;
+            }
+            set
+            {
+                imageUrl = value;
+                OnPropertyChanged(nameof(ImageUrl));
+            }
+        }
         public string Title
         {
             get
@@ -223,6 +235,7 @@ namespace ManagementCoach.ViewModels
         public ICommand ChooseRestAreaCommand { get; }
         public ICommand AddRestAreaCommand { get; }
         public ICommand RemoveRestAreaCommand { get; }
+        public ICommand ImageCommand { get; }
         public AddRouteViewModel()
         {
             ListStations = new RepoStation().GetStations("", 1, context.Stations.Count()).Items;
@@ -235,6 +248,7 @@ namespace ManagementCoach.ViewModels
             ChooseRestAreaCommand = new ViewModelCommand(ExcuteChooseRestAreaCommand);
             AddRestAreaCommand = new ViewModelCommand(ExcuteAddRestAreaCommand);
             RemoveRestAreaCommand = new ViewModelCommand(ExcuteRemoveRestAreaCommand);
+            ImageCommand = new ViewModelCommand(ExcuteImageCommand);
             Title = "Add Route";
         }
 
@@ -301,11 +315,13 @@ namespace ManagementCoach.ViewModels
             ChooseRestAreaCommand = new ViewModelCommand(ExcuteChooseRestAreaCommand);
             AddRestAreaCommand = new ViewModelCommand(ExcuteAddRestAreaCommand);
             RemoveRestAreaCommand = new ViewModelCommand(ExcuteRemoveRestAreaCommand);
+            ImageCommand = new ViewModelCommand(ExcuteImageCommand);
             Price = data.Price.ToString();
             DestinationStation = new RepoStation().GetStation(data.DestinationStationId);
             OriginStation = new RepoStation().GetStation(data.OriginStationId);
             id = data.Id;
             Title = "Update Route";
+            ImageUrl = data.ImageUrl;
             data.RestAreas.ForEach(route => {
             {
               RouteRestAreas.Add(route.Id);
@@ -325,7 +341,17 @@ namespace ManagementCoach.ViewModels
                 count++;
             });
         }
+        private void ExcuteImageCommand(object obj)
+        {
+            System.Windows.Forms.OpenFileDialog openFD = new System.Windows.Forms.OpenFileDialog();
+            openFD.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.tif;...";
 
+            if (openFD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                ImageUrl = openFD.FileName;
+            }
+
+        }
         private void ExcuteEditCommand(object obj)
         {
             try
@@ -339,7 +365,8 @@ namespace ManagementCoach.ViewModels
                        OriginStationId = OriginStation.Id,
                        EstimatedTime = 0,
                        Price = int.Parse(Price),
-                       RouteRestAreaIdList = RouteRestAreas
+                       RouteRestAreaIdList = RouteRestAreas,
+                       ImageUrl = ImageUrl,
 
                     }
                 );
@@ -385,6 +412,7 @@ namespace ManagementCoach.ViewModels
                        EstimatedTime = 0,
                        Price = int.Parse(Price),
                        RouteRestAreaIdList = RouteRestAreas,
+                       ImageUrl = ImageUrl,
                    }
                );
                 if (route.Success == true)

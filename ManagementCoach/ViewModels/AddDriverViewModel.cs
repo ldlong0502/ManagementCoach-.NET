@@ -35,7 +35,19 @@ namespace ManagementCoach.ViewModels
         private string notes;
         private List<string> listGender = new List<string>() { "Male", "Female" };
         private string title;
-
+        private string imageUrl = "/Images/driver.png";
+        public string ImageUrl
+        {
+            get
+            {
+                return imageUrl;
+            }
+            set
+            {
+                imageUrl = value;
+                OnPropertyChanged(nameof(ImageUrl));
+            }
+        }
         public string Title
         {
             get
@@ -211,6 +223,7 @@ namespace ManagementCoach.ViewModels
         public ICommand CancelCommand { get; }
         public ICommand ChooseLicenseCommand { get; }
         public ICommand SeeLicenseCommand { get; }
+        public ICommand ImageCommand { get; }
 
         public AddDriverViewModel()
         {
@@ -220,12 +233,25 @@ namespace ManagementCoach.ViewModels
             CancelCommand = new ViewModelCommand(ExcuteCancelCommand);
             ChooseLicenseCommand = new ViewModelCommand(ExcuteChooseLicenseCommand);
             SeeLicenseCommand = new ViewModelCommand(ExcuteSeeLicenseCommand, CanExcuteSeeLicenseCommand);
+            ImageCommand = new ViewModelCommand(ExcuteImageCommand);
             DateJoined = DateTime.Now;
             Dob = DateTime.Now;
             Gender = ListGender.First();
             Title = "Add Driver";
 
         }
+
+        private void ExcuteImageCommand(object obj)
+        {
+            System.Windows.Forms.OpenFileDialog openFD = new System.Windows.Forms.OpenFileDialog();
+            openFD.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.tif;...";
+
+            if (openFD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                ImageUrl = openFD.FileName;
+            }
+        }
+
         private bool CanExcuteSeeLicenseCommand(object obj)
         {
             if (string.IsNullOrEmpty(License))
@@ -242,7 +268,7 @@ namespace ManagementCoach.ViewModels
         private void ExcuteChooseLicenseCommand(object obj)
         {
             System.Windows.Forms.OpenFileDialog openFD = new System.Windows.Forms.OpenFileDialog();
-            openFD.Filter = "Bitmaps|*.bmp|jpeg|*.jpg";
+            openFD.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.tif;...";
 
             if (openFD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -259,6 +285,7 @@ namespace ManagementCoach.ViewModels
             CancelCommand = new ViewModelCommand(ExcuteCancelCommand);
             ChooseLicenseCommand = new ViewModelCommand(ExcuteChooseLicenseCommand);
             SeeLicenseCommand = new ViewModelCommand(ExcuteSeeLicenseCommand, CanExcuteSeeLicenseCommand);
+            ImageCommand = new ViewModelCommand(ExcuteImageCommand);
             Id = data.Id;
             Name = data.Name;
             Active = data.Active;
@@ -271,6 +298,7 @@ namespace ManagementCoach.ViewModels
             License = data.License;
             Notes = data.Notes;
             Phone = data.Phone;
+            ImageUrl = data.ImageUrl;
             Title = "Update Driver";
         }
 
@@ -291,7 +319,7 @@ namespace ManagementCoach.ViewModels
                     License = License,
                     Notes = Notes,
                     Phone = Phone,
-
+                    ImageUrl = ImageUrl,
                 });
                 if (editDriver.Success == true)
                 {
@@ -340,6 +368,7 @@ namespace ManagementCoach.ViewModels
                     License = License,
                     Notes = Notes,
                     Phone = Phone,
+                    ImageUrl = ImageUrl,
                 });
                 if (addDriver.Success == true)
                 {

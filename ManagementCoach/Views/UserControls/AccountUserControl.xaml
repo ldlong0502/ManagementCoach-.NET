@@ -139,7 +139,23 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Role" Binding="{Binding Role}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Name" Width="200"  >
+                    <DataGridTemplateColumn.CellTemplate  >
+                        <DataTemplate >
+                            <Grid HorizontalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                    <ColumnDefinition Width="150" ></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Border Width="25" Height="25" HorizontalAlignment="Left" BorderBrush="YellowGreen" BorderThickness="1" CornerRadius="50">
+                                    <Image Source="{Binding ImageUrl}" HorizontalAlignment="Left"></Image>
+                                </Border>
+                                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Text="{Binding Name}"></TextBlock>
+                            </Grid>
+
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Date created" Binding="{Binding DateAdded , StringFormat='{}{0:dd/MM/yyyy HH:mm:ss}'}" Width="*"></DataGridTextColumn>
                 <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto" >

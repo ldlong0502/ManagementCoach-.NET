@@ -250,7 +250,7 @@ namespace ManagementCoach.ViewModels
             var name = user.Name.Split(' ');
             WelcomeText = "Hello, " + name[name.Length-1];
             //Avtar
-            Avatar = string.IsNullOrEmpty(CurrentUser.currentUser.ImageUrl) ? "Images/user.png" : CurrentUser.currentUser.ImageUrl;
+            Avatar = string.IsNullOrEmpty(new RepoUser().GetUser(CurrentUser.currentUser.Id).ImageUrl) ? "/Images/user.png" : new RepoUser().GetUser(CurrentUser.currentUser.Id).ImageUrl;
             //Total Income
             var listTickets = new RepoTicket().GetTickets(1, context.Tickets.Count()).Items;
             listTickets.ForEach(ticket =>

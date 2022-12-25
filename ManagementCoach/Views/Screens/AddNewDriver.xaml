@@ -124,8 +124,39 @@
         </Grid>
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden" Margin="0,0,0,0">
             <StackPanel Orientation="Vertical" >
-
-                <Grid Grid.Row="1" Height="50"   Margin="0,10,0,0">
+                <Grid Grid.Row="1" Height="150"   Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Style="{StaticResource textStyle}" Text="Image"></TextBlock>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="1">
+                        <WrapPanel Name ="container" RenderTransformOrigin="0.5,0.5" Width="167" >
+                            <WrapPanel.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="-1"/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </WrapPanel.RenderTransform>
+                            <Image  Source="{Binding ImageUrl}" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill"/>
+                            <WrapPanel.OpacityMask>
+                                <VisualBrush >
+                                    <VisualBrush.Visual>
+                                        <Border Height="{Binding ElementName=container, Path=ActualHeight}" 
+                            Width="{Binding ElementName=container, Path=ActualWidth}"
+                            Background="White" CornerRadius="15" />
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </WrapPanel.OpacityMask>
+                        </WrapPanel>
+                        <Button HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10 0" Command='{Binding ImageCommand}'>
+                            <materialDesign:PackIcon Kind="Image"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="1" Height="50"   Margin="0,20,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>

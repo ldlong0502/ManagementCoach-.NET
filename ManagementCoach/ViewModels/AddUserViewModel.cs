@@ -29,7 +29,19 @@ namespace ManagementCoach.ViewModels
         private string role;
         private List<string> listRole = new List<string>() {  "Employee", "Admin"};
         private string title;
-
+        private string imageUrl = "/Images/avatar.png";
+        public string ImageUrl
+        {
+            get
+            {
+                return imageUrl;
+            }
+            set
+            {
+                imageUrl = value;
+                OnPropertyChanged(nameof(ImageUrl));
+            }
+        }
         public string Title
         {
             get
@@ -165,6 +177,7 @@ namespace ManagementCoach.ViewModels
         public ICommand CancelCommand { get; }
         public ICommand ChooseLicenseCommand { get; }
         public ICommand SeeLicenseCommand { get; }
+        public ICommand ImageCommand { get; }
 
         public AddUserViewModel()
         {
@@ -172,6 +185,7 @@ namespace ManagementCoach.ViewModels
             _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
             SaveCommand = new ViewModelCommand(ExcuteSaveCommand, CanExcuteSaveCommand);
             CancelCommand = new ViewModelCommand(ExcuteCancelCommand);
+            ImageCommand = new ViewModelCommand(ExcuteImageCommand);
             Title = "Add User";
             Role = ListRole.First();
 
@@ -184,6 +198,7 @@ namespace ManagementCoach.ViewModels
             _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
             SaveCommand = new ViewModelCommand(ExcuteEditCommand, CanExcuteSaveCommand);
             CancelCommand = new ViewModelCommand(ExcuteCancelCommand);
+            ImageCommand = new ViewModelCommand(ExcuteImageCommand);
             Id = data.Id;
             Name = data.Name;
             Role = data.Role;
@@ -191,9 +206,19 @@ namespace ManagementCoach.ViewModels
             Username = data.Username;
             Email =data.Email;
             Title = "Update User";
+            ImageUrl = data.ImageUrl;
 
         }
+        private void ExcuteImageCommand(object obj)
+        {
+            System.Windows.Forms.OpenFileDialog openFD = new System.Windows.Forms.OpenFileDialog();
+            openFD.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.tif;...";
 
+            if (openFD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                ImageUrl = openFD.FileName;
+            }
+        }
         private void ExcuteEditCommand(object obj)
         {
             try
@@ -206,6 +231,7 @@ namespace ManagementCoach.ViewModels
                     Password = MD5Helper.Encrypt(Password),
                     Email = Email,
                     Role = Role,
+                    ImageUrl = ImageUrl,
 
                 });
                 if (editUser.Success == true)
@@ -249,6 +275,7 @@ namespace ManagementCoach.ViewModels
                     Password = MD5Helper.Encrypt(Password),
                     Email = Email,
                     Role = Role,
+                    ImageUrl = ImageUrl,
 
                 });
                 if (addUser.Success == true)

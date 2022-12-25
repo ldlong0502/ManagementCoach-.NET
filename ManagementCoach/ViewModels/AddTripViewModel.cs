@@ -158,7 +158,7 @@ namespace ManagementCoach.ViewModels
             get
             {
                 _errorsViewModel.ClearErrors(nameof(Date));
-                if (DateTime.Compare(date, DateTime.Now) < 0)
+                if (DateTime.Compare(date, DateTime.Today) < 0)
                 {
                     _errorsViewModel.AddError(nameof(Date), "Date must later than now");
                 }
@@ -209,6 +209,10 @@ namespace ManagementCoach.ViewModels
                 {
                     _errorsViewModel.AddError(nameof(DepartTime), "Field is required.");
                 }
+                if(DateTime.Compare(date,DateTime.Today) == 0 && (departTime.Hour * 60 + departTime.Minute - 180 < DateTime.Now.Hour * 60 + DateTime.Now.Minute))
+                {
+                    _errorsViewModel.AddError(nameof(DepartTime), "Your trip must planed before 3 hours.");
+                }
                 return departTime;
             }
             set
@@ -236,7 +240,7 @@ namespace ManagementCoach.ViewModels
             _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
             SaveCommand = new ViewModelCommand(ExcuteSaveCommand, CanExcuteSaveCommand);
             CancelCommand = new ViewModelCommand(ExcuteCancelCommand);
-            Date = DateTime.Now;
+            Date = DateTime.Today;
             Title = "Add Trip";
         }
        
