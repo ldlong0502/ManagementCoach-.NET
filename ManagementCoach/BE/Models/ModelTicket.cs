@@ -20,6 +20,8 @@ namespace ManagementCoach.BE.Models
 		[Required]
 		public int CoachSeatId { get; set; }
 
+		public int? Price { get; set; }
+
 		[Column(TypeName = "timestamptz")]
 		public DateTimeOffset DateBought { get; set; } = DateTimeOffset.Now;
 	}
