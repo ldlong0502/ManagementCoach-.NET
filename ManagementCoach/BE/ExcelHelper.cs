@@ -163,11 +163,11 @@ namespace ManagementCoach.BE
 						{
 							if (dropCurrentData)
 							{
-								context.BulkSynchronize(entities);
+								context.BulkSynchronize(entities, o => o.SynchronizeKeepidentity = true);
 							}
 							else
 							{
-								context.BulkMerge(entities);
+								context.BulkMerge(entities, o => o.MergeKeepIdentity = true);
 							}
 						}
 						catch (Exception ex)
