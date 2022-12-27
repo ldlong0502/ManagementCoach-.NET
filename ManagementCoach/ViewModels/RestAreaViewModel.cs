@@ -116,7 +116,7 @@ namespace ManagementCoach.ViewModels
         {
             Load();
             EditCommand = new ViewModelCommand(ExcuteEditCommand);
-            DeleteCommand = new ViewModelCommand(ExcuteDeleteCommand);
+            DeleteCommand = new ViewModelCommand(ExcuteDeleteCommand, CanExcuteDeleteCommand);
             NextPageCommand = new ViewModelCommand(ExcuteNextPageCommand, CanExcuteNextPageCommand);
             PreviousPageCommand = new ViewModelCommand(ExcutePreviousPageCommand, CanExcutePreviousPageCommand);
             UpLimitCommand = new ViewModelCommand(ExcuteUpLimitCommand, CanExcuteUpLimitCommand);
@@ -126,7 +126,12 @@ namespace ManagementCoach.ViewModels
             OpenRestAreaRoutesCommand = new ViewModelCommand(ExcuteOpenRestAreaRoutesCommand);
 
         }
-
+        private bool CanExcuteDeleteCommand(object obj)
+        {
+            if (CurrentUser.currentUser.Role == "Admin")
+                return true;
+            return false;
+        }
         private void ExcuteOpenRestAreaRoutesCommand(object obj)
         {
             throw new NotImplementedException();
@@ -210,7 +215,7 @@ namespace ManagementCoach.ViewModels
             {
                 return;
             }
-            var delAction = new RepoRestArea().DeleteRestArea((obj as ModelRestArea).Id);
+            var delAction = new RepoRestArea().DeleteRestArea((obj as MergeRestAreaAndProvinces).Id);
             if (delAction.Success == true)
             {
                 MessageBox.Show("Successfully");

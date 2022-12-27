@@ -114,13 +114,19 @@ namespace ManagementCoach.ViewModels
         {
             Load();
             EditCommand = new ViewModelCommand(ExcuteEditCommand);
-            DeleteCommand = new ViewModelCommand(ExcuteDeleteCommand);
+            DeleteCommand = new ViewModelCommand(ExcuteDeleteCommand, CanExcuteDeleteCommand);
             NextPageCommand = new ViewModelCommand(ExcuteNextPageCommand, CanExcuteNextPageCommand);
             PreviousPageCommand = new ViewModelCommand(ExcutePreviousPageCommand, CanExcutePreviousPageCommand);
             UpLimitCommand = new ViewModelCommand(ExcuteUpLimitCommand, CanExcuteUpLimitCommand);
             DownLimitCommand = new ViewModelCommand(ExcuteDownLimitCommand, CanExcuteDownLimitCommand);
             FirstPageCommand = new ViewModelCommand(ExcuteFirstPageCommand, CanExcuteFirstPageCommand);
             EndPageCommand = new ViewModelCommand(ExcuteEndPageCommand, CanExcuteEndPageCommand);
+        }
+        private bool CanExcuteDeleteCommand(object obj)
+        {
+            if (CurrentUser.currentUser.Role == "Admin")
+                return true;
+            return false;
         }
         private bool CanExcuteEndPageCommand(object obj)
         {

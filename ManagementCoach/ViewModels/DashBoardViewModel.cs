@@ -143,7 +143,8 @@ namespace ManagementCoach.ViewModels
 
         private void ExecuteShowHomeViewCommand(object obj)
         {
-            if(CurrentUser.currentUser.Role == "Admin")
+            ResetTime();
+            if (CurrentUser.currentUser.Role == "Admin")
             {
                 CurrentChildView = new AdminHomeViewModel();
                 CurrentUserControl = new AdminHome();

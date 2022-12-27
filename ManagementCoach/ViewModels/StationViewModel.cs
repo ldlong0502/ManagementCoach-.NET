@@ -116,7 +116,7 @@ namespace ManagementCoach.ViewModels
         {
             Load();
             EditCommand = new ViewModelCommand(ExcuteEditCommand);
-            DeleteCommand = new ViewModelCommand(ExcuteDeleteCommand);
+            DeleteCommand = new ViewModelCommand(ExcuteDeleteCommand,CanExcuteDeleteCommand);
             NextPageCommand = new ViewModelCommand(ExcuteNextPageCommand, CanExcuteNextPageCommand);
             PreviousPageCommand = new ViewModelCommand(ExcutePreviousPageCommand, CanExcutePreviousPageCommand);
             UpLimitCommand = new ViewModelCommand(ExcuteUpLimitCommand, CanExcuteUpLimitCommand);
@@ -125,7 +125,12 @@ namespace ManagementCoach.ViewModels
             EndPageCommand = new ViewModelCommand(ExcuteEndPageCommand, CanExcuteEndPageCommand);
             OpenProvinceCommand = new ViewModelCommand(ExcuteOpenProvinceCommand);
         }
-
+        private bool CanExcuteDeleteCommand(object obj)
+        {
+            if (CurrentUser.currentUser.Role == "Admin")
+                return true;
+            return false;
+        }
         private void ExcuteOpenProvinceCommand(object obj)
         {
             var screen = new ProvinceScreen(this);
@@ -210,7 +215,7 @@ namespace ManagementCoach.ViewModels
             {
                 return;
             }
-            var delAction = new RepoStation().DeleteStation((obj as ModelStation).Id);
+            var delAction = new RepoStation().DeleteStation((obj as MergeStationAndProvinces).Id);
             if (delAction.Success == true)
             {
                 MessageBox.Show("Successfully");

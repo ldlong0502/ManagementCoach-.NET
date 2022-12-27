@@ -16,7 +16,7 @@ namespace ManagementCoach.BE.Repositories
 		public bool EmailExists(string email) => Context.Drivers.Any(d => d.Email == email);
 		public bool PhoneExists(string phone) => Context.Drivers.Any(d => d.Phone == phone);
 		public bool DriverExists(int id) => Context.Drivers.Any(d => d.Id == id);
-
+		public bool LicenseExists(string license) => Context.Drivers.Any(d => d.License == license);
 		public Result<ModelDriver> InsertDriver(InputDriver input)
 		{
 			if (IdCardExists(input.IdCard))
@@ -27,6 +27,8 @@ namespace ManagementCoach.BE.Repositories
 
 			if (PhoneExists(input.Phone))
 				return new Result<ModelDriver> { Success = false, ErrorMessage = "Driver with this phone already exist." };
+			if (LicenseExists(input.License))
+				return new Result<ModelDriver> { Success = false, ErrorMessage = "Driver with this license already exist." };
 
 			var driver = Map.To<Driver>(input);
 			Context.Drivers.Add(driver);
@@ -69,6 +71,9 @@ namespace ManagementCoach.BE.Repositories
 
 			if (driver.Phone != input.Phone && PhoneExists(input.Phone))
 				return new Result<ModelDriver> { Success = false, ErrorMessage = "Driver with this phone already exist." };
+
+			if (driver.License != input.License && LicenseExists(input.License))
+				return new Result<ModelDriver> { Success = false, ErrorMessage = "Driver with this license already exist." };
 
 			driver = Map.To(input, driver);
 			Context.SaveChanges();

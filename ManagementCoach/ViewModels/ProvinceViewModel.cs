@@ -102,13 +102,18 @@ namespace ManagementCoach.ViewModels
         {
             Load();
             EditCommand = new ViewModelCommand(ExcuteEditCommand);
-            DeleteCommand = new ViewModelCommand(ExcuteDeleteCommand);
+            DeleteCommand = new ViewModelCommand(ExcuteDeleteCommand, CanExcuteDeleteCommand);
             AddCommand = new ViewModelCommand(ExcuteAddCommand);
             CloseCommand = new ViewModelCommand(ExcuteCloseCommand);
             CloseEditCommand = new ViewModelCommand(ExcuteCloseEditCommand);
             SaveCommand = new ViewModelCommand(ExcuteSaveCommand);
         }
-
+        private bool CanExcuteDeleteCommand(object obj)
+        {
+            if (CurrentUser.currentUser.Role == "Admin")
+                return true;
+            return false;
+        }
         private void ExcuteSaveCommand(object obj)
         {
             if (SelectedItem as ModelProvince == null)

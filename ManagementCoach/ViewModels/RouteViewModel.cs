@@ -131,7 +131,7 @@ namespace ManagementCoach.ViewModels
         {
             Load();
             EditCommand = new ViewModelCommand(ExcuteEditCommand);
-            DeleteCommand = new ViewModelCommand(ExcuteDeleteCommand);
+            DeleteCommand = new ViewModelCommand(ExcuteDeleteCommand,CanExcuteDeleteCommand );
             NextPageCommand = new ViewModelCommand(ExcuteNextPageCommand, CanExcuteNextPageCommand);
             PreviousPageCommand = new ViewModelCommand(ExcutePreviousPageCommand, CanExcutePreviousPageCommand);
             UpLimitCommand = new ViewModelCommand(ExcuteUpLimitCommand, CanExcuteUpLimitCommand);
@@ -140,7 +140,12 @@ namespace ManagementCoach.ViewModels
             EndPageCommand = new ViewModelCommand(ExcuteEndPageCommand, CanExcuteEndPageCommand);
             OpenRouteRestAreaCommand = new ViewModelCommand(ExcuteOpenRouteRestAreaCommand);
         }
-
+        private bool CanExcuteDeleteCommand(object obj)
+        {
+            if (CurrentUser.currentUser.Role == "Admin")
+                return true;
+            return false;
+        }
         private void ExcuteOpenRouteRestAreaCommand(object obj)
         {
             if (obj == null) return;

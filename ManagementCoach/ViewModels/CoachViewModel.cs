@@ -122,7 +122,7 @@ namespace ManagementCoach.ViewModels
             Load();
             OpenCoachSeatsCommand = new ViewModelCommand(ExcuteOpenCoachSeatsCommand, CanExcuteOpenCoachSeatsCommand);
             EditCommand = new ViewModelCommand(ExcuteEditCommand);
-            DeleteCommand = new ViewModelCommand(ExcuteDeleteCommand);
+            DeleteCommand = new ViewModelCommand(ExcuteDeleteCommand, CanExcuteDeleteCommand);
             NextPageCommand = new ViewModelCommand(ExcuteNextPageCommand, CanExcuteNextPageCommand);
             PreviousPageCommand = new ViewModelCommand(ExcutePreviousPageCommand, CanExcutePreviousPageCommand);
             UpLimitCommand = new ViewModelCommand(ExcuteUpLimitCommand, CanExcuteUpLimitCommand);
@@ -130,7 +130,12 @@ namespace ManagementCoach.ViewModels
             FirstPageCommand = new ViewModelCommand(ExcuteFirstPageCommand, CanExcuteFirstPageCommand);
             EndPageCommand = new ViewModelCommand(ExcuteEndPageCommand, CanExcuteEndPageCommand);
         }
-        
+        private bool CanExcuteDeleteCommand(object obj)
+        {
+            if (CurrentUser.currentUser.Role == "Admin")
+                return true;
+            return false;
+        }
         private bool CanExcuteEndPageCommand(object obj)
         {
             if (CurrentPage != NumOfPages)
@@ -210,8 +215,16 @@ namespace ManagementCoach.ViewModels
                 return;
             }
 
-			new RepoCoach().DeleteCoach((obj as ModelCoach).Id);
-			Load();
+			var delAction = new RepoCoach().DeleteCoach((obj as ModelCoach).Id);
+            if (delAction.Success == true)
+            {
+                System.Windows.MessageBox.Show("Successfully");
+                Load();
+            }
+            else
+            {
+                System.Windows.MessageBox.Show(delAction.ErrorMessage);
+            }
 		}
 
 		private void ExcuteEditCommand(object obj)
