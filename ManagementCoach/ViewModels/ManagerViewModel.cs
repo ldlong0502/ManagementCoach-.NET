@@ -117,7 +117,13 @@ namespace ManagementCoach.ViewModels
 		{
 				{ "Tickets", (sheetName, context) => ExcelHelper.ExportSingleSheetAs(sheetName, context.Tickets) },
 				{ "Trips", (sheetName, context) => ExcelHelper.ExportSingleSheetAs(sheetName, context.Trips) },
-				{ "Coaches", (sheetName, context) => ExcelHelper.ExportSingleSheetAs(sheetName, context.Coaches) },
+				{ "Coaches", (sheetName, context) => {
+					var filePath = ExcelHelper.ExportSingleSheetAs(sheetName, context.Coaches);
+					if (filePath != null)
+					{
+						ExcelHelper.Export(filePath, "CoachSeats", context.CoachSeats);
+					}
+				} },
 				{ "Drivers", (sheetName, context) => ExcelHelper.ExportSingleSheetAs(sheetName, context.Drivers) },
 				{ "Passengers", (sheetName, context) => ExcelHelper.ExportSingleSheetAs(sheetName, context.Passengers) },
 				{ "Stations", (sheetName, context) => ExcelHelper.ExportSingleSheetAs(sheetName, context.Stations) },
@@ -137,7 +143,14 @@ namespace ManagementCoach.ViewModels
 		{
 				{ "Tickets", (sheetName) => ExcelHelper.ImportFromFile<Ticket>(sheetName) },
 				{ "Trips", (sheetName) => ExcelHelper.ImportFromFile<Trip>(sheetName) },
-				{ "Coaches", (sheetName) => ExcelHelper.ImportFromFile<Coach>(sheetName) },
+				{ "Coaches", (sheetName) => {
+					var (filePath, dropData) = ExcelHelper.ImportFromFile<Coach>(sheetName);
+					if (filePath != null)
+					{
+						ExcelHelper.Import<CoachSeat>(filePath, "CoachSeats", dropData);
+					}	
+				} 
+				},
 				{ "Drivers", (sheetName) => ExcelHelper.ImportFromFile<Driver>(sheetName) },
 				{ "Passengers", (sheetName) => ExcelHelper.ImportFromFile<Passenger>(sheetName) },
 				{ "Stations", (sheetName) => ExcelHelper.ImportFromFile<Station>(sheetName) },
