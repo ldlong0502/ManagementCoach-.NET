@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace ManagementCoach.BE.Repositories
 {
@@ -39,6 +40,8 @@ namespace ManagementCoach.BE.Repositories
 			}
 				
 			var ticket = Map.To<Ticket>(input);
+
+			ticket.Price = Context.Trips.Where(t => t.Id == input.TripId).Include(t => t.Route).FirstOrDefault().Route.Price;
 			Context.Tickets.Add(ticket);
 			Context.SaveChanges();
 
@@ -98,6 +101,7 @@ namespace ManagementCoach.BE.Repositories
 			var ticket = Context.Tickets.Where(c => c.Id == id).FirstOrDefault();
 
 			ticket = Map.To(input, ticket);
+			ticket.Price = Context.Trips.Where(t => t.Id == input.TripId).Include(t => t.Route).FirstOrDefault().Route.Price;
 			Context.SaveChanges();
 
 			return new Result<ModelTicket> { Success = true, Payload = Map.To<ModelTicket>(ticket) };
