@@ -557,6 +557,10 @@
     <Compile Include="Migrations\202212271503172_AddPrice1.designer.cs">
       <DependentUpon>202212271503172_AddPrice1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212271510481_DeleteCascadeTickets.cs" />
+    <Compile Include="Migrations\202212271510481_DeleteCascadeTickets.designer.cs">
+      <DependentUpon>202212271510481_DeleteCascadeTickets.cs</DependentUpon>
+    </Compile>
     <Compile Include="PriceConverter.cs" />
     <Compile Include="ViewModels\AddPassengerViewModel.cs" />
     <Compile Include="Migrations\202212131825014_RemoveOneToOneRelationship.cs" />
@@ -829,6 +833,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212271503172_AddPrice1.resx">
       <DependentUpon>202212271503172_AddPrice1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212271510481_DeleteCascadeTickets.resx">
+      <DependentUpon>202212271510481_DeleteCascadeTickets.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
