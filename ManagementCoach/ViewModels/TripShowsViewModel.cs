@@ -383,7 +383,7 @@ namespace ManagementCoach.ViewModels
             listDown.Sort((a, b) => int.Parse(a.Name.Split('A')[1]).CompareTo(int.Parse(b.Name.Split('A')[1])));
             listDown.ForEach(seat =>
             {
-                if (context.Tickets.Any(c => c.CoachSeatId == seat.Id))
+                if (context.Tickets.Any(c => c.CoachSeatId == seat.Id && c.TripId == ChooseTrip.Id))
                 {
                     temp.Add(new Seat()
                     {
@@ -409,7 +409,7 @@ namespace ManagementCoach.ViewModels
             temp = new List<Seat>();
             listUp.ForEach(seat =>
             {
-                if (context.Tickets.Any(c => c.CoachSeatId == seat.Id))
+                if (context.Tickets.Any(c => c.CoachSeatId == seat.Id && c.TripId == ChooseTrip.Id))
                 {
                     temp.Add(new Seat()
                     {
@@ -449,7 +449,7 @@ namespace ManagementCoach.ViewModels
             //Get list Trips by id route
             ListTrips = new List<TripShow>();
             var listTrip = new List<ModelTrip>();
-            listTrip = new RepoTrip().GetTripsByRoute(Route.Id).Items.Where(trip => trip.Date.CompareTo(DateFilter) == 0).ToList();
+            listTrip = new RepoTrip().GetTripsByRoute(Route.Id).Items.Where(trip => trip.Date.CompareTo(DateFilter) == 0 && !trip.Cancelled).ToList();
             listTrip.Sort((a, b) => a.DepartTime.CompareTo(b.DepartTime));
             var temp = new List<TripShow>();
             listTrip.ForEach(trip => { 
@@ -474,7 +474,7 @@ namespace ManagementCoach.ViewModels
                     Id = trip.Id,
                     NameCoach = coach.Name,
                     DepartureTime = trip.DepartTime,
-                    Destinationtime = trip.DepartTime + trip.EstimatedTime,
+                    Destinationtime = trip.DepartTime + trip.EstimatedTime > 1440 ? trip.DepartTime + trip.EstimatedTime - 1440 : trip.DepartTime + trip.EstimatedTime,
                     OriginStationName = originStation.Name,
                     DestinationStationName = desStation.Name,
                     ImageUrl = string.IsNullOrEmpty(coach.ImageUrl) ? "/Images/coach.jpg" : coach.ImageUrl,

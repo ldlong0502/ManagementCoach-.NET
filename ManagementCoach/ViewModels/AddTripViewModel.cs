@@ -162,11 +162,13 @@ namespace ManagementCoach.ViewModels
                 {
                     _errorsViewModel.AddError(nameof(Date), "Date must later than now");
                 }
+                              
                 return date;
             }
             set
             {
                 date = value;
+                DepartTime = DepartTime;
                 OnPropertyChanged(nameof(Date));
             }
         }
@@ -179,6 +181,7 @@ namespace ManagementCoach.ViewModels
                 {
                     _errorsViewModel.AddError(nameof(EstimatedTime), "Value not invalid");
                 }
+                
                 return estimatedTime;
             }
             set
@@ -209,7 +212,7 @@ namespace ManagementCoach.ViewModels
                 {
                     _errorsViewModel.AddError(nameof(DepartTime), "Field is required.");
                 }
-                if(DateTime.Compare(date,DateTime.Today) == 0 && (departTime.Hour * 60 + departTime.Minute - 180 < DateTime.Now.Hour * 60 + DateTime.Now.Minute))
+                else if(DateTime.Compare(Date,DateTime.Today) == 0 && (departTime.Hour * 60 + departTime.Minute - 180 < DateTime.Now.Hour * 60 + DateTime.Now.Minute))
                 {
                     _errorsViewModel.AddError(nameof(DepartTime), "Your trip must planed before 3 hours.");
                 }
@@ -327,6 +330,13 @@ namespace ManagementCoach.ViewModels
         {
             try
             {
+                var time = ConvertTimeToInt();
+                var y = context.Trips.Any(x => (x.CoachId == Coach.Id || x.DriverId == Driver.Id) && x.DepartTime + x.EstimatedTime >= time && x.Date.CompareTo(Date) == 0);
+                if (y)
+                {
+                    MessageBox.Show("Same time with an other trip");
+                    return;
+                }
                 var addTrip = new RepoTrip().InsertTrip(new InputTrip()
                 {
                     RouteId = Route.Id,

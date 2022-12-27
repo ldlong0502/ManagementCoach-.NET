@@ -4,7 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa ="http://schemas.fontawesome.io/icons/"
-        xmlns:local="clr-namespace:ManagementCoach.Views.Screens" xmlns:usercontrols="clr-namespace:ManagementCoach.Views.UserControls" xmlns:viewmodels="clr-namespace:ManagementCoach.ViewModels"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:ManagementCoach.Views.Screens"
+        xmlns:usercontrols="clr-namespace:ManagementCoach.Views.UserControls" xmlns:viewmodels="clr-namespace:ManagementCoach.ViewModels"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
@@ -134,16 +136,27 @@
                 Command="{Binding LoginCommand}"
                 Grid.ColumnSpan="2"
                 Content="Sign In" HorizontalAlignment="Left" 
-                Height="45" Margin="350,435,0,0" VerticalAlignment="Top" Width="116" Background="#FF6600FF"/>
+                Height="45" Margin="350,445,0,0" VerticalAlignment="Top" Width="116" Background="#FF6600FF"/>
 
         <Grid x:Name="User" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="49" Margin="215,309,0,0" VerticalAlignment="Top" Width="400">
             <Rectangle  HorizontalAlignment="Center" Height="49" Stroke="Black" VerticalAlignment="Center" Width="400" RadiusX="15.847" RadiusY="15.847"/>
-            <Image HorizontalAlignment="Left" Height="30" Margin="10,0,0,0" VerticalAlignment="Center" Width="30" Source="/Images/user.png"/>
-            <TextBox HorizontalAlignment="Left" FocusVisualStyle="{x:Null}" BorderThickness="0" VerticalContentAlignment="Center" Height="48" Margin="58,0,0,0" TextWrapping="Wrap" Text="{Binding UserName}"  VerticalAlignment="Center" Width="315" BorderBrush="{x:Null}" Background="{x:Null}" FontSize="16" Cursor="Hand"/>
+            <materialDesign:PackIcon Kind="User" HorizontalAlignment="Left" Height="30" Margin="10,0,0,0" VerticalAlignment="Center" Width="30"></materialDesign:PackIcon>
+            <TextBox 
+                HorizontalAlignment="Left"
+                FocusVisualStyle="{x:Null}" 
+                BorderThickness="0" 
+                VerticalContentAlignment="Center" 
+                Height="48" Margin="58,0,0,0" 
+                materialDesign:HintAssist.Hint="Input Name"
+                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                Padding="0 10"
+                materialDesign:TextFieldAssist.HasClearButton="True"
+                Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                TextWrapping="Wrap" Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" Width="315" BorderBrush="{x:Null}" Background="{x:Null}" FontSize="16" Cursor="Hand"/>
         </Grid>
-        <Grid x:Name="Pass" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="49" Margin="215,373,0,0" VerticalAlignment="Top" Width="400">
+        <Grid x:Name="Pass" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="49" Margin="215,383,0,0" VerticalAlignment="Top" Width="400">
             <Rectangle  HorizontalAlignment="Center" Height="49" Stroke="Black" VerticalAlignment="Center" Width="400" RadiusX="15.847" RadiusY="15.847"/>
-            <Image HorizontalAlignment="Left" Height="30" Margin="10,0,0,0" VerticalAlignment="Center" Width="30" Source="/Images/lock.png"/>
+            <materialDesign:PackIcon Kind="Password" HorizontalAlignment="Left" Height="30" Margin="10,0,0,0" VerticalAlignment="Center" Width="30"></materialDesign:PackIcon>
             <usercontrols:BindablePasswordBoxUC Height="48"
                                                 Width="315"
                                                 FocusVisualStyle="{x:Null}"
@@ -151,11 +164,12 @@
                                                 BorderBrush="{x:Null}"
                                                 HorizontalAlignment="Center"
                                                 Margin="30 0 0 0"
+                                                Validation.ErrorTemplate="{StaticResource validationTemplate}"
                                                 Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></usercontrols:BindablePasswordBoxUC>
 
         </Grid>
         <Grid x:Name="Top" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" Height="437" Width="800" >
-            <Path x:Name="path" Data="M9.4796339,211.65496 C9.4796339,211.65496 12.38387,240.5533 59.426881,240.5533 106.46989,240.5533 741.14011,240.06829 737.08636,240.06829 733.03262,240.06829 799.36519,240.55732 804.76804,289.05136 810.17089,337.5454 799.5739,39.595855 799.5739,39.595855 L-6.4646081,39.35207" Fill="#FF4A5BF7" HorizontalAlignment="Center" Stroke="Transparent" Stretch="Fill" Width="837" Margin="0,-54,0,-136" RenderTransformOrigin="0.5,0.5" >
+            <Path x:Name="path" Data="M9.4796339,211.65496 C9.4796339,211.65496 12.38387,240.5533 59.426881,240.5533 106.46989,240.5533 741.14011,240.06829 737.08636,240.06829 733.03262,240.06829 799.36519,240.55732 804.76804,289.05136 810.17089,337.5454 799.5739,39.595855 799.5739,39.595855 L-6.4646081,39.35207" Fill="#FF4A5BF7" HorizontalAlignment="Center" Stroke="Transparent" Stretch="Fill" Width="837" Margin="0,-54,0,-133" RenderTransformOrigin="0.5,0.5" >
                 <Path.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>

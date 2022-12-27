@@ -158,7 +158,7 @@
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <TextBlock TextAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Margin="0,10,0,0" TextWrapping="Wrap" Text="Today Income" VerticalAlignment="Top" Width="150" FontSize="18" FontWeight="Bold" FontFamily="Arial"/>
-                            <TextBlock VerticalAlignment="Center"  HorizontalAlignment="Center" Foreground="{StaticResource violetIcon}" Grid.Row="1" TextWrapping="Wrap" Text="{Binding TodayIncome, Converter={StaticResource PriceConverter}}" FontSize="35" FontWeight="Bold" FontFamily="Arial"/>
+                            <TextBlock VerticalAlignment="Center"  HorizontalAlignment="Center" Foreground="{StaticResource violetIcon}" Grid.Row="1" TextWrapping="Wrap" Text="{Binding TodayIncome, Converter={StaticResource PriceConverter}}" FontSize="25" FontWeight="Bold" FontFamily="Arial"/>
                             <TextBlock TextAlignment="Center" HorizontalAlignment="Center" Foreground="#FFAEC314" Height="23" TextWrapping="Wrap" Text="{Binding PercentTodayIncome}" Grid.Row="2" VerticalAlignment="Center" Width="98" FontSize="18" FontWeight="Bold" FontFamily="Arial" Background="#FFF3FDC7"/>
                         </Grid>
 

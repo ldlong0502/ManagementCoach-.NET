@@ -418,6 +418,7 @@
                           materialDesign:HintAssist.Hint="Input info"
                           materialDesign:TextFieldAssist.HasClearButton="True"
                           ItemsSource="{Binding ListPassenger}"
+                          
                           Validation.ErrorTemplate="{StaticResource validationTemplate}"
                           Style="{StaticResource MaterialDesignOutlinedComboBox}">
                             <ComboBox.ItemTemplate>

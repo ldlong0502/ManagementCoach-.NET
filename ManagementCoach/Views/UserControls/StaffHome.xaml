@@ -133,8 +133,7 @@
                                             Height="Auto" />
                                     <RowDefinition
                                             Height="Auto" />
-                                    <RowDefinition
-            Height="Auto" />
+                                   
                                 </Grid.RowDefinitions>
                                 <Image
                                   Height="140"
@@ -145,8 +144,11 @@
                                   Margin="0,0,16,-20"
                                   HorizontalAlignment="Right"
                                   VerticalAlignment="Bottom"
+                                  ToolTip="Reserve"
+                                  Command="{Binding Path=DataContext.ReserveCommand , RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                                  CommandParameter="{Binding Id}"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
-                                    <materialDesign:PackIcon Kind="ShareVariant" />
+                                    <materialDesign:PackIcon Kind="Ticket" />
                                 </Button>
                                 <StackPanel
                                   Grid.Row="1"
@@ -220,16 +222,7 @@
                                         </ListBoxItem>
                                     </ListBox>
                                 </Grid>
-                                <StackPanel
-      Grid.Row="5">
-                                    <Button
-        Margin="8,4,8,8"
-        HorizontalAlignment="Left"
-        Content="RESERVE"             
-        Command="{Binding Path=DataContext.ReserveCommand , RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
-        CommandParameter="{Binding Id}"
-        Style="{StaticResource MaterialDesignFlatButton}" />
-                                </StackPanel>
+                               
                             </Grid>
                         </materialDesign:Card>
 

@@ -283,7 +283,7 @@ namespace ManagementCoach.ViewModels
             DateTime startDate = DateTime.Today;
             startDate = startDate.AddDays(1 - (int)startDate.DayOfWeek);
             DateTime endDate = startDate.AddDays(6);
-            while (startDate.Day <= endDate.Day)
+            while (startDate.CompareTo(endDate) <=0)
             {
                 var listPassengers = new RepoPassenger().GetPassengers("", 1, context.Passengers.Count()).Items.Where(p=> getDate(p.DateAdded).CompareTo(startDate) == 0).ToList();
                 NewPassengersWeek += listPassengers.Count;

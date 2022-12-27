@@ -242,7 +242,7 @@ namespace ManagementCoach.ViewModels
             }
             
             Avatar = string.IsNullOrEmpty(CurrentUser.currentUser.ImageUrl) ? "/Images/avatar.png" : CurrentUser.currentUser.ImageUrl;
-            //Get 4 routes popular 
+            //Get 3 routes popular 
             ListRoutes = new List<RoutesShow>();
             var list = new RepoRoute().GetRoutes().Items;
             foreach (var item in list)
@@ -251,7 +251,7 @@ namespace ManagementCoach.ViewModels
                 string title = new RepoProvince().GetProvince(new RepoStation().GetStation(item.OriginStationId).ProvinceId).Name + " -> " + new RepoProvince().GetProvince(new RepoStation().GetStation(item.DestinationStationId).ProvinceId).Name;
                 string price = item.Price.ToString();
                 string imageUrl = string.IsNullOrEmpty(item.ImageUrl) ? "/Images/coach.jpg" : item.ImageUrl;
-                var listTrip = new RepoTrip().GetTripsByRoute(item.Id).Items.Where(trip => trip.Date == DateTime.Today).ToList();
+                var listTrip = new RepoTrip().GetTripsByRoute(item.Id).Items.Where(trip => trip.Date == DateTime.Today && !trip.Cancelled).ToList();
                 listTrip.Sort((a, b) => a.DepartTime.CompareTo(b.DepartTime));
                 List<int> listTime = new List<int>();
                 listTrip.ForEach(trip => {
