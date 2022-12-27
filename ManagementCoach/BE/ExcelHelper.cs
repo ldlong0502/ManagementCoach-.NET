@@ -30,7 +30,7 @@ namespace ManagementCoach.BE
 {
 	public class ExcelHelper
 	{
-		public static void ExportSingleSheetAs<TEntity>(string sheetName, IEnumerable<TEntity> items) 
+		public static string ExportSingleSheetAs<TEntity>(string sheetName, IEnumerable<TEntity> items) 
 		{
 			SaveFileDialog dialog = new SaveFileDialog();
 			dialog.Filter = "Excel File|*.xlsx";
@@ -53,7 +53,7 @@ namespace ManagementCoach.BE
 					catch
 					{
 						MessageBox.Show($"The file \"{dialog.FileName}\" is being use by another process.\n\nPlease close the file before exporting.", "Export Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-						return;
+						return null;
 					}
 				}
 
@@ -64,10 +64,14 @@ namespace ManagementCoach.BE
 				{
 					Open(dialog.FileName);
 				}
+
+				return dialog.FileName;
 			}
+
+			return null;
 		}
 
-		public static void ImportFromFile<TEntity>(string sheetName = null) where TEntity : class, new()
+		public static (string filePath, bool dropData) ImportFromFile<TEntity>(string sheetName = null) where TEntity : class, new()
 		{
 			OpenFileDialog dialog = new OpenFileDialog();
 			dialog.Filter = "Excel File|*.xlsx";
@@ -76,7 +80,7 @@ namespace ManagementCoach.BE
 
 			if (dialog.FileName == "")
 			{
-				return;
+				return (null, false);
 			}
 
 			var result = MessageBox.Show($"Do you want to delete all of the current data before importing?", "Export Sucessfully", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
@@ -93,11 +97,11 @@ namespace ManagementCoach.BE
 			}
 			catch 
 			{
-				return;
+				return (null, false);
 			}
 
 			MessageBox.Show($"Import Completed.", "Import Sucessfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+			return (dialog.FileName, result == DialogResult.Yes);
 		}
 
 		public static void Export<TEntity>(string filePath, string sheetName, IEnumerable<TEntity> items) {
