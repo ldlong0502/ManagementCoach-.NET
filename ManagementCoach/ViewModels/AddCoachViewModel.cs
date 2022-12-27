@@ -236,24 +236,6 @@ namespace ManagementCoach.ViewModels
 
 				 if (result.Success == true)
                 {
-                    for (int i = 1; i <= 12; i++)
-                    {
-                        string seatDown = "A" + i.ToString();
-                        string seatUp = "B" + i.ToString();
-                        var CoachId = new RepoCoach().GetCoachByRegNo(RegNo).Id;
-                        new RepoCoachSeat().InsertCoachSeat(new InputCoachSeat()
-                        {
-                            CoachId = CoachId,
-                            Name = seatDown
-
-                        });
-                        new RepoCoachSeat().InsertCoachSeat(new InputCoachSeat()
-                        {
-                            CoachId = CoachId,
-                            Name = seatUp
-
-                        });
-                    }
                     MessageBox.Show("Successfull");
                 }
                 else

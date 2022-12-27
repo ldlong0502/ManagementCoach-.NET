@@ -57,9 +57,9 @@ namespace ManagementCoach.ViewModels
         public CoachSeatViewModel(ModelCoach data)
         {
             ListSeatDown = new RepoCoachSeat().GetCoachSeats(data.Id).Where(c => c.Name.StartsWith("A")).ToList();
-            ListSeatDown.Sort((a, b) => a.Name.Split('A')[0].CompareTo(b.Name.Split('A')[0]));
+            ListSeatDown.Sort((a, b) => int.Parse(a.Name.Split('A')[1]).CompareTo(int.Parse(b.Name.Split('A')[1])));
             ListSeatUp = new RepoCoachSeat().GetCoachSeats(data.Id).Where(c => c.Name.StartsWith("B")).ToList();
-            ListSeatUp.Sort((a, b) => a.Name.Split('B')[0].CompareTo(b.Name.Split('B')[0]));
+            ListSeatUp.Sort((a, b) => int.Parse(a.Name.Split('B')[1]).CompareTo(int.Parse(b.Name.Split('B')[1])));
             Rows = ListSeatDown.Count() / 2;
         }
     }
