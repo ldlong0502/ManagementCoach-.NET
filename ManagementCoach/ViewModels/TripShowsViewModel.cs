@@ -286,6 +286,7 @@ namespace ManagementCoach.ViewModels
                             CoachSeatId = modelSeat.Id,
                             TripId = ChooseTrip.Id,
                             PassengerId = Passenger.Id,
+                           
                         });
                         var x = new TempSeat
                         {
@@ -308,12 +309,13 @@ namespace ManagementCoach.ViewModels
                     FromProvince = new RepoProvince().GetProvince(new RepoStation().GetStation(Route.OriginStationId).ProvinceId).Name,
                     ToProvince = new RepoProvince().GetProvince(new RepoStation().GetStation(Route.DestinationStationId).ProvinceId).Name,
                  };
-                    MessageBox.Show("Payment Successfully", "Payment", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ExcuteChooseCommand(ChooseTrip.Id);
-                    var invoiceScreen = new InvoiceScreen();
-                    var invoiceContext = new InvoiceViewModel(invoice);
-                    invoiceScreen.DataContext = invoiceContext;
-                    invoiceScreen.ShowDialog();
+                 MessageBox.Show("Payment Successfully", "Payment", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                 ExcuteChooseCommand(ChooseTrip.Id);
+                 var invoiceScreen = new InvoiceScreen();
+                 var invoiceContext = new InvoiceViewModel(invoice);
+                 invoiceScreen.DataContext = invoiceContext;
+                 invoiceScreen.ShowDialog();
+                 Load();
                     
                
                
