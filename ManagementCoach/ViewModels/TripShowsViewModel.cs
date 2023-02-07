@@ -246,7 +246,7 @@ namespace ManagementCoach.ViewModels
         {
             _errorsViewModel = new ErrorsViewModel();
             _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
-            DateFilter = date;
+            DateFilter = new DateTime(date.Year,date.Month,date.Day);
             ChooseSeats = new List<string>();
             Route = data;
             ListSeatUp = new List<Seat>() { new Seat() };

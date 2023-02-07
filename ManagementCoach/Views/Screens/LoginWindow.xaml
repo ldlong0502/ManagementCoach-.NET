@@ -135,7 +135,7 @@
                 FontSize="18"
                 Command="{Binding LoginCommand}"
                 Grid.ColumnSpan="2"
-                Content="Sign In" HorizontalAlignment="Left" 
+                Content="Log In" HorizontalAlignment="Left" 
                 Height="45" Margin="350,445,0,0" VerticalAlignment="Top" Width="116" Background="#FF6600FF"/>
 
         <Grid x:Name="User" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="49" Margin="215,309,0,0" VerticalAlignment="Top" Width="400">
@@ -196,7 +196,7 @@
                     </TransformGroup>
                 </Label.RenderTransform>
             </Label>
-            <Label x:Name="label2" Content="LOGIN" 
+            <Label x:Name="label2" Content="LOG IN" 
                 HorizontalAlignment="Left" 
                 Height="auto" 
                 FontSize="40"

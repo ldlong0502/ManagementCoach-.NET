@@ -331,7 +331,10 @@ namespace ManagementCoach.ViewModels
             try
             {
                 var time = ConvertTimeToInt();
-                var y = context.Trips.Any(x => (x.CoachId == Coach.Id || x.DriverId == Driver.Id) && x.DepartTime + x.EstimatedTime >= time && x.Date.CompareTo(Date) == 0);
+                var y = context.Trips.Any(
+                    x => (x.CoachId == Coach.Id || x.DriverId == Driver.Id) 
+                && ( time <= x.DepartTime + x.EstimatedTime && time >= x.DepartTime ) 
+                && x.Date.CompareTo(Date) == 0 && x.RouteId == Route.Id );
                 if (y)
                 {
                     MessageBox.Show("Same time with an other trip");
